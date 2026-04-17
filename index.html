@@ -317,7 +317,7 @@
 
     .live-toast {
       position: fixed;
-      top: 20px;
+      top: 40px;
       left: 50%;
       transform: translateX(-50%) translateY(-120px);
       background: white;
@@ -3454,337 +3454,7 @@
       ]
     };
 
-    let brands = [
-      { id: "GEMI-P1-3748291077", name: "Tài khoản Gemini Enterprise 1 tháng – Admin Activation", logo: "https://cdn.freelogovectors.net/wp-content/uploads/2024/02/gemini-logo-chatbot-freelogovectors.net_.png", category: "Gemini", price: "25.650 VND" },
-      { id: "CURS-P1-3748291069", name: "Tài khoản Cursor AI Pro 1 tháng – Subscription", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "GEMI-P1-8374659222", name: "Tài khoản Gemini Ultra 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "CURS-P1-8374659214", name: "Tài khoản Cursor AI Ultra 1 tháng – Renewal", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "GEMI-P1-9182736471", name: "Tài khoản Gemini Business 12 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "CURS-P1-9182736463", name: "Tài khoản Cursor AI Pro+ 12 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "GEMI-P1-5647382931", name: "Tài khoản Gemini Advanced Pro 6 tháng – Cá nhân bảo hành cao cấp", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "DUOL-P1-1000000159", name: "Tài khoản Duolingo Max 240 ngày", category: "Duolingo", price: "3.240.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374668", name: "Tài khoản Gemini Enterprise 3 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "CURS-P1-5647382923", name: "Tài khoản Cursor AI Ultra 6 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "GEMI-P1-3748291076", name: "Tài khoản Gemini Business 1 tháng – Private Email", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "27.000 VND" },
-      { id: "DUOL-P1-1000000158", name: "Tài khoản Duolingo Max 150 ngày", category: "Duolingo", price: "2.025.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659221", name: "Tài khoản Gemini Ultra 2 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "CURS-P1-1928374661", name: "Tài khoản Cursor AI Pro 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "GEMI-P1-9182736470", name: "Tài khoản Gemini Advanced 12 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "DUOL-P1-1000000157", name: "Tài khoản Duolingo Max 120 ngày", category: "Duolingo", price: "1.620.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382930", name: "Tài khoản Gemini Business 6 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "CURS-P1-3748291068", name: "Tài khoản Cursor AI Pro 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "GEMI-P1-1928374667", name: "Tài khoản Gemini Enterprise 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "DUOL-P1-1000000156", name: "Tài khoản Duolingo Max 60 ngày", category: "Duolingo", price: "810.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291075", name: "Tài khoản Gemini Ultra 1 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "CGPT-P1-1928374658", name: "Tài khoản ChatGPT Instant Renewal 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "GEMI-P1-8374659220", name: "Tài khoản Gemini Business 3 tháng – Admin Activation", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "CURS-P1-8374659213", name: "Tài khoản Cursor AI Ultra 12 tháng – Subscription", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "GEMI-P1-9182736469", name: "Tài khoản Gemini Advanced Pro 1 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "DUOL-P1-1000000155", name: "Tài khoản Duolingo Super 330 ngày", category: "Duolingo", price: "3.850.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382929", name: "Tài khoản Gemini Enterprise 2 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "CGPT-P1-3748291065", name: "Tài khoản ChatGPT Auto Upgrade 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "GEMI-P1-1928374666", name: "Tài khoản Gemini Business 12 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "CURS-P1-9182736462", name: "Tài khoản Cursor AI Pro+ 6 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "GEMI-P1-3748291074", name: "Tài khoản Gemini Ultra 6 tháng – Cá nhân bảo hành cao cấp", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "DUOL-P1-1000000154", name: "Tài khoản Duolingo Super 300 ngày", category: "Duolingo", price: "3.500.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659219", name: "Tài khoản Gemini Advanced 3 tháng – Bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "CGPT-P1-8374659210", name: "Tài khoản ChatGPT Team Premium 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "87.750 VND" },
-      { id: "GEMI-P1-9182736468", name: "Tài khoản Gemini Business 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "34.290 VND" },
-      { id: "CURS-P1-5647382922", name: "Tài khoản Cursor AI Ultra 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "GEMI-P1-5647382928", name: "Tài khoản Gemini Enterprise 1 tháng – Shared Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "DUOL-P1-1000000153", name: "Tài khoản Duolingo Super 240 ngày", category: "Duolingo", price: "2.800.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291073", name: "Tài khoản Gemini Ultra 12 tháng – Cá nhân bảo hành cao cấp", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "CGPT-P1-9182736459", name: "Tài khoản ChatGPT Premium Advanced 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "GEMI-P1-8374659218", name: "Tài khoản Gemini Enterprise 2 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "CURS-P1-1928374660", name: "Tài khoản Cursor AI Pro 2 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "1.890.000 VND" },
-      { id: "GEMI-P1-9182736467", name: "Tài khoản Gemini Business 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "34.290 VND" },
-      { id: "DUOL-P1-1000000152", name: "Tài khoản Duolingo Super 150 ngày", category: "Duolingo", price: "1.750.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382927", name: "Tài khoản Gemini Advanced 1 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "CGPT-P1-5647382919", name: "Tài khoản ChatGPT Lite Pro 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "GEMI-P1-1928374665", name: "Tài khoản Gemini Ultra 3 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "CURS-P1-3748291067", name: "Tài khoản Cursor AI Pro 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "GEMI-P1-3748291072", name: "Tài khoản Gemini Enterprise 1 tháng – Private Profile", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "DUOL-P1-1000000151", name: "Tài khoản Duolingo Super 120 ngày", category: "Duolingo", price: "1.400.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659217", name: "Tài khoản Gemini Business 12 tháng – Admin Activation", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "CGPT-P1-1928374657", name: "Tài khoản ChatGPT Enterprise Advanced 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "136.890 VND" },
-      { id: "GEMI-P1-9182736466", name: "Tài khoản Gemini Advanced Pro 6 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "CURS-P1-8374659212", name: "Tài khoản Cursor AI Ultra 1 tháng – Fast Delivery", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "GEMI-P1-5647382926", name: "Tài khoản Gemini Ultra 2 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "DUOL-P1-1000000150", name: "Tài khoản Duolingo Super 60 ngày", category: "Duolingo", price: "700.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374664", name: "Tài khoản Gemini Enterprise 12 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "CGPT-P1-3748291064", name: "Tài khoản ChatGPT Developer Starter 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "CURS-P1-9182736461", name: "Tài khoản Cursor AI Pro+ 1 tháng – Renewal", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DUOL-P1-1000000149", name: "Tài khoản Duolingo EDU 365 ngày", category: "Duolingo", price: "1.350.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291071", name: "Tài khoản Gemini Business 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "CGPT-P1-8374659209", name: "Tài khoản ChatGPT Student Basic 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "CURS-P1-5647382921", name: "Tài khoản Cursor AI Pro 12 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "DUOL-P1-1000000148", name: "Tài khoản Duolingo Max 365 ngày", category: "Duolingo", price: "4.860.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659216", name: "Tài khoản Gemini Advanced 2 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "BANA-P1-1000000028", name: "Nano banana gói cơ bản 15 ngày", category: "Nano banana", price: "285.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-9182736458", name: "Tài khoản ChatGPT Family Premium 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-1928374664", name: "Tài khoản YouTube Premium 1 tháng – Cá nhân bảo hành cao cấp", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "107.730 VND" },
-      { id: "CURS-P1-1928374659", name: "Tài khoản Cursor AI Pro 6 tháng – Private Account", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "DUOL-P1-1000000147", name: "Tài khoản Duolingo Max 180 ngày", category: "Duolingo", price: "2.430.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736465", name: "Tài khoản Gemini Pro VEO3.1 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "BANA-P1-1000000027", name: "Nano banana 8000 credits 365 ngày", category: "Nano banana", price: "640.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-5647382918", name: "Tài khoản ChatGPT Business Advanced 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "136.890 VND" },
-      { id: "YOTU-P1-3748291071", name: "Tài khoản YouTube Premium 2 tháng – Family Renew", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "84.240 VND" },
-      { id: "CURS-P1-3748291066", name: "Tài khoản Cursor AI Pro 3 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "DUOL-P1-1000000146", name: "Tài khoản Duolingo Max 90 ngày", category: "Duolingo", price: "1.215.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382925", name: "Tài khoản Gemini Enterprise 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "28.890 VND" },
-      { id: "BANA-P1-1000000026", name: "Nano banana 6000 credits 365 ngày", category: "Nano banana", price: "5.265.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-1928374656", name: "Tài khoản ChatGPT Instant Access 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "YOTU-P1-8374659216", name: "Tài khoản YouTube Premium 1 tháng – Family Invite", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "42.120 VND" },
-      { id: "CURS-P1-8374659211", name: "Tài khoản Cursor AI Ultra 1 tháng – Subscription", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DUOL-P1-1000000145", name: "Tài khoản Duolingo Max 30 ngày", category: "Duolingo", price: "405.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374663", name: "Tài khoản Gemini Business 1 tháng – Email riêng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "27.810 VND" },
-      { id: "BANA-P1-1000000025", name: "Nano banana 4000 credits 365 ngày", category: "Nano banana", price: "3.510.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-3748291063", name: "Tài khoản ChatGPT Auto Renewal 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "YOTU-P1-9182736465", name: "Tài khoản YouTube Premium 1–12 tháng – Cá nhân nhanh chóng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "421.200 VND" },
-      { id: "CURS-P1-9182736460", name: "Tài khoản Cursor AI Pro Plus 1 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DUOL-P1-1000000144", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "1.820.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291070", name: "Tài khoản Gemini Ultra 1 tháng – Bảo hành cao cấp", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "BANA-P1-1000000024", name: "Nano banana 2000 credits 365 ngày", category: "Nano banana", price: "1.755.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-8374659208", name: "Tài khoản ChatGPT Team Advanced 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-5647382925", name: "Tài khoản YouTube Premium 1 tháng – Full Warranty", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "107.730 VND" },
-      { id: "CURS-P1-5647382920", name: "Tài khoản Cursor AI Pro 1 tháng – Private Account", logo: "https://i.pinimg.com/736x/eb/9e/79/eb9e798813c11da0a483a4ad22f0a0c5.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DUOL-P1-1000000143", name: "Tài khoản Duolingo Super 180 ngày", category: "Duolingo", price: "1.050.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659215", name: "Tài khoản Gemini Advanced Pro 12 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "BANA-P1-1000000023", name: "Nano banana gói max 365 ngày", category: "Nano banana", price: "3.240.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-9182736457", name: "Tài khoản ChatGPT Premium Plus 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "87.750 VND" },
-      { id: "YOTU-P1-1928374663", name: "Tài khoản YouTube Premium Music 3 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "226.800 VND" },
-      { id: "CURS-P1-9182736464", name: "Tài khoản Cursor AI Pro+ 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "DUOL-P1-1000000142", name: "Tài khoản Duolingo Super 90 ngày", category: "Duolingo", price: "643.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736464", name: "Tài khoản Gemini Business 6 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "KLIG-P1-1000000022", name: "Tài khoản Kling AI Pro 15 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "121.500 VND" },
-      { id: "BANA-P1-1000000022", name: "Nano banana gói pro 365 ngày", category: "Nano banana", price: "2.916.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-5647382917", name: "Tài khoản ChatGPT Lite Basic 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "YOTU-P1-3748291070", name: "Tài khoản YouTube Premium 12 tháng – Family Plan", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "842.400 VND" },
-      { id: "CURS-P1-5647382924", name: "Tài khoản Cursor AI Ultra 2 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "1.890.000 VND" },
-      { id: "DUOL-P1-1000000141", name: "Tài khoản Duolingo Super 30 ngày", category: "Duolingo", price: "350.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382924", name: "Tài khoản Gemini Enterprise 3 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "KLIG-P1-1000000021", name: "Tài khoản Kling AI Standard 15 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "114.000 VND" },
-      { id: "BANA-P1-1000000021", name: "Nano banana gói cơ bản 365 ngày", category: "Nano banana", price: "2.736.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "CGPT-P1-1928374655", name: "Tài khoản ChatGPT Enterprise Pro 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "136.890 VND" },
-      { id: "YOTU-P1-8374659215", name: "Tài khoản YouTube Premium 6 tháng – Cá nhân bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "485.460 VND" },
-      { id: "CURS-P1-1928374662", name: "Tài khoản Cursor AI Pro 2 tháng – Subscription", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "1.890.000 VND" },
-      { id: "DEEP-P1-1000000219", name: "DeepSeek Nạp 250 USD", category: "DeepSeek", price: "8.775.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000120", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "154.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374662", name: "Tài khoản Gemini Ultra 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "KLIG-P1-1000000020", name: "Tài khoản Kling AI Ultra 365 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "4.212.000 VND" },
-      { id: "BANA-P1-1000000020", name: "Nano banana 3500 credits 180 ngày", category: "Nano banana", price: "283.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-1928374662", name: "Tài khoản Netflix Premium 4K Ultra HD – Bảo hành cao cấp 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-3748291062", name: "Tài khoản ChatGPT Developer Advanced 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "70.200 VND" },
-      { id: "YOTU-P1-9182736464", name: "Tài khoản YouTube Premium 3 tháng – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "242.730 VND" },
-      { id: "ZOOM-P1-1000000020", name: "Zoom Workplace Pro 6 tháng – Team Access", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "486.000 VND" },
-      { id: "CURS-P1-3748291069", name: "Tài khoản Cursor AI Pro 1 tháng – Subscription", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000218", name: "DeepSeek Nạp 200 USD", category: "DeepSeek", price: "7.020.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000119", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "154.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291069", name: "Tài khoản Gemini Enterprise 1 tháng – Private Email", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "27.000 VND" },
-      { id: "KLIG-P1-1000000019", name: "Tài khoản Kling AI Premier 180 ngày – Cá nhân", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "1.620.000 VND" },
-      { id: "BANA-P1-1000000019", name: "Nano banana 2500 credits 180 ngày", category: "Nano banana", price: "2.430.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-3748291069", name: "Tài khoản Netflix Premium 4K Ultra HD – Cá nhân 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-8374659207", name: "Tài khoản ChatGPT Student Pro 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "YOTU-P1-5647382924", name: "Tài khoản YouTube Premium 1 tháng – Cá nhân nhanh chóng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "94.770 VND" },
-      { id: "ZOOM-P1-1000000019", name: "Zoom Workplace Pro 3 tháng – Cá nhân bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "243.000 VND" },
-      { id: "CURS-P1-8374659214", name: "Tài khoản Cursor AI Ultra 1 tháng – Renewal", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000217", name: "DeepSeek Nạp 150 USD", category: "DeepSeek", price: "5.265.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000118", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "154.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659214", name: "Tài khoản Gemini Business 1 tháng – Admin Activation", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "25.650 VND" },
-      { id: "KLIG-P1-1000000018", name: "Tài khoản Kling AI Pro 365 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "2.916.000 VND" },
-      { id: "BANA-P1-1000000018", name: "Nano banana 1500 credits 180 ngày", category: "Nano banana", price: "1.497.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-8374659214", name: "Tài khoản Netflix Premium 4K Ultra HD – Shared Profile 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "159.885 VND" },
-      { id: "CGPT-P1-9182736456", name: "Tài khoản ChatGPT Family Plus 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "87.750 VND" },
-      { id: "YOTU-P1-1928374662", name: "Tài khoản YouTube Premium 1 tháng – Cá nhân nhanh chóng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "94.770 VND" },
-      { id: "ZOOM-P1-1000000018", name: "Zoom Workplace Pro 2 tháng – Subscription", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "162.000 VND" },
-      { id: "CURS-P1-9182736463", name: "Tài khoản Cursor AI Pro+ 12 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "DEEP-P1-1000000216", name: "DeepSeek Nạp 100 USD", category: "DeepSeek", price: "3.510.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000117", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "154.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736463", name: "Tài khoản Gemini Advanced Pro 12 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "842.400 VND" },
-      { id: "KLIG-P1-1000000017", name: "Tài khoản Kling AI Standard 60 ngày – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "456.000 VND" },
-      { id: "BANA-P1-1000000017", name: "Nano banana 1000 credits 90 ngày", category: "Nano banana", price: "447.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-9182736463", name: "Tài khoản Netflix Premium 4K Ultra HD – Private Profile 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-5647382916", name: "Tài khoản ChatGPT Business Premium 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-3748291069", name: "Tài khoản YouTube Premium Family 1 tháng – Private Access", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "69.900 VND" },
-      { id: "ZOOM-P1-1000000017", name: "Zoom Workplace Pro 1 tháng – Full Warranty", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "81.000 VND" },
-      { id: "CURS-P1-5647382923", name: "Tài khoản Cursor AI Ultra 6 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "DEEP-P1-1000000215", name: "DeepSeek Nạp 90 USD", category: "DeepSeek", price: "3.159.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000116", name: "Tài khoản Duolingo Super 180 ngày", category: "Duolingo", price: "154.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382923", name: "Tài khoản Gemini Enterprise 6 tháng – Team Access", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "485.460 VND" },
-      { id: "KLIG-P1-1000000016", name: "Tài khoản Kling AI Ultra 30 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "351.000 VND" },
-      { id: "MANU-P1-1000000195", name: "Manus AI Gói Chuyên nghiệp 365 ngày – Tài khoản riêng tư", category: "Manus AI", price: "2.457.000 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000016", name: "Nano banana 500 credits 30 ngày", category: "Nano banana", price: "945.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-5647382923", name: "Tài khoản Netflix Premium 4K Ultra HD 1 năm – 5 thiết bị", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "1.918.620 VND" },
-      { id: "CGPT-P1-1928374654", name: "Tài khoản ChatGPT Lite 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "YOTU-P1-8374659214", name: "Tài khoản YouTube Premium 1–12 tháng – Cá nhân bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "421.200 VND" },
-      { id: "ZOOM-P1-1000000016", name: "Zoom Workplace Business 1 tháng – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "81.000 VND" },
-      { id: "CURS-P1-1928374661", name: "Tài khoản Cursor AI Pro 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "DEEP-P1-1000000214", name: "DeepSeek Nạp 80 USD", category: "DeepSeek", price: "2.808.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000115", name: "Tài khoản Duolingo Super 90 ngày", category: "Duolingo", price: "140.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374661", name: "Tài khoản Gemini Business 2 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "69.900 VND" },
-      { id: "KLIG-P1-1000000015", name: "Tài khoản Kling AI Premier 30 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "270.000 VND" },
-      { id: "MANU-P1-1000000194", name: "Manus AI Gói Chuyên nghiệp 365 ngày – 4000 điểm/tháng", category: "Manus AI", price: "1.930.749 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000015", name: "Nano banana 400 credits 30 ngày", category: "Nano banana", price: "423.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-1928374661", name: "Tài khoản Netflix Premium 4K Ultra HD 6 tháng – Shared Account", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "959.310 VND" },
-      { id: "CGPT-P1-3748291061", name: "Tài khoản ChatGPT Enterprise 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-9182736463", name: "Tài khoản YouTube Premium 1 tháng – Không quảng cáo (Android)", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "107.730 VND" },
-      { id: "ZOOM-P1-1000000015", name: "Zoom One Pro 1 tháng – Cá nhân nhanh chóng", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "69.900 VND" },
-      { id: "CURS-P1-3748291068", name: "Tài khoản Cursor AI Pro 1 tháng – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000213", name: "DeepSeek Nạp 70 USD", category: "DeepSeek", price: "2.457.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000114", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "140.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291068", name: "Tài khoản Gemini Ultra 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "KLIG-P1-1000000014", name: "Tài khoản Kling AI Pro 90 ngày – Cá nhân nhanh chóng", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "729.000 VND" },
-      { id: "MANU-P1-1000000193", name: "Manus AI Gói thuê bao 365 ngày", category: "Manus AI", price: "1.048.788 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000014", name: "Nano banana 50 credits 30 ngày", category: "Nano banana", price: "162.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-3748291068", name: "Tài khoản Netflix Premium 4K Ultra HD 3 tháng – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "479.655 VND" },
-      { id: "CGPT-P1-8374659206", name: "Tài khoản ChatGPT Developer Pro 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "70.200 VND" },
-      { id: "YOTU-P1-5647382923", name: "Tài khoản YouTube Premium 90 ngày – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "242.730 VND" },
-      { id: "ZOOM-P1-1000000014", name: "Zoom Workplace Pro 12 tháng – Subscription", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "842.400 VND" },
-      { id: "CURS-P1-8374659213", name: "Tài khoản Cursor AI Ultra 12 tháng – Subscription", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "DEEP-P1-1000000212", name: "DeepSeek Nạp 60 USD", category: "DeepSeek", price: "2.106.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000113", name: "Tài khoản Duolingo EDU Lifetime", category: "Duolingo", price: "140.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659213", name: "Tài khoản Gemini Pro VEO3.1 3 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "226.800 VND" },
-      { id: "KLIG-P1-1000000013", name: "Tài khoản Kling AI Standard 365 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "2.736.000 VND" },
-      { id: "MANU-P1-1000000192", name: "Manus AI Gói Tiêu chuẩn mở rộng", category: "Manus AI", price: "947.049 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000013", name: "Nano banana gói max 90 ngày", category: "Nano banana", price: "2.430.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-8374659213", name: "Tài khoản Netflix Premium 4K Ultra HD 2 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "319.770 VND" },
-      { id: "CGPT-P1-9182736455", name: "Tài khoản ChatGPT Student Edition 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "YOTU-P1-1928374661", name: "Tài khoản YouTube Premium Music 1 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "75.600 VND" },
-      { id: "ZOOM-P1-1000000013", name: "Zoom Workplace Pro 6 tháng – Cá nhân bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "421.200 VND" },
-      { id: "CURS-P1-9182736462", name: "Tài khoản Cursor AI Pro+ 6 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "DEEP-P1-1000000211", name: "DeepSeek Nạp 50 USD", category: "DeepSeek", price: "1.755.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000112", name: "Tài khoản Duolingo Max 90 ngày", category: "Duolingo", price: "132.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736462", name: "Tài khoản Gemini Enterprise Business 1 tháng – Fast Delivery", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "42.120 VND" },
-      { id: "KLIG-P1-1000000012", name: "Tài khoản Kling AI Ultra 180 ngày – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "2.106.000 VND" },
-      { id: "MANU-P1-1000000191", name: "Manus AI Gói Chuyên nghiệp 30 ngày", category: "Manus AI", price: "702.000 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000012", name: "Nano banana gói pro 90 ngày", category: "Nano banana", price: "2.187.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-9182736462", name: "Tài khoản Netflix Premium Full HD 1080p 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "159.885 VND" },
-      { id: "CGPT-P1-5647382915", name: "Tài khoản ChatGPT Family Pack 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-3748291068", name: "Tài khoản YouTube Premium 12 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "421.200 VND" },
-      { id: "ZOOM-P1-1000000012", name: "Zoom Workplace Pro 3 tháng – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "210.600 VND" },
-      { id: "CURS-P1-5647382922", name: "Tài khoản Cursor AI Ultra 3 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "DEEP-P1-1000000210", name: "DeepSeek Nạp 40 USD", category: "DeepSeek", price: "1.404.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000111", name: "Tài khoản Duolingo Max 60 ngày", category: "Duolingo", price: "105.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382922", name: "Tài khoản Gemini Advanced 1 tháng – Guarantee", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "KLIG-P1-1000000011", name: "Tài khoản Kling AI Premier 60 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "540.000 VND" },
-      { id: "MANU-P1-1000000190", name: "Manus AI Gói Nâng cao 30 ngày", category: "Manus AI", price: "698.490 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000011", name: "Nano banana gói cơ bản 90 ngày", category: "Nano banana", price: "1.899.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-5647382922", name: "Tài khoản Netflix Premium 4K Ultra HD 30 ngày – Bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-1928374653", name: "Tài khoản ChatGPT Premium Business 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "87.750 VND" },
-      { id: "YOTU-P1-8374659213", name: "Tài khoản YouTube Premium 1/3 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "105.300 VND" },
-      { id: "ZOOM-P1-1000000011", name: "Zoom Workplace Pro 2 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "140.400 VND" },
-      { id: "CURS-P1-1928374660", name: "Tài khoản Cursor AI Pro 2 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "1.890.000 VND" },
-      { id: "DEEP-P1-1000000209", name: "DeepSeek Nạp 30 USD", category: "DeepSeek", price: "1.053.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000110", name: "Tài khoản Duolingo Max 30 ngày", category: "Duolingo", price: "103.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374660", name: "Tài khoản Gemini Enterprise 1 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "28.890 VND" },
-      { id: "KLIG-P1-1000000010", name: "Tài khoản Kling AI Pro 30 ngày – Fast Delivery", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "243.000 VND" },
-      { id: "MANU-P1-1000000189", name: "Manus AI Gói Cơ bản 30 ngày", category: "Manus AI", price: "667.000 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000010", name: "Nano banana 8000 credits 365 ngày", category: "Nano banana", price: "640.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-1928374660", name: "Tài khoản Netflix Premium 4K Ultra HD – Bảo hành 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-3748291060", name: "Tài khoản ChatGPT Instant Issue 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "YOTU-P1-9182736462", name: "Tài khoản YouTube Premium Private Account 1 tháng – Bảo hành", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "81.000 VND" },
-      { id: "ZOOM-P1-1000000010", name: "Zoom Workplace Pro Subscription 1–12 tháng – Business Plan", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "175.500 VND" },
-      { id: "CURS-P1-3748291067", name: "Tài khoản Cursor AI Pro 1 tháng – Full Warranty", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000208", name: "DeepSeek Nạp 25 USD", category: "DeepSeek", price: "877.500 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000109", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "878.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291067", name: "Tài khoản Gemini Business Pro 1 tháng – Email riêng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "27.810 VND" },
-      { id: "KLIG-P1-1000000009", name: "Tài khoản Kling AI Standard 30 ngày – Full Warranty", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "228.000 VND" },
-      { id: "MANU-P1-1000000188", name: "Manus AI Gói Chuyên nghiệp 7 ngày – 3300 điểm", category: "Manus AI", price: "298.350 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000009", name: "Nano banana 3500 credits 180 ngày", category: "Nano banana", price: "283.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-3748291067", name: "Tài khoản Netflix Premium 4K Ultra HD – Private Profile 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-8374659205", name: "Tài khoản ChatGPT Joint Account 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-5647382922", name: "Tài khoản YouTube Premium Family 1 tháng – Ad‑Free, Offline, HiFi", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "69.900 VND" },
-      { id: "ZOOM-P1-1000000009", name: "Zoom Workplace Pro – Subscription trên tài khoản của bạn", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "135.000 VND" },
-      { id: "CURS-P1-8374659212", name: "Tài khoản Cursor AI Ultra 1 tháng – Fast Delivery", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000207", name: "DeepSeek Nạp 20 USD", category: "DeepSeek", price: "702.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000108", name: "Tài khoản Duolingo Super 30 ngày", category: "Duolingo", price: "88.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659212", name: "Tài khoản Gemini Enterprise 1 tháng – Nano Banana Pro Veo3", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "34.650 VND" },
-      { id: "KLIG-P1-1000000008", name: "Tài khoản Kling AI Ultra 90 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "1.053.000 VND" },
-      { id: "MANU-P1-1000000187", name: "Manus AI Gói Chuyên nghiệp 7 ngày – 3800 điểm", category: "Manus AI", price: "157.950 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000008", name: "Nano banana 1500 credits 90 ngày", category: "Nano banana", price: "1.497.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-8374659212", name: "Tài khoản Netflix Premium 4K Ultra HD – Shared Account 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "159.885 VND" },
-      { id: "CGPT-P1-9182736454", name: "Tài khoản ChatGPT Pro Cashback 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "70.200 VND" },
-      { id: "YOTU-P1-9182736451", name: "Tài khoản YouTube Premium 1 tháng – Không quảng cáo", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "107.730 VND" },
-      { id: "ZOOM-P1-1000000008", name: "Zoom Workplace Pro Subscription 1–12 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "108.000 VND" },
-      { id: "CURS-P1-9182736461", name: "Tài khoản Cursor AI Pro+ 1 tháng – Renewal", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000206", name: "DeepSeek Nạp 15 USD", category: "DeepSeek", price: "526.500 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000107", name: "Tài khoản Duolingo Super 90 ngày", category: "Duolingo", price: "643.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736461", name: "Tài khoản Gemini Business 1 tháng – Bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "34.290 VND" },
-      { id: "KLIG-P1-1000000007", name: "Tài khoản Kling AI Premier 365 ngày – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "2.916.000 VND" },
-      { id: "MANU-P1-1000000186", name: "Manus AI Tài khoản riêng tư 1300 điểm", category: "Manus AI", price: "80.730 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000007", name: "Nano banana 1000 credits 30 ngày", category: "Nano banana", price: "447.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-9182736461", name: "Tài khoản Netflix Premium 4K Ultra HD 1 năm", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "1.918.620 VND" },
-      { id: "CGPT-P1-5647382914", name: "Tài khoản ChatGPT Plus Auto Delivery 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "45.630 VND" },
-      { id: "YOTU-P1-5647382911", name: "Tài khoản YouTube Premium Music 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "75.600 VND" },
-      { id: "ZOOM-P1-1000000007", name: "Zoom One Pro 14 ngày – 12 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "108.000 VND" },
-      { id: "CURS-P1-5647382921", name: "Tài khoản Cursor AI Pro 12 tháng – Cá nhân bảo hành", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "11.340.000 VND" },
-      { id: "DEEP-P1-1000000205", name: "DeepSeek Nạp 10 USD", category: "DeepSeek", price: "351.000 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000106", name: "Tài khoản Duolingo Super 365 ngày", category: "Duolingo", price: "456.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382921", name: "Tài khoản Gemini Ultra 1 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "35.100 VND" },
-      { id: "KLIG-P1-1000000006", name: "Tài khoản Kling AI Pro 180 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "1.458.000 VND" },
-      { id: "MANU-P1-1000000185", name: "Manus AI Gói Chuyên nghiệp 30 ngày", category: "Manus AI", price: "702.000 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000006", name: "Nano banana 500 credits 30 ngày", category: "Nano banana", price: "945.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-5647382921", name: "Tài khoản Netflix Premium 4K Ultra HD 6 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "959.310 VND" },
-      { id: "CGPT-P1-5647382911", name: "Tài khoản ChatGPT DALL·E chung 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "77.220 VND" },
-      { id: "YOTU-P1-1928374650", name: "Tài khoản YouTube Premium 12 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "421.200 VND" },
-      { id: "ZOOM-P1-1000000006", name: "Zoom Workplace Pro Subscription – Upgrade/Renew", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "108.000 VND" },
-      { id: "CURS-P1-1928374659", name: "Tài khoản Cursor AI Pro 6 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "5.670.000 VND" },
-      { id: "DEEP-P1-1000000204", name: "DeepSeek Nạp 7 USD", category: "DeepSeek", price: "245.700 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000105", name: "Tài khoản Duolingo Super 30 ngày", category: "Duolingo", price: "350.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-1928374659", name: "Tài khoản Gemini Enterprise Business 30 ngày – 15 thành viên", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "81.900 VND" },
-      { id: "KLIG-P1-1000000005", name: "Tài khoản Kling AI Standard 90 ngày – Cá nhân", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "684.000 VND" },
-      { id: "MANU-P1-1000000184", name: "Manus AI Gói Nâng cao 30 ngày", category: "Manus AI", price: "526.500 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000005", name: "Nano banana 250 credits 30 ngày", category: "Nano banana", price: "585.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-1928374659", name: "Tài khoản Netflix Premium 4K Ultra HD 60 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "319.770 VND" },
-      { id: "CGPT-P1-1928374650", name: "Tài khoản ChatGPT Sora 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "77.220 VND" },
-      { id: "YOTU-P1-3748291056", name: "Tài khoản YouTube Premium 3 tháng – Cá nhân", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "105.300 VND" },
-      { id: "ZOOM-P1-1000000005", name: "Zoom Pro 1 năm – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "105.300 VND" },
-      { id: "CURS-P1-3748291066", name: "Tài khoản Cursor AI Pro 3 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "2.835.000 VND" },
-      { id: "DEEP-P1-1000000203", name: "DeepSeek Nạp 5 USD", category: "DeepSeek", price: "175.500 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000104", name: "Tài khoản Duolingo Max 30 ngày", category: "Duolingo", price: "190.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-3748291066", name: "Tài khoản Gemini Pro VEO3.1 2 tháng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "150.660 VND" },
-      { id: "KLIG-P1-1000000004", name: "Tài khoản Kling AI Ultra 30 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "351.000 VND" },
-      { id: "MANU-P1-1000000183", name: "Manus AI Gói Cơ bản 7 ngày", category: "Manus AI", price: "70.200 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000004", name: "Nano banana 100 credits 30 ngày", category: "Nano banana", price: "259.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-3748291066", name: "Tài khoản Netflix Premium Full HD 1080p 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "159.885 VND" },
-      { id: "CGPT-P1-3748291056", name: "Tài khoản ChatGPT Plus bảo hành cao cấp 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "87.750 VND" },
-      { id: "YOTU-P1-8374659201", name: "Tài khoản YouTube Premium Private Account 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "81.000 VND" },
-      { id: "ZOOM-P1-1000000004", name: "Zoom Pro Workplace subscription 2 tuần – 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "70.200 VND" },
-      { id: "CURS-P1-8374659211", name: "Tài khoản Cursor AI Ultra 1 tháng – Subscription", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000202", name: "DeepSeek Nạp 3 USD", category: "DeepSeek", price: "105.300 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000103", name: "Tài khoản Duolingo Super 15 ngày", category: "Duolingo", price: "175.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-8374659211", name: "Tài khoản Gemini Advanced Pro + Google One 2TB 1 tháng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "97.740 VND" },
-      { id: "KLIG-P1-1000000003", name: "Tài khoản Kling AI Premier 30 ngày – Subscription", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "228.000 VND" },
-      { id: "MANU-P1-1000000182", name: "Manus AI Nạp 3000 điểm", category: "Manus AI", price: "105.300 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000003", name: "Nano banana gói max 365 ngày", category: "Nano banana", price: "3.120.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-8374659211", name: "Tài khoản Netflix Premium 4K 365 ngày – 5 màn hình", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "421.200 VND" },
-      { id: "CGPT-P1-8374659201", name: "Tài khoản ChatGPT Team Business 30 ngày – Không vô hiệu hóa", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "105.300 VND" },
-      { id: "YOTU-P1-9182736450", name: "Tài khoản YouTube Premium Family 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "69.900 VND" },
-      { id: "ZOOM-P1-1000000003", name: "Zoom Workplace Pro – Subscription trên tài khoản của bạn", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "70.200 VND" },
-      { id: "CURS-P1-9182736460", name: "Tài khoản Cursor AI Pro Plus 1 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000201", name: "DeepSeek Nạp 2 USD", category: "DeepSeek", price: "70.200 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000102", name: "Tài khoản Duolingo Plus 30 ngày", category: "Duolingo", price: "105.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-9182736460", name: "Tài khoản Gemini Business 1 tháng – Cá nhân", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "81.000 VND" },
-      { id: "KLIG-P1-1000000002", name: "Tài khoản Kling AI Pro 7 ngày – Cá nhân", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "53.200 VND" },
-      { id: "MANU-P1-1000000181", name: "Manus AI Nạp 1000 điểm", category: "Manus AI", price: "35.100 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000002", name: "Nano banana gói pro 180 ngày", category: "Nano banana", price: "1.046.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-9182736460", name: "Tài khoản Netflix Private Account 4K Premium 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "181.260 VND" },
-      { id: "CGPT-P1-9182736450", name: "Tài khoản ChatGPT Cá nhân 30 ngày kèm email", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "52.650 VND" },
-      { id: "YOTU-P1-5647382910", name: "Tài khoản YouTube Premium 2 tháng + YT Music", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "45.900 VND" },
-      { id: "ZOOM-P1-1000000002", name: "Zoom One Pro Premium 30 ngày – Private Account", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "69.900 VND" },
-      { id: "CURS-P1-5647382920", name: "Tài khoản Cursor AI Pro 1 tháng – Private Account", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Cursor", price: "945.000 VND" },
-      { id: "DEEP-P1-1000000200", name: "DeepSeek Nạp 1 USD", category: "DeepSeek", price: "35.100 VND", logo: "https://freepnglogo.com/images/all_img/deep-seek-logo-whale-1ced.png" },
-      { id: "DUOL-P1-1000000101", name: "Tài khoản Duolingo Super 7 ngày", category: "Duolingo", price: "105.000 VND", logo: "https://th.bing.com/th/id/R.43c102a5fc259baffd203fb7537043dd?rik=YxAZPYpo4UzOaw&pid=ImgRaw&r=0" },
-      { id: "GEMI-P1-5647382920", name: "Tài khoản Gemini Enterprise Pro 1 tháng", logo: "https://i.pinimg.com/736x/ed/46/98/ed469817b36ddb087939bfc4597c2e11.jpg", category: "Gemini", price: "70.200 VND" },
-      { id: "KLIG-P1-1000000001", name: "Tài khoản Kling AI Standard 1 ngày – Private Account", logo: "https://i.pinimg.com/736x/08/55/22/08552284063198c4fc24ac9a2a8cbaeb.jpg", category: "Kling AI", price: "7.600 VND" },
-      { id: "MANU-P1-1000000180", name: "Manus AI Nạp 500 điểm", category: "Manus AI", price: "28.080 VND", logo: "https://crystalpng.com/wp-content/uploads/2025/10/Manus-ai-agent-logo.png" },
-      { id: "BANA-P1-1000000001", name: "Nano banana gói cơ bản 30 ngày", category: "Nano banana", price: "633.000 VND", logo: "https://i.pinimg.com/736x/f7/db/cb/f7dbcb1426bdc49ad55543f09b764ddc.jpg" },
-      { id: "NFLX-P1-5647382920", name: "Tài khoản Netflix Premium 4K Ultra HD 30 ngày", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", category: "Netflix", price: "159.885 VND" },
-      { id: "CGPT-P1-5647382910", name: "Tài khoản ChatGPT Pro 30 ngày – Gia hạn 24/7", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", category: "OpenAI", price: "70.200 VND" },
-      { id: "YOTU-P1-1029384756", name: "Tài khoản YouTube Premium 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", category: "YouTube", price: "35.100 VND" },
-      { id: "ZOOM-P1-1000000001", name: "Zoom Workspace 100 thành viên 1 tháng", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg", category: "Zoom", price: "35.100 VND" },
-
-    ];
+    let brands = [];
 
     const usersList = ["Quốc Bảo", "An An", "Minh Khang", "Thảo Vy", "Lê Nam", "Hoàng Yến",
       "Anh Tuấn", "Ngọc Anh", "Đức Huy", "Mai Phương", "Phúc Lâm", "Diệu Linh",
@@ -4781,6 +4451,7 @@ So tien: ${usdAmount} USD`;
       if (!canvas) return;
       const itemsCount = 45;
       const displayItems = [];
+      if (!brands.length) { canvas.innerHTML = ''; return; }
       for (let i = 0; i < itemsCount; i++) displayItems.push(brands[i % brands.length]);
 
       let html = `
@@ -4856,18 +4527,10 @@ So tien: ${usdAmount} USD`;
 
     function goToDetail(id) {
       const s = brands.find(x => x.id === id);
-      if (!s) return;
-      currentSelectedId = id;
       const title = document.getElementById('detail-title');
       const logo = document.getElementById('detail-logo');
       const cat = document.getElementById('detail-category-label');
       const price = document.getElementById('detail-price');
-
-      if (title) title.innerText = s.name;
-      if (logo) { logo.src = s.logo; logo.alt = s.name; }
-      if (cat) cat.innerText = s.category;
-      if (price) price.innerText = s.price;
-
       const detailMetaCategory = document.getElementById('detail-meta-category');
       const detailMetaPrice = document.getElementById('detail-meta-price');
       const detailMetaStatus = document.getElementById('detail-meta-status');
@@ -4875,12 +4538,56 @@ So tien: ${usdAmount} USD`;
       const detailSummaryText = document.getElementById('detail-summary-text');
       const detailWaitTime = document.getElementById('detail-wait-time');
 
-      if (detailMetaCategory) detailMetaCategory.innerText = s.category;
-      if (detailMetaPrice) detailMetaPrice.innerText = s.price;
-      if (detailMetaStatus) detailMetaStatus.innerText = 'Sẵn sàng kích hoạt ngay';
-      if (detailMetaSupport) detailMetaSupport.innerText = 'Hotline 0357130499 / Zalo / Messenger / Email';
-      if (detailSummaryText) detailSummaryText.innerText = `${s.name} thuộc danh mục ${s.category}, mức giá hiện tại ${s.price}. Sau khi thanh toán, hệ thống tạo mã kích hoạt để gửi qua kênh hỗ trợ và hoàn tất thiết lập.`;
-      if (detailWaitTime) detailWaitTime.innerText = 'Dưới 2 phút (Hệ thống đang rảnh)';
+      if (!s) {
+        if (title) title.innerText = 'Chưa có sản phẩm';
+        if (logo) { logo.src = ''; logo.alt = 'Chưa có sản phẩm'; }
+        if (cat) cat.innerText = 'Danh mục trống';
+        if (price) price.innerText = '';
+        if (detailMetaCategory) detailMetaCategory.innerText = 'Danh mục trống';
+        if (detailMetaPrice) detailMetaPrice.innerText = '';
+        if (detailMetaStatus) detailMetaStatus.innerText = 'Chưa có dữ liệu';
+        if (detailMetaSupport) detailMetaSupport.innerText = 'Hãy nạp lại dữ liệu từ Apps Script trong khu Admin';
+        if (detailSummaryText) detailSummaryText.innerText = 'Danh sách sản phẩm hiện đang trống. Hãy nạp lại từ Apps Script trong khu Admin.';
+        if (detailWaitTime) detailWaitTime.innerText = 'Đang chờ dữ liệu';
+        showPage('product-detail');
+        return;
+      }
+
+      currentSelectedId = id;
+
+      const productName = String(s.name || '').trim();
+      const platformName = String(s.platformName || productName).trim();
+      const categoryName = String(s.category || 'Khác').trim();
+      const productPrice = String(s.price || '').trim();
+      const productLogo = String(s.logo || s.categoryImage || '').trim();
+      const shortDescription = String(s.shortDescription || s.short_description || '').trim();
+      const detailedDescription = String(s.detailedDescription || s.detailed_description || '').trim();
+      const warrantyText = String(s.warranty || '').trim();
+      const productLink = String(s.link || '').trim();
+
+      const summaryParts = [];
+      if (shortDescription) summaryParts.push(shortDescription);
+      if (detailedDescription && detailedDescription !== shortDescription) summaryParts.push(detailedDescription);
+      if (warrantyText) summaryParts.push('Bảo hành: ' + warrantyText);
+      if (!summaryParts.length) {
+        summaryParts.push(productName + ' thuộc danh mục ' + categoryName + (productPrice ? ', mức giá hiện tại ' + productPrice + '.' : '.'));
+      }
+
+      if (title) title.innerText = productName || platformName || 'Sản phẩm';
+      if (logo) {
+        logo.src = productLogo;
+        logo.alt = productName || platformName || 'Sản phẩm';
+        logo.onerror = function () { this.src = ''; };
+      }
+      if (cat) cat.innerText = categoryName;
+      if (price) price.innerText = productPrice;
+
+      if (detailMetaCategory) detailMetaCategory.innerText = categoryName;
+      if (detailMetaPrice) detailMetaPrice.innerText = productPrice || 'Liên hệ';
+      if (detailMetaStatus) detailMetaStatus.innerText = platformName ? ('Sẵn sàng kích hoạt • ' + platformName) : 'Sẵn sàng kích hoạt ngay';
+      if (detailMetaSupport) detailMetaSupport.innerText = productLink ? ('Hotline 0357130499 / Zalo / Messenger / Link sản phẩm') : 'Hotline 0357130499 / Zalo / Messenger / Email';
+      if (detailSummaryText) detailSummaryText.innerText = summaryParts.join(' ');
+      if (detailWaitTime) detailWaitTime.innerText = warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Dưới 2 phút (Hệ thống đang rảnh)';
 
       lastReceiptData = null;
       selectedPaymentMethod = 'bank';
@@ -5014,7 +4721,7 @@ So tien: ${usdAmount} USD`;
     function rebuildCategoriesIfNeeded() {
       const container = document.getElementById('category-filter-list');
       if (!container) return;
-      const fixedOrder = ['Tất cả', 'Phim ảnh', 'Âm nhạc', 'Work', 'A.I'];
+      const fixedOrder = ['Tất cả'];
       const existingCategories = [...new Set(brands.map(item => item.category))];
       const extraCategories = existingCategories.filter(cat => !fixedOrder.includes(cat)).sort((a, b) => a.localeCompare(b, 'vi'));
       const allCategories = [...fixedOrder, ...extraCategories];
@@ -6524,10 +6231,11 @@ So tien: ${usdAmount} USD`;
       function getCategories() {
         const map = new Map();
         getProducts().forEach(function (item) {
-          const key = String(item.platformName || item.name || '').trim() || 'Khác';
-          if (!map.has(key)) map.set(key, { name: key, image: item.categoryImage || item.logo || '', count: 0 });
+          const key = String(item.category || '').trim() || 'Khác';
+          const image = String(item.logo || item.categoryImage || '').trim();
+          if (!map.has(key)) map.set(key, { name: key, image: image, count: 0 });
           map.get(key).count += 1;
-          if (!map.get(key).image && (item.categoryImage || item.logo)) map.get(key).image = item.categoryImage || item.logo;
+          if (!map.get(key).image && image) map.get(key).image = image;
         });
         let list = Array.from(map.values());
         if (categorySort === 'asc') list.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
@@ -6545,9 +6253,19 @@ So tien: ${usdAmount} USD`;
         const host = document.getElementById('category-filter-list');
         if (!host) return;
         const list = getCategories();
-        const chips = [{ name: 'Tất cả', label: 'Tất cả' }].concat(list.map(function (item) { return { name: item.name, label: item.name }; }));
+        const chips = [{ name: 'Tất cả', label: 'Tất cả', image: '', count: getProducts().length }].concat(list.map(function (item) {
+          return { name: item.name, label: item.name, image: item.image || '', count: item.count || 0 };
+        }));
         host.innerHTML = chips.map(function (item, idx) {
-          return '<button type="button" class="category-chip ' + (idx === 0 ? 'active' : '') + '" data-category="' + esc(item.name) + '">' + esc(item.label) + '</button>';
+          const media = idx === 0
+            ? '<span class="alpha-chip-media"><i class="fa-solid fa-layer-group"></i></span>'
+            : (item.image
+                ? '<span class="alpha-chip-media"><img src="' + esc(item.image) + '" alt="' + esc(item.name) + '"></span>'
+                : '<span class="alpha-chip-media"><i class="fa-solid fa-cube"></i></span>');
+          return '<button type="button" class="category-chip ' + (idx === 0 ? 'active' : '') + '" data-category="' + esc(item.name) + '">'
+            + media
+            + '<span>' + esc(item.label) + '</span>'
+            + '</button>';
         }).join('');
         host.querySelectorAll('.category-chip').forEach(function (btn) {
           btn.addEventListener('click', function () { filterByCategory(btn.dataset.category || 'Tất cả'); });
@@ -8938,12 +8656,7 @@ So tien: ${usdAmount} USD`;
   </style>
   <script id="alpha-google-sheet-bridge-script">
     (function () {
-      const STORE_URL = 'alpha_zone_supabase_url_v1';
-      const STORE_KEY = 'alpha_zone_supabase_publishable_key_v1';
-      const STORE_TABLE = 'alpha_zone_supabase_table_v1';
-      const DEFAULT_URL = 'https://knobdsxnqxlmsgghjvjw.supabase.co';
-      const DEFAULT_KEY = 'sb_publishable_b-O1i9VsbBwhG8Obun1fsA_qj9Q0dWW';
-      const DEFAULT_TABLE = 'products';
+      const API_URL = 'https://script.google.com/macros/s/AKfycbzBqoUEd4SzIiWFuCw5XSWhzQMIk6FLic55Ar_gHaV569uhfjoYevSqgS5p0_Ls1k_c/exec';
       const BOX_ID = 'alpha-google-sheet-bridge';
 
       function safeJsonParse(raw, fallback) {
@@ -8974,7 +8687,7 @@ So tien: ${usdAmount} USD`;
         if (typeof window.refreshCurrentView === 'function') try { window.refreshCurrentView(); } catch (_) { }
       }
       function inlineValue(key) {
-        const el = document.getElementById('alpha-apps-inline-' + key);
+        const el = document.getElementById('alpha-apps-inline-' + key) || document.getElementById('alpha-admin-field-' + key);
         return el ? String(el.value || '').trim() : '';
       }
       function normalizeNumericPrice(value) {
@@ -8994,7 +8707,7 @@ So tien: ${usdAmount} USD`;
         const numeric = normalizeNumericPrice(value);
         return numeric == null ? '' : numeric.toLocaleString('vi-VN') + ' VND';
       }
-      function normalizeProductForSupabase(item) {
+      function normalizeProductForApi(item) {
         const base = item && typeof item === 'object' ? item : {};
         return {
           id: String(base.id || '').trim(),
@@ -9006,7 +8719,8 @@ So tien: ${usdAmount} USD`;
           warranty: String(base.warranty || '').trim(),
           price: normalizeNumericPrice(base.price),
           logo: String(base.logo || '').trim(),
-          categoryImage: String(base.categoryImage || base.logo || '').trim()
+          categoryImage: String(base.categoryImage || base.logo || '').trim(),
+          link: String(base.link || '').trim()
         };
       }
       function normalizeProductForAdmin(item) {
@@ -9017,7 +8731,7 @@ So tien: ${usdAmount} USD`;
         });
       }
       function getProductDraft() {
-        return normalizeProductForSupabase({
+        return normalizeProductForApi({
           id: inlineValue('id'),
           name: inlineValue('name'),
           platformName: inlineValue('platformName'),
@@ -9027,80 +8741,38 @@ So tien: ${usdAmount} USD`;
           warranty: inlineValue('warranty'),
           price: inlineValue('price'),
           logo: inlineValue('logo'),
-          categoryImage: inlineValue('categoryImage') || inlineValue('logo')
+          categoryImage: inlineValue('categoryImage') || inlineValue('logo'),
+          link: inlineValue('link')
         });
       }
       function selectedProductId() {
         return inlineValue('id') || String(window.currentSelectedId || '').trim() || '';
-      }
-      function sanitizeTableName(value) {
-        const raw = String(value || '').trim();
-        if (!raw) return DEFAULT_TABLE;
-        const normalized = raw.replace(/^public\./i, '').trim();
-        if (!normalized || /^product_list$/i.test(normalized)) return DEFAULT_TABLE;
-        return normalized;
-      }
-      function migrateLegacySupabaseTable() {
-        try {
-          const stored = localStorage.getItem(STORE_TABLE);
-          const next = sanitizeTableName(stored);
-          if (stored !== next) localStorage.setItem(STORE_TABLE, next);
-          return next;
-        } catch (_) {
-          return DEFAULT_TABLE;
-        }
-      }
-      function readConfig() {
-        const urlInput = document.getElementById('alpha-supabase-url');
-        const keyInput = document.getElementById('alpha-supabase-key');
-        const tableInput = document.getElementById('alpha-supabase-table');
-        const url = (urlInput && urlInput.value) || localStorage.getItem(STORE_URL) || DEFAULT_URL;
-        const key = (keyInput && keyInput.value) || localStorage.getItem(STORE_KEY) || DEFAULT_KEY;
-        const table = sanitizeTableName((tableInput && tableInput.value) || migrateLegacySupabaseTable() || DEFAULT_TABLE);
-        return {
-          url: String(url || '').trim().replace(/\/+$/, ''),
-          key: String(key || '').trim(),
-          table: table
-        };
-      }
-      function saveConfig() {
-        const cfg = readConfig();
-        if (!cfg.url) throw new Error('Thiếu Supabase Project URL.');
-        if (!cfg.key) throw new Error('Thiếu Supabase publishable key.');
-        localStorage.setItem(STORE_URL, cfg.url);
-        localStorage.setItem(STORE_KEY, cfg.key);
-        localStorage.setItem(STORE_TABLE, sanitizeTableName(cfg.table));
-        const tableInput = document.getElementById('alpha-supabase-table');
-        if (tableInput) tableInput.value = sanitizeTableName(cfg.table);
-        cfg.table = sanitizeTableName(cfg.table);
-        return cfg;
       }
       function required(product) {
         const need = ['id', 'name', 'platformName', 'category', 'shortDescription', 'detailedDescription', 'warranty', 'price', 'logo'];
         const missing = need.filter(function (k) { return !String(product && product[k] || '').trim(); });
         if (missing.length) throw new Error('Thiếu trường bắt buộc: ' + missing.join(', '));
       }
-      async function supabaseFetch(method, query, body, preferHeader) {
-        const cfg = saveConfig();
-        const endpoint = cfg.url + '/rest/v1/' + encodeURIComponent(cfg.table) + (query || '');
-        const headers = {
-          'apikey': cfg.key,
-          'Authorization': 'Bearer ' + cfg.key
-        };
-        if (body != null) headers['Content-Type'] = 'application/json';
-        if (preferHeader) headers['Prefer'] = preferHeader;
-        const res = await fetch(endpoint, {
+      async function apiFetch(method, action, params, body) {
+        const url = new URL(API_URL);
+        url.searchParams.set('action', action);
+        Object.entries(params || {}).forEach(function (entry) {
+          const key = entry[0];
+          const value = entry[1];
+          if (value != null && String(value).trim() !== '') url.searchParams.set(key, String(value).trim());
+        });
+
+        const res = await fetch(url.toString(), {
           method: method,
-          headers: headers,
+          headers: body != null ? { 'Content-Type': 'application/json' } : undefined,
           body: body == null ? undefined : JSON.stringify(body)
         });
         const raw = await res.text();
         let json = null;
         try { json = JSON.parse(raw); } catch (_) { }
-        if (!res.ok) {
-          throw new Error((json && (json.message || json.error || json.hint || json.details)) || raw || ('HTTP ' + res.status));
-        }
-        return json || raw;
+        if (!res.ok) throw new Error((json && (json.message || json.error)) || raw || ('HTTP ' + res.status));
+        if (!json || typeof json !== 'object') throw new Error('API Apps Script không trả JSON hợp lệ.');
+        return json;
       }
       function mount() {
         const area = document.getElementById('admin-json-area');
@@ -9109,26 +8781,27 @@ So tien: ${usdAmount} USD`;
         host.id = BOX_ID;
         host.className = 'alpha-sheet-bridge';
         host.innerHTML = ''
-          + '<div class="alpha-sheet-bridge-title">Supabase JSON Sync</div>'
-          + '<div class="alpha-sheet-bridge-helper">Nạp sản phẩm từ Supabase vào Admin JSON, lưu sản phẩm đang nhập, đẩy toàn bộ JSON hiện tại lên Supabase, hoặc xoá theo ID đang nhập.</div>'
+          + '<div class="alpha-sheet-bridge-title">Apps Script JSON Sync</div>'
+          + '<div class="alpha-sheet-bridge-helper">Đồng bộ trực tiếp với Google Sheet thông qua Apps Script JSON API. Giữ nguyên luồng Admin JSON hiện tại, chỉ thay lớp kết nối dữ liệu.</div>'
           + '<div class="alpha-sheet-bridge-actions">'
-          + '  <button type="button" class="btn-street w-full" id="alpha-sheet-load"><i class="fa-solid fa-table-list"></i> Nạp từ Supabase</button>'
+          + '  <button type="button" class="btn-street w-full" id="alpha-sheet-load"><i class="fa-solid fa-table-list"></i> Nạp từ Apps Script</button>'
           + '  <button type="button" class="btn-street w-full" id="alpha-sheet-upsert"><i class="fa-solid fa-pen-to-square"></i> Lưu sản phẩm hiện tại</button>'
           + '  <button type="button" class="btn-street w-full" id="alpha-sheet-push-all"><i class="fa-solid fa-cloud-arrow-up"></i> Đẩy toàn bộ JSON</button>'
           + '  <button type="button" class="btn-street w-full" id="alpha-sheet-delete"><i class="fa-solid fa-trash"></i> Xoá theo ID</button>'
           + '</div>'
-          + '<div id="alpha-sheet-bridge-log" class="alpha-sheet-bridge-log">Sẵn sàng kết nối Supabase.</div>';
+          + '<div id="alpha-sheet-bridge-log" class="alpha-sheet-bridge-log">Sẵn sàng kết nối Apps Script API.</div>';
         area.appendChild(host);
 
         host.querySelector('#alpha-sheet-load').addEventListener('click', async function () {
           try {
-            bridgeStatus('Đang nạp sản phẩm từ Supabase...');
-            const rows = await supabaseFetch('GET', '?select=id,name,platformName,category,shortDescription,detailedDescription,warranty,price,logo,categoryImage&order=id.asc', null, null);
-            const items = (Array.isArray(rows) ? rows : []).map(normalizeProductForAdmin);
+            bridgeStatus('Đang nạp sản phẩm từ Apps Script API...');
+            const result = await apiFetch('GET', 'list', null, null);
+            if (!result.success) throw new Error(result.message || 'Không nạp được dữ liệu.');
+            const items = (Array.isArray(result.products) ? result.products : []).map(normalizeProductForAdmin);
             writeProducts(items);
-            bridgeStatus('Đã nạp ' + items.length + ' sản phẩm từ Supabase vào Admin JSON.', 'success');
+            bridgeStatus('Đã nạp ' + items.length + ' sản phẩm từ Apps Script vào Admin JSON.', 'success');
           } catch (e) {
-            bridgeStatus(e.message || 'Không thể nạp dữ liệu từ Supabase.', 'error');
+            bridgeStatus(e.message || 'Không thể nạp dữ liệu từ Apps Script.', 'error');
           }
         });
 
@@ -9136,15 +8809,17 @@ So tien: ${usdAmount} USD`;
           try {
             const product = getProductDraft();
             required(product);
-            bridgeStatus('Đang lưu sản phẩm hiện tại lên Supabase...');
-            await supabaseFetch('POST', '?on_conflict=id', product, 'resolution=merge-duplicates,return=representation');
+            bridgeStatus('Đang lưu sản phẩm hiện tại lên Apps Script...');
+            const result = await apiFetch('POST', 'upsert', null, product);
+            if (!result.success) throw new Error(result.message || 'Không lưu được sản phẩm.');
             const list = currentProducts();
-            const idx = list.findIndex(function (item) { return String(item && item.id || '').trim() === product.id; });
-            if (idx >= 0) list[idx] = Object.assign({}, list[idx], product); else list.unshift(product);
+            const saved = normalizeProductForAdmin(result.product || product);
+            const idx = list.findIndex(function (item) { return String(item && item.id || '').trim() === saved.id; });
+            if (idx >= 0) list[idx] = Object.assign({}, list[idx], saved); else list.unshift(saved);
             writeProducts(list);
-            bridgeStatus('Đã lưu sản phẩm ' + product.id + ' lên Supabase.', 'success');
+            bridgeStatus((result.message || 'Đã lưu sản phẩm.') + ' ID: ' + saved.id, 'success');
           } catch (e) {
-            bridgeStatus(e.message || 'Không thể lưu sản phẩm lên Supabase.', 'error');
+            bridgeStatus(e.message || 'Không thể lưu sản phẩm lên Apps Script.', 'error');
           }
         });
 
@@ -9152,33 +8827,38 @@ So tien: ${usdAmount} USD`;
           try {
             const list = currentProducts();
             if (!list.length) throw new Error('Admin JSON đang trống, chưa có sản phẩm để đẩy.');
-            const payload = list.map(normalizeProductForSupabase);
+            const payload = list.map(normalizeProductForApi);
             payload.forEach(required);
-            bridgeStatus('Đang đẩy ' + payload.length + ' sản phẩm từ Admin JSON lên Supabase...');
-            await supabaseFetch('POST', '?on_conflict=id', payload, 'resolution=merge-duplicates,return=minimal');
-            bridgeStatus('Đã đẩy ' + payload.length + ' sản phẩm từ Admin JSON lên Supabase.', 'success');
+            bridgeStatus('Đang đẩy ' + payload.length + ' sản phẩm từ Admin JSON lên Apps Script...');
+            for (let i = 0; i < payload.length; i++) {
+              const item = payload[i];
+              await apiFetch('POST', 'upsert', null, item);
+              bridgeStatus('Đang đẩy ' + (i + 1) + '/' + payload.length + ': ' + item.id + ' ...');
+            }
+            bridgeStatus('Đã đẩy ' + payload.length + ' sản phẩm từ Admin JSON lên Apps Script.', 'success');
           } catch (e) {
-            bridgeStatus(e.message || 'Không thể đẩy Admin JSON lên Supabase.', 'error');
+            bridgeStatus(e.message || 'Không thể đẩy Admin JSON lên Apps Script.', 'error');
           }
         });
 
         host.querySelector('#alpha-sheet-delete').addEventListener('click', async function () {
           try {
             const id = selectedProductId();
-            if (!id) throw new Error('Nhập ID sản phẩm trước khi xoá trên Supabase.');
-            const ok = window.confirm('Xoá sản phẩm ' + id + ' trên Supabase?');
+            if (!id) throw new Error('Nhập ID sản phẩm trước khi xoá trên Apps Script.');
+            const ok = window.confirm('Xoá sản phẩm ' + id + ' trên Apps Script?');
             if (!ok) return;
-            bridgeStatus('Đang xoá sản phẩm ' + id + ' trên Supabase...');
-            await supabaseFetch('DELETE', '?id=eq.' + encodeURIComponent(id), null, 'return=representation');
+            bridgeStatus('Đang xoá sản phẩm ' + id + ' trên Apps Script...');
+            const result = await apiFetch('POST', 'delete', { id: id }, {});
+            if (!result.success) throw new Error(result.message || 'Không xoá được sản phẩm.');
             const list = currentProducts().filter(function (item) { return String(item && item.id || '').trim() !== id; });
             writeProducts(list);
-            bridgeStatus('Đã xoá sản phẩm ' + id + ' trên Supabase.', 'success');
+            bridgeStatus('Đã xoá sản phẩm ' + id + ' trên Apps Script.', 'success');
           } catch (e) {
-            bridgeStatus(e.message || 'Không thể xoá sản phẩm trên Supabase.', 'error');
+            bridgeStatus(e.message || 'Không thể xoá sản phẩm trên Apps Script.', 'error');
           }
         });
       }
-      function boot() { migrateLegacySupabaseTable(); mount(); }
+      function boot() { mount(); }
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
@@ -9670,7 +9350,7 @@ So tien: ${usdAmount} USD`;
   <div id="global-page-controls" aria-label="Điều hướng trang">
     <button class="gpc-btn" type="button" id="gpc-apps-script" data-action="apps-script" aria-label="Apps Script"
       title="Apps Script"
-      data-external-link="https://script.google.com/macros/s/AKfycbwmgz6lH72LnXewvq_GCZeHVhwDrnPthLpDh9PQrZHfyArHkLV8RlRvUi9EuXWFcQ3z/exec">📱</button>
+      data-external-link="https://script.google.com/macros/s/AKfycbwmgz6lH72LnXewvq_GCZeHVhwDrnPthLpDh9PQrZHfyArHkLV8RlRvUi9EuXWFcQ3z/exec">☎</button>
     <button class="gpc-btn" type="button" data-scroll="top" aria-label="Lên đầu trang" title="Lên đầu trang">↑</button>
     <button class="gpc-btn" type="button" data-scroll="bottom" aria-label="Xuống cuối trang"
       title="Xuống cuối trang">↓</button>
@@ -10249,7 +9929,6 @@ So tien: ${usdAmount} USD`;
         <h2 class="promo-popup-title" id="promoPopupTitle">
           <span class="plain"></span> <span class="gradient">ALPHA ZONE STUDIO</span>
         </h2>
-        <p class="promo-popup-text">Mỗi sản phẩm bạn đăng = thêm thời gian làm ảnh</p>
         <p class="promo-popup-text">Mỗi ngày trôi qua = thêm tiền thuê designer</p>
         <div class="promo-popup-version">Giảm đến 90% chi phí thiết kế </p></div>
         <div class="promo-popup-version">Tạo hàng triệu ảnh chỉ trong vài phút</div>
@@ -10922,7 +10601,7 @@ So tien: ${usdAmount} USD`;
       function missingCount(p) { return ['id', 'name', 'platformName', 'category', 'price', 'logo'].filter(function (k) { return !String((p || {})[k] || '').trim() }).length }
       function renderQuickList() {
         var host = id('alpha-smart-list'); if (!host) return; var query = String((id('alpha-smart-search') || {}).value || '').trim().toLowerCase(); var entries = []; entries.push({ label: 'Lưu sản phẩm hiện tại', note: 'Gọi nút lưu sản phẩm cũ', action: function () { var el = id('alpha-admin-save-product'); if (el) el.click(); else note('Không thấy nút lưu.', 'error') } });
-        entries.push({ label: 'Nạp từ Supabase', note: 'Gọi nút load cloud sync', action: function () { var el = id('alpha-sheet-load'); if (el) el.click(); else note('Không thấy nút nạp cloud.', 'error') } });
+        entries.push({ label: 'Nạp từ Apps Script', note: 'Gọi nút load cloud sync', action: function () { var el = id('alpha-sheet-load'); if (el) el.click(); else note('Không thấy nút nạp cloud.', 'error') } });
         entries.push({ label: 'Đẩy toàn bộ JSON', note: 'Gọi nút push all hiện có', action: function () { var el = id('alpha-sheet-push-all'); if (el) el.click(); else note('Không thấy nút đẩy toàn bộ.', 'error') } });
         entries.push({ label: 'Kiểm tra JSON', note: 'Validate dữ liệu nhanh', action: function () { var el = id('alpha-admin-validate-json'); if (el) el.click(); else note('Không thấy nút kiểm tra JSON.', 'error') } });
         entries.push({ label: 'Format JSON', note: 'Sắp xếp dữ liệu dễ đọc', action: function () { var el = id('alpha-admin-format-json'); if (el) el.click(); else note('Không thấy nút format JSON.', 'error') } });
@@ -10931,14 +10610,14 @@ So tien: ${usdAmount} USD`;
         host.innerHTML = filtered.map(function (entry, idx) { if (entry.product) { var p = entry.product || {}; return '<button type="button" class="alpha-smart-item" data-smart-index="' + idx + '"><img src="' + esc(p.logo || p.categoryImage || 'https://dummyimage.com/80x80/f5f5f5/9ca3af&text=No') + '" alt="logo"><div><strong>' + esc(entry.label) + '</strong><span>' + esc(entry.note) + '</span></div><span class="alpha-smart-chip">Mở</span></button>' } return '<button type="button" class="alpha-smart-palette-btn" data-smart-index="' + idx + '"><strong>' + esc(entry.label) + '</strong><span>' + esc(entry.note) + '</span></button>' }).join('');
         qa('[data-smart-index]', host).forEach(function (btn) { btn.addEventListener('click', function () { filtered[Number(btn.getAttribute('data-smart-index'))].action() }) })
       }
-      function refresh() { var p = cur(), arr = list(), cats = new Set(arr.map(function (x) { return String((x && x.category) || '').trim() }).filter(Boolean)); var a = id('alpha-smart-kpi-products'), b = id('alpha-smart-kpi-categories'), c = id('alpha-smart-kpi-missing'), d = id('alpha-smart-kpi-draft'); if (a) a.textContent = String(arr.length || 0); if (b) b.textContent = String(cats.size || 0); if (c) c.textContent = String(missingCount(p)); if (d) d.textContent = (p.name || p.id) ? '1' : '0'; var state = id('alpha-smart-state'); if (state) state.innerHTML = '<span class="alpha-smart-chip"><i class="fa-solid fa-fingerprint"></i>ID: ' + esc(p.id || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-tag"></i>Giá: ' + esc(priceText(priceNum(p.price)) || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-file-pen"></i>Nháp: ' + esc(p.name || p.platformName || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-layer-group"></i>JSON: ' + esc(Array.isArray(parseJson()) ? 'hợp lệ' : 'lỗi') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-cloud"></i>Bảng: ' + esc((id('alpha-supabase-table') || {}).value || 'products') + '</span>'; var pr = id('alpha-smart-preview'); if (pr) pr.innerHTML = '<img src="' + esc(p.logo || p.categoryImage || 'https://dummyimage.com/120x120/f5f5f5/9ca3af&text=No+Image') + '" alt="preview"><div><div class="alpha-smart-preview-name">' + esc(p.name || 'Chưa nhập tên sản phẩm') + '</div><div class="alpha-smart-preview-meta">ID: ' + esc(p.id || 'chưa có') + '<br>Nền tảng: ' + esc(p.platformName || 'chưa có') + '<br>Danh mục: ' + esc(p.category || 'chưa có') + '<br>Giá hiển thị: ' + esc(priceText(priceNum(p.price)) || 'chưa có') + '</div></div>'; renderQuickList() }
+      function refresh() { var p = cur(), arr = list(), cats = new Set(arr.map(function (x) { return String((x && x.category) || '').trim() }).filter(Boolean)); var a = id('alpha-smart-kpi-products'), b = id('alpha-smart-kpi-categories'), c = id('alpha-smart-kpi-missing'), d = id('alpha-smart-kpi-draft'); if (a) a.textContent = String(arr.length || 0); if (b) b.textContent = String(cats.size || 0); if (c) c.textContent = String(missingCount(p)); if (d) d.textContent = (p.name || p.id) ? '1' : '0'; var state = id('alpha-smart-state'); if (state) state.innerHTML = '<span class="alpha-smart-chip"><i class="fa-solid fa-fingerprint"></i>ID: ' + esc(p.id || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-tag"></i>Giá: ' + esc(priceText(priceNum(p.price)) || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-file-pen"></i>Nháp: ' + esc(p.name || p.platformName || 'chưa có') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-layer-group"></i>JSON: ' + esc(Array.isArray(parseJson()) ? 'hợp lệ' : 'lỗi') + '</span><span class="alpha-smart-chip"><i class="fa-solid fa-cloud"></i>API: ' + esc((id('alpha-supabase-table') || {}).value || 'products') + '</span>'; var pr = id('alpha-smart-preview'); if (pr) pr.innerHTML = '<img src="' + esc(p.logo || p.categoryImage || 'https://dummyimage.com/120x120/f5f5f5/9ca3af&text=No+Image') + '" alt="preview"><div><div class="alpha-smart-preview-name">' + esc(p.name || 'Chưa nhập tên sản phẩm') + '</div><div class="alpha-smart-preview-meta">ID: ' + esc(p.id || 'chưa có') + '<br>Nền tảng: ' + esc(p.platformName || 'chưa có') + '<br>Danh mục: ' + esc(p.category || 'chưa có') + '<br>Giá hiển thị: ' + esc(priceText(priceNum(p.price)) || 'chưa có') + '</div></div>'; renderQuickList() }
       function ensureSuite() {
         var area = id('admin-json-area'); if (!area || id('alpha-smart-suite')) return; var box = document.createElement('div'); box.id = 'alpha-smart-suite'; box.className = 'alpha-smart-suite'; box.innerHTML = '<div class="alpha-smart-head"><div><div class="alpha-smart-title">Admin thông minh</div><div class="alpha-smart-note">Đã tối ưu để dùng trong khung admin hẹp: nút dễ bấm hơn, chữ ít vỡ hơn, thao tác nhanh và an toàn hơn.</div></div></div><div class="alpha-smart-kpis"><div class="alpha-smart-kpi"><strong id="alpha-smart-kpi-products">0</strong><span>Tổng sản phẩm</span></div><div class="alpha-smart-kpi"><strong id="alpha-smart-kpi-categories">0</strong><span>Danh mục</span></div><div class="alpha-smart-kpi"><strong id="alpha-smart-kpi-missing">0</strong><span>Thiếu trường</span></div><div class="alpha-smart-kpi"><strong id="alpha-smart-kpi-draft">0</strong><span>Nháp hiện tại</span></div></div><div id="alpha-smart-state" class="alpha-smart-state"></div><div class="alpha-smart-actions"><button type="button" class="alpha-smart-btn" id="alpha-smart-normalize"><i class="fa-solid fa-wand-magic-sparkles"></i> Chuẩn hóa đang sửa</button><button type="button" class="alpha-smart-btn" id="alpha-smart-duplicate"><i class="fa-solid fa-clone"></i> Nhân bản sản phẩm</button></div><div class="alpha-smart-secondary"><button type="button" class="alpha-smart-btn light" id="alpha-smart-snapshot"><i class="fa-solid fa-camera"></i> Snapshot</button><button type="button" class="alpha-smart-btn light" id="alpha-smart-restore"><i class="fa-solid fa-rotate-left"></i> Phục hồi</button><button type="button" class="alpha-smart-btn light" id="alpha-smart-dedupe"><i class="fa-solid fa-filter-circle-xmark"></i> Gộp trùng ID</button><button type="button" class="alpha-smart-btn light" id="alpha-smart-prices"><i class="fa-solid fa-coins"></i> Sửa toàn bộ giá</button><button type="button" class="alpha-smart-btn light" id="alpha-smart-restore-draft"><i class="fa-solid fa-pen-to-square"></i> Phục hồi nháp</button><button type="button" class="alpha-smart-btn warn" id="alpha-smart-delete-all"><i class="fa-solid fa-trash-can"></i> Xóa tất cả</button></div><input id="alpha-smart-search" class="alpha-smart-search" type="text" placeholder="Tìm sản phẩm, ID, danh mục hoặc lệnh nhanh như save / cloud / json ..."><div id="alpha-smart-list" class="alpha-smart-list"></div><div id="alpha-smart-preview" class="alpha-smart-preview"></div>';
         area.insertBefore(box, area.firstChild);
         id('alpha-smart-normalize').addEventListener('click', smartNormalize); id('alpha-smart-duplicate').addEventListener('click', duplicate); id('alpha-smart-snapshot').addEventListener('click', saveSnap); id('alpha-smart-restore').addEventListener('click', restoreSnap); id('alpha-smart-dedupe').addEventListener('click', dedupe); id('alpha-smart-prices').addEventListener('click', normalizeAll); id('alpha-smart-delete-all').addEventListener('click', smartDeleteAll); id('alpha-smart-restore-draft').addEventListener('click', restoreDraft); id('alpha-smart-search').addEventListener('input', renderQuickList); refresh()
       }
       function ensurePalette() { if (id('alpha-smart-palette')) return; var wrap = document.createElement('div'); wrap.id = 'alpha-smart-palette'; wrap.className = 'alpha-smart-palette'; wrap.innerHTML = '<div class="alpha-smart-palette-panel"><input id="alpha-smart-palette-input" type="text" placeholder="Gõ lệnh hoặc tên sản phẩm... (Esc để đóng)"><div id="alpha-smart-palette-list" class="alpha-smart-palette-list"></div></div>'; document.body.appendChild(wrap); wrap.addEventListener('click', function (e) { if (e.target === wrap) wrap.classList.remove('open') }); var input = id('alpha-smart-palette-input'); input.addEventListener('input', renderPalette); input.addEventListener('keydown', function (e) { if (e.key === 'Escape') wrap.classList.remove('open'); if (e.key === 'Enter') { var btn = q('.alpha-smart-palette-btn', id('alpha-smart-palette-list')); if (btn) btn.click() } }); document.addEventListener('keydown', function (e) { var combo = (e.ctrlKey || e.metaKey) && String(e.key).toLowerCase() === 'k'; if (combo) { e.preventDefault(); openPalette() } if (e.key === 'Escape' && wrap.classList.contains('open')) wrap.classList.remove('open') }) }
-      function paletteEntries() { var arr = []; arr.push({ label: 'Lưu sản phẩm hiện tại', note: 'Gọi nút lưu cũ', action: function () { var el = id('alpha-admin-save-product'); if (el) el.click(); } }); arr.push({ label: 'Nạp từ Supabase', note: 'Load cloud sync', action: function () { var el = id('alpha-sheet-load'); if (el) el.click(); } }); arr.push({ label: 'Đẩy toàn bộ JSON', note: 'Push all cloud sync', action: function () { var el = id('alpha-sheet-push-all'); if (el) el.click(); } }); arr.push({ label: 'Chuẩn hóa sản phẩm đang sửa', note: 'ID, giá, platform, category image', action: smartNormalize }); arr.push({ label: 'Gộp trùng theo ID', note: 'Dọn JSON hiện tại', action: dedupe }); arr.push({ label: 'Sửa toàn bộ giá', note: 'Chuẩn hóa VND trong JSON', action: normalizeAll }); list().slice(0, 8).forEach(function (item) { arr.push({ label: String(item.name || item.platformName || item.id || 'Sản phẩm'), note: 'Mở nhanh ID ' + String(item.id || ''), action: function () { openProduct(item) } }) }); return arr }
+      function paletteEntries() { var arr = []; arr.push({ label: 'Lưu sản phẩm hiện tại', note: 'Gọi nút lưu cũ', action: function () { var el = id('alpha-admin-save-product'); if (el) el.click(); } }); arr.push({ label: 'Nạp từ Apps Script', note: 'Load từ Apps Script', action: function () { var el = id('alpha-sheet-load'); if (el) el.click(); } }); arr.push({ label: 'Đẩy toàn bộ JSON', note: 'Push toàn bộ lên Apps Script', action: function () { var el = id('alpha-sheet-push-all'); if (el) el.click(); } }); arr.push({ label: 'Chuẩn hóa sản phẩm đang sửa', note: 'ID, giá, platform, category image', action: smartNormalize }); arr.push({ label: 'Gộp trùng theo ID', note: 'Dọn JSON hiện tại', action: dedupe }); arr.push({ label: 'Sửa toàn bộ giá', note: 'Chuẩn hóa VND trong JSON', action: normalizeAll }); list().slice(0, 8).forEach(function (item) { arr.push({ label: String(item.name || item.platformName || item.id || 'Sản phẩm'), note: 'Mở nhanh ID ' + String(item.id || ''), action: function () { openProduct(item) } }) }); return arr }
       function renderPalette() { var host = id('alpha-smart-palette-list'); if (!host) return; var query = String((id('alpha-smart-palette-input') || {}).value || '').trim().toLowerCase(); var entries = paletteEntries().filter(function (x) { return !query || [x.label, x.note].join(' ').toLowerCase().indexOf(query) > -1 }).slice(0, 14); host.innerHTML = entries.map(function (x, i) { return '<button type="button" class="alpha-smart-palette-btn" data-palette-index="' + i + '"><strong>' + esc(x.label) + '</strong><span>' + esc(x.note) + '</span></button>' }).join(''); qa('[data-palette-index]', host).forEach(function (btn) { btn.addEventListener('click', function () { entries[Number(btn.getAttribute('data-palette-index'))].action(); id('alpha-smart-palette').classList.remove('open') }) }) }
       function bindWatchers() { ['id', 'name', 'platformName', 'category', 'price', 'logo', 'categoryImage', 'shortDescription', 'detailedDescription', 'warranty'].forEach(function (k) { var el = id('alpha-admin-field-' + k); if (!el || el.dataset.smartWatch === '1') return; el.dataset.smartWatch = '1';['input', 'change'].forEach(function (evt) { el.addEventListener(evt, function () { saveDraft(); if (k === 'name' && !field('id')) setField('id', slug(field('name'))); refresh() }) }) }); var j = jsonInput(); if (j && j.dataset.smartWatch !== '1') { j.dataset.smartWatch = '1';['input', 'change'].forEach(function (evt) { j.addEventListener(evt, function () { saveDraft(); refresh() }) }) } window.addEventListener('resize', refresh, { passive: true }); }
       function boot() { ensureSuite(); ensurePalette(); ensureFab(); bindWatchers(); refresh() }
@@ -10946,6 +10625,1446 @@ So tien: ${usdAmount} USD`;
       var tries = 0, timer = setInterval(function () { boot(); tries += 1; if (tries > 120) clearInterval(timer) }, 500)
     })();
   </script>
+
+<style id="alpha-safe-visual-override">
+  /* safer typography */
+  body :where(p, span, small, div, label, a, button, input, textarea, li):not(.title-font):not(.title-font *):not(.fa-solid):not(.fa-regular):not(.fa-brands) {
+    font-weight: 360 !important;
+  }
+  .mono, .product-card-id, .detail-product-id-value, .detail-meta-value {
+    font-weight: 520 !important;
+  }
+
+  /* prevent overflow / overlap */
+  #categories .title-font,
+  #products .title-font,
+  #product-detail .title-font {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  #category-filter-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    padding-right: 4px !important;
+  }
+
+  .category-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: 44px !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    border-radius: 999px !important;
+    padding: 10px 14px !important;
+    overflow: hidden !important;
+  }
+
+  .alpha-chip-media,
+  .alpha-category-icon-badge {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    background: rgba(0,0,0,.06) !important;
+    color: #111 !important;
+    font-size: 11px !important;
+  }
+
+  .alpha-chip-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  #logo-canvas.alpha-safe-category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    align-content: start !important;
+    min-height: 320px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .alpha-safe-category-card {
+    width: 100% !important;
+    min-height: 122px !important;
+    border-radius: 28px !important;
+    background: rgba(255,255,255,.72) !important;
+    border: 1px solid rgba(0,0,0,.05) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05) !important;
+    padding: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-align: left !important;
+    overflow: hidden !important;
+    position: relative !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  .alpha-safe-category-card-media {
+    width: 58px !important;
+    height: 58px !important;
+    min-width: 58px !important;
+    border-radius: 20px !important;
+    background: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+    position: relative !important;
+  }
+
+  .alpha-safe-category-card-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .alpha-safe-category-card-icon {
+    position: absolute !important;
+    right: 6px !important;
+    bottom: 6px !important;
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 999px !important;
+    background: rgba(17,17,17,.9) !important;
+    color: #fff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 9px !important;
+  }
+
+  .alpha-safe-category-card-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .alpha-safe-category-card-sub {
+    font-size: 10px !important;
+    opacity: .52 !important;
+    margin-top: 4px !important;
+    line-height: 1.4 !important;
+  }
+
+  #products-list.product-grid {
+    align-items: stretch !important;
+  }
+
+  #products-list .alpha-product-card,
+  #products-list .product-card-enhanced {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #products-list .title-font,
+  #products-list .text-\[11px\],
+  #products-list .text-\[10px\] {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  @media (max-width: 640px) {
+    #logo-canvas.alpha-safe-category-grid {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+    .alpha-safe-category-card {
+      min-height: 108px !important;
+      border-radius: 24px !important;
+      padding: 12px !important;
+      gap: 10px !important;
+    }
+    .alpha-safe-category-card-media {
+      width: 52px !important;
+      height: 52px !important;
+      min-width: 52px !important;
+      border-radius: 18px !important;
+    }
+    .alpha-safe-category-card-title {
+      font-size: 12px !important;
+    }
+    .alpha-safe-category-card-sub {
+      font-size: 9px !important;
+    }
+  }
+</style>
+
+<script id="alpha-safe-runtime-override">
+(function () {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzBqoUEd4SzIiWFuCw5XSWhzQMIk6FLic55Ar_gHaV569uhfjoYevSqgS5p0_Ls1k_c/exec';
+  const SYNC_MS = 30000;
+  let lastSyncHash = '';
+  let syncing = false;
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function getProductsSafe() {
+    return Array.isArray(window.brands) ? window.brands.slice() : [];
+  }
+
+  function shuffle(list) {
+    const arr = Array.isArray(list) ? list.slice() : [];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  }
+
+  function categoryIcon(name) {
+    const key = String(name || '').trim().toLowerCase();
+    let icon = 'fa-cube';
+    if (key.includes('ai')) icon = 'fa-robot';
+    else if (key.includes('freepik') || key.includes('design') || key.includes('đồ họa') || key.includes('do hoa') || key.includes('canva')) icon = 'fa-wand-magic-sparkles';
+    else if (key.includes('netflix') || key.includes('phim') || key.includes('movie') || key.includes('stream') || key.includes('youtube') || key.includes('music')) icon = 'fa-play';
+    else if (key.includes('game')) icon = 'fa-gamepad';
+    else if (key.includes('work') || key.includes('office') || key.includes('zoom') || key.includes('copilot')) icon = 'fa-briefcase';
+    else if (key.includes('study') || key.includes('hoc') || key.includes('học') || key.includes('duolingo') || key.includes('quizlet')) icon = 'fa-graduation-cap';
+    else if (key.includes('vpn') || key.includes('security') || key.includes('bao mat') || key.includes('bảo mật')) icon = 'fa-shield-halved';
+    else if (key.includes('cloud') || key.includes('storage') || key.includes('drive')) icon = 'fa-cloud';
+    return icon;
+  }
+
+  function getCategoryData() {
+    const map = new Map();
+    getProductsSafe().forEach(function (item) {
+      const key = String(item && item.category || '').trim() || 'Khác';
+      const image = String((item && (item.logo || item.categoryImage)) || '').trim();
+      if (!map.has(key)) {
+        map.set(key, { name: key, image: image, count: 0 });
+      }
+      const ref = map.get(key);
+      ref.count += 1;
+      if (!ref.image && image) ref.image = image;
+    });
+    return shuffle(Array.from(map.values()));
+  }
+
+  function renderCategoryChipsSafe() {
+    const host = document.getElementById('category-filter-list');
+    if (!host) return;
+    const list = [{ name: 'Tất cả', image: '', count: getProductsSafe().length }].concat(getCategoryData());
+
+    host.innerHTML = list.map(function (item, idx) {
+      const icon = idx === 0 ? 'fa-layer-group' : categoryIcon(item.name);
+      const img = item.image
+        ? '<span class="alpha-chip-media"><img src="' + esc(item.image) + '" alt="' + esc(item.name) + '"></span>'
+        : '';
+      return ''
+        + '<button type="button" class="category-chip ' + (idx === 0 ? 'active' : '') + '" data-category="' + esc(item.name) + '">'
+        +   '<span class="alpha-category-icon-badge"><i class="fa-solid ' + icon + '"></i></span>'
+        +   img
+        +   '<span>' + esc(item.name) + '</span>'
+        + '</button>';
+    }).join('');
+
+    host.querySelectorAll('.category-chip').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (typeof window.filterByCategory === 'function') window.filterByCategory(btn.dataset.category || 'Tất cả');
+      });
+    });
+  }
+
+  function renderCategoryGridSafe() {
+    const canvas = document.getElementById('logo-canvas');
+    if (!canvas) return;
+    const list = [{ name: 'Tất cả', image: '', count: getProductsSafe().length }].concat(getCategoryData());
+
+    canvas.classList.add('alpha-safe-category-grid');
+    canvas.innerHTML = list.map(function (item, idx) {
+      const icon = idx === 0 ? 'fa-layer-group' : categoryIcon(item.name);
+      const media = item.image
+        ? '<img src="' + esc(item.image) + '" alt="' + esc(item.name) + '"><span class="alpha-safe-category-card-icon"><i class="fa-solid ' + icon + '"></i></span>'
+        : '<span class="alpha-category-icon-badge" style="width:34px!important;height:34px!important;"><i class="fa-solid ' + icon + '"></i></span>';
+
+      return ''
+        + '<button type="button" class="alpha-safe-category-card" data-category="' + esc(item.name) + '">'
+        +   '<div class="alpha-safe-category-card-media">' + media + '</div>'
+        +   '<div style="min-width:0">'
+        +     '<div class="alpha-safe-category-card-title">' + esc(item.name) + '</div>'
+        +     '<div class="alpha-safe-category-card-sub">' + esc(String(item.count)) + ' sản phẩm</div>'
+        +   '</div>'
+        + '</button>';
+    }).join('');
+
+    canvas.querySelectorAll('.alpha-safe-category-card').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (typeof window.filterByCategory === 'function') window.filterByCategory(btn.dataset.category || 'Tất cả');
+      });
+    });
+  }
+
+  function renderProductsSafe(list) {
+    if (typeof window.renderProducts !== 'function') return;
+    const items = shuffle(Array.isArray(list) ? list : getProductsSafe());
+    window.__alphaSafeLastProducts = items;
+    const original = window.__alphaOriginalRenderProducts || window.renderProducts;
+    original(items);
+  }
+
+  function renderRecommendationsSafe(category) {
+    if (typeof window.renderRecommendations !== 'function') return;
+    const original = window.__alphaOriginalRenderRecommendations || window.renderRecommendations;
+    original(category || 'Tất cả');
+  }
+
+  function applyCategoryPageSafe() {
+    renderCategoryChipsSafe();
+    renderCategoryGridSafe();
+  }
+
+  function installFunctionOverrides() {
+    if (!window.__alphaOriginalRenderProducts && typeof window.renderProducts === 'function') {
+      window.__alphaOriginalRenderProducts = window.renderProducts;
+    }
+    if (!window.__alphaOriginalRenderRecommendations && typeof window.renderRecommendations === 'function') {
+      window.__alphaOriginalRenderRecommendations = window.renderRecommendations;
+    }
+    if (!window.__alphaOriginalFilterByCategory && typeof window.filterByCategory === 'function') {
+      window.__alphaOriginalFilterByCategory = window.filterByCategory;
+    }
+    if (!window.__alphaOriginalShowPage && typeof window.showPage === 'function') {
+      window.__alphaOriginalShowPage = window.showPage;
+      window.showPage = function (page) {
+        const result = window.__alphaOriginalShowPage.apply(this, arguments);
+        setTimeout(function () {
+          if (page === 'categories') applyCategoryPageSafe();
+          if (page === 'products') renderProductsSafe(window.__alphaSafeLastProducts || getProductsSafe());
+        }, 30);
+        scheduleSync(500);
+        return result;
+      };
+    }
+
+    window.renderProducts = function (list) {
+      const items = shuffle(Array.isArray(list) ? list : getProductsSafe());
+      window.__alphaSafeLastProducts = items;
+      const original = window.__alphaOriginalRenderProducts || function(){};
+      return original(items);
+    };
+
+    window.filterByCategory = function (category) {
+      const key = String(category || 'Tất cả').trim() || 'Tất cả';
+      const title = document.getElementById('product-page-title');
+      const subtitle = document.getElementById('product-category-subtitle');
+
+      document.querySelectorAll('#category-filter-list .category-chip').forEach(function (chip) {
+        chip.classList.toggle('active', chip.dataset.category === key);
+      });
+
+      if (title) title.textContent = key === 'Tất cả' ? 'Sản phẩm' : key;
+      if (subtitle) subtitle.textContent = key === 'Tất cả' ? 'Alpha Marketplace' : 'Danh mục';
+
+      const products = key === 'Tất cả'
+        ? getProductsSafe()
+        : getProductsSafe().filter(function (item) {
+            return String(item && item.category || '').trim() === key;
+          });
+
+      renderProductsSafe(products);
+      renderRecommendationsSafe(key);
+      if (typeof window.__alphaOriginalShowPage === 'function') window.__alphaOriginalShowPage('products');
+      scheduleSync(500);
+    };
+  }
+
+  function normalizeApiProduct(item) {
+    const base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  async function syncNow() {
+    if (syncing) return;
+    syncing = true;
+    try {
+      const res = await fetch(API_URL + '?action=list');
+      const text = await res.text();
+      let data = {};
+      try { data = JSON.parse(text); } catch (e) { throw new Error('Apps Script không trả JSON hợp lệ'); }
+      if (!data.success || !Array.isArray(data.products)) throw new Error(data.message || 'Không đọc được dữ liệu Apps Script');
+
+      const products = data.products.map(normalizeApiProduct).filter(function (item) {
+        return item.id && item.name && item.category;
+      });
+
+      const hash = JSON.stringify(products);
+      if (hash === lastSyncHash) return;
+      lastSyncHash = hash;
+
+      window.brands = products.slice();
+      try {
+        localStorage.setItem('alpha_zone_products_json_v34', JSON.stringify(products));
+      } catch (_) {}
+
+      applyCategoryPageSafe();
+      renderProductsSafe(getProductsSafe());
+      renderRecommendationsSafe('Tất cả');
+
+      if (typeof window.refreshCurrentView === 'function') {
+        try { window.refreshCurrentView(); } catch (_) {}
+      }
+    } catch (err) {
+      console.warn('[AlphaSafeSync]', err);
+    } finally {
+      syncing = false;
+    }
+  }
+
+  let syncTimer = null;
+  function scheduleSync(delay) {
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncNow, typeof delay === 'number' ? delay : 0);
+  }
+
+  function installSyncTriggers() {
+    ['click', 'touchstart', 'change'].forEach(function (evt) {
+      document.addEventListener(evt, function () { scheduleSync(800); }, { passive: true });
+    });
+    setInterval(syncNow, SYNC_MS);
+  }
+
+  function bootSafeOverride() {
+    installFunctionOverrides();
+    applyCategoryPageSafe();
+    renderProductsSafe(getProductsSafe());
+    installSyncTriggers();
+    scheduleSync(200);
+    setTimeout(applyCategoryPageSafe, 400);
+    setTimeout(applyCategoryPageSafe, 1200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootSafeOverride, { once: true });
+  } else {
+    bootSafeOverride();
+  }
+})();
+</script>
+
+<style id="alpha-safe-button-overrides">
+  /* Chống tràn chữ cho tất cả nút hành động, ưu tiên khu admin */
+  .btn-street,
+  .admin-panel button,
+  .admin-panel .btn-street,
+  #admin-json-area button,
+  #alpha-google-sheet-bridge button,
+  #alpha-apps-inline-editor button,
+  .ownership-box button,
+  .street-card button {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+  }
+
+  .btn-street,
+  .admin-panel .btn-street,
+  #admin-json-area .btn-street,
+  #alpha-google-sheet-bridge .btn-street,
+  #alpha-apps-inline-editor .btn-street {
+    min-height: 48px !important;
+    height: auto !important;
+    padding: 14px 16px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+    gap: 8px !important;
+  }
+
+  .admin-panel .grid,
+  #admin-json-area .grid,
+  #alpha-google-sheet-bridge .alpha-sheet-bridge-actions {
+    align-items: stretch !important;
+  }
+
+  .admin-panel .btn-street i,
+  #admin-json-area .btn-street i,
+  #alpha-google-sheet-bridge .btn-street i {
+    flex: 0 0 auto !important;
+  }
+
+  .admin-panel .btn-street span,
+  #admin-json-area .btn-street span,
+  #alpha-google-sheet-bridge .btn-street span {
+    min-width: 0 !important;
+  }
+
+  /* Mobile: giảm spacing để chữ không bung */
+  @media (max-width: 768px) {
+    .btn-street,
+    .admin-panel .btn-street,
+    #admin-json-area .btn-street,
+    #alpha-google-sheet-bridge .btn-street,
+    #alpha-apps-inline-editor .btn-street {
+      min-height: 44px !important;
+      padding: 12px 12px !important;
+      font-size: 9px !important;
+      letter-spacing: 0.05em !important;
+      border-radius: 18px !important;
+    }
+  }
+</style>
+
+<script id="alpha-products-reset-override">
+(function () {
+  function resetProductsToAllSafe() {
+    var allProducts = Array.isArray(window.brands) ? window.brands.slice() : [];
+    var title = document.getElementById('product-page-title');
+    var subtitle = document.getElementById('product-category-subtitle');
+
+    if (title) title.textContent = 'Sản phẩm';
+    if (subtitle) subtitle.textContent = 'Alpha Marketplace';
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(allProducts); } catch (_) {}
+    }
+    if (typeof window.renderRecommendations === 'function') {
+      try { window.renderRecommendations('Tất cả'); } catch (_) {}
+    }
+
+    document.querySelectorAll('#category-filter-list .category-chip').forEach(function (chip) {
+      var isAll = String(chip.dataset.category || '').trim() === 'Tất cả';
+      chip.classList.toggle('active', isAll);
+    });
+
+    window.currentCategory = 'Tất cả';
+  }
+
+  function bindProductButtons() {
+    document.querySelectorAll('[data-page="products"], [onclick*="showPage(\'products\')"], [onclick*="showPage(&quot;products&quot;)"]').forEach(function (btn) {
+      if (btn.dataset.alphaProductsResetBound) return;
+      btn.dataset.alphaProductsResetBound = '1';
+      btn.addEventListener('click', function () {
+        setTimeout(resetProductsToAllSafe, 30);
+      }, true);
+    });
+  }
+
+  function patchShowPage() {
+    if (typeof window.showPage !== 'function' || window.__alphaShowPageProductsResetPatched) return;
+    window.__alphaShowPageProductsResetPatched = true;
+    var originalShowPage = window.showPage;
+    window.showPage = function (id) {
+      var result = originalShowPage.apply(this, arguments);
+      if (String(id || '').trim() === 'products') {
+        setTimeout(resetProductsToAllSafe, 30);
+      }
+      return result;
+    };
+  }
+
+  function boot() {
+    patchShowPage();
+    bindProductButtons();
+    setTimeout(bindProductButtons, 400);
+    setTimeout(bindProductButtons, 1200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
+
+<script id="alpha-restore-autosync">
+(function () {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzBqoUEd4SzIiWFuCw5XSWhzQMIk6FLic55Ar_gHaV569uhfjoYevSqgS5p0_Ls1k_c/exec';
+  const SYNC_INTERVAL = 30000;
+  let syncLock = false;
+  let lastHash = '';
+
+  function normalizeApiProduct(item) {
+    const base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  function getLocalProducts() {
+    return Array.isArray(window.brands) ? window.brands.slice() : [];
+  }
+
+  function saveLocalProducts(products) {
+    const list = Array.isArray(products) ? products.slice() : [];
+    window.brands = list;
+
+    const input = document.getElementById('admin-json-input');
+    if (input) {
+      try { input.value = JSON.stringify(list, null, 2); } catch (_) {}
+    }
+
+    try {
+      localStorage.setItem('alpha_zone_products_json_v34', JSON.stringify(list));
+    } catch (_) {}
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(list); } catch (_) {}
+    }
+    if (typeof window.renderCategories === 'function') {
+      try { window.renderCategories(); } catch (_) {}
+    }
+    if (typeof window.refreshCurrentView === 'function') {
+      try { window.refreshCurrentView(); } catch (_) {}
+    }
+  }
+
+  async function fetchRemoteProducts() {
+    const res = await fetch(API_URL + '?action=list', { method: 'GET' });
+    const raw = await res.text();
+    let json;
+    try {
+      json = JSON.parse(raw);
+    } catch (err) {
+      throw new Error('Apps Script không trả JSON hợp lệ');
+    }
+    if (!json || !json.success || !Array.isArray(json.products)) {
+      throw new Error((json && json.message) || 'Không đọc được dữ liệu Apps Script');
+    }
+    return json.products.map(normalizeApiProduct);
+  }
+
+  async function syncFromAppsScript() {
+    if (syncLock) return;
+    syncLock = true;
+
+    try {
+      const remoteProducts = await fetchRemoteProducts();
+      const nextHash = JSON.stringify(remoteProducts);
+      if (nextHash === lastHash) return;
+      lastHash = nextHash;
+      saveLocalProducts(remoteProducts);
+    } catch (err) {
+      console.warn('[AlphaAutoSync]', err);
+    } finally {
+      syncLock = false;
+    }
+  }
+
+  let debounceTimer = null;
+  function scheduleSync(delay) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(syncFromAppsScript, typeof delay === 'number' ? delay : 600);
+  }
+
+  function bindInteractionSync() {
+    ['click', 'change', 'input', 'touchstart'].forEach(function (evt) {
+      document.addEventListener(evt, function () {
+        scheduleSync(800);
+      }, { passive: true });
+    });
+  }
+
+  function bindPageHooks() {
+    if (typeof window.showPage === 'function' && !window.__alphaAutoSyncShowPagePatched) {
+      window.__alphaAutoSyncShowPagePatched = true;
+      const originalShowPage = window.showPage;
+      window.showPage = function () {
+        const result = originalShowPage.apply(this, arguments);
+        scheduleSync(500);
+        return result;
+      };
+    }
+
+    if (typeof window.openModal === 'function' && !window.__alphaAutoSyncModalPatched) {
+      window.__alphaAutoSyncModalPatched = true;
+      const originalOpenModal = window.openModal;
+      window.openModal = function () {
+        const result = originalOpenModal.apply(this, arguments);
+        scheduleSync(500);
+        return result;
+      };
+    }
+  }
+
+  function bootAutoSync() {
+    bindInteractionSync();
+    bindPageHooks();
+    syncFromAppsScript();
+    setInterval(syncFromAppsScript, SYNC_INTERVAL);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootAutoSync, { once: true });
+  } else {
+    bootAutoSync();
+  }
+})();
+</script>
+
+
+
+<script id="alpha-detail-json-fallback-fix">
+(function () {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzBqoUEd4SzIiWFuCw5XSWhzQMIk6FLic55Ar_gHaV569uhfjoYevSqgS5p0_Ls1k_c/exec';
+  const STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
+  const DETAIL_SYNC_INTERVAL = 30000;
+
+  let syncBusy = false;
+  let debounceTimer = null;
+  let lastRemoteHash = '';
+
+  function readSavedProducts() {
+    for (const key of STORAGE_KEYS) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function normalizeApiProduct(item) {
+    const base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  function writeProducts(list) {
+    const products = Array.isArray(list) ? list.slice() : [];
+    window.brands = products;
+
+    const input = document.getElementById('admin-json-input');
+    if (input) {
+      try { input.value = JSON.stringify(products, null, 2); } catch (_) {}
+    }
+
+    for (const key of STORAGE_KEYS) {
+      try { localStorage.setItem(key, JSON.stringify(products)); } catch (_) {}
+    }
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(products); } catch (_) {}
+    }
+    if (typeof window.renderCategories === 'function') {
+      try { window.renderCategories(); } catch (_) {}
+    }
+    if (typeof window.refreshCurrentView === 'function') {
+      try { window.refreshCurrentView(); } catch (_) {}
+    }
+  }
+
+  function detailVisible() {
+    const page = document.getElementById('product-detail');
+    if (!page) return false;
+    if (page.classList.contains('hidden')) return false;
+    if (page.classList.contains('page') && !page.classList.contains('active')) return false;
+    return getComputedStyle(page).display !== 'none';
+  }
+
+  function findProductById(id) {
+    const list = Array.isArray(window.brands) ? window.brands : [];
+    return list.find(function (x) {
+      return String(x && x.id || '').trim() === String(id || '').trim();
+    }) || null;
+  }
+
+  function rerenderDetailSafe(idHint) {
+    const id = String(idHint || window.currentSelectedId || '').trim();
+    if (!detailVisible()) return;
+    if (!id || typeof window.goToDetail !== 'function') return;
+    try { window.goToDetail(id); } catch (err) { console.warn('[alpha-detail-rerender-safe]', err); }
+  }
+
+  function hydrateFromSavedJson() {
+    const saved = readSavedProducts();
+    if (saved.length) {
+      writeProducts(saved);
+      return true;
+    }
+    return false;
+  }
+
+  async function fetchRemoteProducts() {
+    const res = await fetch(API_URL + '?action=list', { method: 'GET' });
+    const raw = await res.text();
+    let json;
+    try {
+      json = JSON.parse(raw);
+    } catch (err) {
+      throw new Error('Apps Script không trả JSON hợp lệ');
+    }
+    if (!json || !json.success || !Array.isArray(json.products)) {
+      throw new Error((json && json.message) || 'Không đọc được dữ liệu Apps Script');
+    }
+    return json.products.map(normalizeApiProduct);
+  }
+
+  async function syncDetailNow(forceId) {
+    if (syncBusy) return;
+    syncBusy = true;
+
+    try {
+      const remote = await fetchRemoteProducts();
+      const hash = JSON.stringify(remote);
+      if (hash !== lastRemoteHash) {
+        lastRemoteHash = hash;
+        writeProducts(remote);
+      }
+      rerenderDetailSafe(forceId);
+    } catch (err) {
+      console.warn('[alpha-detail-json-fallback-fix]', err);
+      rerenderDetailSafe(forceId);
+    } finally {
+      syncBusy = false;
+    }
+  }
+
+  function scheduleSync(delay, idHint) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () {
+      syncDetailNow(idHint);
+    }, typeof delay === 'number' ? delay : 500);
+  }
+
+  function patchGoToDetail() {
+    if (typeof window.goToDetail !== 'function' || window.__alphaDetailFallbackPatched) return;
+    window.__alphaDetailFallbackPatched = true;
+    const original = window.goToDetail;
+
+    window.goToDetail = function (id) {
+      const normalizedId = String(id || window.currentSelectedId || '').trim();
+
+      if (!findProductById(normalizedId)) {
+        hydrateFromSavedJson();
+      }
+
+      let actualId = normalizedId;
+      if (!findProductById(actualId)) {
+        const list = Array.isArray(window.brands) ? window.brands : [];
+        if (list.length) {
+          actualId = String(list[0].id || '').trim();
+          window.currentSelectedId = actualId;
+        }
+      } else {
+        window.currentSelectedId = actualId;
+      }
+
+      const result = original.call(this, actualId);
+      scheduleSync(250, actualId);
+      return result;
+    };
+  }
+
+  function patchOpeners() {
+    if (typeof window.showPage === 'function' && !window.__alphaDetailShowPageFallbackPatched) {
+      window.__alphaDetailShowPageFallbackPatched = true;
+      const originalShowPage = window.showPage;
+      window.showPage = function (pageId) {
+        const result = originalShowPage.apply(this, arguments);
+        if (String(pageId || '').trim() === 'product-detail') {
+          const id = String(window.currentSelectedId || '').trim();
+          if (!findProductById(id)) hydrateFromSavedJson();
+          scheduleSync(250, id);
+        }
+        return result;
+      };
+    }
+
+    if (typeof window.openModalFromDetail === 'function' && !window.__alphaDetailModalFallbackPatched) {
+      window.__alphaDetailModalFallbackPatched = true;
+      const originalModal = window.openModalFromDetail;
+      window.openModalFromDetail = function () {
+        const id = String(window.currentSelectedId || '').trim();
+        if (!findProductById(id)) hydrateFromSavedJson();
+        scheduleSync(200, id);
+        return originalModal.apply(this, arguments);
+      };
+    }
+  }
+
+  function watchDetailVisibility() {
+    const page = document.getElementById('product-detail');
+    if (!page || page.dataset.alphaDetailFallbackObserved === '1') return;
+    page.dataset.alphaDetailFallbackObserved = '1';
+
+    const observer = new MutationObserver(function () {
+      if (detailVisible()) {
+        const id = String(window.currentSelectedId || '').trim();
+        if (!findProductById(id)) hydrateFromSavedJson();
+        scheduleSync(250, id);
+      }
+    });
+
+    observer.observe(page, {
+      attributes: true,
+      attributeFilter: ['class', 'style']
+    });
+  }
+
+  function bindInteractions() {
+    const root = document.getElementById('product-detail') || document.body;
+    ['click', 'change', 'input', 'touchstart'].forEach(function (evt) {
+      root.addEventListener(evt, function () {
+        if (!detailVisible()) return;
+        const id = String(window.currentSelectedId || '').trim();
+        if (!findProductById(id)) hydrateFromSavedJson();
+        scheduleSync(800, id);
+      }, { passive: true });
+    });
+  }
+
+  function boot() {
+    hydrateFromSavedJson();
+    patchGoToDetail();
+    patchOpeners();
+    watchDetailVisibility();
+    bindInteractions();
+
+    const currentId = String(window.currentSelectedId || '').trim();
+    if (!findProductById(currentId)) hydrateFromSavedJson();
+    scheduleSync(350, currentId);
+
+    setInterval(function () {
+      if (!detailVisible()) return;
+      const id = String(window.currentSelectedId || '').trim();
+      if (!findProductById(id)) hydrateFromSavedJson();
+      syncDetailNow(id);
+    }, DETAIL_SYNC_INTERVAL);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
+
+<script id="alpha-detail-product-resolver-optimizer">
+(function () {
+  const STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
+
+  function readSavedProducts() {
+    for (const key of STORAGE_KEYS) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function getLiveProducts() {
+    if (Array.isArray(window.brands) && window.brands.length) return window.brands;
+    const saved = readSavedProducts();
+    if (saved.length) {
+      window.brands = saved.slice();
+      return window.brands;
+    }
+    return [];
+  }
+
+  function normalizeProduct(item) {
+    const base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || base.categoryImage || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  function findProductById(id) {
+    const target = String(id || '').trim();
+    if (!target) return null;
+    return getLiveProducts().map(normalizeProduct).find(function (x) {
+      return String(x.id || '').trim() === target;
+    }) || null;
+  }
+
+  function resolveDetailProduct(id) {
+    const normalizedId = String(id || '').trim();
+    const snapshot = normalizeProduct(window.__alphaLastDetailSnapshot || {});
+    let product = findProductById(normalizedId);
+
+    if (!product && snapshot.id && snapshot.id === normalizedId) {
+      product = snapshot;
+    }
+
+    if (!product && window.currentSelectedId) {
+      product = findProductById(window.currentSelectedId);
+    }
+
+    if (!product && snapshot.name) {
+      product = getLiveProducts().map(normalizeProduct).find(function (x) {
+        return x.name && x.name === snapshot.name && x.category === snapshot.category;
+      }) || snapshot;
+    }
+
+    if (!product) {
+      const list = getLiveProducts().map(normalizeProduct);
+      if (list.length) product = list[0];
+    }
+
+    return product || null;
+  }
+
+  function detailVisible() {
+    const page = document.getElementById('product-detail');
+    if (!page) return false;
+    if (page.classList.contains('hidden')) return false;
+    if (page.classList.contains('page') && !page.classList.contains('active')) return false;
+    return getComputedStyle(page).display !== 'none';
+  }
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = String(value == null ? '' : value);
+  }
+
+  function setDetailFromProduct(rawProduct) {
+    const s = normalizeProduct(rawProduct || {});
+    if (!s.id && !s.name && !s.price) return false;
+
+    window.currentSelectedId = s.id || window.currentSelectedId || '';
+    window.__alphaLastDetailSnapshot = s;
+
+    const productName = s.name || s.platformName || 'Sản phẩm';
+    const categoryName = s.category || 'Khác';
+    const productPrice = s.price || 'Liên hệ';
+    const productLogo = s.logo || s.categoryImage || '';
+    const shortDescription = s.shortDescription || '';
+    const detailedDescription = s.detailedDescription || '';
+    const warrantyText = s.warranty || '';
+    const platformName = s.platformName || productName;
+
+    const summaryParts = [];
+    if (shortDescription) summaryParts.push(shortDescription);
+    if (detailedDescription && detailedDescription !== shortDescription) summaryParts.push(detailedDescription);
+    if (warrantyText) summaryParts.push('Bảo hành: ' + warrantyText);
+    if (!summaryParts.length) summaryParts.push(productName + ' thuộc danh mục ' + categoryName + '.');
+
+    setText('detail-title', productName);
+    setText('detail-price', productPrice);
+    setText('detail-category-label', categoryName);
+    setText('detail-meta-category', categoryName);
+    setText('detail-meta-price', productPrice);
+    setText('detail-meta-status', warrantyText || ('Sẵn sàng kích hoạt • ' + platformName));
+    setText('detail-meta-support', s.link ? 'Hotline / Zalo / Messenger / Link sản phẩm' : 'Hotline / Zalo / Messenger / Email');
+    setText('detail-summary-text', summaryParts.join(' '));
+    setText('detail-wait-time', warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Dưới 2 phút (Hệ thống đang rảnh)');
+
+    const logo = document.getElementById('detail-logo');
+    if (logo) {
+      logo.src = productLogo;
+      logo.alt = productName;
+      logo.onerror = function () { this.src = ''; this.alt = productName; };
+    }
+
+    const orderProduct = document.getElementById('order-message-product');
+    const orderProductId = document.getElementById('order-message-product-id');
+    const orderPrice = document.getElementById('order-message-price');
+    const shortPreview = document.getElementById('order-message-short-preview');
+    const fullPreview = document.getElementById('order-message-full-preview');
+
+    if (orderProduct) orderProduct.textContent = productName;
+    if (orderProductId) orderProductId.textContent = s.id || '—';
+    if (orderPrice) orderPrice.textContent = productPrice;
+    if (shortPreview && shortDescription) shortPreview.textContent = shortDescription;
+    if (fullPreview) fullPreview.textContent = detailedDescription || shortDescription || ('Em muốn đặt ' + productName + ', nhờ anh/chị hỗ trợ giúp em.');
+
+    return true;
+  }
+
+  function patchHandleCardClick() {
+    if (typeof window.handleCardClick !== 'function' || window.__alphaHandleCardClickPatched) return;
+    window.__alphaHandleCardClickPatched = true;
+    const original = window.handleCardClick;
+    window.handleCardClick = function (id, element) {
+      const live = findProductById(id);
+      if (live) window.__alphaLastDetailSnapshot = normalizeProduct(live);
+      return original.apply(this, arguments);
+    };
+  }
+
+  function patchGoToDetail() {
+    if (typeof window.goToDetail !== 'function' || window.__alphaGoToDetailResolverPatched) return;
+    window.__alphaGoToDetailResolverPatched = true;
+    const original = window.goToDetail;
+
+    window.goToDetail = function (id) {
+      const product = resolveDetailProduct(id);
+      if (product) {
+        setDetailFromProduct(product);
+
+        if (typeof window.ensureDetailBlocks === 'function') {
+          try { window.ensureDetailBlocks(); } catch (_) {}
+        }
+        if (typeof window.renderOwnershipFlowFixed === 'function') {
+          try { window.renderOwnershipFlowFixed(); } catch (_) {}
+        } else if (typeof window.renderOwnershipFlow === 'function') {
+          try { window.renderOwnershipFlow(product.id); } catch (_) {}
+        }
+        if (typeof window.renderCommentsFixed === 'function') {
+          try { window.renderCommentsFixed(); } catch (_) {}
+        } else if (typeof window.renderFeaturedComments === 'function') {
+          try { window.renderFeaturedComments(); } catch (_) {}
+        }
+        if (typeof window.SocialProofManager !== 'undefined' && window.SocialProofManager.updateDetailStats) {
+          try { window.SocialProofManager.updateDetailStats(); } catch (_) {}
+        }
+        if (typeof window.showPage === 'function' && !detailVisible()) {
+          try { window.showPage('product-detail'); } catch (_) {}
+        }
+        return;
+      }
+
+      return original.apply(this, arguments);
+    };
+  }
+
+  function patchOpenModalFromDetail() {
+    if (typeof window.openModalFromDetail !== 'function' || window.__alphaModalFromDetailResolverPatched) return;
+    window.__alphaModalFromDetailResolverPatched = true;
+    const original = window.openModalFromDetail;
+    window.openModalFromDetail = function () {
+      const product = resolveDetailProduct(window.currentSelectedId);
+      if (product) {
+        window.currentSelectedId = product.id || window.currentSelectedId || '';
+        window.__alphaLastDetailSnapshot = normalizeProduct(product);
+      }
+      return original.apply(this, arguments);
+    };
+  }
+
+  function boot() {
+    patchHandleCardClick();
+    patchGoToDetail();
+    patchOpenModalFromDetail();
+
+    if (detailVisible()) {
+      const product = resolveDetailProduct(window.currentSelectedId);
+      if (product) setDetailFromProduct(product);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
+
+<script id="alpha-payment-restore-patch">
+(function () {
+  const STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
+
+  function readSavedProducts() {
+    for (const key of STORAGE_KEYS) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function normalizeProduct(item) {
+    const base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || base.categoryImage || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  function getAllProductsSafe() {
+    if (Array.isArray(window.brands) && window.brands.length) return window.brands.map(normalizeProduct);
+    const saved = readSavedProducts().map(normalizeProduct);
+    if (saved.length) {
+      window.brands = saved.slice();
+      return window.brands.map(normalizeProduct);
+    }
+    return [];
+  }
+
+  function resolveProduct(id) {
+    const normalizedId = String(id || window.currentSelectedId || '').trim();
+    const snapshot = normalizeProduct(window.__alphaLastDetailSnapshot || window.__alphaLastPaymentSnapshot || {});
+
+    let product = getAllProductsSafe().find(function (x) {
+      return String(x.id || '').trim() === normalizedId;
+    }) || null;
+
+    if (!product && snapshot.id && snapshot.id === normalizedId) product = snapshot;
+
+    if (!product && snapshot.name) {
+      product = getAllProductsSafe().find(function (x) {
+        return x.name === snapshot.name && x.category === snapshot.category;
+      }) || snapshot;
+    }
+
+    if (!product) {
+      const list = getAllProductsSafe();
+      if (list.length) product = list[0];
+    }
+
+    if (product) {
+      window.currentSelectedId = product.id || window.currentSelectedId || '';
+      window.__alphaLastPaymentSnapshot = product;
+      if (window.__alphaLastDetailSnapshot == null || !window.__alphaLastDetailSnapshot.id) {
+        window.__alphaLastDetailSnapshot = product;
+      }
+    }
+
+    return product || null;
+  }
+
+  function fillPaymentModalPreview(product) {
+    const p = normalizeProduct(product || {});
+    const modalTitle = document.getElementById('modal-title');
+    const iconContainer = document.getElementById('modal-icon-container');
+    const modalCategory = document.getElementById('modal-category');
+
+    if (modalTitle) modalTitle.innerText = p.name || p.platformName || 'Dịch vụ';
+    if (iconContainer) {
+      iconContainer.innerHTML = p.logo
+        ? '<img src="' + p.logo + '" alt="' + (p.name || 'Dịch vụ') + '" class="w-8 h-8 object-contain">'
+        : '<div class="w-8 h-8 rounded-xl bg-black/5 flex items-center justify-center"><i class="fa-solid fa-cube"></i></div>';
+    }
+    if (modalCategory) modalCategory.innerText = (p.category || 'Danh mục') + ' • Hệ thống sẵn sàng';
+  }
+
+  function createReceiptDataSafe() {
+    const product = resolveProduct(window.currentSelectedId);
+    const code = typeof generate21DigitCode === 'function'
+      ? generate21DigitCode(product?.id || '0')
+      : String(Date.now()).slice(-12);
+    const now = new Date();
+    const displayDate = now.toLocaleString('vi-VN');
+    const selectedNetwork = typeof getSelectedNetwork === 'function' ? getSelectedNetwork() : null;
+    const usdAmount = typeof getUsdtAmount === 'function'
+      ? getUsdtAmount({ price: product?.price || '0k' })
+      : '0.00';
+
+    return {
+      orderCode: code,
+      productName: product?.name || product?.platformName || 'Dịch vụ',
+      category: product?.category || 'Danh mục',
+      price: product?.price || '0k',
+      paymentMethod: window.selectedPaymentMethod || 'bank',
+      bankTransferContent: '',
+      usdtAmountUsd: usdAmount,
+      usdtNetwork: selectedNetwork?.label || 'USDT',
+      usdtWalletAddress: selectedNetwork?.address || '',
+      methodSummary: (window.selectedPaymentMethod || 'bank') === 'bank'
+        ? 'QR ngân hàng'
+        : 'USDT (' + (selectedNetwork?.code || 'N/A') + ')',
+      createdAt: displayDate,
+      paymentConfirmedAt: displayDate
+    };
+  }
+
+  function patchGetCurrentProduct() {
+    window.getCurrentProduct = function () {
+      return resolveProduct(window.currentSelectedId);
+    };
+  }
+
+  function patchCreateReceiptData() {
+    window.createReceiptData = createReceiptDataSafe;
+  }
+
+  function patchOpenModal() {
+    if (typeof window.openModal !== 'function' || window.__alphaPaymentOpenModalPatched) return;
+    window.__alphaPaymentOpenModalPatched = true;
+
+    const original = window.openModal;
+    window.openModal = function (id) {
+      const product = resolveProduct(id);
+      if (!product) return original.apply(this, arguments);
+
+      window.currentSelectedId = product.id || String(id || '').trim();
+      window.__alphaLastPaymentSnapshot = product;
+      fillPaymentModalPreview(product);
+
+      try {
+        if (typeof clearSimulation === 'function') clearSimulation();
+      } catch (_) {}
+      window.lastReceiptData = null;
+
+      const simSection = document.getElementById('sim-section');
+      const modalActions = document.getElementById('modal-actions');
+      const finishBtn = document.getElementById('finish-btn');
+      const simBar = document.getElementById('sim-bar');
+      const simPercent = document.getElementById('sim-percent');
+      const simStatus = document.getElementById('sim-status');
+      const modal = document.getElementById('product-modal');
+
+      if (simSection) simSection.classList.add('hidden');
+      if (modalActions) modalActions.classList.remove('hidden');
+      if (finishBtn) finishBtn.classList.add('hidden');
+      if (simBar) simBar.style.width = '0%';
+      if (simPercent) simPercent.innerText = '0%';
+      if (simStatus) simStatus.innerText = 'Đang chuẩn bị...';
+      if (modal) modal.classList.add('active');
+    };
+  }
+
+  function patchOpenPaymentPopup() {
+    if (typeof window.openPaymentPopup !== 'function' || window.__alphaPaymentPopupPatched) return;
+    window.__alphaPaymentPopupPatched = true;
+
+    const original = window.openPaymentPopup;
+    window.openPaymentPopup = function () {
+      const product = resolveProduct(window.currentSelectedId);
+      if (!product) return original.apply(this, arguments);
+
+      if (!window.lastReceiptData || window.lastReceiptData.productName !== (product.name || product.platformName || '')) {
+        window.lastReceiptData = createReceiptDataSafe();
+      }
+
+      window.lastReceiptData.paymentMethod = window.selectedPaymentMethod || 'bank';
+      if (typeof buildTransferContent === 'function') {
+        window.lastReceiptData.bankTransferContent = buildTransferContent(window.lastReceiptData);
+      }
+      if (typeof getUsdtAmount === 'function') {
+        window.lastReceiptData.usdtAmountUsd = getUsdtAmount(window.lastReceiptData);
+      }
+      const selectedNetwork = typeof getSelectedNetwork === 'function' ? getSelectedNetwork() : null;
+      window.lastReceiptData.usdtNetwork = selectedNetwork?.label || 'USDT';
+      window.lastReceiptData.usdtWalletAddress = selectedNetwork?.address || '';
+      window.lastReceiptData.methodSummary = (window.selectedPaymentMethod || 'bank') === 'bank'
+        ? 'QR ngân hàng'
+        : 'USDT (' + (selectedNetwork?.code || 'N/A') + ')';
+
+      if (typeof updatePaymentUI === 'function') {
+        try { updatePaymentUI(); } catch (_) {}
+      }
+      if (typeof showMiniPopup === 'function') {
+        try { showMiniPopup('payment-popup'); } catch (_) {}
+      }
+    };
+  }
+
+  function patchOpenModalFromDetail() {
+    if (typeof window.openModalFromDetail !== 'function' || window.__alphaPaymentFromDetailPatched) return;
+    window.__alphaPaymentFromDetailPatched = true;
+    const original = window.openModalFromDetail;
+    window.openModalFromDetail = function () {
+      const product = resolveProduct(window.currentSelectedId);
+      if (product) {
+        window.currentSelectedId = product.id || window.currentSelectedId || '';
+        window.__alphaLastPaymentSnapshot = product;
+        window.__alphaLastDetailSnapshot = product;
+      }
+      return original.apply(this, arguments);
+    };
+  }
+
+  function boot() {
+    patchGetCurrentProduct();
+    patchCreateReceiptData();
+    patchOpenModal();
+    patchOpenPaymentPopup();
+    patchOpenModalFromDetail();
+
+    const current = resolveProduct(window.currentSelectedId);
+    if (current) {
+      window.__alphaLastPaymentSnapshot = current;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
 
 </body>
 
