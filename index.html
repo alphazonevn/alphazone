@@ -12575,6 +12575,103 @@ So tien: ${usdAmount} USD`;
   }
 </style>
 
+
+
+<script id="alpha-qr-repair-patch">
+(function(){
+  function safeEnsureQr(){
+    try {
+      var popup = document.getElementById('payment-popup');
+      var bankSection = document.getElementById('bank-payment-section');
+      var qrImage = document.getElementById('bank-qr-image');
+      if (!popup || !bankSection || !qrImage) return;
+
+      bankSection.classList.remove('hidden');
+      qrImage.classList.remove('hidden');
+      qrImage.style.display = 'block';
+      qrImage.style.visibility = 'visible';
+      qrImage.style.opacity = '1';
+      qrImage.setAttribute('decoding', 'async');
+      qrImage.setAttribute('loading', 'eager');
+      qrImage.setAttribute('referrerpolicy', 'no-referrer');
+
+      var receipt = window.lastReceiptData;
+      if ((!receipt || !receipt.productName) && typeof window.createReceiptDataSafe === 'function') {
+        receipt = window.createReceiptDataSafe();
+        window.lastReceiptData = receipt;
+      }
+      if ((!receipt || !receipt.productName) && typeof window.createReceiptData === 'function') {
+        try { receipt = window.createReceiptData(); window.lastReceiptData = receipt; } catch (e) {}
+      }
+
+      if (receipt && typeof window.buildTransferContent === 'function' && !receipt.bankTransferContent) {
+        try { receipt.bankTransferContent = window.buildTransferContent(receipt); } catch (e) {}
+      }
+
+      if (receipt && typeof window.buildBankQrUrl === 'function') {
+        var url = window.buildBankQrUrl(receipt);
+        if (url) {
+          qrImage.src = url;
+          qrImage.alt = 'QR thanh toán ' + (receipt.productName || 'đơn hàng');
+        }
+      }
+    } catch (e) {}
+  }
+
+  function wrapUpdatePaymentUI(){
+    if (typeof window.updatePaymentUI !== 'function' || window.__alphaQrUpdateWrapped) return;
+    window.__alphaQrUpdateWrapped = true;
+    var original = window.updatePaymentUI;
+    window.updatePaymentUI = function(){
+      var result = original.apply(this, arguments);
+      safeEnsureQr();
+      return result;
+    };
+  }
+
+  function wrapOpenPaymentPopup(){
+    if (typeof window.openPaymentPopup !== 'function' || window.__alphaQrPopupWrapped) return;
+    window.__alphaQrPopupWrapped = true;
+    var original = window.openPaymentPopup;
+    window.openPaymentPopup = function(){
+      var result = original.apply(this, arguments);
+      setTimeout(safeEnsureQr, 0);
+      setTimeout(safeEnsureQr, 120);
+      setTimeout(safeEnsureQr, 320);
+      return result;
+    };
+  }
+
+  function wrapShowMiniPopup(){
+    if (typeof window.showMiniPopup !== 'function' || window.__alphaQrMiniWrapped) return;
+    window.__alphaQrMiniWrapped = true;
+    var original = window.showMiniPopup;
+    window.showMiniPopup = function(id){
+      var result = original.apply(this, arguments);
+      if (id === 'payment-popup') {
+        setTimeout(safeEnsureQr, 0);
+        setTimeout(safeEnsureQr, 120);
+      }
+      return result;
+    };
+  }
+
+  function boot(){
+    wrapUpdatePaymentUI();
+    wrapOpenPaymentPopup();
+    wrapShowMiniPopup();
+    safeEnsureQr();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+  window.addEventListener('load', function(){ setTimeout(safeEnsureQr, 180); });
+})();
+</script>
+
 </body>
 
 </html>
