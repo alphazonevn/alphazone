@@ -5782,38 +5782,56 @@ So tien: ${usdAmount} USD`;
 
     #logo-canvas.alpha-category-grid {
       position: relative;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 10px;
       min-height: 0;
-      height: auto;
-      padding: 4px 2px 20px;
+      max-height: 260px;
+      padding: 8px 4px 10px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card {
       position: relative;
       inset: auto;
       transform: none;
-      width: 100%;
+      width: auto;
+      min-width: 0;
       height: auto;
-      min-height: 148px;
-      border-radius: 28px;
-      padding: 18px;
-      background: rgba(255, 255, 255, 0.82);
+      min-height: 0;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease;
       animation: none !important;
+      flex: 0 0 auto;
+      max-width: calc(50% - 6px);
+    }
+
+    #logo-canvas.alpha-category-grid::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #logo-canvas.alpha-category-grid::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 999px;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card.is-all {
@@ -5822,15 +5840,16 @@ So tien: ${usdAmount} USD`;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card-media {
-      width: 48px;
-      height: 48px;
-      border-radius: 18px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.96);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.08);
+      flex: 0 0 18px;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card-media img {
@@ -5840,17 +5859,24 @@ So tien: ${usdAmount} USD`;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card-title {
-      font-size: 12px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      line-height: 1.4;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.2;
+      text-transform: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #logo-canvas.alpha-category-grid .alpha-category-card-sub {
-      font-size: 10px;
-      font-weight: 700;
-      opacity: .55;
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      #logo-canvas.alpha-category-grid .alpha-category-card {
+        max-width: 100%;
+      }
     }
   </style>
 
@@ -6282,10 +6308,11 @@ So tien: ${usdAmount} USD`;
           '<button type="button" class="alpha-category-card is-all" data-category="Tất cả"><div class="alpha-category-card-media"><i class="fa-solid fa-layer-group"></i></div><div><div class="alpha-category-card-title">Tất cả</div><div class="alpha-category-card-sub">' + getProducts().length + ' sản phẩm</div></div></button>'
         ].concat(list.map(function (item) {
           return '<button type="button" class="alpha-category-card" data-category="' + esc(item.name) + '">'
-            + '<div class="alpha-category-card-media">' + (item.image ? '<img src="' + esc(item.image) + '" alt="' + esc(item.name) + '">' : '<i class="fa-solid fa-cube"></i>') + '</div>'
+            + '<div class="alpha-category-card-media">' + (item.image ? '<img src="' + esc(item.image) + '" alt="' + esc(item.name) + '">' : '<i class="fa-solid fa-circle"></i>') + '</div>'
             + '<div><div class="alpha-category-card-title">' + esc(item.name) + '</div><div class="alpha-category-card-sub">' + item.count + ' sản phẩm</div></div>'
             + '</button>';
         })).join('');
+        canvas.scrollTop = 0;
         canvas.querySelectorAll('.alpha-category-card').forEach(function (btn) {
           btn.addEventListener('click', function () { filterByCategory(btn.dataset.category || 'Tất cả'); });
         });
@@ -12066,6 +12093,487 @@ So tien: ${usdAmount} USD`;
   }
 })();
 </script>
+
+
+<style id="alpha-catalog-science-style">
+  .alpha-catalog-shell { display:grid; gap:14px; }
+  .alpha-catalog-hero {
+    border:1px solid rgba(0,0,0,.08); border-radius:28px; padding:18px;
+    background:linear-gradient(135deg, rgba(255,255,255,.97), rgba(246,246,246,.94));
+    box-shadow:0 14px 36px rgba(0,0,0,.05); display:grid; gap:12px;
+  }
+  .alpha-catalog-kicker { font-size:9px; font-weight:900; letter-spacing:.24em; text-transform:uppercase; opacity:.42; }
+  .alpha-catalog-title { font-size:22px; line-height:1.1; font-weight:900; }
+  .alpha-catalog-copy { font-size:11px; line-height:1.6; opacity:.62; max-width:560px; }
+  .alpha-catalog-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  .alpha-catalog-stat {
+    border-radius:18px; padding:12px 14px; background:#fff; border:1px solid rgba(0,0,0,.07);
+    display:grid; gap:3px; min-height:62px;
+  }
+  .alpha-catalog-stat b { font-size:16px; line-height:1; }
+  .alpha-catalog-stat span { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.12em; opacity:.45; }
+  .alpha-catalog-controls {
+    display:grid; grid-template-columns:minmax(0,1fr) 130px; gap:10px; align-items:center;
+  }
+  .alpha-catalog-field {
+    width:100%; border:1px solid rgba(0,0,0,.1); border-radius:16px; padding:12px 13px; font-size:12px;
+    font-weight:700; background:rgba(255,255,255,.94); outline:none;
+  }
+  .alpha-catalog-field:focus { border-color:rgba(0,0,0,.2); box-shadow:0 0 0 4px rgba(0,0,0,.035); }
+  .alpha-catalog-slider {
+    display:grid; grid-auto-flow:column; grid-auto-columns:minmax(220px, 78%); gap:12px;
+    overflow-x:auto; padding:2px 2px 8px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .alpha-catalog-slider::-webkit-scrollbar { display:none; }
+  .alpha-catalog-grid {
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px;
+  }
+  .alpha-catalog-card {
+    position:relative; border:1px solid rgba(0,0,0,.08); border-radius:22px; background:rgba(255,255,255,.95);
+    padding:14px; display:grid; gap:10px; text-align:left; overflow:hidden; box-shadow:0 12px 28px rgba(0,0,0,.045);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .alpha-catalog-card.is-slider { min-height:154px; scroll-snap-align:start; }
+  .alpha-catalog-card:hover { transform:translateY(-2px); box-shadow:0 18px 34px rgba(0,0,0,.07); border-color:rgba(0,0,0,.14); }
+  .alpha-catalog-card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .alpha-catalog-card-badge {
+    min-width:30px; height:30px; border-radius:11px; display:flex; align-items:center; justify-content:center;
+    background:#111; color:#fff; font-size:12px; box-shadow:0 8px 16px rgba(0,0,0,.12);
+  }
+  .alpha-catalog-card-title { font-size:14px; font-weight:900; line-height:1.2; }
+  .alpha-catalog-card-sub { font-size:10px; opacity:.52; margin-top:3px; }
+  .alpha-catalog-card-count {
+    font-size:9px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; opacity:.5; white-space:nowrap;
+  }
+  .alpha-catalog-preview { display:flex; align-items:center; gap:7px; min-height:30px; }
+  .alpha-catalog-preview img {
+    width:30px; height:30px; border-radius:10px; object-fit:contain; background:#fff; border:1px solid rgba(0,0,0,.07); padding:5px;
+  }
+  .alpha-catalog-preview-more { font-size:9px; font-weight:900; opacity:.5; }
+  .alpha-catalog-card-foot { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .alpha-catalog-card-tag {
+    display:inline-flex; align-items:center; gap:6px; font-size:9px; font-weight:900; text-transform:uppercase; letter-spacing:.11em;
+    padding:7px 9px; border-radius:999px; background:rgba(0,0,0,.045);
+  }
+  .alpha-catalog-card-arrow { font-size:11px; opacity:.45; }
+  .alpha-catalog-special { background:linear-gradient(135deg, #111, #242424); color:#fff; }
+  .alpha-catalog-special .alpha-catalog-card-count,
+  .alpha-catalog-special .alpha-catalog-card-sub,
+  .alpha-catalog-special .alpha-catalog-preview-more,
+  .alpha-catalog-special .alpha-catalog-card-arrow { opacity:.72; color:#fff; }
+  .alpha-catalog-special .alpha-catalog-card-tag { background:rgba(255,255,255,.12); }
+  .alpha-catalog-section-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:2px; }
+  .alpha-catalog-section-title { font-size:12px; font-weight:900; letter-spacing:.16em; text-transform:uppercase; opacity:.48; }
+  .alpha-catalog-section-note { font-size:10px; opacity:.42; }
+  .alpha-social-empty {
+    border:1px dashed rgba(0,0,0,.12); border-radius:22px; padding:24px 18px; text-align:center; font-size:12px; opacity:.62;
+  }
+  @media (max-width: 768px) {
+    .alpha-catalog-title { font-size:20px; }
+    .alpha-catalog-copy { font-size:10px; }
+    .alpha-catalog-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .alpha-catalog-controls { grid-template-columns:1fr 116px; }
+    .alpha-catalog-grid { grid-template-columns:1fr; }
+    .alpha-catalog-slider { grid-auto-columns:minmax(210px, 84%); }
+  }
+</style>
+<script id="alpha-catalog-science-script">
+(function () {
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (m) {
+      return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[m];
+    });
+  }
+  function getProducts() {
+    var list = Array.isArray(window.brands) ? window.brands : [];
+    return list.map(function (item) {
+      var base = item && typeof item === 'object' ? item : {};
+      return {
+        id: String(base.id || '').trim(),
+        name: String(base.name || '').trim(),
+        platformName: String(base.platformName || base.name || '').trim(),
+        category: String(base.category || '').trim() || 'Khác',
+        price: String(base.price || '').trim(),
+        logo: String(base.logo || base.categoryImage || '').trim(),
+        categoryImage: String(base.categoryImage || base.logo || '').trim(),
+        shortDescription: String(base.shortDescription || '').trim(),
+        detailedDescription: String(base.detailedDescription || '').trim()
+      };
+    }).filter(function (item) { return item.id || item.name; });
+  }
+  function categoryIcon(name) {
+    var key = String(name || '').toLowerCase();
+    if (key.indexOf('tương tác mxh') > -1 || key.indexOf('mxh') > -1 || key.indexOf('social') > -1) return 'fa-share-nodes';
+    if (key.indexOf('ai') > -1) return 'fa-robot';
+    if (key.indexOf('work') > -1 || key.indexOf('office') > -1 || key.indexOf('copilot') > -1) return 'fa-briefcase';
+    if (key.indexOf('học') > -1 || key.indexOf('hoc') > -1 || key.indexOf('quizlet') > -1 || key.indexOf('duolingo') > -1) return 'fa-graduation-cap';
+    if (key.indexOf('phim') > -1 || key.indexOf('movie') > -1 || key.indexOf('netflix') > -1) return 'fa-film';
+    if (key.indexOf('nhạc') > -1 || key.indexOf('music') > -1 || key.indexOf('spotify') > -1) return 'fa-music';
+    if (key.indexOf('thiết kế') > -1 || key.indexOf('design') > -1 || key.indexOf('canva') > -1) return 'fa-wand-magic-sparkles';
+    return 'fa-cube';
+  }
+  function byCategory() {
+    var map = new Map();
+    getProducts().forEach(function (item) {
+      var key = item.category || 'Khác';
+      if (!map.has(key)) map.set(key, { name:key, count:0, previews:[], products:[] });
+      var ref = map.get(key);
+      ref.count += 1;
+      ref.products.push(item);
+      var preview = item.categoryImage || item.logo;
+      if (preview && ref.previews.indexOf(preview) === -1 && ref.previews.length < 3) ref.previews.push(preview);
+    });
+    return Array.from(map.values()).sort(function (a, b) {
+      if (a.name === 'Tương tác MXH') return -1;
+      if (b.name === 'Tương tác MXH') return 1;
+      return String(a.name).localeCompare(String(b.name), 'vi');
+    });
+  }
+  function bySocialPlatform() {
+    var map = new Map();
+    getProducts().filter(function (item) { return String(item.category).trim() === 'Tương tác MXH'; }).forEach(function (item) {
+      var key = String(item.platformName || item.name || '').trim() || 'Danh mục MXH';
+      if (!map.has(key)) map.set(key, { name:key, count:0, previews:[], products:[], price:item.price || '' });
+      var ref = map.get(key);
+      ref.count += 1;
+      ref.products.push(item);
+      if (!ref.price && item.price) ref.price = item.price;
+      var preview = item.logo || item.categoryImage;
+      if (preview && ref.previews.indexOf(preview) === -1 && ref.previews.length < 3) ref.previews.push(preview);
+    });
+    return Array.from(map.values()).sort(function (a, b) { return String(a.name).localeCompare(String(b.name), 'vi'); });
+  }
+  function ensureSocialPage() {
+    if (document.getElementById('social-categories')) return;
+    var productsPage = document.getElementById('products');
+    if (!productsPage || !productsPage.parentNode) return;
+    var page = document.createElement('div');
+    page.id = 'social-categories';
+    page.className = 'page';
+    page.innerHTML = ''
+      + '<header class="mb-8">'
+      + '  <button onclick="showPage(\'categories\')" class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center mb-4" type="button">'
+      + '    <i class="fa-solid fa-chevron-left"></i>'
+      + '  </button>'
+      + '  <span id="social-category-subtitle" class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Tương tác MXH</span>'
+      + '  <h2 id="social-category-page-title" class="title-font vi-title text-3xl">Danh mục MXH</h2>'
+      + '</header>'
+      + '<div class="product-grid" id="social-categories-list"></div>'
+      + '<div id="social-category-empty" class="alpha-social-empty hidden">Chưa có danh mục nào trong nhóm Tương tác MXH.</div>';
+    productsPage.parentNode.insertBefore(page, productsPage);
+  }
+  function renderSocialPage() {
+    ensureSocialPage();
+    var host = document.getElementById('social-categories-list');
+    var empty = document.getElementById('social-category-empty');
+    if (!host || !empty) return;
+    var list = bySocialPlatform();
+    if (!list.length) {
+      host.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    host.innerHTML = list.map(function (item) {
+      var preview = item.previews[0] || '';
+      var badge = item.count + ' gói';
+      return ''
+        + '<button type="button" class="product-card-enhanced flex flex-col text-left relative overflow-hidden alpha-product-card" data-social-platform="' + esc(item.name) + '">'
+        +   '<div class="loading-shimmer"></div>'
+        +   '<div class="w-14 h-14 rounded-2xl bg-black/5 flex items-center justify-center p-3 mb-4 overflow-hidden">'
+        +     (preview ? '<img src="' + esc(preview) + '" alt="' + esc(item.name) + '" class="w-full h-full object-contain">' : '<i class="fa-solid ' + categoryIcon(item.name) + '"></i>')
+        +   '</div>'
+        +   '<div class="mono text-[10px] font-black opacity-45 mb-2">TƯƠNG TÁC MXH</div>'
+        +   '<div class="title-font text-lg leading-tight mb-2">' + esc(item.name) + '</div>'
+        +   '<div class="text-[10px] font-black uppercase tracking-[0.24em] opacity-50 mb-2">' + esc(badge) + '</div>'
+        +   '<div class="text-[11px] opacity-60 leading-relaxed min-h-[36px]">' + esc(item.price ? ('Giá từ ' + item.price) : 'Mở để xem toàn bộ gói thuộc danh mục này.') + '</div>'
+        +   '<div class="mt-4 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.18em] opacity-70">Mở danh mục <i class="fa-solid fa-arrow-right"></i></div>'
+        + '</button>';
+    }).join('');
+    host.querySelectorAll('[data-social-platform]').forEach(function (btn) {
+      btn.addEventListener('click', function () { openSocialPlatform(btn.dataset.socialPlatform || ''); });
+    });
+  }
+  function openSocialPlatform(platformName) {
+    var key = String(platformName || '').trim();
+    var items = getProducts().filter(function (item) {
+      return String(item.category).trim() === 'Tương tác MXH' && String(item.platformName || item.name || '').trim() === key;
+    });
+    if (typeof window.renderProducts === 'function') window.renderProducts(items);
+    if (typeof window.renderRecommendations === 'function') window.renderRecommendations('Tương tác MXH');
+    var title = document.getElementById('product-page-title');
+    var subtitle = document.getElementById('product-category-subtitle');
+    if (title) title.textContent = key || 'Tương tác MXH';
+    if (subtitle) subtitle.textContent = 'Tương tác MXH';
+    if (typeof window.showPage === 'function') window.showPage('products');
+  }
+  window.openSocialPlatform = openSocialPlatform;
+  window.openSocialCategoriesPage = function () {
+    renderSocialPage();
+    if (typeof window.showPage === 'function') window.showPage('social-categories');
+  };
+  function scientificCard(item) {
+    var previews = item.previews.slice(0, 3).map(function (src) { return '<img src="' + esc(src) + '" alt="' + esc(item.name) + '">'; }).join('');
+    var special = item.name === 'Tương tác MXH';
+    return ''
+      + '<button type="button" class="alpha-catalog-card' + (special ? ' alpha-catalog-special' : '') + '" data-catalog-category="' + esc(item.name) + '">'
+      +   '<div class="alpha-catalog-card-head">'
+      +     '<div>'
+      +       '<div class="alpha-catalog-card-title">' + esc(item.name) + '</div>'
+      +       '<div class="alpha-catalog-card-sub">' + esc(special ? 'Nhóm dịch vụ mạng xã hội đã được tách ra trang riêng.' : 'Đi tới danh sách sản phẩm theo danh mục.') + '</div>'
+      +     '</div>'
+      +     '<div class="alpha-catalog-card-count">' + esc(String(item.count)) + ' sản phẩm</div>'
+      +   '</div>'
+      +   '<div class="alpha-catalog-preview">'
+      +     '<span class="alpha-catalog-card-badge"><i class="fa-solid ' + categoryIcon(item.name) + '"></i></span>'
+      +     (previews || '<span class="alpha-catalog-preview-more">Chưa có ảnh</span>')
+      +     (item.previews.length > 3 ? '<span class="alpha-catalog-preview-more">+' + (item.previews.length - 3) + '</span>' : '')
+      +   '</div>'
+      +   '<div class="alpha-catalog-card-foot">'
+      +     '<span class="alpha-catalog-card-tag">' + (special ? 'Trang riêng' : 'Đi tới sản phẩm') + '</span>'
+      +     '<span class="alpha-catalog-card-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>'
+      +   '</div>'
+      + '</button>';
+  }
+  function renderScientificCategories() {
+    ensureSocialPage();
+    var page = document.getElementById('categories');
+    var canvas = document.getElementById('logo-canvas');
+    if (!page || !canvas) return;
+    var all = byCategory();
+    var query = String((document.getElementById('alpha-catalog-search') || {}).value || '').trim().toLowerCase();
+    var sort = String((document.getElementById('alpha-catalog-sort') || {}).value || 'count');
+    var filtered = all.filter(function (item) { return !query || item.name.toLowerCase().indexOf(query) > -1; });
+    filtered.sort(function (a, b) {
+      if (sort === 'az') return a.name.localeCompare(b.name, 'vi');
+      if (sort === 'za') return b.name.localeCompare(a.name, 'vi');
+      if (b.count !== a.count) return b.count - a.count;
+      return a.name.localeCompare(b.name, 'vi');
+    });
+    var featured = filtered.slice(0, Math.min(6, filtered.length));
+    var compact = filtered.slice(featured.length);
+    canvas.className = '';
+    canvas.innerHTML = ''
+      + '<section class="alpha-catalog-shell">'
+      +   '<div class="alpha-catalog-hero">'
+      +     '<div>'
+      +       '<div class="alpha-catalog-kicker">Danh mục</div>'
+      +       '<div class="alpha-catalog-title">Gọn hơn, quét nhanh hơn, có thể trượt ngang.</div>'
+      +       '<div class="alpha-catalog-copy">Toàn bộ danh mục được gom vào một dải trượt ngang để giao diện gọn hơn và đỡ kéo dài màn hình.</div>'
+      +     '</div>'
+      +     '<div class="alpha-catalog-stats">'
+      +       '<div class="alpha-catalog-stat"><span>Danh mục</span><b>' + esc(String(all.length)) + '</b></div>'
+      +       '<div class="alpha-catalog-stat"><span>Sản phẩm</span><b>' + esc(String(getProducts().length)) + '</b></div>'
+      +       '<div class="alpha-catalog-stat"><span>MXH riêng</span><b>' + esc(String(bySocialPlatform().length)) + '</b></div>'
+      +     '</div>'
+      +     '<div class="alpha-catalog-controls">'
+      +       '<input id="alpha-catalog-search" class="alpha-catalog-field" placeholder="Tìm nhanh danh mục..." value="' + esc(query) + '">'
+      +       '<select id="alpha-catalog-sort" class="alpha-catalog-field">'
+      +         '<option value="count"' + (sort === 'count' ? ' selected' : '') + '>Ưu tiên nhiều</option>'
+      +         '<option value="az"' + (sort === 'az' ? ' selected' : '') + '>A → Z</option>'
+      +         '<option value="za"' + (sort === 'za' ? ' selected' : '') + '>Z → A</option>'
+      +       '</select>'
+      +     '</div>'
+      +   '</div>'
+      +   '<div class="alpha-catalog-section-head"><div class="alpha-catalog-section-title">Danh mục • trượt ngang</div><div class="alpha-catalog-section-note">Vuốt để xem thêm</div></div>'
+      +   '<div class="alpha-catalog-slider">' + ((featured.length || compact.length) ? featured.concat(compact).map(function (item) { return scientificCard(item).replace('alpha-catalog-card', 'alpha-catalog-card is-slider'); }).join('') : '<div class="alpha-social-empty">Không có danh mục phù hợp.</div>') + '</div>'
+      + '</section>';
+    var search = document.getElementById('alpha-catalog-search');
+    var sorter = document.getElementById('alpha-catalog-sort');
+    if (search) search.addEventListener('input', renderScientificCategories);
+    if (sorter) sorter.addEventListener('change', renderScientificCategories);
+    canvas.querySelectorAll('[data-catalog-category]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var category = btn.dataset.catalogCategory || 'Tất cả';
+        if (category === 'Tương tác MXH') {
+          window.openSocialCategoriesPage();
+          return;
+        }
+        if (typeof window.filterByCategory === 'function') window.filterByCategory(category);
+      });
+    });
+  }
+  function patchCategoryInteractions() {
+    var original = window.filterByCategory;
+    if (typeof original === 'function' && !window.__alphaCatalogFilterPatched) {
+      window.__alphaCatalogFilterPatched = true;
+      window.filterByCategory = function (category) {
+        var key = String(category || '').trim() || 'Tất cả';
+        if (key === 'Tương tác MXH' && document.getElementById('categories') && !document.getElementById('products')?.classList.contains('active')) {
+          window.openSocialCategoriesPage();
+          return;
+        }
+        return original.apply(this, arguments);
+      };
+    }
+  }
+  function bootCatalogPatch() {
+    patchCategoryInteractions();
+    ensureSocialPage();
+    renderSocialPage();
+    renderScientificCategories();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootCatalogPatch, { once:true });
+  else bootCatalogPatch();
+  window.addEventListener('load', function () { setTimeout(bootCatalogPatch, 120); });
+})();
+</script>
+
+
+<script>
+(function(){
+  function escHtml(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+  function ensureChipDropdown(){
+    var host = document.getElementById('category-filter-list');
+    if (!host) return;
+    var parent = host.parentElement;
+    if (!parent) return;
+
+    var wrap = document.getElementById('alpha-chip-disclosure');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.id = 'alpha-chip-disclosure';
+      wrap.className = 'alpha-chip-disclosure';
+      parent.insertBefore(wrap, host);
+      wrap.appendChild(host);
+    }
+
+    var btn = document.getElementById('alpha-chip-toggle');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'alpha-chip-toggle';
+      btn.className = 'alpha-chip-toggle';
+      btn.innerHTML = '<span class="alpha-chip-toggle-left"><i class="fa-solid fa-layer-group"></i><span>Danh mục</span></span><span class="alpha-chip-toggle-right"><span id="alpha-chip-count"></span><i class="fa-solid fa-chevron-down"></i></span>';
+      wrap.parentNode.insertBefore(btn, wrap);
+      btn.addEventListener('click', function(){
+        var open = wrap.classList.toggle('is-open');
+        btn.classList.toggle('is-open', open);
+      });
+    }
+
+    var count = document.getElementById('alpha-chip-count');
+    if (count) {
+      var chips = host.querySelectorAll('.category-chip');
+      var n = Math.max(0, chips.length - 1);
+      count.textContent = n ? (n + ' cate') : '0 cate';
+    }
+  }
+
+  function renderCompactChips(){
+    var host = document.getElementById('category-filter-list');
+    if (!host || typeof window.getProductsSafe !== 'function') return;
+    var products = window.getProductsSafe();
+    var map = new Map();
+    products.forEach(function(item){
+      var key = String(item && item.category || '').trim() || 'Khác';
+      var image = String((item && (item.logo || item.categoryImage)) || '').trim();
+      if (!map.has(key)) map.set(key, { name: key, image: image, count: 0 });
+      var ref = map.get(key); ref.count += 1; if (!ref.image && image) ref.image = image;
+    });
+    var list = [{ name: 'Tất cả', image: '', count: products.length }].concat(Array.from(map.values()));
+    host.innerHTML = list.map(function(item, idx){
+      var icon = idx === 0 ? 'fa-layer-group' : (typeof window.categoryIcon === 'function' ? window.categoryIcon(item.name) : 'fa-cube');
+      var media = item.image
+        ? '<span class="alpha-chip-media"><img src="' + escHtml(item.image) + '" alt="' + escHtml(item.name) + '"></span>'
+        : '<span class="alpha-chip-media"><i class="fa-solid ' + icon + '"></i></span>';
+      return '<button type="button" class="category-chip ' + (idx === 0 ? 'active' : '') + '" data-category="' + escHtml(item.name) + '">' + media + '<span>' + escHtml(item.name) + '</span></button>';
+    }).join('');
+    host.querySelectorAll('.category-chip').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (typeof window.filterByCategory === 'function') window.filterByCategory(btn.dataset.category || 'Tất cả');
+      });
+    });
+    ensureChipDropdown();
+  }
+
+  var oldApply = window.applyCategoryPageSafe;
+  window.applyCategoryPageSafe = function(){
+    if (typeof oldApply === 'function') oldApply();
+    renderCompactChips();
+    ensureChipDropdown();
+  };
+
+  var oldShowPage = window.showPage;
+  if (typeof oldShowPage === 'function' && !window.__alphaChipToggleWrapped) {
+    window.__alphaChipToggleWrapped = true;
+    window.showPage = function(page){
+      var r = oldShowPage.apply(this, arguments);
+      setTimeout(function(){ if (page === 'categories') { renderCompactChips(); ensureChipDropdown(); } }, 60);
+      return r;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ renderCompactChips(); ensureChipDropdown(); }, 120); });
+})();
+</script>
+<style>
+  #alpha-chip-toggle {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    border-radius: 18px !important;
+    padding: 14px 16px !important;
+    margin: 0 0 12px !important;
+    background: rgba(255,255,255,.85) !important;
+    border: 1px solid rgba(0,0,0,.06) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.05) !important;
+  }
+  .alpha-chip-toggle-left,
+  .alpha-chip-toggle-right {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-weight: 700 !important;
+  }
+  .alpha-chip-toggle-right {
+    font-weight: 600 !important;
+    color: #6b7280 !important;
+    font-size: 13px !important;
+  }
+  #alpha-chip-toggle .fa-chevron-down {
+    transition: transform .2s ease !important;
+  }
+  #alpha-chip-toggle.is-open .fa-chevron-down {
+    transform: rotate(180deg) !important;
+  }
+  #alpha-chip-disclosure {
+    display: none !important;
+    margin-bottom: 14px !important;
+  }
+  #alpha-chip-disclosure.is-open {
+    display: block !important;
+  }
+  #category-filter-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    padding: 2px 0 2px !important;
+  }
+  #alpha-chip-disclosure #category-filter-list .category-chip {
+    min-height: 42px !important;
+    padding: 9px 12px !important;
+    gap: 8px !important;
+  }
+  #alpha-chip-disclosure #category-filter-list .category-chip .alpha-category-icon-badge {
+    display: none !important;
+  }
+  #alpha-chip-disclosure #category-filter-list .category-chip span:last-child {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+  }
+  #alpha-chip-disclosure #category-filter-list .alpha-chip-media,
+  #alpha-chip-disclosure #category-filter-list .alpha-chip-media img {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    border-radius: 999px !important;
+    object-fit: cover !important;
+  }
+</style>
 
 </body>
 
