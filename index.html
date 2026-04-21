@@ -304,9 +304,9 @@
       border-radius: 100px;
       padding: 14px 16px;
       font-size: 9px;
-      font-weight: 700;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -378,9 +378,10 @@
     }
 
     .mini-popup-card {
-      width: min(100%, 360px);
+      width: min(100%, 380px);
       max-height: 88vh;
       overflow-y: auto;
+      overflow-x: hidden;
       background: var(--paper-white);
       border-radius: 32px;
       padding: 22px 18px 20px;
@@ -391,6 +392,14 @@
 
     .mini-popup-overlay.active .mini-popup-card {
       transform: scale(1) translateY(0);
+    }
+
+    body.modal-open #alpha-right-dock,
+    body.modal-open #global-page-controls,
+    body.modal-open #global-back-btn,
+    body.modal-open .nav-bar {
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     .progress-track {
@@ -435,6 +444,7 @@
 
     .category-chip {
       padding: 12px 20px;
+      max-width: 100%;
       background: var(--paper-white);
       border-radius: 20px;
       font-size: 10px;
@@ -774,6 +784,7 @@
       background: white;
       border-radius: 20px;
       padding: 14px;
+      overflow: hidden;
     }
 
     .pay-box+.pay-box {
@@ -789,9 +800,11 @@
       background: var(--carbon-black);
       color: white;
       font-size: 8px;
-      font-weight: 900;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.08em;
+      max-width: 100%;
+      white-space: normal;
     }
 
     .order-code-box {
@@ -804,19 +817,30 @@
 
     .method-switch {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       margin-bottom: 14px;
+      align-items: stretch;
     }
 
     .method-btn {
+      min-height: 0;
+      height: auto;
       border: 1px solid rgba(0, 0, 0, 0.08);
       background: #fff;
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 12px 14px;
       text-align: left;
       cursor: pointer;
       transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 4px;
+      overflow: hidden;
+      white-space: normal;
+      box-shadow: none;
     }
 
     .method-btn.active {
@@ -825,18 +849,38 @@
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
     }
 
+    .method-btn span {
+      display: block;
+      width: 100%;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .method-btn.active small {
+      opacity: 0.82;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
     .method-btn small {
       display: block;
-      margin-top: 4px;
+      margin-top: 0;
       font-size: 10px;
-      opacity: 0.6;
-      font-weight: 700;
+      opacity: 0.68;
+      font-weight: 600;
+      line-height: 1.45;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .pay-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      align-items: start;
       gap: 12px;
       margin-bottom: 8px;
     }
@@ -937,7 +981,7 @@
     .method-btn span,
     .network-chip,
     .pay-label {
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .method-btn small {
@@ -1014,6 +1058,7 @@
       min-height: 110px;
       resize: vertical;
     }
+
 
     .popup-section-title {
       font-size: 10px;
@@ -1329,7 +1374,7 @@
     .method-btn,
     .payment-badge,
     .network-chip {
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .btn-street,
@@ -1361,12 +1406,12 @@
     }
 
     .code-field {
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .pay-value,
     .warranty-meta-value {
-      white-space: nowrap;
+      white-space: normal;
     }
 
     #bank-payment-section .pay-row,
@@ -1495,16 +1540,25 @@
         line-height: 1.45;
       }
 
+      .method-switch {
+        grid-template-columns: 1fr;
+      }
+
       .method-btn {
-        padding: 10px;
+        min-height: 0;
+        height: auto;
+        padding: 12px 12px;
+        border-radius: 18px;
       }
 
       .method-btn span {
-        font-size: 9px;
+        font-size: 10px;
+        line-height: 1.32;
       }
 
       .method-btn small {
-        font-size: 7.5px;
+        font-size: 9px;
+        line-height: 1.4;
         white-space: normal;
       }
 
@@ -1589,8 +1643,300 @@
         min-height: 56px;
         font-size: 10.2px;
         letter-spacing: 0.08em;
-      });
-    });
+      }
+    }
+
+
+    /* recommendation cards unified */
+    #recommendation-section {
+      overflow: hidden;
+    }
+
+    #recommendations-list {
+      display: grid !important;
+      grid-auto-flow: column !important;
+      grid-auto-columns: minmax(150px, 150px) !important;
+      gap: 14px !important;
+      align-items: stretch !important;
+    }
+
+    #recommendations-list > * {
+      min-width: 0 !important;
+      width: 150px !important;
+      height: 100% !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid rgba(0, 0, 0, 0.04) !important;
+      border-radius: 24px !important;
+      padding: 16px 14px 14px !important;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      text-align: center !important;
+      overflow: hidden !important;
+    }
+
+    #recommendations-list > * img,
+    #recommendations-list > * .w-14,
+    #recommendations-list > * .h-14,
+    #recommendations-list > * .w-16,
+    #recommendations-list > * .h-16 {
+      width: 54px !important;
+      height: 54px !important;
+      min-width: 54px !important;
+      min-height: 54px !important;
+      border-radius: 18px !important;
+      object-fit: contain !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-bottom: 12px !important;
+      padding: 8px !important;
+      background: #fff !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    #recommendations-list > * h3,
+    #recommendations-list > * .title,
+    #recommendations-list > * .card-title,
+    #recommendations-list > * .font-black,
+    #recommendations-list > * .font-bold {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 4 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      font-size: 16px !important;
+      line-height: 1.45 !important;
+      font-weight: 700 !important;
+      margin: 0 0 10px !important;
+      min-height: 92px !important;
+      color: #1f1f1f !important;
+    }
+
+    #recommendations-list > * p,
+    #recommendations-list > * .desc,
+    #recommendations-list > * .text,
+    #recommendations-list > * .opacity-40,
+    #recommendations-list > * .opacity-50,
+    #recommendations-list > * .opacity-60,
+    #recommendations-list > * .opacity-70 {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      font-size: 11px !important;
+      line-height: 1.5 !important;
+      min-height: 48px !important;
+      margin: 0 0 10px !important;
+      color: rgba(0, 0, 0, 0.48) !important;
+    }
+
+    #recommendations-list > * .mono,
+    #recommendations-list > * .tracking-widest,
+    #recommendations-list > * .uppercase {
+      font-size: 10px !important;
+      line-height: 1.35 !important;
+      letter-spacing: 0.04em !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      margin-bottom: 8px !important;
+      color: rgba(0, 0, 0, 0.32) !important;
+    }
+
+    #recommendations-list > * .price,
+    #recommendations-list > * .text-price,
+    #recommendations-list > * .title-font:last-child,
+    #recommendations-list > * .mt-auto,
+    #recommendations-list > * .text-[10px].font-black,
+    #recommendations-list > * .text-[11px].font-black,
+    #recommendations-list > * .text-[12px].font-black {
+      margin-top: auto !important;
+      font-size: 13px !important;
+      line-height: 1.4 !important;
+      font-weight: 700 !important;
+      color: #2f2f2f !important;
+      white-space: normal !important;
+    }
+
+    @media (max-width: 768px) {
+      #recommendations-list {
+        grid-auto-columns: minmax(138px, 138px) !important;
+        gap: 12px !important;
+      }
+
+      #recommendations-list > * {
+        width: 138px !important;
+        padding: 14px 12px !important;
+        border-radius: 22px !important;
+      }
+
+      #recommendations-list > * h3,
+      #recommendations-list > * .title,
+      #recommendations-list > * .card-title,
+      #recommendations-list > * .font-black,
+      #recommendations-list > * .font-bold {
+        font-size: 14px !important;
+        min-height: 84px !important;
+      }
+
+      #recommendations-list > * p,
+      #recommendations-list > * .desc,
+      #recommendations-list > * .text,
+      #recommendations-list > * .opacity-40,
+      #recommendations-list > * .opacity-50,
+      #recommendations-list > * .opacity-60,
+      #recommendations-list > * .opacity-70 {
+        font-size: 10px !important;
+        min-height: 44px !important;
+      }
+    }
+
+
+    /* strong integrated typography safety */
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    .max-w-md,
+    .street-card,
+    .dark-card,
+    .modal-content,
+    .mini-popup-card,
+    .product-card-enhanced,
+    .detail-meta-card,
+    .detail-summary-card,
+    .pay-box,
+    .warranty-ticket-card,
+    .order-chat-card,
+    .order-chat-window,
+    .order-chat-summary-item,
+    .ownership-box,
+    .admin-panel,
+    .comment-pill-small,
+    .qr-card,
+    .method-btn,
+    .network-chip,
+    .category-chip {
+      min-width: 0 !important;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p, li,
+    .detail-meta-value,
+    .detail-summary-text,
+    .pay-value,
+    .warranty-meta-value,
+    .helper-note,
+    .order-chat-bubble,
+    .comment-pill-small .text,
+    .comment-pill-small .name,
+    .comment-pill-small .meta,
+    #detail-title,
+    #detail-price,
+    #modal-title,
+    #payment-product-name,
+    #payment-note,
+    #order-message-product,
+    #order-message-product-id,
+    #order-message-price,
+    #order-message-code,
+    #order-message-short-preview,
+    #order-message-full-preview,
+    .admin-helper,
+    .admin-status,
+    .warranty-meta-label,
+    .popup-section-title {
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+    }
+
+    .btn-street,
+    .btn-light,
+    .method-btn,
+    .payment-badge,
+    .network-chip,
+    .pay-label,
+    .code-field,
+    .pay-value,
+    .warranty-meta-value {
+      white-space: normal !important;
+    }
+
+    .btn-street,
+    .btn-light {
+      height: auto !important;
+      min-height: 58px !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+      padding-top: 14px !important;
+      padding-bottom: 14px !important;
+    }
+
+    .method-btn small,
+    .helper-note,
+    .detail-summary-text,
+    .order-chat-bubble,
+    .comment-pill-small .text {
+      white-space: normal !important;
+    }
+
+    .pay-row,
+    .warranty-meta,
+    .detail-meta-card,
+    .order-chat-summary-item,
+    .ownership-step {
+      min-width: 0 !important;
+    }
+
+    #activation-order-input,
+    #warranty-order-input,
+    #warranty-contact-input,
+    #warranty-product-input,
+    #payment-transfer-content,
+    #usdt-wallet-address,
+    #usdt-network-name,
+    #payment-amount-main,
+    #payment-amount-secondary,
+    #usdt-amount-display {
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+      text-overflow: clip !important;
+    }
+
+    @media (max-width: 520px) {
+      .btn-street,
+      .btn-light {
+        min-height: 54px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+        font-size: 10px !important;
+        line-height: 1.25 !important;
+      }
+
+      .payment-badge,
+      .network-chip,
+      .pay-label,
+      .pay-value,
+      .warranty-meta-value,
+      .detail-meta-value,
+      .detail-summary-text,
+      .helper-note,
+      .order-chat-bubble,
+      .comment-pill-small .text {
+        font-size: clamp(9.5px, 2.8vw, 11px) !important;
+        line-height: 1.45 !important;
+      }
     }
 
 
@@ -2060,11 +2406,15 @@
       border-radius: var(--alpha-box-radius) !important;
     }
 
-    button,
+    .btn-street,
+    .btn-light,
     .btn,
     a.btn,
     input[type="button"],
-    input[type="submit"] {
+    input[type="submit"],
+    #global-page-controls .gpc-btn,
+    #global-back-btn,
+    #alpha-right-dock .dock-btn {
       min-height: var(--alpha-btn-height) !important;
       height: var(--alpha-btn-height) !important;
       padding: 0 18px !important;
@@ -2203,7 +2553,7 @@
     .toast-container,
     #toast-container,
     [data-toast-container] {
-      position:  !important;
+      position: fixed !important;
       top: 16px !important;
       right: 68px !important;
       left: auto !important;
@@ -2353,12 +2703,11 @@
 
     /* toast position cleanup */
     .live-toast {
-      top: 14px !important;
-      left: auto !important;
-      right: 64px !important;
-      transform: translateY(-140px) !important;
-      border-radius: 18px !important;
-      max-width: min(340px, calc(100vw - 86px)) !important;
+      top: auto !important;
+      right: auto !important;
+      left: 24px !important;
+      bottom: 28px !important;
+      transform: translateY(140px) !important;
       z-index: 2147483600 !important;
     }
 
@@ -2477,8 +2826,8 @@
       }
 
       .live-toast {
-        right: 56px !important;
-        max-width: calc(100vw - 72px) !important;
+        left: 16px !important;
+        right: auto !important;
       }
 
       #alpha-right-dock {
@@ -2651,24 +3000,110 @@
 
     .alpha-lang-widget,
     .alpha-lang-widget-final {
-      gap: 8px !important;
-      padding: 7px 9px !important;
-      border-radius: 14px !important;
+      position: fixed !important;
+      top: 16px !important;
+      right: 16px !important;
+      z-index: 10001 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      padding: 10px 12px !important;
+      border-radius: 18px !important;
+      border: 1px solid rgba(17, 24, 39, .08) !important;
+      background: rgba(255, 255, 255, .96) !important;
+      backdrop-filter: blur(12px) !important;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .12) !important;
     }
 
-    .alpha-lang-select,
-    .alpha-lang-widget-final select {
-      min-width: 128px !important;
-      padding: 7px 9px !important;
+    .alpha-lang-trigger {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+      border: 1px solid rgba(17, 24, 39, .08) !important;
+      border-radius: 12px !important;
+      background: #fff !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 18px !important;
+      line-height: 1 !important;
+      cursor: pointer !important;
+    }
+
+    .alpha-lang-panel {
+      position: absolute !important;
+      top: calc(100% + 10px) !important;
+      right: 0 !important;
+      width: 214px !important;
+      padding: 8px !important;
+      border-radius: 16px !important;
+      border: 1px solid rgba(17, 24, 39, .08) !important;
+      background: rgba(255, 255, 255, .98) !important;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, .14) !important;
+      display: none !important;
+    }
+
+    .alpha-lang-panel.active {
+      display: block !important;
+    }
+
+    .alpha-lang-option {
+      width: 100% !important;
+      border: 0 !important;
+      background: transparent !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      padding: 10px 12px !important;
+      border-radius: 12px !important;
+      cursor: pointer !important;
+    }
+
+    .alpha-lang-option:hover,
+    .alpha-lang-option.active {
+      background: rgba(17, 24, 39, .05) !important;
+    }
+
+    .alpha-lang-option-main {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      min-width: 0 !important;
+    }
+
+    .alpha-lang-option-emoji {
+      width: 22px !important;
+      flex: 0 0 22px !important;
+      text-align: center !important;
+      font-size: 17px !important;
+      line-height: 1 !important;
+    }
+
+    .alpha-lang-option-label {
       font-size: 12px !important;
-      border-radius: 10px !important;
+      font-weight: 700 !important;
+      line-height: 1.25 !important;
+      color: rgba(17, 24, 39, .92) !important;
+      white-space: nowrap !important;
+    }
+
+    .alpha-lang-option-currency {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      color: rgba(17, 24, 39, .48) !important;
+      white-space: nowrap !important;
     }
 
     .alpha-lang-rate,
     .alpha-lang-widget-rate {
-      font-size: 10px !important;
-      line-height: 1.3 !important;
-      max-width: 120px !important;
+      font-size: 11px !important;
+      line-height: 1.4 !important;
+      color: rgba(17, 24, 39, .62) !important;
+      max-width: 220px !important;
+      white-space: normal !important;
     }
 
     @media (max-width: 768px) {
@@ -2676,24 +3111,28 @@
       .alpha-lang-widget,
       .alpha-lang-widget-final {
         top: 10px !important;
-        left: 10px !important;
         right: 10px !important;
-        padding: 6px 8px !important;
-        gap: 6px !important;
+        left: auto !important;
+        padding: 8px 10px !important;
+        gap: 8px !important;
       }
 
-      .alpha-lang-select,
-      .alpha-lang-widget-final select {
-        min-width: 0 !important;
-        padding: 6px 8px !important;
-        font-size: 11px !important;
+      .alpha-lang-trigger {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 16px !important;
+      }
+
+      .alpha-lang-panel {
+        width: 192px !important;
       }
 
       .alpha-lang-rate,
       .alpha-lang-widget-rate {
         font-size: 9px !important;
-        max-width: 34% !important;
-        text-align: right !important;
+        max-width: 136px !important;
       }
 
       #product-detail .alpha-detail-logo-wrap {
@@ -2702,6 +3141,134 @@
         padding: 14px !important;
       }
     }
+
+    /* optimized integrated dock */
+    #alpha-right-dock {
+      width: 58px !important;
+      overflow: hidden !important;
+      align-items: stretch !important;
+      gap: 10px !important;
+      padding: 8px !important;
+      border-radius: 20px !important;
+      transition: width 0.24s ease !important;
+    }
+
+    #alpha-right-dock:hover,
+    #alpha-right-dock.expanded {
+      width: 176px !important;
+    }
+
+    #alpha-right-dock .dock-btn {
+      width: 100% !important;
+      min-width: 100% !important;
+      height: 42px !important;
+      min-height: 42px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+      border-radius: 14px !important;
+      box-sizing: border-box !important;
+      transition: padding 0.22s ease, gap 0.22s ease, justify-content 0.22s ease !important;
+    }
+
+    #alpha-right-dock:hover .dock-btn,
+    #alpha-right-dock.expanded .dock-btn {
+      justify-content: flex-start !important;
+      gap: 12px !important;
+      padding: 0 14px !important;
+    }
+
+    #alpha-right-dock .dock-btn .dock-icon {
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex: 0 0 18px !important;
+      line-height: 1 !important;
+    }
+
+    #alpha-right-dock .dock-btn .dock-icon i {
+      display: block !important;
+      font-size: 14px !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+
+    #alpha-right-dock .dock-btn .dock-label {
+      display: inline-block !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      max-width: 0 !important;
+      overflow: hidden !important;
+      transform: translateX(6px) !important;
+      transition: opacity 0.18s ease, transform 0.18s ease, max-width 0.18s ease !important;
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      color: #1f2937 !important;
+      line-height: 1.1 !important;
+      white-space: nowrap !important;
+    }
+
+    #alpha-right-dock:hover .dock-btn .dock-label,
+    #alpha-right-dock.expanded .dock-btn .dock-label {
+      opacity: 1 !important;
+      visibility: visible !important;
+      max-width: 120px !important;
+      transform: translateX(0) !important;
+    }
+
+    @media (max-width: 768px) {
+      #alpha-right-dock {
+        width: 54px !important;
+        right: 8px !important;
+        gap: 8px !important;
+        padding: 6px !important;
+      }
+
+      #alpha-right-dock:hover,
+      #alpha-right-dock.expanded {
+        width: 154px !important;
+      }
+
+      #alpha-right-dock .dock-btn {
+        height: 38px !important;
+        min-height: 38px !important;
+      }
+
+      #alpha-right-dock:hover .dock-btn,
+      #alpha-right-dock.expanded .dock-btn {
+        gap: 10px !important;
+        padding: 0 12px !important;
+      }
+
+      #alpha-right-dock .dock-btn .dock-icon {
+        width: 16px !important;
+        height: 16px !important;
+        min-width: 16px !important;
+        min-height: 16px !important;
+        flex: 0 0 16px !important;
+      }
+
+      #alpha-right-dock .dock-btn .dock-icon i {
+        font-size: 13px !important;
+      }
+
+      #alpha-right-dock .dock-btn .dock-label {
+        font-size: 10px !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -2723,7 +3290,7 @@
   <div class="max-w-md mx-auto px-6">
     <div id="home" class="page active">
       <div class="street-card p-10 relative mb-6">
-        <span class="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 mb-4 block">Welcome back</span>
+        <span class="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 mb-4 block">Chào mừng</span>
         <h1 class="title-font text-5xl leading-[0.85] tracking-tighter mb-8">ALPHA<br>ZONE<br>VIETNAM</h1>
 
         <div class="absolute right-[-30px] top-[1%] floating-ball" style="width: 300px; height: 250px;">
@@ -2732,11 +3299,14 @@
             class="w-full h-full object-contain opacity-90" alt="Alpha logo">
         </div>
 
-        <div class="mt-20">
-          <button onclick="showPage('categories')" class="btn-street w-full" type="button">
+        <div class="mt-20 grid grid-cols-1 gap-3">
+          <button onclick="showPage(&quot;categories&quot;)" class="btn-street w-full" type="button">
             <i class="fa-solid fa-layer-group text-[10px]"></i>
-            Khám phá Danh mục
+            Khám phá Danh mục nhà Alpha Zone
           </button>
+          <button onclick="showPage('engagement-hub')" class="btn-street w-full" type="button">
+          <i class="fa-solid fa-layer-group text-[10px]"></i>
+            Dịch vụ Seeding giá siêu rẻ </button>
         </div>
       </div>
 
@@ -2764,13 +3334,13 @@
       </div>
 
       <div class="dark-card p-8">
-        <h2 class="title-font vi-title text-xl mb-6">Dịch vụ Hot</h2>
+        <h2 class="title-font vi-title text-xl mb-6">Dịch vụ nổi bật</h2>
         <div class="relative rounded-[32px] overflow-hidden aspect-video bg-zinc-800"
           onclick="handleCardClick('netflix')">
           <img src="https://i.pinimg.com/736x/14/e9/82/14e9820263a849f5ee1c26a3061fb110.jpg"
             class="w-full h-full object-cover opacity-60" alt="Hot">
           <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-            <p class="text-[11px] font-bold uppercase tracking-widest mb-2 italic">Alpha Premium Access</p>
+            <p class="text-[11px] font-bold uppercase tracking-widest mb-2 italic">Dịch vụ được quan tâm</p>
             <div class="bg-[#c5beaf] text-black px-4 py-1.5 rounded-full text-[9px] font-black uppercase">
               ★ Đã bán 2.4k lượt
             </div>
@@ -2807,7 +3377,7 @@
     <div id="products" class="page">
       <header class="mb-8">
         <span id="product-category-subtitle"
-          class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Marketplace</span>
+          class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Danh mục dịch vụ số</span>
         <h2 id="product-page-title" class="title-font vi-title text-3xl">Sản phẩm</h2>
       </header>
 
@@ -2821,7 +3391,7 @@
 
     <div id="product-detail" class="page">
       <header class="flex items-center gap-4 mb-8">
-        <button onclick="showPage('products')"
+        <button onclick="showPage(&quot;products&quot;)"
           class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
@@ -2869,7 +3439,7 @@
             </div>
             <div class="detail-meta-card">
               <span class="detail-meta-label">Trạng thái</span>
-              <div id="detail-meta-status" class="detail-meta-value">Sẵn sàng kích hoạt ngay</div>
+              <div id="detail-meta-status" class="detail-meta-value">Đồng bộ kích hoạt ngay</div>
             </div>
             <div class="detail-meta-card">
               <span class="detail-meta-label">Hỗ trợ</span>
@@ -2884,19 +3454,12 @@
             <div class="mt-3 text-[10px] font-semibold text-black/60">Liên hệ nhanh: Hotline 0357130499 · Zalo ·
               Messenger Alpha Zone Việt Nam · Email alphazone582@gmail.com</div>
           </div>
-
-          <div class="p-4 rounded-2xl bg-black/5 flex items-center gap-4">
-            <div class="flex-1">
-              <p class="text-[9px] font-black uppercase tracking-widest mb-1">Thời gian chờ dự kiến</p>
-              <p id="detail-wait-time" class="text-[10px] font-bold opacity-40">Dưới 2 phút (Hệ thống đang rảnh)</p>
-            </div>
-            <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
           </div>
+          <div>
         </div>
 
         <div>
-          <h4 class="title-font vi-title text-[10px] opacity-40 mb-4 tracking-widest" <h4>SỞ HỮU NGAY CHỈ VỚI 03
-            BƯỚC</h4>
+          <h4 class="title-font vi-title text-[10px] opacity-40 mb-4 tracking-widest">QUY TRÌNH THỰC HIỆN TRONG 03 BƯỚC</h4>
           <div id="activation-flow-container" class="ownership-box"></div>
         </div>
       </div>
@@ -2913,7 +3476,7 @@
 
       <button id="detail-buy-btn" onclick="openModalFromDetail()" class="btn-street w-full py-6 text-sm mb-4"
         type="button">
-        <span id="btn-text">Bắt đầu thiết lập</span>
+        <span id="btn-text">Tiến hành đặt hàng</span>
         <div id="btn-loader" class="hidden absolute right-6"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
       </button>
     </div>
@@ -2928,19 +3491,19 @@
         <div class="w-24 h-24 border-2 border-black rounded-full mx-auto mb-6 flex items-center justify-center">
           <i class="fa-solid fa-shield-halved text-4xl"></i>
         </div>
-        <h3 class="title-font vi-title text-xl mb-2">100% Chính hãng</h3>
+        <h3 class="title-font vi-title text-xl mb-2">Cam kết chất lượng</h3>
         <p class="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] mb-6 leading-relaxed">
-          Cam kết tài khoản chính chủ<br>Bảo hành 1 đổi 1 suốt thời gian sử dụng
+          Cam kết thông tin minh bạch<br>Hỗ trợ bảo hành theo chính sách áp dụng
         </p>
         <div class="warranty-ticket-card mb-4">
           <div class="popup-section-title">Phiếu bảo hành điện tử</div>
           <div class="warranty-meta">
             <div class="warranty-meta-label">Trạng thái</div>
-            <div class="warranty-meta-value">Sẵn sàng tạo phiếu</div>
+            <div class="warranty-meta-value">Đồng bộ tạo phiếu</div>
           </div>
           <div class="warranty-meta">
             <div class="warranty-meta-label">Hình thức</div>
-            <div class="warranty-meta-value">PDF tiếng Việt</div>
+            <div class="warranty-meta-value">Phát hành Phiếu bảo hành</div>
           </div>
           <div class="warranty-meta">
             <div class="warranty-meta-label">Kích hoạt</div>
@@ -2959,21 +3522,21 @@
       <header class="text-center mb-8">
         <span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Order
           Assistant</span>
-        <h2 class="title-font vi-title text-3xl">Tin Nhắn Đặt</h2>
+        <h2 class="title-font vi-title text-3xl">Tin nhắn đặt hàng</h2>
       </header>
       <div class="street-card p-10 mb-6 order-chat-page">
         <div class="order-chat-shell">
           <div class="order-chat-topbar">
             <div class="order-chat-avatar"><i class="fa-solid fa-headset"></i></div>
             <div class="order-chat-headline">
-              <h3>Chăm sóc khách hàng</h3>
-              <p>Soạn sẵn tin nhắn theo kiểu hội thoại, chỉ việc sao chép và gửi</p>
+              <h3>Hỗ trợ đơn hàng</h3>
+              <p>Soạn sẵn nội dung liên hệ để quý khách sao chép và gửi nhanh</p>
             </div>
             <div class="order-chat-badge">Online</div>
           </div>
 
           <div class="order-chat-card mb-4">
-            <div class="order-chat-card-title">Thông tin đơn đang chọn</div>
+            <div class="order-chat-card-title">Thông tin đơn hàng đang chọn</div>
             <div class="order-chat-summary-grid">
               <div class="order-chat-summary-item">
                 <span>Sản phẩm</span>
@@ -2995,30 +3558,26 @@
           </div>
 
           <div class="order-chat-window mb-4">
-            <div class="order-chat-date">Cuộc trò chuyện mẫu với chăm sóc khách hàng</div>
+            <div class="order-chat-date">Mẫu nội dung trao đổi với bộ phận hỗ trợ</div>
 
             <div class="order-chat-row support">
               <div class="order-chat-bubble support">
-                Chào bạn, vui lòng gửi mã sản phẩm hoặc mã 21 số. Alpha Zone hỗ trợ qua hotline 0357130499, Zalo,
-                Messenger và email alphazone582@gmail.com.
+                Kính chào quý khách, vui lòng gửi mã sản phẩm hoặc mã xác nhận 21 số. Alpha Zone hỗ trợ qua hotline 0357130499, Zalo, Messenger và email alphazone582@gmail.com.
               </div>
             </div>
 
             <div class="order-chat-row user">
-              <div class="order-chat-bubble user" id="order-message-short-preview">Em muốn đặt sản phẩm, nhờ anh/chị hỗ
-                trợ giúp em.</div>
+              <div class="order-chat-bubble user" id="order-message-short-preview">Em muốn đặt dịch vụ này, nhờ anh/chị hỗ trợ giúp em.</div>
             </div>
 
             <div class="order-chat-row support">
               <div class="order-chat-bubble support">
-                Mình đã nhận thông tin. Nếu cần kiểm tra đầy đủ, bạn có thể gửi thêm qua hotline, Zalo, Messenger hoặc
-                email alphazone582@gmail.com nhé.
+                Alpha Zone đã tiếp nhận thông tin. Nếu cần đối chiếu thêm, quý khách vui lòng gửi bổ sung qua hotline, Zalo, Messenger hoặc email alphazone582@gmail.com.
               </div>
             </div>
 
             <div class="order-chat-row user full">
-              <div class="order-chat-bubble user full" id="order-message-full-preview">Chào anh/chị, em gửi thông tin
-                đơn như sau...</div>
+              <div class="order-chat-bubble user full" id="order-message-full-preview">Chào anh/chị, em gửi thông tin đơn hàng như sau...</div>
             </div>
           </div>
 
@@ -3135,6 +3694,18 @@
         </div>
       </div>
 
+
+      <div id="alpha-customer-collect-modal" class="pay-box mb-6">
+        <div id="alpha-customer-collect-title" class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Thông tin khách hàng</div>
+        <div class="grid grid-cols-1 gap-3">
+          <input id="customer-name" class="ticket-field" placeholder="Họ và tên">
+          <input id="customer-contact" class="ticket-field" placeholder="Số điện thoại / Telegram / Zalo">
+          <input id="customer-email" class="ticket-field" placeholder="Email nhận hỗ trợ">
+          <textarea id="customer-note" class="ticket-field ticket-textarea" placeholder="Ghi chú thêm"></textarea>
+        </div>
+        <div id="alpha-customer-collect-helper" class="helper-note">Vui lòng nhập thông tin trước khi xác nhận hoàn tất quy trình.</div>
+      </div>
+
       <div class="flex gap-3" id="modal-actions">
         <button onclick="startSimulation()" class="btn-street flex-1 shadow-2xl shadow-black/20" type="button">Hoàn tất
           quy trình</button>
@@ -3143,20 +3714,19 @@
           type="button"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <button id="finish-btn" onclick="window.location.href='https://zalo.me/0357130499'"
-        class="hidden w-full btn-street bg-green-600 uppercase py-6" type="button">Liên hệ Zalo / Hotline</button>
+        class="hidden w-full btn-street bg-green-600 uppercase py-6" type="button">Liên hệ hỗ trợ</button>
     </div>
   </div>
 
   <div id="payment-popup" class="mini-popup-overlay" onclick="closeMiniPopup(event, 'payment-popup')">
     <div class="mini-popup-card" onclick="event.stopPropagation()">
-      <div class="flex items-center justify-between gap-3 mb-4">
-        <div>
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div class="min-w-0 flex-1 pr-2">
           <div class="payment-badge"><i class="fa-solid fa-wallet"></i> Hướng dẫn thanh toán</div>
           <h3 class="title-font vi-title text-2xl mt-3 leading-none">Thanh toán</h3>
-          <div class="text-[11px] mt-2 leading-relaxed opacity-70">Hotline: 0357130499 · Zalo: Alpha Zone · Messenger:
-            Alpha Zone Việt Nam · Email: alphazone582@gmail.com</div>
+          <div class="text-[11px] mt-2 leading-relaxed opacity-70 break-words">Hotline: 0357130499 · Zalo: Alpha Zone · Messenger: Alpha Zone Việt Nam · Email: alphazone582@gmail.com</div>
         </div>
-        <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button"
+        <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center shrink-0" type="button"
           onclick="hideMiniPopup('payment-popup')">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -3194,8 +3764,7 @@
             <img id="bank-qr-image" src="" alt="QR thanh toán ngân hàng">
           </div>
           <div class="text-[10px] font-black uppercase tracking-[0.16em] mb-1">QR chuyển khoản tự động</div>
-          <div class="text-[10px] opacity-60 font-bold">Khách chỉ cần quét đúng mã để điền sẵn số tiền và nội dung.
-          </div>
+          <div class="text-[10px] opacity-60 font-bold">Khách chỉ cần quét đúng mã để điền sẵn số tiền và nội dung.</div>
         </div>
 
         <div class="pay-box">
@@ -3222,8 +3791,7 @@
         <div class="pay-box">
           <div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Chọn mạng thanh toán</div>
           <div id="usdt-network-list" class="network-grid"></div>
-          <div class="helper-note">TON, SOL, TRC20 và các mạng khác có thể cập nhật thêm sớm. Phần quy đổi hiện dùng tỷ
-            giá cấu hình sẵn trong file HTML để giữ web chạy ổn định.</div>
+          <div class="helper-note">TON, SOL, TRC20 và các mạng khác có thể cập nhật thêm sớm. Phần quy đổi hiện dùng tỷ giá cấu hình sẵn trong file HTML để giữ web chạy ổn định.</div>
         </div>
 
         <div class="pay-box">
@@ -3244,8 +3812,7 @@
 
       <div class="pay-box">
         <div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Ghi chú</div>
-        <div id="payment-note" class="text-[11px] leading-relaxed opacity-75">Vui lòng chọn đúng phương thức thanh toán.
-          PDF chỉ tự động tải xuống sau khi khách xác nhận đã thanh toán.</div>
+        <div id="payment-note" class="text-[11px] leading-relaxed opacity-75">Vui lòng chọn đúng phương thức thanh toán. PDF chỉ tự động tải xuống sau khi khách xác nhận đã thanh toán.</div>
       </div>
 
       <div class="grid grid-cols-1 gap-3 mt-4">
@@ -3266,7 +3833,7 @@
       <div class="flex items-center justify-between gap-3 mb-4">
         <div>
           <div class="payment-badge"><i class="fa-solid fa-receipt"></i> Kích hoạt đơn hàng</div>
-          <h3 class="title-font vi-title text-2xl mt-3 leading-none">Mã kích hoạt</h3>
+          <h3 class="title-font vi-title text-2xl mt-3 leading-none">Mã xác nhận</h3>
         </div>
         <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button"
           onclick="hideMiniPopup('activation-popup')">
@@ -3275,42 +3842,41 @@
       </div>
 
       <div class="order-code-box mb-4 order-code-box-singleline">
-        <div class="text-[9px] font-black uppercase tracking-[0.18em] opacity-40 mb-2">Mã biên nhận</div>
+        <div class="text-[9px] font-black uppercase tracking-[0.18em] opacity-40 mb-2">Mã đơn hàng</div>
         <div id="activation-order-code" class="mono text-[18px] font-black tracking-[0.14em] leading-relaxed">
           000000000000000000000</div>
       </div>
 
       <div class="text-[11px] leading-relaxed opacity-75 mb-4">
-        Vui lòng gửi đúng <b>21 số kích hoạt</b> này qua một trong các kênh hỗ trợ bên dưới để kích hoạt đơn hàng ngay.
+        Vui lòng gửi đúng <b>mã xác nhận 21 số</b> này qua một trong các kênh hỗ trợ bên dưới để kích hoạt đơn hàng ngay.
       </div>
 
-      <input id="activation-order-input" class="code-field mono mb-4" placeholder="Nhập 21 số kích hoạt" maxlength="21"
+      <input id="activation-order-input" class="code-field mono mb-4" placeholder="Nhập mã xác nhận 21 số" maxlength="21"
         inputmode="numeric">
 
       <div class="grid grid-cols-1 gap-3">
         <button class="btn-light w-full" type="button" onclick="copyActivationCode()">
           <i class="fa-solid fa-copy"></i>
-          Sao chép 21 số
+          Sao chép mã kích hoạt
         </button>
         <a class="btn-light w-full flex items-center justify-center gap-2" href="tel:0357130499">
           <i class="fa-solid fa-phone"></i>
-          Hotline 0357130499
+          Hotline
         </a>
         <button class="btn-light w-full" type="button" onclick="sendActivationChannel('zalo')">
           <i class="fa-solid fa-comment-dots"></i>
-          Zalo 0357130499
+          Zalo
         </button>
         <a class="btn-light w-full flex items-center justify-center gap-2"
           href="mailto:alphazone582@gmail.com?subject=Ho%20tro%20kich%20hoat%20Alpha%20Zone">
           <i class="fa-solid fa-envelope"></i>
-          Email alphazone582@gmail.com
+          Email
         </a>
         <div class="btn-light w-full flex items-center justify-center gap-2 opacity-80 cursor-default">
           <i class="fa-brands fa-facebook-messenger"></i>
-          Messenger Alpha Zone Việt Nam
+          Messenger
         </div>
       </div>
-
       <div id="activation-status" class="admin-status mt-4"></div>
     </div>
   </div>
@@ -3332,10 +3898,11 @@
       <div class="compact-grid">
         <div>
           <div class="popup-section-title">Thông tin bảo hành</div>
-          <input id="warranty-order-input" class="ticket-field mono mb-3" placeholder="Mã đơn / 21 số" maxlength="30"
+          <input id="warranty-order-input" class="ticket-field mono mb-3" placeholder="Mã đơn hàng" maxlength="30"
             inputmode="numeric">
-          <input id="warranty-product-input" class="ticket-field mb-3" placeholder="Tên dịch vụ">
-          <input id="warranty-contact-input" class="ticket-field mb-3" placeholder="Liên hệ hỗ trợ">
+          <input id="warranty-product-input" class="ticket-field mb-3" placeholder="ID sản phẩm/ dịch vụ cần bảo hành">
+          <input id="warranty-contact-input" class="ticket-field mb-3" placeholder="Số điện thoại liên hệ">
+            <input id="warranty-contact-input" class="ticket-field mb-3" placeholder="Email nhận kết quả bảo hành">
           <textarea id="warranty-issue-input" class="ticket-field ticket-textarea"
             placeholder="Mô tả lỗi hoặc yêu cầu bảo hành"></textarea>
         </div>
@@ -3352,7 +3919,7 @@
           </div>
           <div class="warranty-meta">
             <div class="warranty-meta-label">Định dạng</div>
-            <div class="warranty-meta-value">PDF tự tải về</div>
+            <div class="warranty-meta-value">Phát hành Phiếu bảo hành tự động</div>
           </div>
         </div>
       </div>
@@ -3364,7 +3931,7 @@
         </button>
         <button class="btn-street w-full" type="button" onclick="generateWarrantyTicket()">
           <i class="fa-solid fa-download"></i>
-          Tạo phiếu bảo hành PDF
+          Tạo phiếu bảo hành
         </button>
       </div>
 
@@ -3445,7 +4012,8 @@
         accountNo: '4499123123',
         accountName: 'NGUYEN LE TRI'
       },
-      usdtUsdRate: 25200,
+      usdtUsdRate: 27000,
+      usdtFeePercent: 5,
       usdDecimalPlaces: 2,
       networks: [
         { code: 'ERC20', label: 'USDT ERC20 (Ethereum)', address: '0x7eCE995099106b3Ab8e758777F4AaA16B4A09665' },
@@ -3610,7 +4178,7 @@
       gpt: [
         { title: "Chọn gói A.I", description: "Kiểm tra đúng gói và bắt đầu quy trình kích hoạt.", icon: "fa-robot" },
         { title: "Hệ thống xử lý", description: "Dữ liệu được kiểm tra và chuẩn bị quyền truy cập.", icon: "fa-microchip" },
-        { title: "Sẵn sàng sử dụng", description: "Hướng dẫn và thông tin dùng sẽ được gửi sau khi hoàn tất.", icon: "fa-sparkles" }
+        { title: "Đồng bộ sử dụng", description: "Hướng dẫn và thông tin dùng sẽ được gửi sau khi hoàn tất.", icon: "fa-sparkles" }
       ],
       default: [
         { title: "Chọn dịch vụ", description: "Mở đúng gói bạn cần và bắt đầu thiết lập.", icon: "fa-box-open" },
@@ -3662,6 +4230,40 @@
     let selectedPaymentMethod = 'bank';
     let selectedUsdtNetwork = PAYMENT_CONFIG.networks[0]?.code || 'TRC20';
     let lastWarrantyTicket = null;
+
+    function getNumericProductIdBase(product) {
+      const rawId = String(product?.id || '').replace(/\D/g, '');
+      if (rawId) return rawId;
+      const fallback = String(product?.id || '')
+        .split('')
+        .map(ch => /[0-9]/.test(ch) ? ch : String(ch.charCodeAt(0)).slice(-1))
+        .join('')
+        .replace(/\D/g, '');
+      return (fallback || '1000000000000000').slice(0, 16).padEnd(16, '0');
+    }
+
+    function generateUniqueFiveDigits() {
+      const digits = ['0','1','2','3','4','5','6','7','8','9'];
+      let result = '';
+      for (let i = 0; i < 5; i++) {
+        const index = Math.floor(Math.random() * digits.length);
+        result += digits.splice(index, 1)[0];
+      }
+      return result;
+    }
+
+    function generateOrderCodeFromProduct(product) {
+      const baseId = getNumericProductIdBase(product);
+      const body = (baseId + generateUniqueFiveDigits()).slice(0, 21);
+      return body.padEnd(21, '0');
+    }
+
+    function generateTransferContentFromProduct(product) {
+      const baseId = getNumericProductIdBase(product);
+      const suffix = generateUniqueFiveDigits();
+      return (baseId + suffix).slice(0, 21);
+    }
+
 
     function setActiveCategoryChip(category) {
       document.querySelectorAll('.category-chip').forEach(chip => {
@@ -3932,12 +4534,18 @@
 
     function showMiniPopup(id) {
       const popup = document.getElementById(id);
-      if (popup) popup.classList.add('active');
+      if (popup) {
+        popup.classList.add('active');
+        document.body.classList.add('modal-open');
+      }
     }
 
     function hideMiniPopup(id) {
       const popup = document.getElementById(id);
       if (popup) popup.classList.remove('active');
+      if (!document.querySelector('.mini-popup-overlay.active') && !document.querySelector('.modal-overlay.active')) {
+        document.body.classList.remove('modal-open');
+      }
     }
 
     function closeMiniPopup(event, id) {
@@ -4023,8 +4631,10 @@
 
     function getUsdtAmount(receipt) {
       const vndAmount = parsePriceToVnd(receipt?.price);
-      const usd = vndAmount / PAYMENT_CONFIG.usdtUsdRate;
-      return Number.isFinite(usd) ? usd.toFixed(PAYMENT_CONFIG.usdDecimalPlaces) : '0.00';
+      const baseUsdt = vndAmount / PAYMENT_CONFIG.usdtUsdRate;
+      const feeMultiplier = 1 + (Number(PAYMENT_CONFIG.usdtFeePercent || 0) / 100);
+      const usdt = baseUsdt * feeMultiplier;
+      return Number.isFinite(usdt) ? usdt.toFixed(PAYMENT_CONFIG.usdDecimalPlaces) : '0.00';
     }
 
     function updatePaymentUI() {
@@ -4054,9 +4664,9 @@
       if (amountMainEl) {
         amountMainEl.textContent = selectedPaymentMethod === 'bank'
           ? `${lastReceiptData.price} • ${vndAmountText}`
-          : `${usdAmount} USD ≈ ${vndAmountText}`;
+          : `${usdAmount} USDT ≈ ${vndAmountText}`;
       }
-      if (amountSecondaryEl) amountSecondaryEl.textContent = `${usdAmount} USD`;
+      if (amountSecondaryEl) amountSecondaryEl.textContent = `${usdAmount} USDT`;
       if (secondaryRowEl) secondaryRowEl.classList.toggle('hidden', selectedPaymentMethod !== 'usdt');
       if (transferContentEl) transferContentEl.textContent = transferContent;
       if (bankQrImage) {
@@ -4069,11 +4679,11 @@
       if (usdtBtn) usdtBtn.classList.toggle('active', selectedPaymentMethod === 'usdt');
       if (walletEl) walletEl.textContent = selectedNetwork?.address || 'Đang cập nhật';
       if (networkNameEl) networkNameEl.textContent = selectedNetwork?.label || 'Đang cập nhật';
-      if (usdtAmountEl) usdtAmountEl.textContent = `${usdAmount} USD`;
+      if (usdtAmountEl) usdtAmountEl.textContent = `${usdAmount} USDT`;
       if (noteEl) {
         noteEl.innerHTML = selectedPaymentMethod === 'bank'
           ? `Bạn đang thanh toán cho <b>${escapeHtml(lastReceiptData.productName)}</b> bằng <b>QR ngân hàng</b>. PDF chỉ tự động tải sau khi khách bấm xác nhận đã thanh toán.`
-          : `Bạn đang thanh toán cho <b>${escapeHtml(lastReceiptData.productName)}</b> bằng <b>USDT</b>. Hệ thống quy đổi từ <b>${escapeHtml(lastReceiptData.price)}</b> sang <b>${usdAmount} USD</b> theo tỷ giá cấu hình hiện tại.`;
+          : `Bạn đang thanh toán cho <b>${escapeHtml(lastReceiptData.productName)}</b> bằng <b>USDT</b>. Hệ thống quy đổi từ <b>${escapeHtml(lastReceiptData.price)}</b> sang <b>${usdAmount} USDT</b> theo tỷ giá <b>27.000 VNĐ / 1 USDT</b> và đã cộng <b>5% phí</b>.`;
       }
       if (networkListEl) {
         networkListEl.innerHTML = PAYMENT_CONFIG.networks.map(network => `
@@ -4092,7 +4702,47 @@
       updatePaymentUI();
     }
 
+
+    function ensurePaymentPopupReady() {
+      const popup = document.getElementById('payment-popup');
+      if (!popup) return false;
+
+      const bankSection = document.getElementById('bank-payment-section');
+      const usdtSection = document.getElementById('usdt-payment-section');
+      const bankBtn = document.getElementById('method-bank-btn');
+      const usdtBtn = document.getElementById('method-usdt-btn');
+      const networkList = document.getElementById('usdt-network-list');
+      const transferContent = document.getElementById('payment-transfer-content');
+      const qrImage = document.getElementById('bank-qr-image');
+
+      if (bankSection && !bankSection.classList.contains('hidden') && usdtSection && !usdtSection.classList.contains('hidden')) {
+        usdtSection.classList.add('hidden');
+      }
+
+      if (bankBtn && !bankBtn.classList.contains('active') && usdtBtn && !usdtBtn.classList.contains('active')) {
+        bankBtn.classList.add('active');
+      }
+
+      if (networkList && !networkList.children.length && typeof renderUsdtNetworks === 'function') {
+        renderUsdtNetworks();
+      }
+
+      if (transferContent && !String(transferContent.textContent || '').trim()) {
+        const product = typeof getCurrentProduct === 'function' ? getCurrentProduct() : null;
+        transferContent.textContent = generateTransferContentFromProduct(product);
+      }
+
+      if (qrImage && !qrImage.getAttribute('src') && typeof updatePaymentPopup === 'function') {
+        const product = typeof getCurrentProduct === 'function' ? getCurrentProduct() : null;
+        updatePaymentPopup(product);
+      }
+
+      return true;
+    }
+
     function copyPaymentInfo() {
+      ensurePaymentPopupReady();
+      const customerInfo = collectCustomerInfo();
       if (!lastReceiptData) return;
       const selectedNetwork = getSelectedNetwork();
       const transferContent = buildTransferContent(lastReceiptData);
@@ -4106,7 +4756,7 @@ Số tiền: ${vndAmountText}
 Nội dung: ${transferContent}`
         : `${selectedNetwork?.label || 'USDT'}
 Vi: ${selectedNetwork?.address || ''}
-So tien: ${usdAmount} USD`;
+So tien: ${usdAmount} USDT`;
 
       if (navigator.clipboard?.writeText) {
         navigator.clipboard.writeText(payload)
@@ -4152,7 +4802,7 @@ So tien: ${usdAmount} USD`;
         const shortCode = getFullReceiptCode(receipt.orderCode);
         const paymentLabel = receipt.paymentMethod === 'usdt' ? `USDT - ${receipt.usdtNetwork}` : 'QR ngân hàng MB';
         const paymentDetail = receipt.paymentMethod === 'usdt'
-          ? `${receipt.usdtAmountUsd} USD - ${receipt.usdtWalletAddress || ''}`
+          ? `${receipt.usdtAmountUsd} USDT - ${receipt.usdtWalletAddress || ''}`
           : 'MB Bank - 4499123123 - Nguyễn Lê Trí';
 
         doc.setFillColor(229, 224, 216);
@@ -4253,7 +4903,7 @@ So tien: ${usdAmount} USD`;
           noteY += h + 5;
         });
 
-        doc.save(`phieu-xac-nhan-${shortCode}.pdf`);
+        doc.save(`${shortCode}.pdf`);
         return true;
       } catch (error) {
         console.error('PDF error:', error);
@@ -4273,6 +4923,8 @@ So tien: ${usdAmount} USD`;
       lastReceiptData.usdtWalletAddress = selectedNetwork?.address || '';
       lastReceiptData.methodSummary = selectedPaymentMethod === 'bank' ? 'QR ngân hàng' : `USDT (${selectedNetwork?.code || 'N/A'})`;
       updatePaymentUI();
+      hidePaymentUntilCustomerInfo();
+      ensurePaymentPopupReady();
       showMiniPopup('payment-popup');
     }
 
@@ -4585,10 +5237,10 @@ So tien: ${usdAmount} USD`;
 
       if (detailMetaCategory) detailMetaCategory.innerText = categoryName;
       if (detailMetaPrice) detailMetaPrice.innerText = productPrice || 'Liên hệ';
-      if (detailMetaStatus) detailMetaStatus.innerText = platformName ? ('Sẵn sàng kích hoạt • ' + platformName) : 'Sẵn sàng kích hoạt ngay';
+      if (detailMetaStatus) detailMetaStatus.innerText = platformName ? ('Đồng bộ kích hoạt • ' + platformName) : 'Đồng bộ kích hoạt ngay';
       if (detailMetaSupport) detailMetaSupport.innerText = productLink ? ('Hotline 0357130499 / Zalo / Messenger / Link sản phẩm') : 'Hotline 0357130499 / Zalo / Messenger / Email';
       if (detailSummaryText) detailSummaryText.innerText = summaryParts.join(' ');
-      if (detailWaitTime) detailWaitTime.innerText = warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Dưới 2 phút (Hệ thống đang rảnh)';
+      if (detailWaitTime) detailWaitTime.innerText = warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Thông thường trong vòng 2 phút';
 
       lastReceiptData = null;
       selectedPaymentMethod = 'bank';
@@ -4650,13 +5302,36 @@ So tien: ${usdAmount} USD`;
       clearSimulation();
       const modal = document.getElementById('product-modal');
       if (modal) modal.classList.remove('active');
+      if (!document.querySelector('.mini-popup-overlay.active') && !document.querySelector('.modal-overlay.active')) {
+        document.body.classList.remove('modal-open');
+      }
     }
 
     function closeModal(e) {
       if (e.target.id === 'product-modal') closeModalDirect();
     }
 
+
+    function collectCustomerInfo() {
+      return {
+        name: (document.getElementById('customer-name')?.value || '').trim(),
+        contact: (document.getElementById('customer-contact')?.value || '').trim(),
+        email: (document.getElementById('customer-email')?.value || '').trim(),
+        note: (document.getElementById('customer-note')?.value || '').trim()
+      };
+    }
+
+    function validateCustomerInfo() {
+      const info = collectCustomerInfo();
+      if (!info.name || !info.contact) {
+        showToast('Vui lòng nhập họ tên và thông tin liên hệ.');
+        return false;
+      }
+      return true;
+    }
+
     function startSimulation() {
+      if (!validateCustomerInfo()) return;
       closeModalDirect();
       openPaymentPopup();
     }
@@ -7916,22 +8591,25 @@ So tien: ${usdAmount} USD`;
       const ADMIN_DRAFT_KEY = 'alpha_zone_admin_draft_v20';
       const CUSTOMER_INFO_KEY = 'alpha_zone_customer_info_v30';
       const FX_CACHE_KEY = 'alpha_zone_fx_cache_v30';
-      const LANG_KEY = 'alpha_zone_lang_v30';
+      const LANG_KEY = 'alpha_zone_lang_v31';
       const LANGS = {
-        vi: { label: 'Tiếng Việt', currency: 'VND', locale: 'vi-VN' },
-        en: { label: 'English', currency: 'USD', locale: 'en-US' },
-        ja: { label: '日本語', currency: 'JPY', locale: 'ja-JP' },
-        zh: { label: '中文', currency: 'CNY', locale: 'zh-CN' },
-        ko: { label: '한국어', currency: 'KRW', locale: 'ko-KR' },
-        th: { label: 'ไทย', currency: 'THB', locale: 'th-TH' }
+        vi: { label: 'Tiếng Việt', currency: 'VND', locale: 'vi-VN', icon: '🇻🇳' },
+        en: { label: 'English', currency: 'USD', locale: 'en-US', icon: '🇬🇧' },
+        fr: { label: 'Français', currency: 'EUR', locale: 'fr-FR', icon: '🇫🇷' },
+        ru: { label: 'Русский', currency: 'RUB', locale: 'ru-RU', icon: '🇷🇺' },
+        zh: { label: '中文', currency: 'CNY', locale: 'zh-CN', icon: '🇨🇳' }
       };
       const I18N = {
-        vi: { customer_title: 'Thông tin khách hàng', customer_name: 'Họ và tên', customer_contact: 'Số điện thoại / Telegram / Zalo', customer_email: 'Email nhận hỗ trợ', customer_note: 'Ghi chú thêm', customer_helper: 'Thông tin này được dùng để hỗ trợ đơn hàng, đồng bộ hộp thư admin và xác nhận liên hệ.', chat_title: 'Trò chuyện trực tiếp', chat_placeholder: 'Nhập tin nhắn để gửi cho admin...\nVí dụ: Em muốn đặt sản phẩm này, nhờ anh/chị kiểm tra giúp em.', chat_send: 'Gửi tin nhắn', chat_rate_prefix: 'Tỷ giá hiện tại', setup_btn: 'Bắt đầu thiết lập' },
-        en: { customer_title: 'Customer information', customer_name: 'Full name', customer_contact: 'Phone / Telegram / Zalo', customer_email: 'Support email', customer_note: 'Additional note', customer_helper: 'This information is used to support the order, sync the admin inbox, and confirm contact.', chat_title: 'Direct chat', chat_placeholder: 'Type a message to send to the admin...\nExample: I would like to order this product. Please help me check it.', chat_send: 'Send message', chat_rate_prefix: 'Live exchange rate', setup_btn: 'Start setup' },
-        ja: { customer_title: 'お客様情報', customer_name: '氏名', customer_contact: '電話 / Telegram / Zalo', customer_email: 'サポート用メール', customer_note: '追加メモ', customer_helper: 'この情報は注文サポート、管理者受信箱の同期、連絡確認に使用されます。', chat_title: 'ダイレクトチャット', chat_placeholder: '管理者に送るメッセージを入力してください…\n例：この商品を注文したいので確認をお願いします。', chat_send: '送信', chat_rate_prefix: '現在の為替レート', setup_btn: '設定を開始' },
-        zh: { customer_title: '客户信息', customer_name: '姓名', customer_contact: '电话 / Telegram / Zalo', customer_email: '支持邮箱', customer_note: '补充说明', customer_helper: '此信息将用于订单支持、同步管理员收件箱以及联系确认。', chat_title: '直接聊天', chat_placeholder: '输入要发送给管理员的消息…\n例如：我想订购这个产品，请帮我确认。', chat_send: '发送消息', chat_rate_prefix: '当前汇率', setup_btn: '开始设置' },
-        ko: { customer_title: '고객 정보', customer_name: '이름', customer_contact: '전화 / Telegram / Zalo', customer_email: '지원 이메일', customer_note: '추가 메모', customer_helper: '이 정보는 주문 지원, 관리자 받은편지함 동기화, 연락 확인에 사용됩니다.', chat_title: '실시간 채팅', chat_placeholder: '관리자에게 보낼 메시지를 입력하세요…\n예: 이 상품을 주문하고 싶습니다. 확인 부탁드립니다.', chat_send: '메시지 보내기', chat_rate_prefix: '현재 환율', setup_btn: '설정 시작' },
-        th: { customer_title: 'ข้อมูลลูกค้า', customer_name: 'ชื่อ-นามสกุล', customer_contact: 'โทรศัพท์ / Telegram / Zalo', customer_email: 'อีเมลสำหรับติดต่อ', customer_note: 'หมายเหตุเพิ่มเติม', customer_helper: 'ข้อมูลนี้ใช้เพื่อช่วยดูแลคำสั่งซื้อ ซิงก์กล่องข้อความแอดมิน และยืนยันการติดต่อ', chat_title: 'แชตโดยตรง', chat_placeholder: 'พิมพ์ข้อความเพื่อส่งถึงแอดมิน...\nตัวอย่าง: ฉันต้องการสั่งสินค้านี้ กรุณาช่วยตรวจสอบให้หน่อย', chat_send: 'ส่งข้อความ', chat_rate_prefix: 'อัตราแลกเปลี่ยนล่าสุด', setup_btn: 'เริ่มตั้งค่า' }
+        vi: { customer_title: 'Thông tin khách hàng', customer_name: 'Họ và tên', customer_contact: 'Số điện thoại / Telegram / Zalo', customer_email: 'Email nhận hỗ trợ', customer_note: 'Ghi chú thêm', customer_helper: 'Thông tin này được dùng để hỗ trợ đơn hàng, đồng bộ hộp thư admin và xác nhận liên hệ.', chat_title: 'Tin nhắn trực tiếp', chat_placeholder: 'Nhập tin nhắn để gửi cho admin...
+Ví dụ: Em muốn đặt sản phẩm này, nhờ anh/chị kiểm tra giúp em.', chat_send: 'Gửi tin nhắn', chat_rate_prefix: 'Tỷ giá hiện tại', setup_btn: 'Bắt đầu thiết lập' },
+        en: { customer_title: 'Customer information', customer_name: 'Full name', customer_contact: 'Phone / Telegram / Zalo', customer_email: 'Support email', customer_note: 'Additional note', customer_helper: 'This information is used to support the order, sync the admin inbox, and confirm contact.', chat_title: 'Direct message', chat_placeholder: 'Type a message to send to the admin...
+Example: I would like to order this product. Please help me review it.', chat_send: 'Send message', chat_rate_prefix: 'Current exchange rate', setup_btn: 'Start setup' },
+        fr: { customer_title: 'Informations client', customer_name: 'Nom complet', customer_contact: 'Téléphone / Telegram / Zalo', customer_email: 'E-mail de support', customer_note: 'Note complémentaire', customer_helper: 'Ces informations sont utilisées pour le support de commande, la synchronisation de la boîte admin et la confirmation de contact.', chat_title: 'Message direct', chat_placeholder: 'Saisissez un message à envoyer à l\'administrateur...
+Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_send: 'Envoyer le message', chat_rate_prefix: 'Taux de change actuel', setup_btn: 'Commencer' },
+        ru: { customer_title: 'Информация о клиенте', customer_name: 'Полное имя', customer_contact: 'Телефон / Telegram / Zalo', customer_email: 'E-mail поддержки', customer_note: 'Дополнительная заметка', customer_helper: 'Эта информация используется для поддержки заказа, синхронизации админ-почты и подтверждения контакта.', chat_title: 'Прямое сообщение', chat_placeholder: 'Введите сообщение для отправки администратору...
+Пример: Я хочу заказать этот товар. Пожалуйста, помогите проверить.', chat_send: 'Отправить сообщение', chat_rate_prefix: 'Текущий курс', setup_btn: 'Начать' },
+        zh: { customer_title: '客户信息', customer_name: '姓名', customer_contact: '电话 / Telegram / Zalo', customer_email: '支持邮箱', customer_note: '补充说明', customer_helper: '此信息将用于订单支持、同步管理员收件箱以及联系确认。', chat_title: '直接消息', chat_placeholder: '输入要发送给管理员的消息...
+例如：我想订购这个产品，请帮我确认。', chat_send: '发送消息', chat_rate_prefix: '当前汇率', setup_btn: '开始设置' }
       };
       let currentLang = localStorage.getItem(LANG_KEY) || 'vi';
       if (!LANGS[currentLang]) currentLang = 'vi';
@@ -8004,209 +8682,50 @@ So tien: ${usdAmount} USD`;
         const wrap = document.createElement('div');
         wrap.id = 'alpha-lang-widget-final';
         wrap.className = 'alpha-lang-widget-final';
-        wrap.innerHTML = '<select id="alpha-lang-select-final"></select><div class="alpha-lang-widget-rate" id="alpha-lang-rate-final"></div>';
+        wrap.innerHTML = ''
+          + '<button type="button" class="alpha-lang-trigger" id="alpha-lang-trigger-final" aria-label="Language">🌐</button>'
+          + '<div class="alpha-lang-panel" id="alpha-lang-panel-final"></div>'
+          + '<div class="alpha-lang-widget-rate" id="alpha-lang-rate-final"></div>';
         document.body.appendChild(wrap);
-        const select = safeId('alpha-lang-select-final');
-        select.innerHTML = Object.keys(LANGS).map(code => '<option value="' + code + '">' + esc(LANGS[code].label) + '</option>').join('');
-        select.value = currentLang;
-        select.addEventListener('change', function () { currentLang = select.value; localStorage.setItem(LANG_KEY, currentLang); applyTranslations(); refreshFx(true); });
-      }
-      function updateRateNote() {
-        const note = safeId('alpha-lang-rate-final');
-        if (!note) return;
-        const t = getTextSet();
-        const cfg = LANGS[currentLang] || LANGS.vi;
-        if (cfg.currency === 'VND') { note.textContent = t.chat_rate_prefix + ': VND'; return; }
-        const rate = Number(fxMap[cfg.currency] || 0);
-        if (!rate) { note.textContent = t.chat_rate_prefix + ': —'; return; }
-        const sample = (1 * rate * 1.05);
-        note.textContent = t.chat_rate_prefix + ': 1 VND ≈ ' + sample.toFixed(cfg.currency === 'JPY' || cfg.currency === 'KRW' ? 4 : 6) + ' ' + cfg.currency + ' (+5%)';
-      }
-      function applyLocalizedPrices() {
-        document.querySelectorAll('.product-card-enhanced').forEach(card => {
-          const idEl = card.querySelector('.product-card-id');
-          const priceEl = card.querySelector('.product-card-price');
-          if (!idEl || !priceEl) return;
-          const product = getProductById(String(idEl.textContent || '').trim());
-          if (!product) return;
-          priceEl.textContent = formatPriceFromVnd(basePriceVnd(product));
+
+        const trigger = safeId('alpha-lang-trigger-final');
+        const panel = safeId('alpha-lang-panel-final');
+
+        function buildOptions() {
+          panel.innerHTML = Object.keys(LANGS).map(code => {
+            const item = LANGS[code];
+            const active = code === currentLang ? ' active' : '';
+            return '<button type="button" class="alpha-lang-option' + active + '" data-lang-code="' + esc(code) + '">'
+              + '<span class="alpha-lang-option-main"><span class="alpha-lang-option-emoji">' + esc(item.icon || '🌐') + '</span><span class="alpha-lang-option-label">' + esc(item.label) + '</span></span>'
+              + '<span class="alpha-lang-option-currency">' + esc(item.currency) + '</span>'
+              + '</button>';
+          }).join('');
+          trigger.textContent = (LANGS[currentLang] && LANGS[currentLang].icon) || '🌐';
+        }
+
+        buildOptions();
+
+        trigger.addEventListener('click', function (event) {
+          event.stopPropagation();
+          panel.classList.toggle('active');
         });
-        const current = window.currentSelectedId ? getProductById(window.currentSelectedId) : null;
-        if (current) {
-          const detailPrice = safeId('detail-price');
-          const detailMetaPrice = safeId('detail-meta-price');
-          const orderPrice = safeId('order-message-price');
-          if (detailPrice) detailPrice.textContent = formatPriceFromVnd(basePriceVnd(current));
-          if (detailMetaPrice) detailMetaPrice.textContent = formatPriceFromVnd(basePriceVnd(current));
-          if (orderPrice) orderPrice.textContent = formatPriceFromVnd(basePriceVnd(current));
-        }
-      }
-      function saveCustomerInfo() {
-        const payload = {
-          name: String((safeId('customer-name') || {}).value || '').trim(),
-          contact: String((safeId('customer-contact') || {}).value || '').trim(),
-          email: String((safeId('customer-email') || {}).value || '').trim(),
-          note: String((safeId('customer-note') || {}).value || '').trim()
-        };
-        try { localStorage.setItem(CUSTOMER_INFO_KEY, JSON.stringify(payload)); } catch (e) { }
-        return payload;
-      }
-      function loadCustomerInfo() {
-        try { return JSON.parse(localStorage.getItem(CUSTOMER_INFO_KEY) || '{}') || {}; } catch (e) { return {}; }
-      }
-      function ensureCustomerInfoUi() {
-        const modalActions = safeId('modal-actions');
-        if (!modalActions || safeId('alpha-customer-collect-box')) return;
-        const t = getTextSet();
-        const data = loadCustomerInfo();
-        const box = document.createElement('div');
-        box.id = 'alpha-customer-collect-box';
-        box.className = 'alpha-customer-collect-box';
-        box.innerHTML = ''
-          + '<div class="alpha-customer-collect-title" id="alpha-customer-collect-title">' + esc(t.customer_title) + '</div>'
-          + '<div class="alpha-customer-collect-grid">'
-          + '  <div class="alpha-customer-collect-field"><label for="customer-name" id="alpha-label-customer-name">' + esc(t.customer_name) + '</label><input id="customer-name" type="text" placeholder="' + esc(t.customer_name) + '" value="' + esc(data.name || '') + '"></div>'
-          + '  <div class="alpha-customer-collect-field"><label for="customer-contact" id="alpha-label-customer-contact">' + esc(t.customer_contact) + '</label><input id="customer-contact" type="text" placeholder="' + esc(t.customer_contact) + '" value="' + esc(data.contact || '') + '"></div>'
-          + '  <div class="alpha-customer-collect-field full alpha-email-field"><label for="customer-email" id="alpha-label-customer-email">' + esc(t.customer_email) + '</label><input id="customer-email" type="email" placeholder="' + esc(t.customer_email) + '" value="' + esc(data.email || '') + '"></div>'
-          + '  <div class="alpha-customer-collect-field full"><label for="customer-note" id="alpha-label-customer-note">' + esc(t.customer_note) + '</label><textarea id="customer-note" placeholder="' + esc(t.customer_note) + '">' + esc(data.note || '') + '</textarea></div>'
-          + '</div>'
-          + '<div class="alpha-customer-collect-helper" id="alpha-customer-collect-helper">' + esc(t.customer_helper) + '</div>';
-        modalActions.parentNode.insertBefore(box, modalActions);
-        ['customer-name', 'customer-contact', 'customer-email', 'customer-note'].forEach(id => {
-          const el = safeId(id);
-          if (el && !el.dataset.alphaBound) {
-            el.dataset.alphaBound = '1';
-            el.addEventListener('input', saveCustomerInfo);
-            el.addEventListener('change', saveCustomerInfo);
-          }
-        });
-      }
-      function validateCustomerInfo() {
-        const data = saveCustomerInfo();
-        if (!data.name || !data.contact || !data.email) {
-          if (typeof window.setActivationStatus === 'function') window.setActivationStatus('Vui lòng nhập đủ họ tên, liên hệ và email trước khi tiếp tục.', 'error');
-          return false;
-        }
-        return true;
-      }
-      function patchSimulationEntry() {
-        const original = window.startSimulation;
-        if (typeof original === 'function' && !original._alphaCustomerWrapped) {
-          window.startSimulation = function () { if (!validateCustomerInfo()) return; return original.apply(this, arguments); };
-          window.startSimulation._alphaCustomerWrapped = true;
-        }
-        const originalReceipt = window.createReceiptData;
-        if (typeof originalReceipt === 'function' && !originalReceipt._alphaWrapped) {
-          window.createReceiptData = function () {
-            const data = originalReceipt.apply(this, arguments) || {};
-            const customer = saveCustomerInfo();
-            data.customerName = customer.name || 'Khách hàng';
-            data.customerContact = customer.contact || '';
-            data.customerEmail = customer.email || '';
-            data.customerNote = customer.note || '';
-            return data;
-          };
-          window.createReceiptData._alphaWrapped = true;
-        }
-      }
-      function cleanMessagePage() {
-        const page = safeId('order-message');
-        if (!page) return;
-        page.classList.add('alpha-chat-clean');
-        const chatWindow = page.querySelector('.order-chat-window');
-        const dateEl = page.querySelector('.order-chat-date');
-        if (dateEl) dateEl.textContent = getTextSet().chat_title;
-        page.querySelectorAll('.order-chat-row').forEach(node => node.remove());
-        const actions = page.querySelector('.order-chat-actions-grid'); if (actions) actions.remove();
-        const card = page.querySelector('.order-chat-card'); if (card) card.remove();
-        const wrap = safeId('alpha-customer-chat-wrap');
-        if (chatWindow && wrap && wrap.parentNode !== chatWindow) chatWindow.appendChild(wrap);
-        const status = safeId('order-message-status'); if (status) status.textContent = '';
-        const input = safeId('alpha-customer-chat-input'); if (input) input.placeholder = getTextSet().chat_placeholder;
-        const send = safeId('alpha-customer-chat-send'); if (send) send.textContent = getTextSet().chat_send;
-      }
-      function getThreads() { try { const parsed = JSON.parse(localStorage.getItem(THREAD_KEY) || '[]'); return Array.isArray(parsed) ? parsed : []; } catch (e) { return []; } }
-      function saveThreads(list) { localStorage.setItem(THREAD_KEY, JSON.stringify(Array.isArray(list) ? list : [])); }
-      function updateThreadsMeta() {
-        const data = saveCustomerInfo();
-        const pid = window.currentSelectedId || '';
-        if (!pid) return;
-        const threads = getThreads();
-        let changed = false;
-        threads.forEach(thread => {
-          if (String(thread.productId || '') === String(pid) && (!thread.email || thread.email === data.email || !data.email)) {
-            if (data.name && thread.customerName !== data.name) { thread.customerName = data.name; changed = true; }
-            if (data.email && thread.email !== data.email) { thread.email = data.email; changed = true; }
-            if (data.contact && thread.contact !== data.contact) { thread.contact = data.contact; changed = true; }
-            if (data.note && thread.customerNote !== data.note) { thread.customerNote = data.note; changed = true; }
-          }
-        });
-        if (changed) saveThreads(threads);
-      }
-      function patchAdminDelete() {
-        if (window.__alphaDeleteBound) return;
-        window.__alphaDeleteBound = true;
-        document.addEventListener('click', function (ev) {
-          const btn = ev.target.closest('[data-delete-id], #alpha-admin-delete-product');
+
+        panel.addEventListener('click', function (event) {
+          const btn = event.target.closest('[data-lang-code]');
           if (!btn) return;
-          const isDelete = btn.matches('[data-delete-id]') || btn.id === 'alpha-admin-delete-product';
-          if (!isDelete) return;
-          ev.preventDefault();
-          ev.stopImmediatePropagation();
-          const field = safeId('alpha-admin-field-id');
-          const id = btn.dataset.deleteId || String((field || {}).value || '').trim();
-          if (!id) { if (typeof window.setAdminStatus === 'function') window.setAdminStatus('Nhập hoặc chọn ID sản phẩm cần xóa.', 'error'); return; }
-          const product = getProductById(id);
-          const ok = window.confirm('Xóa sản phẩm ' + id + (product && product.name ? ' - ' + product.name : '') + '?');
-          if (!ok) return;
-          const next = readProducts().filter(item => String(item.id) !== String(id));
-          if (next.length === readProducts().length) { if (typeof window.setAdminStatus === 'function') window.setAdminStatus('Không tìm thấy sản phẩm để xóa.', 'error'); return; }
-          window.brands = next;
-          try {
-            localStorage.setItem(PRODUCT_STORE_KEY, JSON.stringify(next.map(item => ({ id: item.id, name: item.name, platformName: item.platformName, category: item.category, shortDescription: item.shortDescription, detailedDescription: item.detailedDescription, warranty: item.warranty, price: (item.__basePriceVnd || parseVnd(item.price)).toLocaleString('vi-VN') + ' VND', logo: item.logo, categoryImage: item.categoryImage || item.logo }))));
-          } catch (e) { }
-          const jsonInput = safeId('admin-json-input');
-          if (jsonInput) {
-            jsonInput.value = JSON.stringify(next.map(item => ({ id: item.id, name: item.name, platformName: item.platformName, category: item.category, shortDescription: item.shortDescription, detailedDescription: item.detailedDescription, warranty: item.warranty, price: (item.__basePriceVnd || parseVnd(item.price)).toLocaleString('vi-VN') + ' VND', logo: item.logo, categoryImage: item.categoryImage || item.logo })), null, 2);
-            try { localStorage.setItem(ADMIN_DRAFT_KEY, jsonInput.value); } catch (e) { }
-          }
-          if (field) field.value = '';
-          ['alpha-admin-field-name', 'alpha-admin-field-platformName', 'alpha-admin-field-category', 'alpha-admin-field-price', 'alpha-admin-field-logo', 'alpha-admin-field-categoryImage', 'alpha-admin-field-shortDescription', 'alpha-admin-field-detailedDescription', 'alpha-admin-field-warranty'].forEach(fid => { const el = safeId(fid); if (el) el.value = ''; });
-          if (typeof window.renderProducts === 'function') window.renderProducts(window.activeCategory || 'Tất cả');
-          if (typeof window.renderRecommendations === 'function') window.renderRecommendations(window.currentSelectedId || '');
-          if (window.currentSelectedId === id && typeof window.showPage === 'function') { window.currentSelectedId = ''; window.showPage('products'); }
-          if (typeof window.renderCategories === 'function') { try { window.renderCategories(); } catch (e) { } }
-          const listHost = safeId('alpha-admin-crud-list');
-          if (listHost) setTimeout(() => { document.querySelectorAll('[data-delete-id]').forEach(node => { /* noop: force existing delegated handler only */ }); }, 0);
-          if (typeof window.setAdminStatus === 'function') window.setAdminStatus('Đã xóa sản phẩm: ' + id, 'success');
-          applyLocalizedPrices();
-        }, true);
-      }
-      function applyTranslations() {
-        const t = getTextSet();
-        document.documentElement.lang = currentLang === 'vi' ? 'vi' : currentLang;
-        const pairs = {
-          'alpha-customer-collect-title': t.customer_title,
-          'alpha-label-customer-name': t.customer_name,
-          'alpha-label-customer-contact': t.customer_contact,
-          'alpha-label-customer-email': t.customer_email,
-          'alpha-label-customer-note': t.customer_note,
-          'alpha-customer-collect-helper': t.customer_helper,
-          'alpha-customer-chat-send': t.chat_send,
-          'detail-buy-btn': t.setup_btn
-        };
-        Object.keys(pairs).forEach(id => { const el = safeId(id); if (el) el.textContent = pairs[id]; });
-        const placeholders = {
-          'customer-name': t.customer_name,
-          'customer-contact': t.customer_contact,
-          'customer-email': t.customer_email,
-          'customer-note': t.customer_note,
-          'alpha-customer-chat-input': t.chat_placeholder
-        };
-        Object.keys(placeholders).forEach(id => { const el = safeId(id); if (el) el.placeholder = placeholders[id]; });
-        cleanMessagePage();
-        updateRateNote();
-        applyLocalizedPrices();
+          const next = btn.getAttribute('data-lang-code');
+          if (!LANGS[next]) return;
+          currentLang = next;
+          localStorage.setItem(LANG_KEY, currentLang);
+          buildOptions();
+          panel.classList.remove('active');
+          applyTranslations();
+          refreshFx(true);
+        });
+
+        document.addEventListener('click', function (event) {
+          if (!wrap.contains(event.target)) panel.classList.remove('active');
+        });
       }
       function installRenderHooks() {
         ['renderProducts', 'renderRecommendations', 'goToDetail', 'showPage'].forEach(name => {
@@ -8817,7 +9336,7 @@ So tien: ${usdAmount} USD`;
           + '  <button type="button" class="btn-street w-full" id="alpha-sheet-push-all"><i class="fa-solid fa-cloud-arrow-up"></i> Đẩy toàn bộ JSON</button>'
           + '  <button type="button" class="btn-street w-full" id="alpha-sheet-delete"><i class="fa-solid fa-trash"></i> Xoá theo ID</button>'
           + '</div>'
-          + '<div id="alpha-sheet-bridge-log" class="alpha-sheet-bridge-log">Sẵn sàng kết nối Apps Script API.</div>';
+          + '<div id="alpha-sheet-bridge-log" class="alpha-sheet-bridge-log">Đồng bộ kết nối Apps Script API.</div>';
         area.appendChild(host);
 
         host.querySelector('#alpha-sheet-load').addEventListener('click', async function () {
@@ -9209,7 +9728,7 @@ So tien: ${usdAmount} USD`;
             footer.innerHTML = `
           <div class="f-nav-row">
             <button onclick="showPage('home')">Trang chủ</button>
-            <button onclick="showPage('products')">Sản phẩm</button>
+            <button onclick="showPage(&quot;products&quot;)">Sản phẩm</button>
             <button onclick="showPage('about-us')">Giới thiệu</button>
             <button onclick="location.reload()">Làm mới</button>
           </div>
@@ -9321,7 +9840,7 @@ So tien: ${usdAmount} USD`;
           </style>
           <div class="f-nav-row">
             <button onclick="showPage('home')">Trang chủ</button>
-            <button onclick="showPage('products')">Sản phẩm</button>
+            <button onclick="showPage(&quot;products&quot;)">Sản phẩm</button>
             <button onclick="showPage('about-us')">Giới thiệu</button>
             <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Lên đầu</button>
             <button onclick="location.reload()">Làm mới</button>
@@ -9385,11 +9904,15 @@ So tien: ${usdAmount} USD`;
   </div>
 
   <div id="alpha-right-dock" aria-label="Thanh cạnh trang">
-    <button class="dock-btn" type="button" data-page="home" aria-label="Trang chủ" title="Trang chủ">⌂</button>
-    <button class="dock-btn" type="button" data-page="categories" aria-label="Danh mục" title="Danh mục">◫</button>
-    <button class="dock-btn" type="button" data-page="products" aria-label="Sản phẩm" title="Sản phẩm">◩</button>
-    <button class="dock-btn" type="button" data-page="about-us" aria-label="Giới thiệu" title="Giới thiệu">◎</button>
-    <button class="dock-btn" type="button" data-page="account" aria-label="Tài khoản" title="Tài khoản">●</button>
+    <button class="dock-btn" type="button" data-page="home"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span><span class="dock-label">Trang chủ</span></button>
+    <button class="dock-btn" type="button" data-page="categories"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-window-maximize"></i></span><span class="dock-label">Danh mục</span></button>
+    <button class="dock-btn" type="button" data-page="products"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-gem"></i></span><span class="dock-label">Sản phẩm</span></button>
+    <button class="dock-btn" type="button" data-page="engagement-hub"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-table-cells"></i></span><span class="dock-label">Tăng tương tác</span></button>
+    <button class="dock-btn" type="button" data-page="seller-channel"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-bars"></i></span><span class="dock-label">Kênh người bán</span></button>
+    <button class="dock-btn" type="button" data-page="marketplace"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-compass"></i></span><span class="dock-label">Marketplace</span></button>
+    <button class="dock-btn" type="button" data-page="warranty"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-circle"></i></span><span class="dock-label">Bảo hành</span></button>
+    <button class="dock-btn" type="button" data-page="about-us"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-circle-dot"></i></span><span class="dock-label">Giới thiệu</span></button>
+    <button class="dock-btn" type="button" data-page="account"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-circle"></i></span><span class="dock-label">Tài khoản</span></button>
   </div>
 
   <script>
@@ -9489,6 +10012,13 @@ So tien: ${usdAmount} USD`;
             if (dir === 'bottom') window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
           });
         });
+
+        var warrantyDockBtn = document.querySelector('#alpha-right-dock .dock-btn[data-page="warranty"]');
+        if (warrantyDockBtn) {
+          warrantyDockBtn.addEventListener('click', function(){
+            if (typeof window.showPage === 'function') window.showPage('warranty');
+          });
+        }
 
         document.querySelectorAll('#alpha-right-dock .dock-btn').forEach(function (btn) {
           if (btn.dataset.bound) return;
@@ -10038,7 +10568,7 @@ So tien: ${usdAmount} USD`;
         <section class="alpha-about-fix-footer">
           <div class="alpha-about-fix-nav">
             <button type="button" onclick="showPage('home')">TRANG CHỦ</button>
-            <button type="button" onclick="showPage('products')">SẢN PHẨM</button>
+            <button type="button" onclick="showPage(&quot;products&quot;)">SẢN PHẨM</button>
             <button type="button" onclick="showPage('about-us')">GIỚI THIỆU</button>
           </div>
           <div class="alpha-about-fix-meta">
@@ -10845,8 +11375,22 @@ So tien: ${usdAmount} USD`;
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
+  function normalizeCategoryKey(value) {
+    return String(value == null ? '' : value)
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function isEngagementProductSafe(item) {
+    return normalizeCategoryKey(item && item.category || '') === 'engagement';
+  }
+
   function getProductsSafe() {
-    return Array.isArray(window.brands) ? window.brands.slice() : [];
+    return (Array.isArray(window.brands) ? window.brands.slice() : []).filter(function (item) {
+      return !isEngagementProductSafe(item);
+    });
   }
 
   function shuffle(list) {
@@ -11744,10 +12288,10 @@ So tien: ${usdAmount} USD`;
     setText('detail-category-label', categoryName);
     setText('detail-meta-category', categoryName);
     setText('detail-meta-price', productPrice);
-    setText('detail-meta-status', warrantyText || ('Sẵn sàng kích hoạt • ' + platformName));
+    setText('detail-meta-status', warrantyText || ('Đồng bộ kích hoạt • ' + platformName));
     setText('detail-meta-support', s.link ? 'Hotline / Zalo / Messenger / Link sản phẩm' : 'Hotline / Zalo / Messenger / Email');
     setText('detail-summary-text', summaryParts.join(' '));
-    setText('detail-wait-time', warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Dưới 2 phút (Hệ thống đang rảnh)');
+    setText('detail-wait-time', warrantyText ? ('Xử lý nhanh • ' + warrantyText) : 'Thông thường trong vòng 2 phút');
 
     const logo = document.getElementById('detail-logo');
     if (logo) {
@@ -12670,6 +13214,1489 @@ So tien: ${usdAmount} USD`;
   }
   window.addEventListener('load', function(){ setTimeout(safeEnsureQr, 180); });
 })();
+</script>
+
+
+<script id="alpha-dock-pages-patch">
+(function(){
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+  }
+
+  function getAllProducts(){
+    if (Array.isArray(window.brands)) return window.brands.slice();
+    return [];
+  }
+
+  function getPublicProducts(){
+    return getAllProducts().filter(function(item){ return !isEngagementCategory(item); });
+  }
+
+  function ensurePage(id, html){
+    var page = document.getElementById(id);
+    if (!page){
+      page = document.createElement('div');
+      page.id = id;
+      page.className = 'page';
+      var anchor = document.getElementById('account') || document.querySelector('.page:last-of-type');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(page, anchor);
+      else document.body.appendChild(page);
+    }
+    if (html && !page.dataset.alphaCustomReady){
+      page.innerHTML = html;
+      page.dataset.alphaCustomReady = '1';
+    }
+    return page;
+  }
+
+  function productCard(item){
+    var id = String(item && item.id || '').trim();
+    var name = String(item && item.name || '').trim();
+    var logo = String(item && item.logo || '').trim();
+    var category = String(item && item.category || '').trim();
+    var shortDescription = String(item && (item.shortDescription || item.short_description || item.summary) || '').trim();
+    var price = String(item && item.price || '').trim();
+    return ''
+      + '<div class="product-card-enhanced p-4 flex flex-col relative overflow-hidden" onclick="handleCardClick('' + esc(id) + '', this)">'
+      +   '<div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin opacity-20"></i></div>'
+      +   '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center">'
+      +     '<img src="' + esc(logo) + '" alt="' + esc(name) + '" class="w-full h-full object-contain transition-all duration-500">'
+      +   '</div>'
+      +   '<div class="product-card-id mono text-center">' + esc(id) + '</div>'
+      +   '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">' + esc(name) + '</h5>'
+      +   '<div class="product-card-category text-center">' + esc(category) + '</div>'
+      +   '<div class="product-card-desc text-center">' + esc(shortDescription) + '</div>'
+      +   '<div class="product-card-price mono text-center">' + esc(price) + '</div>'
+      + '</div>';
+  }
+
+  function normalizeText(value){
+    return String(value == null ? '' : value)
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function isEngagementCategory(item){
+    var category = normalizeText(item && item.category || '');
+    return category === 'engagement';
+  }
+
+  function renderEngagementPage(){
+    var allItems = typeof getAllProducts === 'function' ? getAllProducts() : [];
+    var items = allItems.filter(isEngagementCategory);
+    var countEl = document.getElementById('engagement-count');
+    var grid = document.getElementById('engagement-products-list');
+    if (countEl) countEl.textContent = items.length + ' sản phẩm';
+    if (!grid) return;
+    if (!items.length){
+      var sample = [];
+      try {
+        sample = Array.from(new Set((allItems || []).map(function(item){ return String(item && item.category || '').trim(); }).filter(Boolean))).slice(0, 12);
+      } catch (e) {}
+      grid.innerHTML = '<div class="col-span-2 py-10 text-center opacity-40 text-xs font-bold uppercase">Chưa có sản phẩm thuộc category Engagement</div>'
+        + (sample.length ? '<div class="col-span-2 mt-3 text-center text-[10px] opacity-40">Category đang có: ' + esc(sample.join(' • ')) + '</div>' : '');
+      return;
+    }
+    grid.innerHTML = items.map(productCard).join('');
+  }
+
+  function renderMarketplacePage(){
+    var items = getPublicProducts();
+    var categoryMap = {};
+    items.forEach(function(item){
+      var key = String(item && item.category || '').trim() || 'Khác';
+      categoryMap[key] = (categoryMap[key] || 0) + 1;
+    });
+    var categories = Object.keys(categoryMap).sort(function(a,b){ return categoryMap[b] - categoryMap[a]; }).slice(0, 8);
+    var host = document.getElementById('marketplace-category-pills');
+    var total = document.getElementById('marketplace-total-products');
+    var totalCate = document.getElementById('marketplace-total-categories');
+    if (total) total.textContent = String(items.length);
+    if (totalCate) totalCate.textContent = String(Object.keys(categoryMap).length);
+    if (host){
+      host.innerHTML = categories.map(function(name){
+        return '<button type="button" class="category-chip" data-market-category="' + esc(name) + '">' + esc(name) + '</button>';
+      }).join('') || '<div class="text-xs opacity-50">Chưa có danh mục.</div>';
+      host.querySelectorAll('[data-market-category]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if (typeof window.filterByCategory === 'function') window.filterByCategory(btn.dataset.marketCategory || 'Tất cả');
+        });
+      });
+    }
+  }
+
+  function bindSellerButtons(){
+    [['seller-hotline','tel:' + (window.HOTLINE_NUMBER || '0357130499')], ['seller-zalo', window.ZALO_LINK || 'https://zalo.me/0357130499'], ['seller-email', 'mailto:' + (window.SUPPORT_EMAIL || 'alphazone582@gmail.com') + '?subject=Ket%20noi%20kenh%20nguoi%20ban']].forEach(function(pair){
+      var el = document.getElementById(pair[0]);
+      if (!el || el.dataset.bound) return;
+      el.dataset.bound = '1';
+      el.addEventListener('click', function(){ window.location.href = pair[1]; });
+    });
+    var productsBtn = document.getElementById('seller-view-products');
+    if (productsBtn && !productsBtn.dataset.bound){
+      productsBtn.dataset.bound = '1';
+      productsBtn.addEventListener('click', function(){ if (typeof window.showPage === 'function') window.showPage('products'); });
+    }
+  }
+
+  function ensureCustomPages(){
+    ensurePage('engagement-hub', ''
+      + '<div class="street-card p-6 md:p-8 mb-6">'
+      +   '<div class="flex items-center justify-between gap-4 mb-4">'
+      +     '<div><div class="mono text-[10px] opacity-45 mb-2">TĂNG TƯƠNG TÁC</div><h2 class="title-font text-2xl">Sản phẩm Engagement</h2><p class="text-[11px] opacity-65 mt-2">Trang này chỉ hiển thị các sản phẩm thuộc category <b>Engagement</b>.</p></div>'
+      +     '<div class="detail-summary-card px-4 py-3 min-w-[120px] text-center"><div class="detail-summary-title">Số lượng</div><div id="engagement-count" class="mono text-base mt-1">0 sản phẩm</div></div>'
+      +   '</div>'
+      +   '<div id="engagement-products-list" class="product-grid"></div>'
+      + '</div>');
+
+    ensurePage('seller-channel', ''
+      + '<div class="street-card p-6 md:p-8 mb-6">'
+      +   '<div class="mono text-[10px] opacity-45 mb-2">KÊNH NGƯỜI BÁN</div>'
+      +   '<h2 class="title-font text-2xl mb-3">Kết nối nhanh với người bán</h2>'
+      +   '<p class="text-[11px] opacity-65 leading-relaxed mb-5">Mở các kênh liên hệ chính để trao đổi đơn hàng, gửi mã 21 số hoặc hỏi thêm về sản phẩm.</p>'
+      +   '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">'
+      +     '<button id="seller-hotline" class="btn-street w-full" type="button"><i class="fa-solid fa-phone"></i> Gọi hotline</button>'
+      +     '<button id="seller-zalo" class="btn-street w-full" type="button"><i class="fa-solid fa-comment"></i> Mở Zalo</button>'
+      +     '<button id="seller-email" class="btn-street w-full" type="button"><i class="fa-solid fa-envelope"></i> Gửi email</button>'
+      +     '<button id="seller-view-products" class="btn-street w-full" type="button"><i class="fa-solid fa-store"></i> Xem sản phẩm</button>'
+      +   '</div>'
+      +   '<div class="detail-summary-card mt-5">'
+      +     '<div class="detail-summary-title">Thông tin hiện có</div>'
+      +     '<div class="text-[11px] leading-6 opacity-75 mt-2">Hotline: <b>' + esc(window.HOTLINE_NUMBER || '0357130499') + '</b><br>Zalo: <b>Alpha Zone</b><br>Messenger: <b>' + esc(window.MESSENGER_LABEL || 'Messenger Alpha Zone Việt Nam') + '</b><br>Email: <b>' + esc(window.SUPPORT_EMAIL || 'alphazone582@gmail.com') + '</b></div>'
+      +   '</div>'
+      + '</div>');
+
+    ensureSellerAdminPage();
+
+    ensurePage('marketplace', ''
+      + '<div class="street-card p-6 md:p-8 mb-6">'
+      +   '<div class="mono text-[10px] opacity-45 mb-2">MARKETPLACE</div>'
+      +   '<h2 class="title-font text-2xl mb-3">Toàn cảnh marketplace</h2>'
+      +   '<p class="text-[11px] opacity-65 leading-relaxed mb-5">Trang tổng quan để đi nhanh vào toàn bộ sản phẩm, danh mục và nhóm đang có trên website.</p>'
+      +   '<div class="grid grid-cols-2 gap-3 mb-5">'
+      +     '<div class="detail-summary-card text-center"><div class="detail-summary-title">Tổng sản phẩm</div><div id="marketplace-total-products" class="mono text-base mt-1">0</div></div>'
+      +     '<div class="detail-summary-card text-center"><div class="detail-summary-title">Tổng danh mục</div><div id="marketplace-total-categories" class="mono text-base mt-1">0</div></div>'
+      +   '</div>'
+      +   '<div class="flex flex-wrap gap-2 mb-5" id="marketplace-category-pills"></div>'
+      +   '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">'
+      +     '<button class="btn-street w-full" type="button" onclick="showPage(&quot;products&quot;)"><i class="fa-solid fa-box-open"></i> Mở trang sản phẩm</button>'
+      +     '<button class="btn-street w-full" type="button" onclick="showPage(&quot;categories&quot;)"><i class="fa-solid fa-layer-group"></i> Mở trang danh mục</button>'
+      +   '</div>'
+      + '</div>');
+
+    renderEngagementPage();
+    renderMarketplacePage();
+    bindSellerButtons();
+  }
+
+  function patchCustomPageRefresh(){
+    if (window.__alphaCustomDockPagesPatched) return;
+    window.__alphaCustomDockPagesPatched = true;
+    var originalShowPage = window.showPage;
+    if (typeof originalShowPage === 'function') {
+      window.showPage = function(pageId){
+        ensureCustomPages();
+        var result = originalShowPage.apply(this, arguments);
+        if (String(pageId || '').trim() === 'engagement-hub') renderEngagementPage();
+        if (String(pageId || '').trim() === 'marketplace') renderMarketplacePage();
+        return result;
+      };
+    }
+  }
+
+  function boot(){
+    ensureCustomPages();
+    patchCustomPageRefresh();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once:true });
+  else boot();
+  window.addEventListener('load', function(){ setTimeout(boot, 120); setTimeout(renderEngagementPage, 600); setTimeout(renderEngagementPage, 1500); });
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) setTimeout(renderEngagementPage, 120); });
+})();
+</script>
+
+
+
+<script id="alpha-engagement-visibility-fix">
+(function(){
+  var STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
+
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+  }
+
+  function normalizeText(value){
+    return String(value == null ? '' : value)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function normalizeProduct(item){
+    var base = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || base.platformName || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || base.categoryImage || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      category: String(base.category || base.Category || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || base.short_description || base.summary || '').trim(),
+      detailedDescription: String(base.detailedDescription || base.description || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || '').trim()
+    };
+  }
+
+  function readStorageProducts(){
+    var merged = [];
+    STORAGE_KEYS.forEach(function(key){
+      try {
+        var raw = localStorage.getItem(key);
+        if (!raw) return;
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) merged = merged.concat(parsed);
+      } catch (e) {}
+    });
+    return merged;
+  }
+
+  function readRuntimeProducts(){
+    try {
+      if (Array.isArray(window.brands)) return window.brands.slice();
+    } catch (e) {}
+    return [];
+  }
+
+  function dedupeProducts(list){
+    var seen = new Set();
+    var out = [];
+    (Array.isArray(list) ? list : []).forEach(function(item){
+      var p = normalizeProduct(item);
+      var key = [p.id, p.name, normalizeText(p.category)].join('||');
+      if (!p.id && !p.name) return;
+      if (seen.has(key)) return;
+      seen.add(key);
+      out.push(p);
+    });
+    return out;
+  }
+
+  function isEngagement(item){
+    return normalizeText(item && item.category || '') === 'engagement';
+  }
+
+  function cardHtml(item){
+    var id = esc(item.id || '');
+    var name = esc(item.name || item.platformName || '');
+    var logo = esc(item.logo || item.categoryImage || '');
+    var category = esc(item.category || '');
+    var shortDescription = esc(item.shortDescription || '');
+    var price = esc(item.price || '');
+    return ''
+      + '<div class="product-card-enhanced p-4 flex flex-col relative overflow-hidden" onclick="handleCardClick(\'' + id + '\', this)">'
+      +   '<div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin opacity-20"></i></div>'
+      +   '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center">'
+      +     '<img src="' + logo + '" alt="' + name + '" class="w-full h-full object-contain transition-all duration-500">'
+      +   '</div>'
+      +   '<div class="product-card-id mono text-center">' + id + '</div>'
+      +   '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">' + name + '</h5>'
+      +   '<div class="product-card-category text-center">' + category + '</div>'
+      +   '<div class="product-card-desc text-center">' + shortDescription + '</div>'
+      +   '<div class="product-card-price mono text-center">' + price + '</div>'
+      + '</div>';
+  }
+
+  function getEngagementProductsRobust(){
+    return dedupeProducts(readRuntimeProducts().concat(readStorageProducts())).filter(isEngagement);
+  }
+
+  function renderRobustEngagement(){
+    var grid = document.getElementById('engagement-products-list');
+    var countEl = document.getElementById('engagement-count');
+    if (!grid) return;
+    var items = getEngagementProductsRobust();
+    if (countEl) countEl.textContent = items.length + ' sản phẩm';
+    if (!items.length){
+      var all = dedupeProducts(readRuntimeProducts().concat(readStorageProducts()));
+      var sample = Array.from(new Set(all.map(function(item){ return String(item.category || '').trim(); }).filter(Boolean))).slice(0, 12);
+      grid.innerHTML = '<div class="col-span-2 py-10 text-center opacity-40 text-xs font-bold uppercase">Chưa có sản phẩm thuộc category Engagement</div>'
+        + (sample.length ? '<div class="col-span-2 mt-3 text-center text-[10px] opacity-40">Category đang có: ' + esc(sample.join(' • ')) + '</div>' : '');
+      return;
+    }
+    grid.innerHTML = items.map(cardHtml).join('');
+  }
+
+  function scheduleRefresh(){
+    setTimeout(renderRobustEngagement, 50);
+    setTimeout(renderRobustEngagement, 300);
+    setTimeout(renderRobustEngagement, 1000);
+  }
+
+  var originalShowPage = window.showPage;
+  if (typeof originalShowPage === 'function' && !window.__engagementVisibilityWrapped){
+    window.__engagementVisibilityWrapped = true;
+    window.showPage = function(pageId){
+      var result = originalShowPage.apply(this, arguments);
+      if (String(pageId || '').trim() === 'engagement-hub') scheduleRefresh();
+      return result;
+    };
+  }
+
+  window.renderEngagementPage = renderRobustEngagement;
+  document.addEventListener('DOMContentLoaded', scheduleRefresh, { once:true });
+  window.addEventListener('load', scheduleRefresh);
+  window.addEventListener('storage', scheduleRefresh);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) scheduleRefresh(); });
+  setTimeout(scheduleRefresh, 1200);
+})();
+</script>
+
+
+<script id="alpha-engagement-dock-click-fix">
+(function(){
+  function openEngagement(){
+    try {
+      var page = document.getElementById('engagement-hub');
+      if (!page && typeof window.ensurePage === 'function') page = window.ensurePage('engagement-hub', '');
+      var btn = document.querySelector('#alpha-right-dock .dock-btn[data-page="engagement-hub"]');
+      if (btn) {
+        btn.style.display = 'flex';
+        btn.style.pointerEvents = 'auto';
+        btn.disabled = false;
+      }
+      if (typeof window.showPage === 'function') {
+        window.showPage('engagement-hub');
+        setTimeout(function(){
+          var pageNow = document.getElementById('engagement-hub');
+          if (pageNow) {
+            pageNow.classList.add('page');
+            document.querySelectorAll('.page').forEach(function(el){ if (el.id !== 'engagement-hub') el.classList.remove('active'); });
+            pageNow.classList.add('active');
+          }
+        }, 60);
+      } else if (page) {
+        document.querySelectorAll('.page').forEach(function(el){ el.classList.remove('active'); });
+        page.classList.add('page','active');
+        page.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+      if (typeof window.renderEngagementPage === 'function') {
+        setTimeout(window.renderEngagementPage, 30);
+        setTimeout(window.renderEngagementPage, 250);
+      }
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function bind(){
+    var dock = document.getElementById('alpha-right-dock');
+    if (!dock || dock.dataset.engagementDockFixBound) return;
+    dock.dataset.engagementDockFixBound = '1';
+    var btn = dock.querySelector('.dock-btn[data-page="engagement-hub"]');
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.style.pointerEvents = 'auto';
+      btn.disabled = false;
+      btn.addEventListener('click', function(e){
+        if ((btn.getAttribute('data-page') || '') === 'engagement-hub') {
+          e.preventDefault();
+          e.stopPropagation();
+          openEngagement();
+        }
+      }, true);
+    }
+    dock.addEventListener('click', function(e){
+      var target = e.target && e.target.closest ? e.target.closest('.dock-btn[data-page="engagement-hub"]') : null;
+      if (!target) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openEngagement();
+    }, true);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, {once:true});
+  else bind();
+  window.addEventListener('load', function(){ setTimeout(bind, 50); setTimeout(openEngagement, 0); setTimeout(function(){ if (document.querySelector('.page.active#engagement-hub')) openEngagement(); }, 250); });
+})();
+</script>
+
+
+<script id="alpha-engagement-final-fix">
+(function(){
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+  }
+  function normalizeText(value){
+    try {
+      return String(value == null ? '' : value)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .toLowerCase();
+    } catch (e) {
+      return String(value == null ? '' : value).trim().toLowerCase();
+    }
+  }
+  function normalizeProduct(item){
+    item = item && typeof item === 'object' ? item : {};
+    return {
+      id: String(item.id || '').trim(),
+      name: String(item.name || item.platformName || '').trim(),
+      logo: String(item.logo || item.categoryImage || '').trim(),
+      categoryImage: String(item.categoryImage || item.logo || '').trim(),
+      category: String(item.category || item.Category || '').trim(),
+      shortDescription: String(item.shortDescription || item.short_description || item.summary || '').trim(),
+      detailedDescription: String(item.detailedDescription || item.description || '').trim(),
+      warranty: String(item.warranty || '').trim(),
+      price: String(item.price || '').trim(),
+      link: String(item.link || '').trim()
+    };
+  }
+  function readStorageProducts(){
+    var keys = [
+      'alpha_zone_products_json_v34',
+      'alpha_zone_products_v20',
+      'alpha_zone_admin_draft_v20'
+    ];
+    var all = [];
+    keys.forEach(function(key){
+      try {
+        var raw = localStorage.getItem(key);
+        if (!raw) return;
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) all = all.concat(parsed);
+      } catch (e) {}
+    });
+    return all.map(normalizeProduct);
+  }
+  function readRuntimeProducts(){
+    var all = [];
+    try {
+      if (Array.isArray(window.brands)) all = all.concat(window.brands);
+    } catch (e) {}
+    return all.map(normalizeProduct);
+  }
+  function dedupeProducts(items){
+    var out = [];
+    var seen = new Set();
+    (items || []).forEach(function(item, idx){
+      var p = normalizeProduct(item);
+      var key = [p.id, p.name, p.category, p.price].join('||');
+      if (!p.id && !p.name) key = 'row-' + idx + '||' + p.category;
+      if (seen.has(key)) return;
+      seen.add(key);
+      out.push(p);
+    });
+    return out;
+  }
+  function isEngagement(item){
+    return normalizeText(item && item.category) === 'engagement';
+  }
+  function getEngagementProducts(){
+    return dedupeProducts(readRuntimeProducts().concat(readStorageProducts())).filter(isEngagement);
+  }
+  function buildCard(item){
+    var id = esc(item.id || '');
+    var name = esc(item.name || '');
+    var logo = esc(item.logo || item.categoryImage || '');
+    var category = esc(item.category || '');
+    var shortDescription = esc(item.shortDescription || '');
+    var price = esc(item.price || '');
+    return ''
+      + '<div class="product-card-enhanced p-4 flex flex-col relative overflow-hidden" onclick="if(window.handleCardClick){window.handleCardClick(\'' + id + '\', this);}">'
+      +   '<div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin opacity-20"></i></div>'
+      +   '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center">'
+      +     '<img src="' + logo + '" alt="' + name + '" class="w-full h-full object-contain transition-all duration-500">'
+      +   '</div>'
+      +   '<div class="product-card-id mono text-center">' + id + '</div>'
+      +   '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">' + name + '</h5>'
+      +   '<div class="product-card-category text-center">' + category + '</div>'
+      +   '<div class="product-card-desc text-center">' + shortDescription + '</div>'
+      +   '<div class="product-card-price mono text-center">' + price + '</div>'
+      + '</div>';
+  }
+  function ensureEngagementPage(){
+    var page = document.getElementById('engagement-hub');
+    if (!page) {
+      page = document.createElement('div');
+      page.id = 'engagement-hub';
+      page.className = 'page';
+      var anchor = document.getElementById('account') || document.querySelector('.page:last-of-type');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(page, anchor);
+      else document.body.appendChild(page);
+    }
+    if (!page.dataset.alphaEngagementReady) {
+      page.innerHTML = ''
+        + '<div class="street-card p-6 md:p-8 mb-6">'
+        +   '<div class="flex items-center justify-between gap-4 mb-4">'
+        +     '<div><div class="mono text-[10px] opacity-45 mb-2">TĂNG TƯƠNG TÁC</div><h2 class="title-font text-2xl">Sản phẩm Engagement</h2><p class="text-[11px] opacity-65 mt-2">Trang này chỉ hiển thị các sản phẩm thuộc category <b>Engagement</b>.</p></div>'
+        +     '<div class="detail-summary-card px-4 py-3 min-w-[120px] text-center"><div class="detail-summary-title">Số lượng</div><div id="engagement-count" class="mono text-base mt-1">0 sản phẩm</div></div>'
+        +   '</div>'
+        +   '<div id="engagement-products-list" class="product-grid"></div>'
+        + '</div>';
+      page.dataset.alphaEngagementReady = '1';
+    }
+    return page;
+  }
+  function renderEngagementProducts(){
+    ensureEngagementPage();
+    var grid = document.getElementById('engagement-products-list');
+    var countEl = document.getElementById('engagement-count');
+    if (!grid) return;
+    var items = getEngagementProducts();
+    if (countEl) countEl.textContent = items.length + ' sản phẩm';
+    if (!items.length) {
+      var all = dedupeProducts(readRuntimeProducts().concat(readStorageProducts()));
+      var sample = Array.from(new Set(all.map(function(item){ return String(item.category || '').trim(); }).filter(Boolean))).slice(0, 12);
+      grid.innerHTML = '<div class="col-span-2 py-10 text-center opacity-40 text-xs font-bold uppercase">Chưa có sản phẩm thuộc category Engagement</div>'
+        + (sample.length ? '<div class="col-span-2 mt-3 text-center text-[10px] opacity-40">Category đang có: ' + esc(sample.join(' • ')) + '</div>' : '');
+      return;
+    }
+    grid.innerHTML = items.map(buildCard).join('');
+  }
+  function openEngagementPage(){
+    var page = ensureEngagementPage();
+    if (typeof window.showPage === 'function') window.showPage('engagement-hub');
+    else {
+      document.querySelectorAll('.page').forEach(function(el){ el.classList.remove('active'); });
+      page.classList.add('active');
+    }
+    setTimeout(renderEngagementProducts, 20);
+    setTimeout(renderEngagementProducts, 200);
+    setTimeout(renderEngagementProducts, 800);
+  }
+  function bindButton(){
+    var btn = document.querySelector('#alpha-right-dock .dock-btn[data-page="engagement-hub"]');
+    if (!btn || btn.dataset.alphaEngagementFinalBound) return;
+    btn.dataset.alphaEngagementFinalBound = '1';
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openEngagementPage();
+      return false;
+    }, true);
+  }
+  function patchShowPage(){
+    if (typeof window.showPage !== 'function' || window.__alphaEngagementFinalShowPagePatched) return;
+    window.__alphaEngagementFinalShowPagePatched = true;
+    var original = window.showPage;
+    window.showPage = function(pageId){
+      var result = original.apply(this, arguments);
+      if (String(pageId || '').trim() === 'engagement-hub') {
+        setTimeout(renderEngagementProducts, 20);
+        setTimeout(renderEngagementProducts, 200);
+        setTimeout(renderEngagementProducts, 800);
+      }
+      return result;
+    };
+  }
+  window.renderEngagementPage = renderEngagementProducts;
+  window.openEngagementPage = openEngagementPage;
+  function boot(){
+    ensureEngagementPage();
+    bindButton();
+    patchShowPage();
+    setTimeout(bindButton, 300);
+    setTimeout(renderEngagementProducts, 1200);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once:true });
+  else boot();
+  window.addEventListener('load', function(){ bindButton(); renderEngagementProducts(); });
+  window.addEventListener('storage', renderEngagementProducts);
+})();
+</script>
+
+
+<script id="alpha-global-state-bridge-fix">
+(function(){
+  function bridgeProp(name, getter, setter) {
+    try {
+      Object.defineProperty(window, name, {
+        configurable: true,
+        enumerable: true,
+        get: getter,
+        set: setter
+      });
+    } catch (_) {}
+  }
+
+  try {
+    bridgeProp('brands',
+      function(){ try { return brands; } catch (_) { return window.__alphaBrandsFallback || []; } },
+      function(v){
+        try { brands = Array.isArray(v) ? v : []; }
+        catch (_) { window.__alphaBrandsFallback = Array.isArray(v) ? v : []; }
+      }
+    );
+  } catch (_) {}
+
+  try {
+    bridgeProp('currentSelectedId',
+      function(){ try { return currentSelectedId; } catch (_) { return window.__alphaCurrentSelectedIdFallback || ''; } },
+      function(v){
+        try { currentSelectedId = v == null ? '' : String(v).trim(); }
+        catch (_) { window.__alphaCurrentSelectedIdFallback = v == null ? '' : String(v).trim(); }
+      }
+    );
+  } catch (_) {}
+
+  try {
+    bridgeProp('lastReceiptData',
+      function(){ try { return lastReceiptData; } catch (_) { return window.__alphaLastReceiptDataFallback || null; } },
+      function(v){
+        try { lastReceiptData = v || null; }
+        catch (_) { window.__alphaLastReceiptDataFallback = v || null; }
+      }
+    );
+  } catch (_) {}
+
+  try {
+    bridgeProp('selectedPaymentMethod',
+      function(){ try { return selectedPaymentMethod; } catch (_) { return window.__alphaSelectedPaymentMethodFallback || 'bank'; } },
+      function(v){
+        var method = String(v || '').toLowerCase() === 'usdt' ? 'usdt' : 'bank';
+        try { selectedPaymentMethod = method; }
+        catch (_) { window.__alphaSelectedPaymentMethodFallback = method; }
+      }
+    );
+  } catch (_) {}
+
+  try {
+    bridgeProp('selectedUsdtNetwork',
+      function(){ try { return selectedUsdtNetwork; } catch (_) { return window.__alphaSelectedUsdtNetworkFallback || 'TRC20'; } },
+      function(v){
+        var code = v == null ? '' : String(v).trim();
+        try { selectedUsdtNetwork = code || (PAYMENT_CONFIG && PAYMENT_CONFIG.networks && PAYMENT_CONFIG.networks[0] ? PAYMENT_CONFIG.networks[0].code : 'TRC20'); }
+        catch (_) { window.__alphaSelectedUsdtNetworkFallback = code || 'TRC20'; }
+      }
+    );
+  } catch (_) {}
+
+  try { if (typeof getCurrentProduct === 'function') window.getCurrentProduct = getCurrentProduct; } catch (_) {}
+  try { if (typeof getSelectedNetwork === 'function') window.getSelectedNetwork = getSelectedNetwork; } catch (_) {}
+  try { if (typeof getUsdtAmount === 'function') window.getUsdtAmount = getUsdtAmount; } catch (_) {}
+  try { if (typeof buildTransferContent === 'function') window.buildTransferContent = buildTransferContent; } catch (_) {}
+  try { if (typeof buildBankQrUrl === 'function') window.buildBankQrUrl = buildBankQrUrl; } catch (_) {}
+  try { if (typeof updatePaymentUI === 'function') window.updatePaymentUI = updatePaymentUI; } catch (_) {}
+  try { if (typeof createReceiptDataSafe === 'function') window.createReceiptDataSafe = createReceiptDataSafe; } catch (_) {}
+  try { if (typeof createReceiptData === 'function' && typeof window.createReceiptData !== 'function') window.createReceiptData = createReceiptData; } catch (_) {}
+
+  try { window.brands = Array.isArray(window.brands) ? window.brands : (typeof brands !== 'undefined' ? brands : []); } catch (_) {}
+  try { window.currentSelectedId = typeof currentSelectedId !== 'undefined' ? currentSelectedId : (window.currentSelectedId || ''); } catch (_) {}
+  try { window.lastReceiptData = typeof lastReceiptData !== 'undefined' ? lastReceiptData : (window.lastReceiptData || null); } catch (_) {}
+  try { window.selectedPaymentMethod = typeof selectedPaymentMethod !== 'undefined' ? selectedPaymentMethod : (window.selectedPaymentMethod || 'bank'); } catch (_) {}
+  try { window.selectedUsdtNetwork = typeof selectedUsdtNetwork !== 'undefined' ? selectedUsdtNetwork : (window.selectedUsdtNetwork || 'TRC20'); } catch (_) {}
+})();
+</script>
+
+
+<script id="alpha-seller-channel-upgrade">
+(function(){
+  var PROFILE_KEY = 'alpha_zone_seller_hồ sơs_v1';
+  var ACTIVE_KEY = 'alpha_zone_seller_active_v1';
+  var DRAFT_KEY = 'alpha_zone_seller_draft_v1';
+  var PAGE_ID = 'seller-channel';
+  var DEFAULT_HOTLINE = '0357130499';
+  var DEFAULT_ZALO = 'https://zalo.me/0357130499';
+  var DEFAULT_EMAIL = 'alphazone582@gmail.com';
+  var DEFAULT_MESSENGER = 'Messenger Alpha Zone Việt Nam';
+  var INTEREST_OPTIONS = [
+    'AI và làm việc',
+    'Sáng tạo nội dung',
+    'Học tập và premium',
+    'Giải trí và streaming',
+    'Reseller đại lý',
+    'Doanh nghiệp và team'
+  ];
+
+  function esc(value){
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  }
+
+  function safeParse(raw, fallback){
+    try {
+      var parsed = JSON.parse(raw);
+      return parsed == null ? fallback : parsed;
+    } catch (_) {
+      return fallback;
+    }
+  }
+
+  function normalizeText(value){
+    return String(value == null ? '' : value)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function phoneDigits(value){
+    return String(value == null ? '' : value).replace(/\D+/g, '');
+  }
+
+  function validEmail(value){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+  }
+
+  function validPhone(value){
+    var digits = phoneDigits(value);
+    return digits.length >= 9 && digits.length <= 12;
+  }
+
+  function readProfiles(){
+    return safeParse(localStorage.getItem(PROFILE_KEY) || '[]', []).filter(function(item){
+      return item && typeof item === 'object';
+    });
+  }
+
+  function saveProfiles(list){
+    try { localStorage.setItem(PROFILE_KEY, JSON.stringify(list || [])); } catch (_) {}
+  }
+
+  function readActive(){
+    return safeParse(localStorage.getItem(ACTIVE_KEY) || 'null', null);
+  }
+
+  function saveActive(hồ sơ){
+    try { localStorage.setItem(ACTIVE_KEY, JSON.stringify(hồ sơ || null)); } catch (_) {}
+  }
+
+  function clearActive(){
+    try { localStorage.removeItem(ACTIVE_KEY); } catch (_) {}
+  }
+
+  function readDraft(){
+    return safeParse(localStorage.getItem(DRAFT_KEY) || 'null', null);
+  }
+
+  function saveDraft(data){
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data || null)); } catch (_) {}
+  }
+
+  function makeProfileId(data){
+    var email = normalizeText(data.email || '');
+    var phone = phoneDigits(data.phone || '');
+    if (email) return 'mail:' + email;
+    if (phone) return 'phone:' + phone;
+    return 'name:' + normalizeText(data.fullName || data.storeName || 'seller');
+  }
+
+  function buildSellerCode(data){
+    var source = String(data.storeName || data.fullName || 'SELLER').trim();
+    var initials = source
+      .replace(/[^A-Za-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 3)
+      .map(function(part){ return part.charAt(0).toUpperCase(); })
+      .join('');
+    if (!initials) initials = 'AZ';
+    var tail = phoneDigits(data.phone || '').slice(-4);
+    return initials + '-' + (tail || '0000');
+  }
+
+  function completionRate(data){
+    var checks = [
+      !!String(data.fullName || '').trim(),
+      !!String(data.email || '').trim(),
+      !!String(data.phone || '').trim(),
+      !!String(data.storeName || '').trim(),
+      !!String(data.businessType || '').trim(),
+      Array.isArray(data.interests) && data.interests.length > 0,
+      !!String(data.scale || '').trim(),
+      !!String(data.goal || '').trim()
+    ];
+    var done = checks.filter(Boolean).length;
+    return Math.round((done / checks.length) * 100);
+  }
+
+  function formatTime(ts){
+    if (!ts) return 'Chưa lưu';
+    try {
+      return new Date(ts).toLocaleString('vi-VN');
+    } catch (_) {
+      return 'Chưa lưu';
+    }
+  }
+
+  function currentChannels(){
+    return {
+      hotline: window.HOTLINE_NUMBER || DEFAULT_HOTLINE,
+      zalo: window.ZALO_LINK || DEFAULT_ZALO,
+      email: window.SUPPORT_EMAIL || DEFAULT_EMAIL,
+      messenger: window.MESSENGER_LABEL || DEFAULT_MESSENGER
+    };
+  }
+
+  function ensureStyle(){
+    if (document.getElementById('alpha-seller-channel-upgrade-style')) return;
+    var style = document.createElement('style');
+    style.id = 'alpha-seller-channel-upgrade-style';
+    style.textContent = ''
+      + '.seller-upgrade-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:18px;}'
+      + '@media(max-width:980px){.seller-upgrade-wrap{grid-template-columns:1fr;}}'
+      + '.seller-upgrade-panel{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,248,248,.94));border:1px solid rgba(15,23,42,.08);border-radius:26px;padding:20px;box-shadow:0 18px 44px rgba(15,23,42,.08);}'
+      + '.seller-upgrade-panel h3{font-size:1.05rem;font-weight:800;margin:0 0 10px;letter-spacing:-.02em;}'
+      + '.seller-meta-grid,.seller-form-grid,.seller-stat-grid{display:grid;gap:12px;}'
+      + '.seller-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr));}'
+      + '.seller-form-grid{grid-template-columns:repeat(2,minmax(0,1fr));}'
+      + '.seller-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));}'
+      + '@media(max-width:720px){.seller-meta-grid,.seller-form-grid,.seller-stat-grid{grid-template-columns:1fr;}}'
+      + '.seller-kpi{border:1px solid rgba(15,23,42,.08);border-radius:18px;padding:14px;background:rgba(255,255,255,.82);}'
+      + '.seller-kpi-label{font-size:11px;opacity:.55;text-transform:uppercase;letter-spacing:.14em;font-weight:800;}'
+      + '.seller-kpi-value{font-size:20px;font-weight:900;margin-top:6px;}'
+      + '.seller-field{display:flex;flex-direction:column;gap:7px;}'
+      + '.seller-field label{font-size:12px;font-weight:800;opacity:.78;}'
+      + '.seller-input,.seller-select,.seller-textarea{width:100%;border-radius:16px;border:1px solid rgba(15,23,42,.12);background:#fff;padding:12px 14px;font-size:14px;line-height:1.45;outline:none;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;}'
+      + '.seller-input:focus,.seller-select:focus,.seller-textarea:focus{border-color:rgba(37,99,235,.45);box-shadow:0 0 0 4px rgba(37,99,235,.10);transform:translateY(-1px);}'
+      + '.seller-textarea{min-height:110px;resize:vertical;}'
+      + '.seller-chip-row{display:flex;flex-wrap:wrap;gap:8px;}'
+      + '.seller-chip{border:1px solid rgba(15,23,42,.10);background:#fff;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800;cursor:pointer;transition:all .18s ease;}'
+      + '.seller-chip.active{background:#111827;color:#fff;border-color:#111827;box-shadow:0 10px 22px rgba(17,24,39,.18);}'
+      + '.seller-chip.muted{opacity:.74;}'
+      + '.seller-action-row{display:flex;flex-wrap:wrap;gap:10px;}'
+      + '.seller-status{border-radius:18px;padding:12px 14px;font-size:12px;line-height:1.55;border:1px solid rgba(15,23,42,.08);background:rgba(248,250,252,.9);}'
+      + '.seller-status.success{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.18);color:#166534;}'
+      + '.seller-status.error{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.18);color:#991b1b;}'
+      + '.seller-status.info{background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.18);color:#1d4ed8;}'
+      + '.seller-summary-box{border-radius:18px;padding:14px;border:1px dashed rgba(15,23,42,.12);background:rgba(255,255,255,.82);font-size:12px;line-height:1.7;white-space:pre-line;}'
+      + '.seller-progress{height:10px;border-radius:999px;background:rgba(15,23,42,.08);overflow:hidden;}'
+      + '.seller-progress > span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#111827,#2563eb);width:0%;transition:width .18s ease;}'
+      + '.seller-inline-note{font-size:11px;line-height:1.6;opacity:.66;}'
+      + '.seller-step{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(15,23,42,.08);font-size:12px;line-height:1.65;}'
+      + '.seller-step:last-child{border-bottom:none;padding-bottom:0;}'
+      + '.seller-step-index{width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:900;background:#111827;color:#fff;flex:none;font-size:12px;}'
+      + '.seller-hồ sơ-pill{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid rgba(15,23,42,.08);padding:10px 12px;border-radius:16px;background:#fff;cursor:pointer;transition:all .18s ease;}'
+      + '.seller-hồ sơ-pill:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,23,42,.08);}'
+      + '.seller-pill-meta{font-size:11px;opacity:.58;line-height:1.45;}'
+      + '.seller-quick-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}'
+      + '@media(max-width:540px){.seller-quick-actions{grid-template-columns:1fr;}}'
+      + '.seller-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;background:rgba(17,24,39,.05);font-size:11px;font-weight:800;}'
+      + '.seller-divider{height:1px;background:linear-gradient(90deg,rgba(15,23,42,0),rgba(15,23,42,.1),rgba(15,23,42,0));margin:16px 0;}'
+      + '.seller-login-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid rgba(15,23,42,.08);border-radius:18px;background:rgba(255,255,255,.8);}'
+      + '.seller-danger{border-color:rgba(239,68,68,.28)!important;box-shadow:0 0 0 4px rgba(239,68,68,.08)!important;}'
+      + '.seller-soft{font-size:11px;opacity:.56;}'
+      + '.seller-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}'
+      + '.seller-section-title .seller-badge{white-space:nowrap;}'
+      + '.seller-highlight{background:linear-gradient(135deg,rgba(17,24,39,.96),rgba(30,64,175,.92));color:#fff;}'
+      + '.seller-highlight .seller-kpi,.seller-highlight .seller-status,.seller-highlight .seller-summary-box,.seller-highlight .seller-login-strip{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.14);color:#fff;}'
+      + '.seller-highlight .seller-inline-note,.seller-highlight .seller-pill-meta,.seller-highlight .seller-soft{opacity:.78;}'
+      + '.seller-highlight .seller-badge{background:rgba(255,255,255,.12);}'
+      + '.seller-highlight .seller-progress{background:rgba(255,255,255,.16);}'
+      + '.seller-highlight .seller-progress > span{background:linear-gradient(90deg,#f8fafc,#93c5fd);}'
+      + '.seller-highlight .seller-step{border-bottom-color:rgba(255,255,255,.16);}'
+      + '.seller-hidden{display:none !important;}';
+    document.head.appendChild(style);
+  }
+
+  function ensurePageContainer(){
+    var page = document.getElementById(PAGE_ID);
+    if (!page){
+      page = document.createElement('div');
+      page.id = PAGE_ID;
+      page.className = 'page';
+      var anchor = document.getElementById('account') || document.querySelector('.page:last-of-type');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(page, anchor);
+      else document.body.appendChild(page);
+    }
+    return page;
+  }
+
+  function buildHtml(){
+    var channels = currentChannels();
+    return ''
+      + '<div class="seller-upgrade-wrap">'
+      +   '<div class="seller-upgrade-panel seller-highlight">'
+      +     '<div class="seller-section-title">'
+      +       '<div><div class="mono text-[10px] opacity-80 mb-2">KÊNH NGƯỜI BÁN</div><h2 class="title-font text-2xl mb-2">Hồ sơ đối tác thương mại</h2><p class="text-[12px] leading-6 opacity-90">Không gian tiếp nhận hồ sơ hợp tác, lưu dữ liệu cục bộ và hỗ trợ truy xuất lại hồ sơ theo thông tin liên hệ.</p></div>'
+      +       '<span class="seller-badge"><i class="fa-solid fa-shield-halved"></i> Lưu cục bộ trên thiết bị</span>'
+      +     '</div>'
+      +     '<div class="seller-stat-grid mb-4">'
+      +       '<div class="seller-kpi"><div class="seller-kpi-label">Kênh hỗ trợ</div><div class="seller-kpi-value">4</div><div class="seller-soft mt-1">Hotline, Zalo, Email, Messenger</div></div>'
+      +       '<div class="seller-kpi"><div class="seller-kpi-label">Kho dữ liệu cục bộ</div><div class="seller-kpi-value" id="seller-hồ sơ-count">0</div><div class="seller-soft mt-1">Bản ghi đã đồng bộ</div></div>'
+      +       '<div class="seller-kpi"><div class="seller-kpi-label">Trạng thái</div><div class="seller-kpi-value" id="seller-active-label">Đồng bộ</div><div class="seller-soft mt-1">Tự động đối chiếu dữ liệu đã lưu</div></div>'
+      +     '</div>'
+      +     '<div class="seller-login-strip mb-4">'
+      +       '<div class="flex-1 min-w-[220px]"><div class="text-[11px] font-extrabold uppercase tracking-[0.24em] opacity-75 mb-2">Tra cứu dữ liệu hồ sơ</div><input id="seller-login-identifier" name="seller_lookup_code" class="seller-input" data-form-type="other" autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text" placeholder="Email hoặc số điện thoại liên hệ" readonly onfocus="this.removeAttribute('readonly');" data-lpignore="true" data-1p-ignore="true"></div>'
+      +       '<div class="seller-action-row">'
+      +         '<button id="seller-smart-login-btn" class="btn-street" type="button"><i class="fa-solid fa-bolt"></i> Tra cứu</button>'
+      +         '<button id="seller-use-active-btn" class="btn-street" type="button"><i class="fa-solid fa-user-check"></i> Hồ sơ gần đây</button>'
+      +         '<button id="seller-new-hồ sơ-btn" class="btn-street" type="button"><i class="fa-solid fa-user-plus"></i> Khởi tạo hồ sơ</button>'
+      +       '</div>'
+      +     '</div>'
+      +     '<div id="seller-login-status" class="seller-status info mb-4">Hệ thống hỗ trợ đối chiếu hồ sơ đã lưu trên thiết bị theo email hoặc số điện thoại liên hệ.</div>'
+      +     '<div class="seller-quick-actions mb-4">'
+      +       '<button id="seller-hotline" class="btn-street w-full" type="button"><i class="fa-solid fa-phone"></i> Gọi hotline</button>'
+      +       '<button id="seller-zalo" class="btn-street w-full" type="button"><i class="fa-solid fa-comment"></i> Mở Zalo</button>'
+      +       '<button id="seller-email" class="btn-street w-full" type="button"><i class="fa-solid fa-envelope"></i> Gửi email</button>'
+      +       '<button id="seller-view-products" class="btn-street w-full" type="button"><i class="fa-solid fa-store"></i> Xem sản phẩm</button>'
+      +     '</div>'
+      +     '<div class="seller-section-title"><h3 class="m-0">Dữ liệu đã lưu</h3><span class="seller-badge"><i class="fa-solid fa-sparkles"></i> Truy xuất nhanh</span></div>'
+      +     '<div id="seller-hồ sơ-list" class="seller-meta-grid"></div>'
+      +     '<div class="seller-inline-note mt-4">Kênh liên hệ hiện có: Hotline <b>' + esc(channels.hotline) + '</b> • Zalo <b>Alpha Zone</b> • Messenger <b>' + esc(channels.messenger) + '</b> • Email <b>' + esc(channels.email) + '</b>.</div>'
+      +   '</div>'
+      +   '<div class="seller-upgrade-panel">'
+      +     '<div class="seller-section-title">'
+      +       '<div><div class="mono text-[10px] opacity-45 mb-2">BIỂU MẪU ĐĂNG KÝ</div><h3>Hồ sơ đăng ký hợp tác</h3><p class="text-[12px] leading-6 opacity-70">Biểu mẫu tiêu chuẩn phục vụ tiếp nhận thông tin hợp tác, định danh hồ sơ và tổng hợp nội dung làm việc với bộ phận phụ trách.</p></div>'
+      +       '<span class="seller-badge"><i class="fa-solid fa-pen-to-square"></i> Tổng hợp hồ sơ tự động</span>'
+      +     '</div>'
+      +     '<div class="seller-form-grid">'
+      +       '<div class="seller-field"><label for="seller-full-name">Họ và tên *</label><input id="seller-full-name" class="seller-input" autocomplete="name" placeholder="Nguyễn Văn A"></div>'
+      +       '<div class="seller-field"><label for="seller-store-name">Tên shop / thương hiệu</label><input id="seller-store-name" class="seller-input" autocomplete="organization" placeholder="Alpha Agency"></div>'
+      +       '<div class="seller-field"><label for="seller-email-input">Email *</label><input id="seller-email-input" class="seller-input" autocomplete="email" placeholder="ban@example.com"></div>'
+      +       '<div class="seller-field"><label for="seller-phone-input">Số điện thoại / Zalo liên hệ *</label><input id="seller-phone-input" class="seller-input" autocomplete="tel" placeholder="09xxxxxxxx"></div>'
+      +       '<div class="seller-field"><label for="seller-business-type">Mô hình hợp tác</label><select id="seller-business-type" class="seller-select"><option value="">Lựa chọn mô hình</option><option>Cộng tác viên</option><option>Đại lý / Reseller</option><option>Creator / Freelancer</option><option>Doanh nghiệp / Team</option><option>Shop / Thương hiệu</option></select></div>'
+      +       '<div class="seller-field"><label for="seller-region">Khu vực hoạt động</label><input id="seller-region" class="seller-input" autocomplete="address-level1" placeholder="TP.HCM / Hà Nội / Online"></div>'
+      +       '<div class="seller-field"><label for="seller-scale">Quy mô dự kiến / tháng</label><select id="seller-scale" class="seller-select"><option value="">Lựa chọn quy mô</option><option>Dưới 10 đơn</option><option>10 - 30 đơn</option><option>30 - 100 đơn</option><option>100+ đơn</option><option>Cần trao đổi thêm</option></select></div>'
+      +       '<div class="seller-field"><label for="seller-website">Website / Link social</label><input id="seller-website" class="seller-input" autocomplete="url" placeholder="https://"></div>'
+      +     '</div>'
+      +     '<div class="seller-divider"></div>'
+      +     '<div class="seller-field mb-3"><label>Danh mục quan tâm</label><div id="seller-interest-chips" class="seller-chip-row"></div><div class="seller-inline-note">Danh mục quan tâm được sử dụng để phân loại nhu cầu và hỗ trợ đề xuất phương án hợp tác phù hợp.</div></div>'
+      +     '<div class="seller-field"><label for="seller-goal">Mục tiêu hợp tác / ghi chú</label><textarea id="seller-goal" class="seller-textarea" placeholder="Ví dụ: cần bảng giá sỉ, cần kho chung, cần hỗ trợ đơn theo tháng, cần team plan...\n"></textarea></div>'
+      +     '<div class="seller-action-row mt-4">'
+      +       '<button id="seller-save-hồ sơ-btn" class="btn-street" type="button"><i class="fa-solid fa-floppy-disk"></i> Lưu dữ liệu hồ sơ</button>'
+      +       '<button id="seller-copy-summary-btn" class="btn-street" type="button"><i class="fa-solid fa-copy"></i> Sao chép tóm tắt</button>'
+      +       '<button id="seller-email-summary-btn" class="btn-street" type="button"><i class="fa-solid fa-paper-plane"></i> Chuyển qua email</button>'
+      +       '<button id="seller-zalo-summary-btn" class="btn-street" type="button"><i class="fa-solid fa-share-from-square"></i> Chuyển qua Zalo</button>'
+      +     '</div>'
+      +     '<div class="seller-chip-row mt-4">'
+      +       '<button id="seller-device-memory" class="seller-chip active" type="button" aria-pressed="true">Lưu dữ liệu trên thiết bị này</button>'
+      +       '<button id="seller-reset-form-btn" class="seller-chip muted" type="button">Đặt lại biểu mẫu</button>'
+      +       '<button id="seller-clear-memory-btn" class="seller-chip muted" type="button">Xóa dữ liệu đã lưu</button>'
+      +     '</div>'
+      +   '</div>'
+      + '</div>';
+  }
+
+  function ensureSellerAdminPage(){
+    ensurePage('seller-admin-hidden', ''
+      + '<div class="street-card p-6 md:p-8 mb-6">'
+      +   '<div class="mono text-[10px] opacity-45 mb-2">ADMIN ẨN • KÊNH NGƯỜI BÁN</div>'
+      +   '<h2 class="title-font text-2xl mb-3">Bảng điều phối hồ sơ người bán</h2>'
+      +   '<p class="text-[11px] opacity-65 leading-relaxed mb-5">Khu vực quản trị nội bộ phục vụ theo dõi trạng thái hồ sơ, mức độ hoàn tất và nội dung tổng hợp đăng ký. Không hiển thị trên điều hướng người dùng.</p>'
+      +   '<div class="seller-upgrade-panel">'
+      +     '<div class="seller-section-title"><h3 class="m-0">Tổng quan hồ sơ hiện hành</h3><span class="seller-badge"><i class="fa-solid fa-user-shield"></i> Mã hồ sơ nội bộ</span></div>'
+      +     '<div class="seller-status info mb-3" id="seller-form-status">Chưa có hồ sơ hoạt động trong phiên hiện tại. Thông tin sẽ được cập nhật khi dữ liệu được lưu cục bộ.</div>'
+      +     '<div class="seller-kpi mb-3"><div class="seller-kpi-label">Mã hồ sơ</div><div class="seller-kpi-value" id="seller-code">AZ-0000</div><div class="seller-soft mt-1">Mã định danh được tạo từ dữ liệu hồ sơ</div></div>'
+      +     '<div class="seller-kpi mb-3"><div class="seller-kpi-label">Mức độ hoàn tất</div><div class="seller-progress"><span id="seller-progress-bar"></span></div><div class="seller-soft mt-2"><span id="seller-progress-text">0%</span> hoàn tất • <span id="seller-last-save">Chưa lưu</span></div></div>'
+      +     '<div class="seller-summary-box" id="seller-summary-box">Bản tổng hợp hồ sơ sẽ hiển thị tại đây sau khi dữ liệu được cập nhật.</div>'
+      +     '<div class="seller-divider"></div>'
+      +     '<div class="seller-section-title"><h3 class="m-0">Quy trình xử lý</h3><span class="seller-badge"><i class="fa-solid fa-list-check"></i> 3 giai đoạn</span></div>'
+      +     '<div class="seller-step"><span class="seller-step-index">1</span><div>Tiếp nhận dữ liệu nhận diện, thông tin liên hệ và phạm vi hợp tác của đối tác.</div></div>'
+      +     '<div class="seller-step"><span class="seller-step-index">2</span><div>Hệ thống tổng hợp hồ sơ nhằm phục vụ đối soát, đánh giá và xử lý nội bộ.</div></div>'
+      +     '<div class="seller-step"><span class="seller-step-index">3</span><div>Hồ sơ được lưu cục bộ trên thiết bị để hỗ trợ truy cập lại và đối chiếu trong các lần làm việc tiếp theo.</div></div>'
+      +   '</div>'
+      + '</div>');
+  }
+
+  function fieldMap(){
+    return {
+      fullName: document.getElementById('seller-full-name'),
+      storeName: document.getElementById('seller-store-name'),
+      email: document.getElementById('seller-email-input'),
+      phone: document.getElementById('seller-phone-input'),
+      businessType: document.getElementById('seller-business-type'),
+      region: document.getElementById('seller-region'),
+      scale: document.getElementById('seller-scale'),
+      website: document.getElementById('seller-website'),
+      goal: document.getElementById('seller-goal')
+    };
+  }
+
+  function collectForm(){
+    var fields = fieldMap();
+    var interests = [];
+    document.querySelectorAll('#seller-interest-chips [data-interest].active').forEach(function(btn){
+      interests.push(btn.getAttribute('data-interest') || '');
+    });
+    return {
+      fullName: fields.fullName && fields.fullName.value.trim(),
+      storeName: fields.storeName && fields.storeName.value.trim(),
+      email: fields.email && fields.email.value.trim(),
+      phone: fields.phone && fields.phone.value.trim(),
+      businessType: fields.businessType && fields.businessType.value.trim(),
+      region: fields.region && fields.region.value.trim(),
+      scale: fields.scale && fields.scale.value.trim(),
+      website: fields.website && fields.website.value.trim(),
+      goal: fields.goal && fields.goal.value.trim(),
+      interests: interests,
+      rememberDevice: document.getElementById('seller-device-memory') && document.getElementById('seller-device-memory').classList.contains('active')
+    };
+  }
+
+  function applyForm(data, silent){
+    var fields = fieldMap();
+    data = data || {};
+    Object.keys(fields).forEach(function(key){
+      if (fields[key]) fields[key].value = String(data[key] || '');
+    });
+    var activeInterests = Array.isArray(data.interests) ? data.interests.map(normalizeText) : [];
+    document.querySelectorAll('#seller-interest-chips [data-interest]').forEach(function(btn){
+      var isActive = activeInterests.indexOf(normalizeText(btn.getAttribute('data-interest') || '')) >= 0;
+      btn.classList.toggle('active', isActive);
+      btn.classList.toggle('muted', !isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    var memoryBtn = document.getElementById('seller-device-memory');
+    if (memoryBtn){
+      var on = data.rememberDevice !== false;
+      memoryBtn.classList.toggle('active', on);
+      memoryBtn.classList.toggle('muted', !on);
+      memoryBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    if (!silent) syncUi();
+  }
+
+  function summaryText(data){
+    var channels = currentChannels();
+    var code = buildSellerCode(data);
+    var interests = (data.interests || []).join(', ') || 'Chưa chọn';
+    return [
+      'ĐĂNG KÝ KÊNH NGƯỜI BÁN - ALPHA ZONE VIỆT NAM',
+      '',
+      'Mã hồ sơ: ' + code,
+      'Họ và tên: ' + (data.fullName || 'Chưa nhập'),
+      'Thương hiệu / Shop: ' + (data.storeName || 'Chưa nhập'),
+      'Email: ' + (data.email || 'Chưa nhập'),
+      'Số điện thoại / Zalo: ' + (data.phone || 'Chưa nhập'),
+      'Loại hình hợp tác: ' + (data.businessType || 'Chưa chọn'),
+      'Khu vực: ' + (data.region || 'Chưa nhập'),
+      'Quy mô dự kiến: ' + (data.scale || 'Chưa chọn'),
+      'Danh mục quan tâm: ' + interests,
+      'Website / Social: ' + (data.website || 'Chưa nhập'),
+      'Ghi chú: ' + (data.goal || 'Chưa nhập'),
+      '',
+      'Kênh liên hệ hiện có:',
+      '- Hotline: ' + channels.hotline,
+      '- Zalo: Alpha Zone',
+      '- Messenger: ' + channels.messenger,
+      '- Email: ' + channels.email
+    ].join('\n');
+  }
+
+  function setStatus(targetId, message, type){
+    var el = document.getElementById(targetId);
+    if (!el) return;
+    el.className = 'seller-status ' + (type || 'info');
+    el.innerHTML = message;
+  }
+
+  function refreshProfileList(activeId){
+    var host = document.getElementById('seller-hồ sơ-list');
+    var count = document.getElementById('seller-hồ sơ-count');
+    if (!host || !count) return;
+    var hồ sơs = readProfiles();
+    count.textContent = String(hồ sơs.length);
+    if (!hồ sơs.length){
+      host.innerHTML = '<div class="seller-status info" style="grid-column:1/-1;">Chưa có dữ liệu hồ sơ được lưu trên thiết bị. Danh sách sẽ được cập nhật khi phát sinh bản ghi mới.</div>';
+      return;
+    }
+    host.innerHTML = hồ sơs.map(function(hồ sơ){
+      var active = activeId && hồ sơ.id === activeId;
+      return ''
+        + '<button type="button" class="seller-hồ sơ-pill" data-hồ sơ-id="' + esc(hồ sơ.id) + '" aria-label="Hồ sơ ' + esc(hồ sơ.fullName || hồ sơ.storeName || hồ sơ.email || hồ sơ.phone || hồ sơ.id) + '">'
+        +   '<div class="text-left">'
+        +     '<div class="font-extrabold text-[12px]">' + esc(hồ sơ.storeName || hồ sơ.fullName || 'Hồ sơ người bán') + (active ? ' • Đang dùng' : '') + '</div>'
+        +     '<div class="seller-pill-meta">' + esc(hồ sơ.email || hồ sơ.phone || 'Không có thông tin liên hệ') + '<br>Cập nhật: ' + esc(formatTime(hồ sơ.lastLoginAt || hồ sơ.savedAt)) + '</div>'
+        +   '</div>'
+        +   '<i class="fa-solid fa-arrow-right opacity-40"></i>'
+        + '</button>';
+    }).join('');
+    host.querySelectorAll('[data-hồ sơ-id]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var hồ sơ = readProfiles().find(function(item){ return item.id === btn.getAttribute('data-hồ sơ-id'); });
+        if (!hồ sơ) return;
+        applyForm(hồ sơ);
+        saveActive(hồ sơ);
+        setStatus('seller-login-status', 'Đã đối chiếu hồ sơ <b>' + esc(hồ sơ.storeName || hồ sơ.fullName || hồ sơ.id) + '</b>. Dữ liệu đã được đồng bộ vào biểu mẫu hiện hành.', 'success');
+        syncUi();
+      });
+    });
+  }
+
+  function syncUi(){
+    var data = collectForm();
+    var code = buildSellerCode(data);
+    var progress = completionRate(data);
+    var summary = summaryText(data);
+    var now = Date.now();
+    var active = readActive();
+    var codeEl = document.getElementById('seller-code');
+    var bar = document.getElementById('seller-progress-bar');
+    var progressText = document.getElementById('seller-progress-text');
+    var lastSave = document.getElementById('seller-last-save');
+    var summaryBox = document.getElementById('seller-summary-box');
+    var activeLabel = document.getElementById('seller-active-label');
+    if (codeEl) codeEl.textContent = code;
+    if (bar) bar.style.width = progress + '%';
+    if (progressText) progressText.textContent = progress + '%';
+    if (lastSave) lastSave.textContent = active && active.savedAt ? 'Lần lưu: ' + formatTime(active.savedAt) : 'Chưa lưu';
+    if (summaryBox) summaryBox.textContent = summary;
+    if (activeLabel) activeLabel.textContent = active && active.id ? 'Đồng bộ' : 'Đồng bộ';
+    saveDraft(Object.assign({ code: code, updatedAt: now }, data));
+    refreshProfileList(active && active.id);
+  }
+
+  function resetForm(){
+    applyForm({ interests: [], rememberDevice: true }, true);
+    document.getElementById('seller-login-identifier').value = '';
+    setStatus('seller-form-status', 'Biểu mẫu đã được đặt lại và sẵn sàng tiếp nhận bản ghi mới.', 'info');
+    setStatus('seller-login-status', 'Vui lòng nhập email hoặc số điện thoại để hệ thống đối chiếu dữ liệu hiện có.', 'info');
+    syncUi();
+  }
+
+  function highlightInvalid(ids){
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('seller-danger');
+      setTimeout(function(){ el.classList.remove('seller-danger'); }, 1800);
+    });
+  }
+
+  function validateForm(data){
+    var invalid = [];
+    if (!data.fullName) invalid.push('seller-full-name');
+    if (!data.email || !validEmail(data.email)) invalid.push('seller-email-input');
+    if (!data.phone || !validPhone(data.phone)) invalid.push('seller-phone-input');
+    return invalid;
+  }
+
+  function saveCurrentProfile(){
+    var data = collectForm();
+    var invalid = validateForm(data);
+    if (invalid.length){
+      highlightInvalid(invalid);
+      setStatus('seller-form-status', 'Thiếu thông tin bắt buộc: cần bổ sung <b>họ tên</b>, <b>email hợp lệ</b> và <b>số điện thoại/Zalo hợp lệ</b> trước khi lưu dữ liệu.', 'error');
+      return;
+    }
+    var stamp = Date.now();
+    var hồ sơ = Object.assign({}, data, {
+      id: makeProfileId(data),
+      code: buildSellerCode(data),
+      savedAt: stamp,
+      lastLoginAt: stamp
+    });
+    var hồ sơs = readProfiles().filter(function(item){
+      if (!item || !item.id) return false;
+      if (item.id === hồ sơ.id) return false;
+      if (hồ sơ.email && normalizeText(item.email || '') === normalizeText(hồ sơ.email)) return false;
+      if (hồ sơ.phone && phoneDigits(item.phone || '') === phoneDigits(hồ sơ.phone)) return false;
+      return true;
+    });
+    hồ sơs.unshift(hồ sơ);
+    hồ sơs = hồ sơs.slice(0, 6);
+    saveProfiles(hồ sơs);
+    if (data.rememberDevice) saveActive(hồ sơ); else clearActive();
+    syncUi();
+    setStatus('seller-form-status', 'Đã cập nhật dữ liệu hồ sơ <b>' + esc(hồ sơ.storeName || hồ sơ.fullName || hồ sơ.code) + '</b>. Dữ liệu đã sẵn sàng cho các lần truy cập tiếp theo trên thiết bị này.', 'success');
+    setStatus('seller-login-status', 'Truy xuất thông minh đã sẵn sàng cho hồ sơ <b>' + esc(hồ sơ.email || hồ sơ.phone || hồ sơ.code) + '</b>.', 'success');
+  }
+
+  function useIdentifier(){
+    var input = document.getElementById('seller-login-identifier');
+    if (!input) return;
+    var query = String(input.value || '').trim();
+    var active = readActive();
+    var hồ sơs = readProfiles();
+    if (!query && active){
+      applyForm(active);
+      setStatus('seller-login-status', 'Đã mở bản ghi gần đây <b>' + esc(active.storeName || active.fullName || active.id) + '</b>.', 'success');
+      syncUi();
+      return;
+    }
+    var normalized = normalizeText(query);
+    var digits = phoneDigits(query);
+    var found = hồ sơs.find(function(hồ sơ){
+      return (normalized && normalizeText(hồ sơ.email || '') === normalized)
+        || (digits && phoneDigits(hồ sơ.phone || '') === digits)
+        || (normalized && normalizeText(hồ sơ.storeName || '') === normalized)
+        || (normalized && normalizeText(hồ sơ.fullName || '') === normalized);
+    });
+    if (found){
+      found.lastLoginAt = Date.now();
+      var refreshed = hồ sơs.filter(function(item){ return item.id !== found.id; });
+      refreshed.unshift(found);
+      saveProfiles(refreshed);
+      saveActive(found);
+      applyForm(found);
+      setStatus('seller-login-status', 'Đã đối chiếu hồ sơ <b>' + esc(found.storeName || found.fullName || found.id) + '</b>. Dữ liệu đã được đồng bộ vào biểu mẫu hiện hành.', 'success');
+      setStatus('seller-form-status', 'Ban da dang nhap nhanh thanh cong. Co the cap nhat thong tin va luu lai neu can.', 'info');
+      syncUi();
+      return;
+    }
+    var current = collectForm();
+    if (validEmail(query) && !current.email){
+      document.getElementById('seller-email-input').value = query;
+      setStatus('seller-login-status', 'Không tìm thấy dữ liệu trùng khớp. Email đã được giữ lại trong biểu mẫu để tiếp tục hoàn thiện hồ sơ.', 'info');
+      syncUi();
+      return;
+    }
+    if (validPhone(query) && !current.phone){
+      document.getElementById('seller-phone-input').value = query;
+      setStatus('seller-login-status', 'Không tìm thấy dữ liệu trùng khớp. Số điện thoại đã được giữ lại trong biểu mẫu để tiếp tục hoàn thiện hồ sơ.', 'info');
+      syncUi();
+      return;
+    }
+    setStatus('seller-login-status', 'Không tìm thấy hồ sơ phù hợp. Hãy điền biểu mẫu và bấm <b>Lưu dữ liệu hồ sơ</b> để kích hoạt đăng nhập thông minh.', 'error');
+  }
+
+  function copySummary(){
+    var text = summaryText(collectForm());
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        setStatus('seller-form-status', 'Bản tổng hợp hồ sơ đã được sao chép vào bộ nhớ tạm.', 'success');
+      }).catch(function(){
+        window.prompt('Sao chep thu cong noi dung ben duoi:', text);
+      });
+      return;
+    }
+    window.prompt('Sao chep thu cong noi dung ben duoi:', text);
+  }
+
+  function openEmailDraft(){
+    var data = collectForm();
+    var channels = currentChannels();
+    var subject = 'Đăng ký kênh người bán - ' + (data.storeName || data.fullName || buildSellerCode(data));
+    var href = 'mailto:' + channels.email
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(summaryText(data));
+    window.location.href = href;
+  }
+
+  function openZaloShare(){
+    copySummary();
+    var channels = currentChannels();
+    setStatus('seller-form-status', 'Bản tóm tắt đã được copy. Đang mở Zalo để bạn gửi nhanh cho đội ngũ hỗ trợ.', 'info');
+    window.open(channels.zalo, '_blank');
+  }
+
+  function bindQuickActions(){
+    var channels = currentChannels();
+    var hotline = document.getElementById('seller-hotline');
+    var zalo = document.getElementById('seller-zalo');
+    var email = document.getElementById('seller-email');
+    var products = document.getElementById('seller-view-products');
+    if (hotline) hotline.addEventListener('click', function(){ window.location.href = 'tel:' + channels.hotline; });
+    if (zalo) zalo.addEventListener('click', function(){ window.open(channels.zalo, '_blank'); });
+    if (email) email.addEventListener('click', function(){ openEmailDraft(); });
+    if (products) products.addEventListener('click', function(){ if (typeof window.showPage === 'function') window.showPage('products'); });
+  }
+
+  function renderInterestChips(){
+    var host = document.getElementById('seller-interest-chips');
+    if (!host) return;
+    host.innerHTML = INTEREST_OPTIONS.map(function(name){
+      return '<button type="button" class="seller-chip muted" data-interest="' + esc(name) + '" aria-pressed="false">' + esc(name) + '</button>';
+    }).join('');
+    host.querySelectorAll('[data-interest]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var active = !btn.classList.contains('active');
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('muted', !active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        syncUi();
+      });
+    });
+  }
+
+  function wireEvents(){
+    bindQuickActions();
+    renderInterestChips();
+
+    ['seller-full-name','seller-store-name','seller-email-input','seller-phone-input','seller-business-type','seller-region','seller-scale','seller-website','seller-goal'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', syncUi);
+      el.addEventListener('change', syncUi);
+    });
+
+    var loginField = document.getElementById('seller-login-identifier');
+    if (loginField) {
+      loginField.addEventListener('keydown', function(event){ if (event.key === 'Enter') { event.preventDefault(); useIdentifier(); } });
+      loginField.addEventListener('input', function(){
+        if (!loginField.value.trim()) setStatus('seller-login-status', 'Vui lòng nhập email hoặc số điện thoại để hệ thống đối chiếu dữ liệu đăng ký trước đó.', 'info');
+      });
+    }
+
+    var saveBtn = document.getElementById('seller-save-hồ sơ-btn');
+    if (saveBtn) saveBtn.addEventListener('click', saveCurrentProfile);
+
+    var copyBtn = document.getElementById('seller-copy-summary-btn');
+    if (copyBtn) copyBtn.addEventListener('click', copySummary);
+
+    var emailBtn = document.getElementById('seller-email-summary-btn');
+    if (emailBtn) emailBtn.addEventListener('click', openEmailDraft);
+
+    var zaloBtn = document.getElementById('seller-zalo-summary-btn');
+    if (zaloBtn) zaloBtn.addEventListener('click', openZaloShare);
+
+    var loginBtn = document.getElementById('seller-smart-login-btn');
+    if (loginBtn) loginBtn.addEventListener('click', useIdentifier);
+
+    var activeBtn = document.getElementById('seller-use-active-btn');
+    if (activeBtn) activeBtn.addEventListener('click', function(){
+      var active = readActive();
+      if (!active){
+        setStatus('seller-login-status', 'Chưa có bản ghi gần nhất trong bộ nhớ cục bộ.', 'error');
+        return;
+      }
+      applyForm(active);
+      setStatus('seller-login-status', 'Đã mở bản ghi gần đây <b>' + esc(active.storeName || active.fullName || active.id) + '</b>.', 'success');
+      syncUi();
+    });
+
+    var newBtn = document.getElementById('seller-new-hồ sơ-btn');
+    if (newBtn) newBtn.addEventListener('click', resetForm);
+
+    var memoryBtn = document.getElementById('seller-device-memory');
+    if (memoryBtn) memoryBtn.addEventListener('click', function(){
+      var active = !memoryBtn.classList.contains('active');
+      memoryBtn.classList.toggle('active', active);
+      memoryBtn.classList.toggle('muted', !active);
+      memoryBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      syncUi();
+    });
+
+    var resetBtn = document.getElementById('seller-reset-form-btn');
+    if (resetBtn) resetBtn.addEventListener('click', resetForm);
+
+    var clearBtn = document.getElementById('seller-clear-memory-btn');
+    if (clearBtn) clearBtn.addEventListener('click', function(){
+      try { localStorage.removeItem(PROFILE_KEY); } catch (_) {}
+      try { localStorage.removeItem(ACTIVE_KEY); } catch (_) {}
+      try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
+      setStatus('seller-form-status', 'Đã xóa toàn bộ dữ liệu hồ sơ lưu trên thiết bị này.', 'success');
+      setStatus('seller-login-status', 'Cơ chế truy xuất thông minh đã được đặt lại.', 'info');
+      syncUi();
+    });
+  }
+
+  function renderPage(){
+    ensureStyle();
+    var page = ensurePageContainer();
+    page.innerHTML = buildHtml();
+    page.dataset.alphaCustomReady = '1';
+    wireEvents();
+
+    var initial = readActive() || readDraft() || { interests: [], rememberDevice: true };
+    applyForm(initial, true);
+    var loginField = document.getElementById('seller-login-identifier');
+    if (loginField) loginField.value = initial.email || initial.phone || '';
+    if (readActive()) {
+      setStatus('seller-form-status', 'Đã xác định hồ sơ hoạt động trên thiết bị này. Dữ liệu sẵn sàng cho việc rà soát hoặc cập nhật tiếp theo.', 'success');
+      setStatus('seller-login-status', 'Đăng nhập thông minh đang hoạt động với hồ sơ gần nhất.', 'success');
+    }
+    syncUi();
+  }
+
+  function patchShowPage(){
+    if (window.__alphaSellerChannelShowPagePatched || typeof window.showPage !== 'function') return;
+    window.__alphaSellerChannelShowPagePatched = true;
+    var original = window.showPage;
+    function openHiddenAdminFromHash(){
+      var hash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+      if (hash === 'seller-admin' || hash === 'admin-seller' || hash === 'seller-admin-hidden') {
+        ensureSellerAdminPage();
+        original.call(window, 'seller-admin-hidden');
+      }
+    }
+    window.showPage = function(pageId){
+      var result = original.apply(this, arguments);
+      var normalized = String(pageId || '').trim();
+      if (normalized === PAGE_ID || normalized === 'seller-admin-hidden') {
+        renderPage();
+        ensureSellerAdminPage();
+      }
+      return result;
+    };
+    window.addEventListener('hashchange', openHiddenAdminFromHash);
+    setTimeout(openHiddenAdminFromHash, 0);
+  }
+
+  function boot(){
+    renderPage();
+    ensureSellerAdminPage();
+    patchShowPage();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
+  window.addEventListener('load', function(){ setTimeout(renderPage, 180); });
+})();
+
+</script>
+
+
+<style id="alpha-seller-layout-hotfix">
+  #seller-channel .seller-upgrade-wrap{
+    grid-template-columns:1fr !important;
+    align-items:start !important;
+  }
+  #seller-channel .seller-upgrade-wrap > .seller-upgrade-panel{
+    height:auto;
+    grid-column:1 / -1 !important;
+    position:relative !important;
+    top:auto !important;
+  }
+  #seller-channel .seller-upgrade-wrap > .seller-upgrade-panel:nth-child(2) .seller-form-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  #seller-admin-hidden .seller-upgrade-panel{
+    max-width:760px;
+  }
+  @media (max-width: 1180px){
+    #seller-channel .seller-upgrade-wrap > .seller-upgrade-panel:nth-child(2) .seller-form-grid{
+      grid-template-columns:1fr;
+    }
+  }
+</style>
+
+<script id="alpha-dock-expand-script">
+document.addEventListener('DOMContentLoaded', function () {
+  var dock = document.getElementById('alpha-right-dock');
+  if (!dock) return;
+
+  var collapseTimer = null;
+  function openDock() {
+    if (collapseTimer) clearTimeout(collapseTimer);
+    dock.classList.add('expanded');
+  }
+  function closeDockDelayed() {
+    if (collapseTimer) clearTimeout(collapseTimer);
+    collapseTimer = setTimeout(function () {
+      dock.classList.remove('expanded');
+    }, 1200);
+  }
+
+  dock.addEventListener('mouseenter', openDock);
+  dock.addEventListener('mouseleave', function () {
+    dock.classList.remove('expanded');
+  });
+
+  dock.addEventListener('click', function (e) {
+    var btn = e.target.closest('.dock-btn');
+    if (!btn) return;
+    dock.classList.add('expanded');
+    closeDockDelayed();
+  }, true);
+
+  dock.addEventListener('touchstart', function () {
+    openDock();
+    closeDockDelayed();
+  }, { passive: true });
+});
 </script>
 
 </body>
