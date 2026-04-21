@@ -9201,7 +9201,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   </style>
   <script id="alpha-google-sheet-bridge-script">
     (function () {
-      const API_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+      const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
       const BOX_ID = 'alpha-google-sheet-bridge';
 
       function safeJsonParse(raw, fallback) {
@@ -10044,7 +10044,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 
   <script id="alpha-global-apps-script-dock">
     (function () {
-      var DEFAULT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+      var DEFAULT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
       var STORE_KEYS = ['alpha_zone_apps_script_webapp_url_v1', 'alpha_zone_apps_script_url_v33'];
 
       function saveSharedUrl(url) {
@@ -10749,7 +10749,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 
   <script id="alpha-floating-cmd-link">
     (function () {
-      var CMD_LINK = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+      var CMD_LINK = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
 
       function bindFloatingCmdButton() {
         var btn = document.getElementById('gpc-apps-script');
@@ -11365,7 +11365,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 
 <script id="alpha-safe-runtime-override">
 (function () {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
   const SYNC_MS = 30000;
   let lastSyncHash = '';
   let syncing = false;
@@ -11777,7 +11777,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 
 <script id="alpha-restore-autosync">
 (function () {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
   const SYNC_INTERVAL = 30000;
   let syncLock = false;
   let lastHash = '';
@@ -11914,7 +11914,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 
 <script id="alpha-detail-json-fallback-fix">
 (function () {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
   const STORAGE_KEYS = [
     'alpha_zone_products_json_v34',
     'alpha_zone_products_v20',
@@ -14701,270 +14701,198 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<script id="alpha-real-save-backend-patch">
+<script id="alpha-cloud-products-sync-inline">
 (function () {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxg0J42tG-JyO1pSJPPLfLm9eXmxQ8NP29xMgtj1iEj0xtE8DJxVV99n_3NvxQ6HTLg/exec';
-  const LS_KEYS = {
-    customer: 'alpha_real_customer_v1',
-    warranty: 'alpha_real_warranty_v1',
-    order: 'alpha_real_order_v1'
-  };
-  const timers = Object.create(null);
-  let lastOrderHash = '';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
+  const STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
 
-  function safeParse(raw, fallback) {
-    try { return JSON.parse(raw); } catch (_) { return fallback; }
-  }
-
-  function getEl(id) {
-    return document.getElementById(id);
-  }
-
-  function getValue(id) {
-    const el = getEl(id);
-    if (!el) return '';
-    if ('value' in el) return String(el.value || '').trim();
-    return String(el.textContent || '').trim();
-  }
-
-  function setValue(id, value) {
-    const el = getEl(id);
-    if (!el) return;
-    if ('value' in el) el.value = value == null ? '' : String(value);
-    else el.textContent = value == null ? '' : String(value);
-  }
-
-  function currentProduct() {
-    const list = Array.isArray(window.brands) ? window.brands : [];
-    const selectedId = String(window.currentSelectedId || getValue('order-message-product-id') || '').trim();
-    return list.find(function (item) {
-      return String(item && item.id || '') === selectedId;
-    }) || null;
-  }
-
-  function customerPayload() {
-    const product = currentProduct() || {};
+  function normalizeProduct(base) {
+    base = base || {};
     return {
-      leadId: getValue('customer-email') || getValue('customer-contact') || ('lead-' + Date.now()),
-      fullName: getValue('customer-name'),
-      contact: getValue('customer-contact'),
-      email: getValue('customer-email'),
-      note: getValue('customer-note'),
-      productId: String(product.id || getValue('order-message-product-id') || '').trim(),
-      productName: String(product.name || getValue('order-message-product') || '').trim(),
-      sourcePage: location.href,
-      updatedAt: new Date().toISOString()
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || base.categoryImage || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || base.page || '').trim(),
+      page: String(base.page || '').trim(),
+      updatedAt: String(base.updatedAt || '').trim()
     };
   }
 
-  function warrantyPayload() {
-    const product = currentProduct() || {};
-    return {
-      requestId: getValue('warranty-ticket-code') || getValue('warranty-order-input') || ('war-' + Date.now()),
-      ticketCode: getValue('warranty-ticket-code'),
-      orderCode: getValue('warranty-order-input'),
-      contact: getValue('warranty-contact-input'),
-      product: getValue('warranty-product-input') || String(product.name || '').trim(),
-      issue: getValue('warranty-issue-input'),
-      statusText: getValue('warranty-status'),
-      productId: String(product.id || '').trim(),
-      sourcePage: location.href,
-      updatedAt: new Date().toISOString()
-    };
-  }
+  async function fetchCloudProducts() {
+    const url = new URL(API_URL);
+    url.searchParams.set('action', 'listProducts');
 
-  function orderPayload() {
-    const product = currentProduct() || {};
-    return {
-      orderId: getValue('activation-order-code') || getValue('activation-order-input') || getValue('order-message-code') || ('ord-' + Date.now()),
-      orderCode: getValue('activation-order-code') || getValue('activation-order-input') || getValue('order-message-code'),
-      productId: String(product.id || getValue('order-message-product-id') || '').trim(),
-      productName: String(product.name || getValue('order-message-product') || '').trim(),
-      price: String(product.price || getValue('order-message-price') || '').trim(),
-      shortMessage: getValue('order-message-short-preview'),
-      fullMessage: getValue('order-message-full-preview'),
-      statusText: getValue('order-message-status'),
-      customerName: getValue('customer-name'),
-      customerContact: getValue('customer-contact'),
-      customerEmail: getValue('customer-email'),
-      customerNote: getValue('customer-note'),
-      sourcePage: location.href,
-      updatedAt: new Date().toISOString()
-    };
-  }
-
-  function writeLocal(key, data) {
-    try { localStorage.setItem(key, JSON.stringify(data)); } catch (_) {}
-  }
-
-  function restoreLocal() {
-    const customer = safeParse(localStorage.getItem(LS_KEYS.customer) || 'null', null);
-    if (customer) {
-      if (!getValue('customer-name')) setValue('customer-name', customer.fullName || '');
-      if (!getValue('customer-contact')) setValue('customer-contact', customer.contact || '');
-      if (!getValue('customer-email')) setValue('customer-email', customer.email || '');
-      if (!getValue('customer-note')) setValue('customer-note', customer.note || '');
-    }
-    const warranty = safeParse(localStorage.getItem(LS_KEYS.warranty) || 'null', null);
-    if (warranty) {
-      if (!getValue('warranty-order-input')) setValue('warranty-order-input', warranty.orderCode || '');
-      if (!getValue('warranty-contact-input')) setValue('warranty-contact-input', warranty.contact || '');
-      if (!getValue('warranty-product-input')) setValue('warranty-product-input', warranty.product || '');
-      if (!getValue('warranty-issue-input')) setValue('warranty-issue-input', warranty.issue || '');
-    }
-  }
-
-  async function postAction(action, payload) {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: action, data: payload, payload: payload })
-    });
+    const res = await fetch(url.toString());
     const raw = await res.text();
     let json = null;
     try { json = JSON.parse(raw); } catch (_) {}
+
     if (!res.ok || !json || !json.ok) {
       throw new Error((json && json.error) || raw || ('HTTP ' + res.status));
     }
-    return json;
+
+    let items = json.items;
+    if (typeof items === 'string') {
+      try { items = JSON.parse(items); } catch (_) { items = []; }
+    }
+
+    return Array.isArray(items) ? items.map(normalizeProduct) : [];
   }
 
-  function debounceSave(name, fn, wait) {
-    clearTimeout(timers[name]);
-    timers[name] = setTimeout(fn, wait || 800);
+  function saveLocal(products) {
+    STORAGE_KEYS.forEach(function (key) {
+      try { localStorage.setItem(key, JSON.stringify(products)); } catch (_) {}
+    });
   }
 
-  async function saveCustomerReal() {
-    const data = customerPayload();
-    writeLocal(LS_KEYS.customer, data);
-    if (!data.fullName && !data.contact && !data.email) return;
+  function applyProducts(products) {
+    window.brands = products.slice();
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(); } catch (_) {}
+    }
+    if (typeof window.renderRecommendations === 'function') {
+      try { window.renderRecommendations(); } catch (_) {}
+    }
+    if (typeof window.refreshCurrentView === 'function') {
+      try { window.refreshCurrentView(); } catch (_) {}
+    }
+  }
+
+  async function bootCloudProducts() {
     try {
-      await postAction('saveCustomerLead', data);
-      console.log('[real-save] customer saved');
+      const products = await fetchCloudProducts();
+      if (!products.length) return;
+      saveLocal(products);
+      applyProducts(products);
+      console.log('[cloud-products] loaded', products.length);
     } catch (err) {
-      console.warn('[real-save] customer failed', err);
+      console.warn('[cloud-products] failed', err);
     }
-  }
-
-  async function saveWarrantyReal() {
-    const data = warrantyPayload();
-    writeLocal(LS_KEYS.warranty, data);
-    if (!data.orderCode && !data.contact && !data.issue && !data.ticketCode) return;
-    try {
-      await postAction('saveWarrantyRequest', data);
-      console.log('[real-save] warranty saved');
-    } catch (err) {
-      console.warn('[real-save] warranty failed', err);
-    }
-  }
-
-  async function saveOrderReal(force) {
-    const data = orderPayload();
-    writeLocal(LS_KEYS.order, data);
-    const hash = JSON.stringify(data);
-    if (!force && hash === lastOrderHash) return;
-    lastOrderHash = hash;
-    if (!data.orderCode && !data.productId && !data.customerContact && !data.customerEmail) return;
-    try {
-      await postAction('saveOrderRecord', data);
-      console.log('[real-save] order saved');
-    } catch (err) {
-      console.warn('[real-save] order failed', err);
-    }
-  }
-
-  function bindInput(id, saver, wait) {
-    const el = getEl(id);
-    if (!el || el.dataset.realSaveBound === '1') return;
-    el.dataset.realSaveBound = '1';
-    ['input', 'change', 'blur'].forEach(function (ev) {
-      el.addEventListener(ev, function () {
-        debounceSave(id + ':' + ev, saver, wait || 900);
-      });
-    });
-  }
-
-  function bindAll() {
-    ['customer-name','customer-contact','customer-email','customer-note'].forEach(function(id) {
-      bindInput(id, saveCustomerReal, 900);
-      bindInput(id, saveOrderReal, 1000);
-    });
-    ['warranty-order-input','warranty-contact-input','warranty-product-input','warranty-issue-input'].forEach(function(id) {
-      bindInput(id, saveWarrantyReal, 900);
-    });
-    ['activation-order-input','activation-order-code'].forEach(function(id) {
-      bindInput(id, function () { saveOrderReal(true); }, 600);
-    });
-  }
-
-  function patchFunctions() {
-    if (typeof window.startSimulation === 'function' && !window.startSimulation.__realSaveWrapped) {
-      const old = window.startSimulation;
-      window.startSimulation = function () {
-        try {
-          saveCustomerReal();
-          saveOrderReal(true);
-        } catch (_) {}
-        return old.apply(this, arguments);
-      };
-      window.startSimulation.__realSaveWrapped = true;
-    }
-
-    if (typeof window.generateWarrantyTicket === 'function' && !window.generateWarrantyTicket.__realSaveWrapped) {
-      const old = window.generateWarrantyTicket;
-      window.generateWarrantyTicket = function () {
-        const result = old.apply(this, arguments);
-        setTimeout(function () { saveWarrantyReal(); }, 120);
-        return result;
-      };
-      window.generateWarrantyTicket.__realSaveWrapped = true;
-    }
-
-    const chatSend = getEl('alpha-customer-chat-send');
-    if (chatSend && chatSend.dataset.realSaveBound !== '1') {
-      chatSend.dataset.realSaveBound = '1';
-      chatSend.addEventListener('click', function () {
-        setTimeout(function () {
-          saveCustomerReal();
-          saveOrderReal(true);
-        }, 80);
-      });
-    }
-  }
-
-  function startObservers() {
-    const obs = new MutationObserver(function () {
-      bindAll();
-      patchFunctions();
-    });
-    obs.observe(document.documentElement, { childList: true, subtree: true });
-  }
-
-  function startOrderWatcher() {
-    setInterval(function () {
-      saveOrderReal(false);
-    }, 2000);
-  }
-
-  function boot() {
-    restoreLocal();
-    bindAll();
-    patchFunctions();
-    startObservers();
-    startOrderWatcher();
-    window.addEventListener('beforeunload', function () {
-      try {
-        saveCustomerReal();
-        saveWarrantyReal();
-        saveOrderReal(true);
-      } catch (_) {}
-    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
+    document.addEventListener('DOMContentLoaded', bootCloudProducts, { once: true });
   } else {
-    boot();
+    bootCloudProducts();
+  }
+})();
+</script>
+
+
+
+<script id="alpha-final-current-api-sync">
+(function () {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
+  const STORAGE_KEYS = [
+    'alpha_zone_products_json_v34',
+    'alpha_zone_products_v20',
+    'alpha_zone_admin_draft_v20'
+  ];
+
+  function normalizeProduct(base) {
+    base = base || {};
+    return {
+      id: String(base.id || '').trim(),
+      name: String(base.name || '').trim(),
+      platformName: String(base.platformName || base.name || '').trim(),
+      logo: String(base.logo || base.categoryImage || '').trim(),
+      categoryImage: String(base.categoryImage || base.logo || '').trim(),
+      category: String(base.category || '').trim(),
+      price: String(base.price || '').trim(),
+      shortDescription: String(base.shortDescription || '').trim(),
+      detailedDescription: String(base.detailedDescription || '').trim(),
+      warranty: String(base.warranty || '').trim(),
+      link: String(base.link || base.page || '').trim(),
+      page: String(base.page || '').trim(),
+      updatedAt: String(base.updatedAt || '').trim()
+    };
+  }
+
+  function saveLocalProducts(products) {
+    STORAGE_KEYS.forEach(function (key) {
+      try { localStorage.setItem(key, JSON.stringify(products)); } catch (_) {}
+    });
+  }
+
+  function applyProducts(products) {
+    window.brands = Array.isArray(products) ? products.slice() : [];
+    try {
+      const input = document.getElementById('admin-json-input');
+      if (input) input.value = JSON.stringify(window.brands, null, 2);
+    } catch (_) {}
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(window.brands); } catch (_) {
+        try { window.renderProducts(); } catch (_) {}
+      }
+    }
+    if (typeof window.renderCategories === 'function') {
+      try { window.renderCategories(); } catch (_) {}
+    }
+    if (typeof window.renderRecommendations === 'function') {
+      try { window.renderRecommendations(window.activeCategory || window.currentCategory || 'Tất cả'); } catch (_) {}
+    }
+    if (typeof window.refreshCurrentView === 'function') {
+      try { window.refreshCurrentView(); } catch (_) {}
+    }
+  }
+
+  async function fetchProducts() {
+    const tryUrls = [
+      API_URL + '?action=listProducts',
+      API_URL + '?action=list'
+    ];
+
+    for (const url of tryUrls) {
+      try {
+        const res = await fetch(url);
+        const raw = await res.text();
+        let json = null;
+        try { json = JSON.parse(raw); } catch (_) {}
+        if (!res.ok || !json) continue;
+
+        if (Array.isArray(json.items)) return json.items.map(normalizeProduct);
+        if (typeof json.items === 'string') {
+          try {
+            const arr = JSON.parse(json.items);
+            if (Array.isArray(arr)) return arr.map(normalizeProduct);
+          } catch (_) {}
+        }
+        if (json.ok === true && Array.isArray(json.items)) return json.items.map(normalizeProduct);
+        if (json.success === true && Array.isArray(json.products)) return json.products.map(normalizeProduct);
+      } catch (_) {}
+    }
+    throw new Error('Không đọc được dữ liệu sản phẩm từ Apps Script');
+  }
+
+  async function bootSync() {
+    try {
+      const products = await fetchProducts();
+      if (!products.length) return;
+      saveLocalProducts(products);
+      applyProducts(products);
+      console.log('[alpha-final-current-api-sync] loaded', products.length);
+    } catch (err) {
+      console.warn('[alpha-final-current-api-sync]', err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootSync, { once: true });
+  } else {
+    bootSync();
   }
 })();
 </script>
