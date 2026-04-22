@@ -4963,6 +4963,15 @@ So tien: ${usdAmount} USDT`;
       lastReceiptData.usdtWalletAddress = selectedNetwork?.address || '';
       lastReceiptData.methodSummary = selectedPaymentMethod === 'bank' ? 'QR ngân hàng' : `USDT (${selectedNetwork?.code || 'N/A'})`;
       lastReceiptData.paymentConfirmedAt = new Date().toLocaleString('vi-VN');
+
+      try {
+        await sendOrderToFormspree(lastReceiptData);
+        setActivationStatus('Đã gửi thông tin đơn hàng và khách hàng về email quản trị.', 'success');
+      } catch (error) {
+        console.error('Formspree order submit failed:', error);
+        setActivationStatus('Đơn hàng đã được tạo nhưng chưa gửi được email thông báo. Vui lòng kiểm tra lại Formspree.', 'error');
+      }
+
       downloadReceiptPdf(lastReceiptData);
       openActivationPopupFromPayment();
     }
@@ -5326,6 +5335,115 @@ So tien: ${usdAmount} USDT`;
         email: (document.getElementById('customer-email')?.value || '').trim(),
         note: (document.getElementById('customer-note')?.value || '').trim()
       };
+    }
+
+
+    const FORMSPREE_ORDER_ENDPOINT = 'https://formspree.io/f/xdawywdn';
+
+    function safeText(value, fallback = '—') {
+      const text = String(value == null ? '' : value).trim();
+      return text || fallback;
+    }
+
+    function buildOrderEmailBody(receipt) {
+      const customer = collectCustomerInfo();
+      const product = getCurrentProduct() || {};
+      const paymentMethodLabel = receipt?.paymentMethod === 'usdt'
+        ? `USDT (${safeText(receipt?.usdtNetwork, 'USDT')})`
+        : 'QR ngân hàng MB Bank';
+      const bankTransferContent = safeText(receipt?.bankTransferContent || buildTransferContent(receipt), '—');
+      const orderCode = safeText(getFullReceiptCode(receipt?.orderCode || ''), '—');
+      const productLink = safeText(product?.link || window.location.href, window.location.href);
+
+      return [
+        'THÔNG BÁO ĐƠN HÀNG MỚI - ALPHA ZONE VIỆT NAM',
+        '',
+        '1. Thông tin khách hàng',
+        `- Họ tên: ${safeText(customer.name)}`,
+        `- Liên hệ: ${safeText(customer.contact)}`,
+        `- Email: ${safeText(customer.email)}`,
+        `- Ghi chú: ${safeText(customer.note)}`,
+        '',
+        '2. Thông tin đơn hàng',
+        `- Tên sản phẩm: ${safeText(receipt?.productName || product?.name)}`,
+        `- Mã sản phẩm: ${safeText(product?.id)}`,
+        `- Danh mục: ${safeText(receipt?.category || product?.category)}`,
+        `- Giá niêm yết: ${safeText(receipt?.price)}`,
+        `- Mã xác nhận 21 số: ${orderCode}`,
+        `- Nội dung chuyển khoản: ${bankTransferContent}`,
+        `- Phương thức thanh toán: ${paymentMethodLabel}`,
+        `- Tóm tắt phương thức: ${safeText(receipt?.methodSummary)}`,
+        `- Số USDT quy đổi: ${safeText(receipt?.usdtAmountUsd ? receipt.usdtAmountUsd + ' USDT' : '')}`,
+        `- Ví USDT: ${safeText(receipt?.usdtWalletAddress)}`,
+        `- Thời gian tạo đơn: ${safeText(receipt?.createdAt)}`,
+        `- Thời gian khách xác nhận thanh toán: ${safeText(receipt?.paymentConfirmedAt)}`,
+        '',
+        '3. Nguồn đơn hàng',
+        `- Trang hiện tại: ${safeText(window.location.href, '—')}`,
+        `- Link sản phẩm: ${productLink}`,
+        `- User agent: ${safeText(navigator.userAgent, '—')}`
+      ].join('\n');
+    }
+
+    function buildOrderFormspreePayload(receipt) {
+      const customer = collectCustomerInfo();
+      const product = getCurrentProduct() || {};
+      const orderCode = getFullReceiptCode(receipt?.orderCode || '');
+      const paymentMethodLabel = receipt?.paymentMethod === 'usdt'
+        ? `USDT (${safeText(receipt?.usdtNetwork, 'USDT')})`
+        : 'QR ngân hàng MB Bank';
+
+      return {
+        _subject: `Đơn hàng mới ${safeText(receipt?.productName || product?.name, 'Alpha Zone')} - ${safeText(orderCode, 'NO-CODE')}`,
+        customer_name: customer.name || '',
+        customer_contact: customer.contact || '',
+        email: customer.email || '',
+        customer_note: customer.note || '',
+        product_name: receipt?.productName || product?.name || '',
+        product_id: product?.id || '',
+        category: receipt?.category || product?.category || '',
+        price: receipt?.price || product?.price || '',
+        payment_method: paymentMethodLabel,
+        payment_summary: receipt?.methodSummary || '',
+        bank_transfer_content: receipt?.bankTransferContent || buildTransferContent(receipt),
+        order_code: orderCode,
+        usdt_amount: receipt?.usdtAmountUsd || '',
+        usdt_network: receipt?.usdtNetwork || '',
+        usdt_wallet_address: receipt?.usdtWalletAddress || '',
+        created_at: receipt?.createdAt || '',
+        payment_confirmed_at: receipt?.paymentConfirmedAt || '',
+        product_link: product?.link || window.location.href,
+        page_url: window.location.href,
+        message: buildOrderEmailBody(receipt)
+      };
+    }
+
+    async function sendOrderToFormspree(receipt) {
+      const payload = buildOrderFormspreePayload(receipt);
+      const response = await fetch(FORMSPREE_ORDER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let data = null;
+      try {
+        data = await response.json();
+      } catch (_) {
+        data = null;
+      }
+
+      if (!response.ok) {
+        const message = (data && Array.isArray(data.errors) && data.errors[0] && data.errors[0].message)
+          || (data && (data.error || data.message))
+          || ('HTTP ' + response.status);
+        throw new Error(message);
+      }
+
+      return data || { ok: true };
     }
 
     function validateCustomerInfo() {
