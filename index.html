@@ -15024,6 +15024,370 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 </script>
 
+<script id="alpha-appscript-website-sync-v1">
+(function () {
+  'use strict';
+
+  var API_URL = 'https://script.google.com/macros/s/AKfycbzQZ-kQnGMv_H-IDwITNVrPs2JClBpc_0Eb-GeR5HHsmGN8CbhSoSeu3mUXY4cJEIjK/exec';
+  var QUEUE_KEY = 'alpha_appscript_sync_queue_v1';
+  var LEAD_DEBOUNCE_MS = 900;
+  var leadTimer = null;
+
+  function nowVi() {
+    try { return new Date().toLocaleString('vi-VN'); }
+    catch (_) { return new Date().toISOString(); }
+  }
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function val(id) {
+    var node = el(id);
+    if (!node) return '';
+    return clean('value' in node ? node.value : node.textContent);
+  }
+
+  function safeJsonParse(raw, fallback) {
+    try { return JSON.parse(raw); } catch (_) { return fallback; }
+  }
+
+  function readQueue() {
+    return safeJsonParse(localStorage.getItem(QUEUE_KEY) || '[]', []);
+  }
+
+  function writeQueue(items) {
+    try { localStorage.setItem(QUEUE_KEY, JSON.stringify(Array.isArray(items) ? items : [])); } catch (_) {}
+  }
+
+  function addQueue(actionCandidates, payload) {
+    var queue = readQueue();
+    queue.unshift({
+      id: 'SYNC-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      actionCandidates: actionCandidates,
+      payload: payload,
+      createdAt: new Date().toISOString()
+    });
+    writeQueue(queue.slice(0, 80));
+  }
+
+  function setSmallStatus(id, message, type) {
+    var node = el(id);
+    if (!node) return;
+    node.textContent = message || '';
+    if (node.className && String(node.className).indexOf('admin-status') !== -1) {
+      node.className = 'admin-status' + (type ? ' ' + type : '');
+    }
+  }
+
+  async function postAction(action, payload) {
+    var res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(Object.assign({ action: action }, payload || {}))
+    });
+    var raw = await res.text();
+    var json = safeJsonParse(raw, null);
+    if (!res.ok || !json || json.ok === false) {
+      throw new Error((json && json.error) || raw || ('HTTP ' + res.status));
+    }
+    return json;
+  }
+
+  async function postFirstWorking(actionCandidates, payload) {
+    var actions = Array.isArray(actionCandidates) ? actionCandidates : [actionCandidates];
+    var lastError = null;
+    for (var i = 0; i < actions.length; i += 1) {
+      try { return await postAction(actions[i], payload); }
+      catch (err) { lastError = err; }
+    }
+    throw lastError || new Error('Không gọi được Apps Script.');
+  }
+
+  async function syncOrQueue(actionCandidates, payload, options) {
+    options = options || {};
+    try {
+      var data = await postFirstWorking(actionCandidates, payload);
+      if (options.statusId) setSmallStatus(options.statusId, options.successText || 'Đã đồng bộ về admin.', 'success');
+      return data;
+    } catch (err) {
+      addQueue(actionCandidates, payload);
+      if (options.statusId) setSmallStatus(options.statusId, (options.queueText || 'Chưa đồng bộ được, đã lưu hàng đợi.') + ' ' + clean(err.message || err), 'error');
+      return null;
+    }
+  }
+
+  async function flushQueue() {
+    var queue = readQueue();
+    if (!queue.length) return;
+    var remain = [];
+    for (var i = 0; i < queue.length; i += 1) {
+      var item = queue[i];
+      try { await postFirstWorking(item.actionCandidates, item.payload); }
+      catch (_) { remain.push(item); }
+    }
+    writeQueue(remain.slice(0, 80));
+  }
+
+  function getFullOrderCode(raw) {
+    try {
+      if (typeof window.getFullReceiptCode === 'function') return clean(window.getFullReceiptCode(raw || ''));
+    } catch (_) {}
+    return clean(raw || '').replace(/\D/g, '').slice(0, 21);
+  }
+
+  function getProductSnapshot() {
+    var p = null;
+    try { if (typeof window.getCurrentProduct === 'function') p = window.getCurrentProduct(); } catch (_) {}
+    if (!p && window.__alphaLastPaymentSnapshot) p = window.__alphaLastPaymentSnapshot;
+    if (!p && window.__alphaLastDetailSnapshot) p = window.__alphaLastDetailSnapshot;
+    p = p || {};
+    return {
+      productId: clean(p.id || window.currentSelectedId || val('order-message-product-id')),
+      productName: clean(p.name || p.platformName || val('order-message-product') || val('modal-title')),
+      category: clean(p.category || val('modal-category')),
+      price: clean(p.price || val('order-message-price')),
+      productLink: clean(p.link || p.page || window.location.href),
+      logo: clean(p.logo || p.categoryImage)
+    };
+  }
+
+  function collectCustomerInfo() {
+    return {
+      name: val('customer-name'),
+      contact: val('customer-contact'),
+      email: val('customer-email'),
+      note: val('customer-note')
+    };
+  }
+
+  function leadPayload(source) {
+    var customer = collectCustomerInfo();
+    var product = getProductSnapshot();
+    var leadId = 'LEAD-' + Date.now();
+    return {
+      item: {
+        leadId: leadId,
+        fullName: customer.name,
+        contact: customer.contact,
+        email: customer.email,
+        note: customer.note,
+        productId: product.productId,
+        productName: product.productName,
+        sourcePage: source || window.location.href,
+        pageUrl: window.location.href,
+        userAgent: navigator.userAgent,
+        createdAt: nowVi(),
+        updatedAt: nowVi()
+      }
+    };
+  }
+
+  function hasLeadData(payload) {
+    var item = payload && payload.item || {};
+    return !!(item.fullName || item.contact || item.email || item.note || item.productId || item.productName);
+  }
+
+  function scheduleLeadSync(source) {
+    clearTimeout(leadTimer);
+    leadTimer = setTimeout(function () {
+      var payload = leadPayload(source || 'customer-modal');
+      if (!hasLeadData(payload)) return;
+      syncOrQueue(['upsertCustomerLead', 'saveCustomerLead', 'addCustomerLead', 'createCustomerLead'], payload, {
+        statusId: 'alpha-customer-collect-helper',
+        successText: 'Đã lưu thông tin khách vào admin.',
+        queueText: 'Đã lưu tạm thông tin khách, sẽ đồng bộ lại khi API sẵn sàng.'
+      });
+    }, LEAD_DEBOUNCE_MS);
+  }
+
+  function orderPayload(receipt, source) {
+    var customer = collectCustomerInfo();
+    var product = getProductSnapshot();
+    receipt = receipt || window.lastReceiptData || {};
+    var orderCode = getFullOrderCode(receipt.orderCode || val('order-message-code') || val('activation-order-code'));
+    return {
+      item: {
+        orderId: 'ORD-' + Date.now(),
+        orderCode: orderCode,
+        productId: product.productId,
+        productName: clean(receipt.productName || product.productName),
+        category: clean(receipt.category || product.category),
+        price: clean(receipt.price || product.price),
+        statusText: clean(source || 'paymentConfirmed'),
+        paymentMethod: clean(receipt.paymentMethod || ''),
+        paymentSummary: clean(receipt.methodSummary || ''),
+        bankTransferContent: clean(receipt.bankTransferContent || ''),
+        usdtAmountUsd: clean(receipt.usdtAmountUsd || ''),
+        usdtNetwork: clean(receipt.usdtNetwork || ''),
+        usdtWalletAddress: clean(receipt.usdtWalletAddress || ''),
+        customerName: customer.name,
+        customerContact: customer.contact,
+        customerEmail: customer.email,
+        customerNote: customer.note,
+        sourcePage: window.location.href,
+        createdAt: clean(receipt.createdAt || nowVi()),
+        paymentConfirmedAt: clean(receipt.paymentConfirmedAt || nowVi()),
+        updatedAt: nowVi()
+      }
+    };
+  }
+
+  function warrantyPayload(source) {
+    var product = getProductSnapshot();
+    var ticketCode = val('warranty-ticket-code');
+    if (!ticketCode || ticketCode === '—') ticketCode = 'BH-' + Date.now();
+    return {
+      item: {
+        requestId: 'WR-' + Date.now(),
+        ticketCode: ticketCode,
+        orderCode: val('warranty-order-input'),
+        contact: val('warranty-contact-input'),
+        product: val('warranty-product-input') || product.productName,
+        productId: product.productId,
+        issue: val('warranty-issue-input'),
+        statusText: clean(source || 'đang tiếp nhận'),
+        sourcePage: window.location.href,
+        createdAt: nowVi(),
+        updatedAt: nowVi()
+      }
+    };
+  }
+
+  function registrationPayload(type) {
+    var name = val('seller-full-name');
+    var phone = val('seller-phone-input');
+    var email = val('seller-email-input');
+    return {
+      item: {
+        leadId: 'REG-' + Date.now(),
+        fullName: name,
+        contact: phone,
+        email: email,
+        note: [
+          val('seller-store-name') ? ('Shop/thương hiệu: ' + val('seller-store-name')) : '',
+          val('seller-region') ? ('Khu vực: ' + val('seller-region')) : '',
+          val('seller-website') ? ('Website/social: ' + val('seller-website')) : '',
+          val('seller-note')
+        ].filter(Boolean).join('\n'),
+        productId: clean(type || 'seller-registration'),
+        productName: 'Đăng ký thành viên / đối tác / CTV',
+        sourcePage: window.location.href,
+        createdAt: nowVi(),
+        updatedAt: nowVi()
+      }
+    };
+  }
+
+  function wrapAsyncFunction(name, after) {
+    var original = window[name];
+    if (typeof original !== 'function' || original.__alphaAppsWrapped) return false;
+    var wrapped = async function () {
+      var result;
+      try { result = await original.apply(this, arguments); }
+      finally {
+        try { await after.apply(this, arguments); } catch (err) { console.warn('Alpha Apps Script sync failed:', name, err); }
+      }
+      return result;
+    };
+    wrapped.__alphaAppsWrapped = true;
+    window[name] = wrapped;
+    return true;
+  }
+
+  function bindCustomerFields() {
+    ['customer-name', 'customer-contact', 'customer-email', 'customer-note'].forEach(function (id) {
+      var node = el(id);
+      if (!node || node.dataset.alphaAppsBound === '1') return;
+      node.dataset.alphaAppsBound = '1';
+      node.addEventListener('change', function () { scheduleLeadSync('customer-info-change'); });
+      node.addEventListener('blur', function () { scheduleLeadSync('customer-info-blur'); });
+      node.addEventListener('input', function () { scheduleLeadSync('customer-info-input'); });
+    });
+  }
+
+  function bindClickFallbacks() {
+    var paymentBtn = document.querySelector('[onclick*="confirmPaymentAndContinue"]');
+    if (paymentBtn && paymentBtn.dataset.alphaAppsBound !== '1') {
+      paymentBtn.dataset.alphaAppsBound = '1';
+      paymentBtn.addEventListener('click', function () {
+        scheduleLeadSync('payment-click');
+      }, true);
+    }
+
+    var warrantyBtn = document.querySelector('[onclick*="generateWarrantyTicket"]');
+    if (warrantyBtn && warrantyBtn.dataset.alphaAppsBound !== '1') {
+      warrantyBtn.dataset.alphaAppsBound = '1';
+      warrantyBtn.addEventListener('click', function () {
+        setTimeout(function () {
+          syncOrQueue(['upsertWarrantyRequest', 'saveWarrantyRequest', 'addWarrantyRequest', 'createWarrantyRequest'], warrantyPayload('đang tiếp nhận'), {
+            statusId: 'warranty-status',
+            successText: 'Đã lưu yêu cầu bảo hành vào admin.',
+            queueText: 'Đã lưu tạm yêu cầu bảo hành, sẽ đồng bộ lại khi API sẵn sàng.'
+          });
+        }, 100);
+      }, true);
+    }
+  }
+
+  function installWrappers() {
+    wrapAsyncFunction('confirmPaymentAndContinue', async function () {
+      var receipt = window.lastReceiptData || {};
+      await syncOrQueue(['upsertOrderRecord', 'saveOrderRecord', 'addOrderRecord', 'createOrderRecord'], orderPayload(receipt, 'paymentConfirmed'), {
+        statusId: 'activation-status',
+        successText: 'Đã lưu đơn hàng vào admin.',
+        queueText: 'Đã lưu tạm đơn hàng, sẽ đồng bộ lại khi API sẵn sàng.'
+      });
+    });
+
+    wrapAsyncFunction('generateWarrantyTicket', async function () {
+      await syncOrQueue(['upsertWarrantyRequest', 'saveWarrantyRequest', 'addWarrantyRequest', 'createWarrantyRequest'], warrantyPayload('đang tiếp nhận'), {
+        statusId: 'warranty-status',
+        successText: 'Đã lưu yêu cầu bảo hành vào admin.',
+        queueText: 'Đã lưu tạm yêu cầu bảo hành, sẽ đồng bộ lại khi API sẵn sàng.'
+      });
+    });
+
+    wrapAsyncFunction('saveCurrentProfile', async function () {
+      var payload = registrationPayload('seller-profile');
+      if (!hasLeadData(payload)) return;
+      await syncOrQueue(['upsertCustomerLead', 'saveCustomerLead', 'addCustomerLead', 'createCustomerLead'], payload, {
+        statusId: 'seller-login-status',
+        successText: 'Đã lưu hồ sơ đăng ký vào admin.',
+        queueText: 'Đã lưu tạm hồ sơ, sẽ đồng bộ lại khi API sẵn sàng.'
+      });
+    });
+  }
+
+  function boot() {
+    bindCustomerFields();
+    bindClickFallbacks();
+    installWrappers();
+    flushQueue();
+    setTimeout(function () { bindCustomerFields(); bindClickFallbacks(); installWrappers(); flushQueue(); }, 600);
+    setTimeout(function () { bindCustomerFields(); bindClickFallbacks(); installWrappers(); flushQueue(); }, 1800);
+  }
+
+  window.alphaAppsScriptSync = {
+    syncLead: function () { return syncOrQueue(['upsertCustomerLead', 'saveCustomerLead', 'addCustomerLead', 'createCustomerLead'], leadPayload('manual'), {}); },
+    syncOrder: function () { return syncOrQueue(['upsertOrderRecord', 'saveOrderRecord', 'addOrderRecord', 'createOrderRecord'], orderPayload(window.lastReceiptData || {}, 'manual'), {}); },
+    syncWarranty: function () { return syncOrQueue(['upsertWarrantyRequest', 'saveWarrantyRequest', 'addWarrantyRequest', 'createWarrantyRequest'], warrantyPayload('manual'), {}); },
+    flushQueue: flushQueue,
+    queueKey: QUEUE_KEY,
+    apiUrl: API_URL
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
+  window.addEventListener('online', flushQueue);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) flushQueue(); });
+})();
+</script>
+
 </body>
 
 </html>
