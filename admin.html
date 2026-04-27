@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Admin - Sản phẩm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#f4f4f2;
+      --bg-elev:#ffffffcc;
+      --bg-panel:#ffffffb8;
+      --text:#0a0a0a;
+      --muted:#5f5f5f;
+      --line:#00000014;
+      --line-strong:#00000022;
+      --shadow:0 10px 30px rgba(0,0,0,.05);
+      --shadow-lg:0 24px 60px rgba(0,0,0,.08);
+      --halo:0 0 0 1px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.05);
+      --input:#ffffffb3;
+      --primary:#0b0b0b;
+      --soft:#f0f0ee;
+      --success:#111;
+      --danger:#000;
+      --warning:#1a1a1a;
+      --accent:#deded8;
+    }
+    body.dark {
+      --bg:#090909;
+      --bg-elev:#111111c7;
+      --bg-panel:#151515b8;
+      --text:#fafafa;
+      --muted:#b6b6b6;
+      --line:#ffffff12;
+      --line-strong:#ffffff22;
+      --shadow:0 14px 40px rgba(0,0,0,.32);
+      --shadow-lg:0 28px 80px rgba(0,0,0,.42);
+      --halo:0 0 0 1px rgba(255,255,255,.06), 0 18px 48px rgba(255,255,255,.04);
+      --input:#151515cc;
+      --primary:#fff;
+      --soft:#121212;
+      --accent:#1d1d1d;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body {
+      font-family:'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(0,0,0,.045), transparent 24%),
+        radial-gradient(circle at 82% 12%, rgba(0,0,0,.04), transparent 22%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+      min-height:100vh;
+      transition:background .35s ease, color .25s ease;
+    }
+    body.dark {
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255,255,255,.05), transparent 24%),
+        radial-gradient(circle at 82% 12%, rgba(255,255,255,.04), transparent 22%),
+        linear-gradient(180deg, #050505, var(--bg));
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image: linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,.96), transparent 88%);
+      opacity:.4;
+    }
+    body.dark::before{
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    }
+    .glass {
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, var(--bg-elev), var(--bg-panel));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow), var(--halo);
+      border-radius:28px;
+      transition:transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .glass:hover { box-shadow:var(--shadow-lg), var(--halo); }
+    .glass::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,.38), transparent 20%, transparent 72%, rgba(0,0,0,.03));
+      pointer-events:none;
+    }
+    body.dark .glass::after{
+      background:linear-gradient(135deg, rgba(255,255,255,.08), transparent 22%, transparent 72%, rgba(255,255,255,.025));
+    }
+    .card{padding:20px}
+    .card-tight{padding:16px}
+    .field, .area, .select {
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:13px 15px;
+      background:var(--input);
+      color:var(--text);
+      outline:none;
+      transition:.2s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.28);
+    }
+    body.dark .field, body.dark .area, body.dark .select { box-shadow:inset 0 1px 0 rgba(255,255,255,.04); }
+    .field::placeholder, .area::placeholder { color:var(--muted); }
+    .field:focus, .area:focus, .select:focus {
+      border-color:var(--line-strong);
+      box-shadow:0 0 0 4px rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.06);
+      transform:translateY(-1px);
+    }
+    body.dark .field:focus, body.dark .area:focus, body.dark .select:focus {
+      box-shadow:0 0 0 4px rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.28);
+    }
+    .area{min-height:110px; resize:vertical}
+    .tab-btn, .subtab-btn, .chip, .btn {
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.54);
+      color:var(--text);
+      transition:.2s ease;
+      box-shadow:0 8px 20px rgba(0,0,0,.04);
+    }
+    body.dark .tab-btn, body.dark .subtab-btn, body.dark .chip, body.dark .btn { background:rgba(255,255,255,.03); }
+    .tab-btn:hover, .subtab-btn:hover, .chip:hover, .btn:hover { transform:translateY(-1px); border-color:var(--line-strong); }
+    .tab-btn.active, .subtab-btn.active, .chip.active {
+      background:var(--primary);
+      color:var(--bg);
+      border-color:var(--primary);
+      box-shadow:0 16px 36px rgba(0,0,0,.12);
+    }
+    body.dark .tab-btn.active, body.dark .subtab-btn.active, body.dark .chip.active { color:#060606; }
+    .btn-primary{ background:var(--primary); color:var(--bg); border-color:var(--primary); }
+    .btn-primary:hover{ filter:brightness(.96); }
+    .btn-danger{ background:transparent; border-color:var(--text); color:var(--text); }
+    .btn-success{ background:var(--soft); }
+    .btn-ghost{ background:transparent; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .hidden-pane { display:none; }
+    .metric {
+      padding:18px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.44);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.26);
+    }
+    body.dark .metric { background:rgba(255,255,255,.03); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+    .metric-label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .metric-value{ font-size:30px; font-weight:800; margin-top:8px; }
+    .muted{ color:var(--muted); }
+    .divider{ border-color:var(--line); }
+    .section-title{ font-size:1.35rem; font-weight:800; letter-spacing:-.02em; }
+    .small{ font-size:.92rem; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.55); border:1px solid var(--line); color:var(--muted);
+    }
+    body.dark .badge { background:rgba(255,255,255,.04); }
+    .pill-status-ok{ color:var(--text); background:rgba(255,255,255,.7); border-color:var(--line); }
+    .pill-status-warn{ color:var(--text); background:rgba(255,255,255,.55); border-color:var(--line); }
+    .pill-status-err{ color:var(--text); background:rgba(255,255,255,.4); border-color:var(--line); }
+    table { border-collapse: separate; border-spacing:0; }
+    th, td { border-color: var(--line) !important; }
+    thead tr { background: rgba(0,0,0,.035) !important; }
+    body.dark thead tr { background: rgba(255,255,255,.04) !important; }
+    tbody tr:nth-child(odd) { background: rgba(0,0,0,.02); }
+    body.dark tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
+    .soft-panel {
+      border-radius:24px;
+      background:rgba(255,255,255,.38);
+      border:1px solid var(--line);
+      padding:18px;
+    }
+    body.dark .soft-panel { background:rgba(255,255,255,.03); }
+    .product-card {
+      background:rgba(255,255,255,.38);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:16px;
+      transition:.2s ease;
+    }
+    body.dark .product-card { background:rgba(255,255,255,.03); }
+    .product-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+    .ring-dot{ width:10px; height:10px; border-radius:999px; background:currentColor; box-shadow:0 0 0 6px rgba(0,0,0,.06); }
+    body.dark .ring-dot{ box-shadow:0 0 0 6px rgba(255,255,255,.05); }
+    .hero-title{ letter-spacing:-.04em; }
+    .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; }
+    .insight-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .insight-card{ padding:16px; border-radius:22px; border:1px solid var(--line); background:rgba(255,255,255,.4); }
+    body.dark .insight-card{ background:rgba(255,255,255,.03); }
+    .insight-value{ font-size:1.5rem; font-weight:800; }
+    .chat-bubble{ border-radius:22px; padding:14px 16px; border:1px solid var(--line); max-width:86%; }
+    .chat-in{ background:rgba(255,255,255,.65); }
+    .chat-out{ background:var(--primary); color:var(--bg); margin-left:auto; }
+    body.dark .chat-in{ background:rgba(255,255,255,.04); }
+    body.dark .chat-out{ color:#090909; }
+    .toggle-wrap{ display:flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.5); }
+    body.dark .toggle-wrap{ background:rgba(255,255,255,.03); }
+    .switch{ position:relative; width:52px; height:30px; border-radius:999px; background:var(--accent); cursor:pointer; transition:.2s ease; }
+    .switch::after{ content:""; position:absolute; top:4px; left:4px; width:22px; height:22px; border-radius:999px; background:var(--primary); transition:.2s ease; }
+    body.dark .switch::after{ transform:translateX(22px); background:#fff; }
+    .kpi-line{ height:8px; border-radius:999px; overflow:hidden; background:rgba(0,0,0,.08); }
+    .kpi-line > span{ display:block; height:100%; border-radius:999px; background:var(--primary); }
+    body.dark .kpi-line{ background:rgba(255,255,255,.08); }
+    .floating-label{ font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); }
+    .mini-note{ font-size:12px; color:var(--muted); }
+    @media (max-width: 1024px){ .insight-grid{ grid-template-columns:1fr; } }
+    @media (max-width: 768px) {
+      .metric-value{ font-size:22px; }
+      .card { padding:16px; }
+      .hero-actions{ flex-direction:column; }
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.2px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1 {
+      font-weight: 400 !important;
+      letter-spacing: -0.6px;
+    }
+    h2 {
+      font-weight: 400 !important;
+      letter-spacing: -0.35px;
+    }
+    h3, .font-semibold {
+      font-weight: 400 !important;
+      letter-spacing: -0.15px;
+    }
+    .text-slate-500, .text-slate-400, .text-sm, .text-xs, p, label, input, textarea, td, th {
+      font-weight: 300;
+    }
+    .mono {
+      font-weight: 300;
+      letter-spacing: 0.35px;
+    }
+    button, .tab-btn, .subtab-btn, .font-medium {
+      font-weight: 400 !important;
+      letter-spacing: 0;
+    }
+    input::placeholder, textarea::placeholder {
+      font-weight: 300;
+      opacity: 0.72;
+    }
+
+/* --- overflow safety --- */
+body, .glass, .card, .card-tight, .soft-panel, .product-card, table, td, th, .badge, .chat-bubble, .field, .area, .select, .mini-note {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+table { table-layout: fixed; }
+th, td { max-width: 0; }
+.mono { word-break: break-all; }
+.product-card { min-width: 0; }
+.product-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-visual {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.75), transparent 25%),
+    linear-gradient(180deg, rgba(255,255,255,.5), rgba(0,0,0,.02));
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.product-visual img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.08));
+}
+.audit-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+.audit-card {
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,255,255,.12));
+}
+.smart-list { display:grid; gap:10px; }
+.smart-list .item {
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.22);
+}
+.inline-chip-row { display:flex; flex-wrap:wrap; gap:8px; }
+.inline-chip {
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.35);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  cursor:pointer;
+}
+.preview-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+.icon-stat {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* --- stable records/orders table fix: keep UI unchanged, prevent order rows from making layout jump --- */
+.records-stable-table {
+  width: 100%;
+  min-width: 1180px;
+  table-layout: fixed;
+}
+.records-stable-table th,
+.records-stable-table td {
+  vertical-align: top;
+}
+.records-stable-table .cell-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 4.8em;
+}
+.records-stable-table .cell-compact {
+  max-width: 220px;
+}
+.records-stable-table .cell-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  word-break: break-all;
+}
+.records-stable-table .cell-money {
+  white-space: nowrap;
+}
+.records-stable-table .cell-status {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.38);
+}
+body.dark .records-stable-table .cell-status {
+  background: rgba(255,255,255,.04);
+}
+.records-stable-table .cell-muted {
+  color: var(--muted);
+}
+
+/* --- mobile stability: prevent horizontal shake while keeping the same UI --- */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: pan-y;
+}
+body { position: relative; }
+.max-w-7xl, .glass, .card, .card-tight, .soft-panel, .product-card { max-width: 100%; }
+input, textarea, select, button { font-size: 16px; }
+#tableWrap {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+@media (hover:none), (max-width:768px) {
+  .glass:hover, .product-card:hover, .tab-btn:hover, .subtab-btn:hover, .chip:hover, .btn:hover,
+  .field:focus, .area:focus, .select:focus {
+    transform: none !important;
+  }
+  body { padding-left: 12px !important; padding-right: 12px !important; }
+  .glass { border-radius: 24px; }
+  .card { padding: 16px; }
+  .field, .area, .select { min-height: 54px; }
+  .hero-title { font-size: 2rem !important; }
+  .records-stable-table { min-width: 960px; }
+}
+
+</style>
+<link rel="stylesheet" href="az-fix.css">
+<script src="az-fix.js" defer></script>
+  <link rel="stylesheet" href="az-fix.css">
+  <link rel="stylesheet" href="az-appscript-live.css">
+</head>
+<body class="p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <section class="glass card">
+      <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-5">
+        <div class="space-y-3 max-w-3xl">
+          <div class="badge"><span class="ring-dot" style="color:var(--text)"></span> Monochrome Halo Control Center</div>
+          <div>
+            <h1 class="hero-title text-3xl md:text-5xl font-extrabold">Admin tổng Alpha Zone</h1>
+            <p class="muted mt-3 max-w-2xl">Bản pro UI trắng đen theo vibe tối giản cao cấp: gọn, sang, dễ đọc, có dark mode, smart insights, chat mini và khu thao tác nhanh.</p>
+            <div class="text-xs muted mt-3 mono break-all">https://script.google.com/macros/s/AKfycbyLALQc-nf6zFgmvH1jILt5SOGZXcPio6uQFO8g85V8gtcCkmAuDax0pYHr_nmkqcB1/exec</div>
+          </div>
+          <div class="hero-actions mt-2">
+            <button id="pingBtn" class="btn px-4 py-3 rounded-2xl font-medium">Ping API</button>
+            <button id="reloadAllBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Tải lại tất cả</button>
+            <button id="refreshSmartBtn" class="btn btn-success px-4 py-3 rounded-2xl font-medium">Làm mới khu thông minh</button>
+          </div>
+        </div>
+        <div class="space-y-4 w-full xl:max-w-[560px]">
+          <div class="flex items-center justify-between gap-3">
+            <div class="toggle-wrap">
+              <span class="mini-note">Light / Dark</span>
+              <button id="themeToggle" type="button" class="switch" aria-label="Đổi giao diện"></button>
+            </div>
+            <div class="badge" id="liveClock">--:--</div>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="metric">
+              <div class="metric-label">Sản phẩm</div>
+              <div id="metricProducts" class="metric-value">0</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Leads</div>
+              <div id="metricLeads" class="metric-value">0</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Bảo hành</div>
+              <div id="metricWarranty" class="metric-value">0</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Đơn hàng</div>
+              <div id="metricOrders" class="metric-value">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-grid mt-5">
+        <div class="insight-card">
+          <div class="floating-label">Hiệu suất dữ liệu</div>
+          <div id="insightFreshness" class="insight-value mt-2">0%</div>
+          <div class="kpi-line mt-3"><span id="freshnessBar" style="width:0%"></span></div>
+          <div class="mini-note mt-2">Tỷ lệ bản ghi có nội dung hiển thị tốt trong phiên hiện tại.</div>
+        </div>
+        <div class="insight-card">
+          <div class="floating-label">Ưu tiên hôm nay</div>
+          <div id="insightPriority" class="insight-value mt-2">—</div>
+          <div class="mini-note mt-2">Tự gợi ý việc cần chú ý dựa trên dữ liệu đã tải.</div>
+        </div>
+        <div class="insight-card">
+          <div class="floating-label">Khu hành động nhanh</div>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <button class="btn btn-ghost px-3 py-2 rounded-xl text-sm" data-quicktab="products">Mở sản phẩm</button>
+            <button class="btn btn-ghost px-3 py-2 rounded-xl text-sm" data-quicktab="smart">Mở smart</button>
+            <button class="btn btn-ghost px-3 py-2 rounded-xl text-sm" data-quicktab="registration">Mở đăng ký</button>
+          </div>
+          <div class="mini-note mt-3">Nhảy nhanh đến khu thao tác chính.</div>
+        </div>
+      </div>
+      <div id="statusBox" class="mt-4 text-sm muted">Sẵn sàng.</div>
+    </section>
+
+    <section class="glass card-tight">
+      <div class="flex flex-wrap gap-3">
+        <button class="tab-btn active px-4 py-3 rounded-2xl font-medium" data-tab="products">Sản phẩm</button>
+        <button class="tab-btn px-4 py-3 rounded-2xl font-medium" data-tab="records">Khách / Bảo hành / Đơn hàng</button>
+        <button class="tab-btn px-4 py-3 rounded-2xl font-medium" data-tab="smart">Tính năng thông minh</button>
+        <button class="tab-btn px-4 py-3 rounded-2xl font-medium" data-tab="registration">Đăng ký</button>
+      </div>
+    </section>
+
+    <section id="pane-products" class="space-y-6">
+      <div class="grid grid-cols-1 xl:grid-cols-[430px,1fr] gap-6">
+        <section class="glass card">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <div>
+              <h2 class="section-title">Sản phẩm</h2>
+              <p class="small muted mt-1">Thêm, sửa, xóa và đẩy JSON sản phẩm.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <input id="f-id" class="field" placeholder="ID sản phẩm" />
+            <input id="f-name" class="field" placeholder="Tên sản phẩm" />
+            <input id="f-platformName" class="field" placeholder="Tên nền tảng" />
+            <input id="f-category" class="field" placeholder="Danh mục" />
+            <input id="f-price" class="field" placeholder="Giá" />
+            <input id="f-logo" class="field" placeholder="Link logo" />
+            <input id="f-categoryImage" class="field" placeholder="Link ảnh danh mục" />
+            <textarea id="f-shortDescription" class="area" placeholder="Mô tả ngắn"></textarea>
+            <textarea id="f-detailedDescription" class="area" placeholder="Mô tả chi tiết"></textarea>
+            <textarea id="f-warranty" class="area" placeholder="Bảo hành"></textarea>
+            <input id="f-link" class="field" placeholder="Link hoặc page" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-4">
+            <button id="saveBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Lưu / cập nhật</button>
+            <button id="clearBtn" class="btn px-4 py-3 rounded-2xl font-medium">Xóa form</button>
+            <button id="deleteBtn" class="btn btn-danger px-4 py-3 rounded-2xl font-medium">Xóa theo ID</button>
+            <button id="reloadProductsBtn" class="btn px-4 py-3 rounded-2xl font-medium">Nạp danh sách</button>
+          </div>
+
+          <hr class="divider my-5">
+
+          <div class="space-y-3">
+            <div class="text-lg font-semibold">Đẩy toàn bộ JSON</div>
+            <textarea id="bulkJson" class="area mono" style="min-height:220px" placeholder='[{"id":"notion-plus","name":"Notion Plus"}]'></textarea>
+            <div class="grid grid-cols-2 gap-3">
+              <button id="loadCurrentJsonBtn" class="btn px-4 py-3 rounded-2xl font-medium">Nạp JSON hiện tại</button>
+              <button id="pushAllBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Push all</button>
+            </div>
+          </div>
+        </section>
+
+<section class="glass card space-y-5">
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+    <div>
+      <h2 class="section-title">Danh sách sản phẩm</h2>
+      <p class="small muted mt-1">Bấm Sửa để nạp ngược vào form. Bản này có thêm ảnh lớn, sửa hàng loạt và kiểm tra lỗi hiển thị.</p>
+    </div>
+    <input id="searchProductsInput" class="field max-w-sm" placeholder="Tìm ID, tên, danh mục..." />
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[320px,1fr] gap-4">
+    <div class="soft-panel space-y-3">
+      <div class="font-semibold">Xem nhanh ảnh sản phẩm</div>
+      <div id="productVisualBox" class="product-visual">
+        <div class="muted text-sm text-center px-6">Chọn một sản phẩm để xem ảnh rõ hơn.</div>
+      </div>
+      <div id="productVisualMeta" class="text-sm muted">Chưa chọn sản phẩm.</div>
+    </div>
+
+    <div class="soft-panel space-y-4">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <div class="font-semibold">Sửa hàng loạt sản phẩm</div>
+          <div class="small muted mt-1">Lọc theo 1 điều kiện rồi thay đồng loạt 1 trường. Có thể sync sang khối JSON trước khi push.</div>
+        </div>
+        <div id="bulkEditMatchCount" class="badge">0 khớp</div>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3">
+        <select id="bulkEditMatchField" class="select"></select>
+        <input id="bulkEditMatchValue" class="field" placeholder="Giá trị cần khớp, ví dụ: AI / Notion / 55.000" />
+        <select id="bulkEditTargetField" class="select"></select>
+        <input id="bulkEditNewValue" class="field" placeholder="Giá trị mới cần áp dụng" />
+      </div>
+      <div class="grid md:grid-cols-[1fr,1fr,1fr] gap-3">
+        <button id="previewBulkEditBtn" class="btn px-4 py-3 rounded-2xl font-medium">Xem trước</button>
+        <button id="applyBulkEditBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Áp dụng tạm vào danh sách</button>
+        <button id="syncBulkEditToJsonBtn" class="btn px-4 py-3 rounded-2xl font-medium">Đưa vào JSON</button>
+      </div>
+      <div id="bulkEditPreview" class="preview-grid"></div>
+      <div class="mini-note">Mẹo: sau khi xem trước ổn, bấm “Đưa vào JSON” rồi dùng Push all để đồng bộ lên hệ thống.</div>
+    </div>
+  </div>
+
+  <div id="countProductsBox" class="text-sm muted">0 sản phẩm</div>
+  <div id="productList" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4"></div>
+</section>
+
+      </div>
+    </section>
+
+    <section id="pane-records" class="hidden-pane space-y-6">
+      <section class="glass card-tight">
+        <div class="flex flex-wrap gap-3">
+          <button class="subtab-btn active px-4 py-3 rounded-2xl font-medium" data-subtab="leads">CustomerLeads</button>
+          <button class="subtab-btn px-4 py-3 rounded-2xl font-medium" data-subtab="warranty">WarrantyRequests</button>
+          <button class="subtab-btn px-4 py-3 rounded-2xl font-medium" data-subtab="orders">OrderRecords</button>
+        </div>
+      </section>
+
+      <section class="glass card space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input id="searchRecordsInput" class="field md:col-span-2" placeholder="Tìm theo tên, email, liên hệ, mã đơn, sản phẩm..." />
+          <div id="countRecordsBox" class="field bg-transparent flex items-center">0 bản ghi</div>
+        </div>
+        <div id="tableWrap" class="overflow-auto"></div>
+      </section>
+    </section>
+
+<section id="pane-smart" class="hidden-pane space-y-6">
+  <div class="grid grid-cols-1 xl:grid-cols-[1.15fr,.85fr] gap-6">
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Lọc 1 yếu tố hàng loạt</h2>
+        <p class="small muted mt-1">Chọn một loại dữ liệu và lọc theo đúng một trường để ra tập kết quả nhanh.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-3">
+        <select id="bulkFilterDataset" class="select">
+          <option value="products">Sản phẩm</option>
+          <option value="leads">Khách hàng tiềm năng</option>
+          <option value="warranty">Bảo hành</option>
+          <option value="orders">Đơn hàng</option>
+        </select>
+        <select id="bulkFilterField" class="select"></select>
+      </div>
+      <div class="grid md:grid-cols-[1fr,160px] gap-3">
+        <input id="bulkFilterValue" class="field" placeholder="Nhập giá trị cần lọc, ví dụ: pending / Gmail / Notion" />
+        <button id="runBulkFilterBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Lọc ngay</button>
+      </div>
+      <div class="soft-panel">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <div class="font-semibold">Kết quả lọc</div>
+          <div id="bulkFilterCount" class="badge">0 kết quả</div>
+        </div>
+        <div id="bulkFilterPreview" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Kiểm tra thông minh</h2>
+        <p class="small muted mt-1">Ưu tiên cho các luồng nổi bật của Alpha Zone như sản phẩm, bảo hành, đơn hàng và liên hệ nhanh.</p>
+      </div>
+      <div class="audit-grid">
+        <div class="audit-card">
+          <div class="muted text-xs">Thiếu ảnh</div>
+          <div id="auditMissingImage" class="text-2xl mt-2">0</div>
+          <div class="icon-stat">Sản phẩm chưa có logo hoặc ảnh danh mục</div>
+        </div>
+        <div class="audit-card">
+          <div class="muted text-xs">Thiếu bảo hành</div>
+          <div id="auditMissingWarranty" class="text-2xl mt-2">0</div>
+          <div class="icon-stat">Nên bổ sung theo luồng “Phiếu bảo hành điện tử”</div>
+        </div>
+        <div class="audit-card">
+          <div class="muted text-xs">Thiếu giá</div>
+          <div id="auditMissingPrice" class="text-2xl mt-2">0</div>
+          <div class="icon-stat">Khó chốt đơn nếu khách chưa thấy mức giá</div>
+        </div>
+        <div class="audit-card">
+          <div class="muted text-xs">Mã trùng</div>
+          <div id="auditDuplicateId" class="text-2xl mt-2">0</div>
+          <div class="icon-stat">Nên rà lại để tránh ghi đè nhầm sản phẩm</div>
+        </div>
+      </div>
+      <div class="smart-list" id="smartSuggestions"></div>
+    </section>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[1fr,1fr] gap-6">
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Trả kết quả bảo hành</h2>
+        <p class="small muted mt-1">Tra cứu theo mã phiếu, mã đơn hoặc số liên hệ, sau đó trả kết quả nhanh cho khách.</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr,160px] gap-3">
+        <input id="warrantyLookupInput" class="field" placeholder="Ví dụ: WR-001 / ORD-123 / 09xxxxxxx" />
+        <button id="lookupWarrantyBtn" class="btn btn-success px-4 py-3 rounded-2xl font-medium">Tra cứu</button>
+      </div>
+      <div class="inline-chip-row">
+        <button class="inline-chip" data-fill-warranty="đang tiếp nhận">Đang tiếp nhận</button>
+        <button class="inline-chip" data-fill-warranty="đã xác nhận bảo hành">Đã xác nhận</button>
+        <button class="inline-chip" data-fill-warranty="đang đổi tài khoản">Đang đổi tài khoản</button>
+        <button class="inline-chip" data-fill-warranty="đã hoàn tất">Đã hoàn tất</button>
+      </div>
+      <div id="warrantyResultBox" class="soft-panel">
+        <div class="muted">Chưa có kết quả tra cứu.</div>
+      </div>
+      <div class="grid md:grid-cols-[1fr,180px] gap-3">
+        <textarea id="warrantyReplyOutput" class="area" placeholder="Nội dung trả kết quả bảo hành sẽ hiện ở đây"></textarea>
+        <button id="copyWarrantyReplyBtn" class="btn px-4 py-3 rounded-2xl font-medium">Copy nội dung</button>
+      </div>
+    </section>
+
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Mã kích hoạt 21 số</h2>
+        <p class="small muted mt-1">Bám theo luồng xác nhận đơn hàng trên Alpha Zone để kiểm tra nhanh mã khách gửi.</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr,160px] gap-3">
+        <input id="code21Input" class="field mono" placeholder="Dán mã 21 số tại đây" />
+        <button id="validateCode21Btn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Kiểm tra mã</button>
+      </div>
+      <div id="code21Result" class="soft-panel">
+        <div class="muted">Chưa có kiểm tra nào.</div>
+      </div>
+      <div class="grid md:grid-cols-[1fr,1fr] gap-3">
+        <button id="generateCode21Btn" class="btn px-4 py-3 rounded-2xl font-medium">Tạo mã mẫu 21 số</button>
+        <button id="copyCode21Btn" class="btn px-4 py-3 rounded-2xl font-medium">Copy mã đang có</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[1.05fr,.95fr] gap-6">
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Reply tin nhắn khách hàng</h2>
+        <p class="small muted mt-1">Soạn trả lời nhanh dựa trên loại nhu cầu. Hệ thống tự ghép ngữ cảnh từ sản phẩm, bảo hành hoặc đăng ký.</p>
+      </div>
+      <div class="inline-chip-row">
+        <button class="inline-chip" data-channel-fill="Hotline 0357130499">Hotline</button>
+        <button class="inline-chip" data-channel-fill="Zalo Alpha Zone">Zalo</button>
+        <button class="inline-chip" data-channel-fill="Messenger Alpha Zone Việt Nam">Messenger</button>
+        <button class="inline-chip" data-channel-fill="[email protected]">Email</button>
+      </div>
+      <div class="grid xl:grid-cols-[220px,1fr,1fr] gap-4">
+        <div class="space-y-3">
+          <select id="replyIntent" class="select">
+            <option value="interest">Khách hỏi sản phẩm</option>
+            <option value="warranty">Khách hỏi bảo hành</option>
+            <option value="order">Khách hỏi đơn hàng</option>
+            <option value="registration">Khách đăng ký hợp tác</option>
+          </select>
+          <input id="replyCustomerName" class="field" placeholder="Tên khách hàng" />
+          <input id="replyProduct" class="field" placeholder="Tên sản phẩm / gói" />
+          <input id="replyStatus" class="field" placeholder="Trạng thái / ghi chú ngắn" />
+          <input id="replyChannelHint" class="field" placeholder="Kênh hỗ trợ gợi ý: hotline / zalo / messenger / email" />
+          <button id="generateReplyBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium w-full">Tạo reply</button>
+          <button id="copyReplyBtn" class="btn px-4 py-3 rounded-2xl font-medium w-full">Copy reply</button>
+        </div>
+        <textarea id="replyCustomerMessage" class="area" style="min-height:240px" placeholder="Dán tin nhắn khách hàng vào đây"></textarea>
+        <textarea id="replyOutput" class="area" style="min-height:240px" placeholder="Reply sẽ xuất hiện tại đây"></textarea>
+      </div>
+    </section>
+
+    <section class="glass card space-y-5">
+      <div>
+        <h2 class="section-title">Mini chat preview</h2>
+        <p class="small muted mt-1">Xem nhanh tin nhắn khách và câu trả lời theo kiểu chat để dễ duyệt trước khi gửi.</p>
+      </div>
+      <div class="soft-panel space-y-3 min-h-[320px]" id="chatPreview">
+        <div class="chat-bubble chat-in">Khách: Em muốn kiểm tra bảo hành đơn hôm trước.</div>
+        <div class="chat-bubble chat-out">Alpha Zone: Bên em đã nhận thông tin, đang kiểm tra giúp anh/chị ngay.</div>
+      </div>
+      <div class="mini-note">Khung này tự cập nhật sau khi bạn bấm “Tạo reply”.</div>
+    </section>
+  </div>
+</section>
+
+<section id="pane-registration"
+ class="hidden-pane space-y-6">
+      <section class="glass card-tight">
+        <div class="flex flex-wrap gap-3">
+          <button class="chip active px-4 py-3 rounded-2xl font-medium" data-regtab="member">Thành viên</button>
+          <button class="chip px-4 py-3 rounded-2xl font-medium" data-regtab="partner">Đối tác</button>
+          <button class="chip px-4 py-3 rounded-2xl font-medium" data-regtab="ctv">CTV</button>
+        </div>
+      </section>
+
+      <div class="grid grid-cols-1 xl:grid-cols-[420px,1fr] gap-6">
+        <section class="glass card space-y-4">
+          <div>
+            <h2 class="section-title">Nhận thông tin đăng ký</h2>
+            <p class="small muted mt-1">Tạo lead nội bộ cho thành viên, đối tác hoặc cộng tác viên.</p>
+          </div>
+          <div class="grid grid-cols-1 gap-3">
+            <input id="regFullName" class="field" placeholder="Họ và tên" />
+            <input id="regPhone" class="field" placeholder="Số điện thoại" />
+            <input id="regEmail" class="field" placeholder="Email" />
+            <input id="regCompany" class="field" placeholder="Công ty / đơn vị / nickname" />
+            <input id="regArea" class="field" placeholder="Khu vực hoạt động" />
+            <textarea id="regExperience" class="area" placeholder="Kinh nghiệm / nguồn lực / mô tả thêm"></textarea>
+            <textarea id="regNote" class="area" placeholder="Ghi chú tiếp nhận"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <button id="saveRegistrationBtn" class="btn btn-primary px-4 py-3 rounded-2xl font-medium">Lưu đăng ký</button>
+            <button id="clearRegistrationBtn" class="btn px-4 py-3 rounded-2xl font-medium">Xóa form</button>
+          </div>
+        </section>
+
+        <section class="glass card space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h2 class="section-title">Danh sách tiếp nhận</h2>
+              <p class="small muted mt-1">Theo dõi hồ sơ thành viên, đối tác và CTV ngay trong trình duyệt.</p>
+            </div>
+            <div id="registrationCount" class="badge">0 hồ sơ</div>
+          </div>
+          <div id="registrationList" class="grid md:grid-cols-2 gap-4"></div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbyLALQc-nf6zFgmvH1jILt5SOGZXcPio6uQFO8g85V8gtcCkmAuDax0pYHr_nmkqcB1/exec';
+const $ = (id) => document.getElementById(id);
+let activeTab = 'products';
+let activeSubtab = 'leads';
+let activeRegTab = 'member';
+let allProducts = [];
+let recordsData = { leads: [], warranty: [], orders: [] };
+let registrationEntries = [];
+
+const FILTER_FIELDS = {
+  products: ['id','name','platformName','category','price','link'],
+  leads: ['leadId','fullName','contact','email','productId','productName','sourcePage'],
+  warranty: ['requestId','ticketCode','orderCode','contact','product','statusText','productId','sourcePage'],
+  orders: ['orderId','orderCode','productId','productName','price','statusText','customerName','customerContact','customerEmail']
+};
+const PRODUCT_EDIT_FIELDS = ['name','platformName','category','price','logo','categoryImage','shortDescription','detailedDescription','warranty','link'];
+
+function setStatus(msg, isError) {
+  const el = $('statusBox');
+  el.textContent = msg;
+  el.className = 'mt-4 text-sm ' + (isError ? 'text-red-500' : 'muted');
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('alphaZoneTheme') || 'light';
+  document.body.classList.toggle('dark', saved === 'dark');
+}
+function toggleTheme() {
+  const dark = !document.body.classList.contains('dark');
+  document.body.classList.toggle('dark', dark);
+  localStorage.setItem('alphaZoneTheme', dark ? 'dark' : 'light');
+}
+
+function updateClock() {
+  $('liveClock').textContent = new Date().toLocaleTimeString('vi-VN', { hour:'2-digit', minute:'2-digit' });
+}
+
+async function apiGet(action, params) {
+  const url = new URL(API_URL);
+  url.searchParams.set('action', action);
+  Object.entries(params || {}).forEach(([k, v]) => {
+    if (v != null && String(v).trim() !== '') url.searchParams.set(k, String(v).trim());
+  });
+  const res = await fetch(url.toString());
+  const raw = await res.text();
+  let json = null;
+  try { json = JSON.parse(raw); } catch (_) {}
+  if (!res.ok || !json || !json.ok) throw new Error((json && json.error) || raw || ('HTTP ' + res.status));
+  return json;
+}
+
+async function apiPost(action, payload) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, ...(payload || {}) })
+  });
+  const raw = await res.text();
+  let json = null;
+  try { json = JSON.parse(raw); } catch (_) {}
+  if (!res.ok || !json || !json.ok) throw new Error((json && json.error) || raw || ('HTTP ' + res.status));
+  return json;
+}
+
+function collectValidationWarnings(items) {
+  const warnings = [];
+  safeArray(items).forEach((item, idx) => {
+    if (!item || typeof item !== 'object') {
+      warnings.push('Dòng ' + (idx + 1) + ' không phải object hợp lệ');
+      return;
+    }
+    if (!String(item.logo || '').trim()) warnings.push('Thiếu trường bắt buộc: logo');
+  });
+  return [...new Set(warnings)];
+}
+
+function safeArray(v) {
+  if (typeof v === 'string') {
+    try { v = JSON.parse(v); } catch (_) { v = []; }
+  }
+  return Array.isArray(v) ? v : [];
+}
+
+function normalizeProduct(base) {
+  base = base || {};
+  return {
+    id: String(base.id || '').trim(),
+    name: String(base.name || '').trim(),
+    platformName: String(base.platformName || base.name || '').trim(),
+    category: String(base.category || '').trim(),
+    price: String(base.price || '').trim(),
+    logo: String(base.logo || base.categoryImage || '').trim(),
+    categoryImage: String(base.categoryImage || base.logo || '').trim(),
+    shortDescription: String(base.shortDescription || '').trim(),
+    detailedDescription: String(base.detailedDescription || '').trim(),
+    warranty: String(base.warranty || '').trim(),
+    link: String(base.link || base.page || '').trim(),
+    page: String(base.page || '').trim()
+  };
+}
+
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+
+function updateMetrics() {
+  $('metricProducts').textContent = allProducts.length;
+  $('metricLeads').textContent = safeArray(recordsData.leads).length;
+  $('metricWarranty').textContent = safeArray(recordsData.warranty).length;
+  $('metricOrders').textContent = safeArray(recordsData.orders).length;
+  updateInsights();
+}
+
+function updateInsights() {
+  const total = allProducts.length + safeArray(recordsData.leads).length + safeArray(recordsData.warranty).length + safeArray(recordsData.orders).length;
+  const filled = allProducts.filter(x => x.name || x.id).length + safeArray(recordsData.leads).filter(x => x.fullName || x.contact).length + safeArray(recordsData.warranty).filter(x => x.ticketCode || x.requestId).length + safeArray(recordsData.orders).filter(x => x.orderCode || x.orderId).length;
+  const pct = total ? Math.round((filled / total) * 100) : 0;
+  $('insightFreshness').textContent = pct + '%';
+  $('freshnessBar').style.width = pct + '%';
+
+  const pendingWarranty = safeArray(recordsData.warranty).filter(x => /chờ|pending|đợi/i.test(String(x.statusText || ''))).length;
+  const leads = safeArray(recordsData.leads).length;
+  const orders = safeArray(recordsData.orders).length;
+  let priority = 'Rà lại dữ liệu sản phẩm';
+  if (pendingWarranty > 0) priority = pendingWarranty + ' bảo hành đang chờ xử lý';
+  else if (leads > orders) priority = 'Ưu tiên chăm sóc leads mới';
+  else if (orders > 0) priority = 'Theo dõi bàn giao đơn hàng';
+  $('insightPriority').textContent = priority;
+}
+
+function switchMainTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('[data-tab]').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+  ['products','records','smart','registration'].forEach(name => {
+    const pane = $('pane-' + name);
+    if (pane) pane.classList.toggle('hidden-pane', name !== tab);
+  });
+}
+
+function switchSubtab(tab) {
+  activeSubtab = tab;
+  document.querySelectorAll('[data-subtab]').forEach(btn => btn.classList.toggle('active', btn.dataset.subtab === tab));
+  renderRecordsTable();
+}
+
+function switchRegTab(tab) {
+  activeRegTab = tab;
+  document.querySelectorAll('[data-regtab]').forEach(btn => btn.classList.toggle('active', btn.dataset.regtab === tab));
+  renderRegistrationList();
+}
+
+function collectForm() {
+  return normalizeProduct({
+    id: $('f-id').value,
+    name: $('f-name').value,
+    platformName: $('f-platformName').value,
+    category: $('f-category').value,
+    price: $('f-price').value,
+    logo: $('f-logo').value,
+    categoryImage: $('f-categoryImage').value,
+    shortDescription: $('f-shortDescription').value,
+    detailedDescription: $('f-detailedDescription').value,
+    warranty: $('f-warranty').value,
+    link: $('f-link').value,
+    page: $('f-link').value
+  });
+}
+
+function applyForm(item) {
+  item = normalizeProduct(item);
+  $('f-id').value = item.id;
+  $('f-name').value = item.name;
+  $('f-platformName').value = item.platformName;
+  $('f-category').value = item.category;
+  $('f-price').value = item.price;
+  $('f-logo').value = item.logo;
+  $('f-categoryImage').value = item.categoryImage;
+  $('f-shortDescription').value = item.shortDescription;
+  $('f-detailedDescription').value = item.detailedDescription;
+  $('f-warranty').value = item.warranty;
+  $('f-link').value = item.link || item.page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function clearForm() { applyForm({}); }
+
+function updateBulkEditFields() {
+  if (!$('bulkEditMatchField') || !$('bulkEditTargetField')) return;
+  $('bulkEditMatchField').innerHTML = FILTER_FIELDS.products.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
+  $('bulkEditTargetField').innerHTML = PRODUCT_EDIT_FIELDS.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
+  $('bulkEditTargetField').value = 'warranty';
+}
+
+function getBulkEditMatches() {
+  const field = $('bulkEditMatchField') ? $('bulkEditMatchField').value : 'category';
+  const keyword = String($('bulkEditMatchValue')?.value || '').trim().toLowerCase();
+  const rows = safeArray(allProducts).filter(item => {
+    const val = String((item || {})[field] || '').toLowerCase();
+    return !keyword || val.includes(keyword);
+  });
+  if ($('bulkEditMatchCount')) $('bulkEditMatchCount').textContent = rows.length + ' khớp';
+  return rows;
+}
+
+function previewBulkEdit() {
+  const rows = getBulkEditMatches();
+  const targetField = $('bulkEditTargetField')?.value || 'warranty';
+  const newValue = String($('bulkEditNewValue')?.value || '').trim();
+  if (!$('bulkEditPreview')) return;
+  if (!rows.length) {
+    $('bulkEditPreview').innerHTML = '<div class="muted">Không có sản phẩm nào phù hợp để sửa hàng loạt.</div>';
+    return;
+  }
+  $('bulkEditPreview').innerHTML = rows.slice(0, 8).map(item => `
+    <div class="soft-panel">
+      <div class="font-semibold">${esc(item.name || item.id || 'Sản phẩm')}</div>
+      <div class="text-xs muted mono mt-1">${esc(item.id || '')}</div>
+      <div class="text-sm mt-3"><span class="muted">Hiện tại:</span> ${esc(item[targetField] || '')}</div>
+      <div class="text-sm mt-1"><span class="muted">Sau khi sửa:</span> ${esc(newValue)}</div>
+    </div>
+  `).join('');
+}
+
+function applyBulkEdit() {
+  const rows = getBulkEditMatches();
+  const targetField = $('bulkEditTargetField')?.value || 'warranty';
+  const newValue = String($('bulkEditNewValue')?.value || '').trim();
+  if (!rows.length) {
+    setStatus('Không có sản phẩm nào khớp để sửa hàng loạt.', true);
+    previewBulkEdit();
+    return;
+  }
+  allProducts = allProducts.map(item => {
+    const isMatch = rows.some(row => row.id === item.id);
+    return isMatch ? { ...item, [targetField]: newValue } : item;
+  });
+  renderProductsList();
+  previewBulkEdit();
+  updateInsights();
+  setStatus('Đã áp dụng tạm ' + rows.length + ' sản phẩm cho trường ' + targetField + '.');
+}
+
+function syncBulkEditToJson() {
+  $('bulkJson').value = JSON.stringify(allProducts, null, 2);
+  setStatus('Đã đồng bộ danh sách hiện tại vào JSON để bạn push all.');
+}
+
+function showProductVisual(item) {
+  if (!$('productVisualBox') || !$('productVisualMeta')) return;
+  const image = item && (item.logo || item.categoryImage);
+  if (!item) {
+    $('productVisualBox').innerHTML = '<div class="muted text-sm text-center px-6">Chọn một sản phẩm để xem ảnh rõ hơn.</div>';
+    $('productVisualMeta').textContent = 'Chưa chọn sản phẩm.';
+    return;
+  }
+  $('productVisualBox').innerHTML = image
+    ? `<img src="${esc(image)}" alt="${esc(item.name || item.id || 'product')}" onerror="this.parentElement.innerHTML='<div class=&quot;muted text-sm text-center px-6&quot;>Ảnh không tải được.</div>'">`
+    : '<div class="muted text-sm text-center px-6">Sản phẩm này chưa có ảnh.</div>';
+  $('productVisualMeta').innerHTML = `
+    <div class="font-semibold">${esc(item.name || item.id || 'Sản phẩm')}</div>
+    <div class="text-xs muted mono mt-1">${esc(item.id || '')}</div>
+    <div class="text-sm mt-2">${esc(item.category || 'Chưa có danh mục')} · ${esc(item.price || 'Chưa có giá')}</div>
+  `;
+}
+
+function buildSmartAudit() {
+  const missingImage = allProducts.filter(x => !(x.logo || x.categoryImage)).length;
+  const missingWarranty = allProducts.filter(x => !String(x.warranty || '').trim()).length;
+  const missingPrice = allProducts.filter(x => !String(x.price || '').trim()).length;
+  const counts = {};
+  allProducts.forEach(x => {
+    const k = String(x.id || '').trim();
+    if (k) counts[k] = (counts[k] || 0) + 1;
+  });
+  const duplicateId = Object.values(counts).filter(v => v > 1).length;
+  if ($('auditMissingImage')) $('auditMissingImage').textContent = missingImage;
+  if ($('auditMissingWarranty')) $('auditMissingWarranty').textContent = missingWarranty;
+  if ($('auditMissingPrice')) $('auditMissingPrice').textContent = missingPrice;
+  if ($('auditDuplicateId')) $('auditDuplicateId').textContent = duplicateId;
+
+  const suggestions = [];
+  if (missingImage) suggestions.push(`Có ${missingImage} sản phẩm chưa có ảnh. Nên bổ sung vì Alpha Zone đang hiển thị service/card trực quan ở trang sản phẩm.`);
+  if (missingWarranty) suggestions.push(`Có ${missingWarranty} sản phẩm chưa khai báo bảo hành. Nên điền để khớp luồng “Phiếu bảo hành điện tử”.`);
+  if (safeArray(recordsData.warranty).some(x => /chờ|pending|đợi/i.test(String(x.statusText || '')))) {
+    const n = safeArray(recordsData.warranty).filter(x => /chờ|pending|đợi/i.test(String(x.statusText || ''))).length;
+    suggestions.push(`Đang có ${n} yêu cầu bảo hành chờ xử lý. Nên ưu tiên trả kết quả để giảm tin nhắn hỏi lại.`);
+  }
+  if (safeArray(recordsData.leads).length > safeArray(recordsData.orders).length) suggestions.push('Lead đang nhiều hơn đơn hàng. Gợi ý đẩy mạnh reply mẫu và follow-up theo kênh khách đã liên hệ.');
+  suggestions.push('Luồng web hiện nhấn mạnh hotline, Zalo, Messenger, Email. Bạn có thể dùng ô “Kênh hỗ trợ gợi ý” để tạo reply sát ngữ cảnh hơn.');
+  if ($('smartSuggestions')) {
+    $('smartSuggestions').innerHTML = suggestions.map(s => `<div class="item text-sm">${esc(s)}</div>`).join('');
+  }
+}
+
+function validate21DigitCode(raw) {
+  const cleaned = String(raw || '').replace(/\D/g, '');
+  if (!cleaned) return { ok: false, text: 'Bạn chưa nhập mã.' };
+  if (cleaned.length !== 21) return { ok: false, text: 'Mã chưa đúng 21 số. Hiện tại là ' + cleaned.length + ' số.' };
+  if (/^(\d)\1{20}$/.test(cleaned)) return { ok: false, text: 'Mã 21 số không nên là một dãy lặp hoàn toàn.' };
+  return { ok: true, text: 'Mã hợp lệ 21 số và có thể dùng để đối chiếu đơn hàng.' };
+}
+
+function renderCode21Result(raw) {
+  const cleaned = String(raw || '').replace(/\D/g, '');
+  const rs = validate21DigitCode(cleaned);
+  if (!$('code21Result')) return;
+  $('code21Result').innerHTML = `<div class="badge ${rs.ok ? 'pill-status-ok' : 'pill-status-err'}">${esc(rs.text)}</div>${cleaned ? `<div class="mono text-sm mt-3">${esc(cleaned)}</div>` : ''}`;
+}
+
+function generate21DigitCode() {
+  let out = '';
+  while (out.length < 21) out += String(Math.floor(Math.random() * 10));
+  $('code21Input').value = out.slice(0, 21);
+  renderCode21Result(out.slice(0, 21));
+}
+
+function fillWarrantyStatusTemplate(statusText) {
+  const current = String($('warrantyReplyOutput')?.value || '').trim();
+  if (!current) {
+    $('warrantyReplyOutput').value = `Chào anh/chị, Alpha Zone xin cập nhật: yêu cầu bảo hành hiện ${statusText}. Nếu cần bên em đối chiếu thêm mã đơn hoặc hình ảnh lỗi, anh/chị vui lòng phản hồi lại tin nhắn này giúp em.`;
+  } else {
+    $('warrantyReplyOutput').value = current.replace(/Hiện trạng xử lý:[^\.]*\./, 'Hiện trạng xử lý: ' + statusText + '.');
+  }
+}
+
+function renderProductsList() {
+  const q = String($('searchProductsInput').value || '').trim().toLowerCase();
+  const items = allProducts.filter(item => {
+    const hay = [item.id, item.name, item.platformName, item.category, item.price, item.shortDescription, item.warranty].join(' ').toLowerCase();
+    return !q || hay.includes(q);
+  });
+  $('countProductsBox').textContent = items.length + ' sản phẩm';
+  $('productList').innerHTML = items.map(item => `
+    <div class="product-card">
+      <div class="product-visual mb-3">
+        ${item.logo || item.categoryImage ? `<img src="${esc(item.logo || item.categoryImage)}" alt="${esc(item.name || item.id || 'product')}" onerror="this.dataset.azFallbackApplied='';this.dispatchEvent(new Event('error'))">` : `<div class="muted text-sm text-center px-5">Chưa có ảnh sản phẩm</div>`}
+      </div>
+      <div class="min-w-0">
+        <div class="font-semibold text-lg product-title">${esc(item.name)}</div>
+        <div class="text-xs muted mt-1 mono">${esc(item.id)}</div>
+        <div class="text-sm mt-2">${esc(item.platformName)} • ${esc(item.category)}</div>
+        <div class="font-medium mt-2">${esc(item.price || 'Chưa có giá')}</div>
+        <div class="text-sm muted mt-2 product-desc">${esc(item.shortDescription || item.detailedDescription || 'Chưa có mô tả')}</div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mt-4">
+        <button class="btn px-4 py-3 rounded-2xl font-medium" data-show="${esc(item.id)}">Ảnh</button>
+        <button class="btn px-4 py-3 rounded-2xl font-medium" data-edit="${esc(item.id)}">Sửa</button>
+        <button class="btn btn-danger px-4 py-3 rounded-2xl font-medium" data-del="${esc(item.id)}">Xóa</button>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('[data-show]').forEach(btn => btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-show') || '';
+    const found = allProducts.find(x => x.id === id);
+    showProductVisual(found);
+  }));
+
+  document.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-edit') || '';
+    const found = allProducts.find(x => x.id === id);
+    if (found) {
+      applyForm(found);
+      showProductVisual(found);
+    }
+  }));
+
+  document.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', async () => {
+    const id = btn.getAttribute('data-del') || '';
+    if (!id) return;
+    if (!confirm('Xóa sản phẩm ID: ' + id + ' ?')) return;
+    try {
+      setStatus('Đang xóa sản phẩm...');
+      await apiPost('deleteProduct', { id });
+      await loadProducts();
+      setStatus('Đã xóa sản phẩm.');
+    } catch (err) {
+      setStatus('Lỗi xóa: ' + (err.message || err), true);
+    }
+  }));
+
+  if (items[0]) showProductVisual(items[0]);
+}
+
+async function loadProducts() {
+  const json = await apiGet('listProducts');
+  allProducts = safeArray(json.items).map(normalizeProduct);
+  renderProductsList();
+  updateBulkFilterFields();
+  updateBulkEditFields();
+  buildSmartAudit();
+  updateMetrics();
+}
+
+function getRecordHeaders(tab) {
+  if (tab === 'leads') return ['leadId','fullName','contact','email','note','productId','productName','sourcePage','updatedAt'];
+  if (tab === 'warranty') return ['requestId','ticketCode','orderCode','contact','product','issue','statusText','productId','sourcePage','updatedAt'];
+  return ['orderId','orderCode','productId','productName','price','statusText','customerName','customerContact','customerEmail','customerNote','updatedAt'];
+}
+
+function recordKeyFor(tab, row, index) {
+  row = row || {};
+  if (tab === 'orders') return String(row.orderId || row.orderCode || '').trim() || ('row-' + index);
+  if (tab === 'warranty') return String(row.requestId || row.ticketCode || row.orderCode || '').trim() || ('row-' + index);
+  return String(row.leadId || row.contact || row.email || '').trim() || ('row-' + index);
+}
+
+function cleanRecordValue(value) {
+  if (value == null) return '';
+  if (typeof value === 'object') {
+    try { value = JSON.stringify(value); } catch (_) { value = String(value); }
+  }
+  return String(value).replace(/\s+/g, ' ').trim();
+}
+
+function normalizeRecordRows(tab, rows) {
+  const map = new Map();
+  safeArray(rows).forEach((raw, index) => {
+    const row = raw && typeof raw === 'object' ? { ...raw } : {};
+    const hasRealData = Object.keys(row).some(k => !/updatedAt/i.test(k) && cleanRecordValue(row[k]));
+    if (!hasRealData) return;
+
+    const key = recordKeyFor(tab, row, index);
+    if (!map.has(key)) {
+      map.set(key, row);
+      return;
+    }
+
+    const old = map.get(key);
+    Object.keys(row).forEach(k => {
+      const next = cleanRecordValue(row[k]);
+      const prev = cleanRecordValue(old[k]);
+      if (!prev && next) old[k] = row[k];
+      if (k === 'updatedAt' && next && (!prev || next > prev)) old[k] = row[k];
+    });
+  });
+  return Array.from(map.values());
+}
+
+function formatRecordValue(header, value) {
+  let text = cleanRecordValue(value);
+  if (!text) return '<span class="cell-muted">—</span>';
+
+  if (/updatedAt/i.test(header)) {
+    const d = new Date(text);
+    if (!Number.isNaN(d.getTime())) {
+      text = d.toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit', year:'numeric' });
+    }
+  }
+
+  if (/status/i.test(header)) {
+    return `<span class="cell-status" title="${esc(text)}">${esc(text)}</span>`;
+  }
+
+  const cls = /id|code/i.test(header) ? 'cell-code' : (/price/i.test(header) ? 'cell-money' : 'cell-clamp');
+  return `<div class="${cls}" title="${esc(text)}">${esc(text)}</div>`;
+}
+
+function renderRecordsTable() {
+  const q = String($('searchRecordsInput').value || '').trim().toLowerCase();
+  const headers = getRecordHeaders(activeSubtab);
+  const sourceRows = normalizeRecordRows(activeSubtab, recordsData[activeSubtab]);
+  const rows = sourceRows.filter(row => {
+    if (!q) return true;
+    return headers.some(h => cleanRecordValue((row || {})[h]).toLowerCase().includes(q));
+  });
+
+  $('countRecordsBox').textContent = rows.length + ' bản ghi';
+
+  if (!rows.length) {
+    $('tableWrap').innerHTML = '<div class="muted py-8 text-center">Chưa có dữ liệu.</div>';
+    return;
+  }
+
+  const thead = '<thead><tr>' + headers.map(h => `<th class="text-left px-4 py-3 text-sm font-medium whitespace-nowrap">${esc(h)}</th>`).join('') + '</tr></thead>';
+  const tbody = '<tbody>' + rows.map(row => '<tr class="border-t align-top">' + headers.map(h => {
+    const compact = /note|message|productName|customer/i.test(h) ? 'cell-compact' : '';
+    return `<td class="px-4 py-3 min-w-[140px] text-sm ${compact}">${formatRecordValue(h, row[h])}</td>`;
+  }).join('') + '</tr>').join('') + '</tbody>';
+
+  $('tableWrap').innerHTML = `<table class="records-stable-table border rounded-2xl overflow-hidden" style="border-color:var(--line)">${thead}${tbody}</table>`;
+}
+
+async function loadRecords() {
+  const [leads, warranty, orders] = await Promise.all([
+    apiGet('listCustomerLeads'),
+    apiGet('listWarrantyRequests'),
+    apiGet('listOrderRecords')
+  ]);
+  recordsData.leads = safeArray(leads.items);
+  recordsData.warranty = safeArray(warranty.items);
+  recordsData.orders = safeArray(orders.items);
+  renderRecordsTable();
+  updateBulkFilterFields();
+  buildSmartAudit();
+  updateMetrics();
+}
+
+function getDataByDataset(dataset) {
+  if (dataset === 'products') return allProducts;
+  if (dataset === 'leads') return safeArray(recordsData.leads);
+  if (dataset === 'warranty') return safeArray(recordsData.warranty);
+  if (dataset === 'orders') return safeArray(recordsData.orders);
+  return [];
+}
+
+function updateBulkFilterFields() {
+  const dataset = $('bulkFilterDataset').value;
+  const options = FILTER_FIELDS[dataset] || [];
+  $('bulkFilterField').innerHTML = options.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
+}
+
+function runBulkFilter() {
+  const dataset = $('bulkFilterDataset').value;
+  const field = $('bulkFilterField').value;
+  const value = String($('bulkFilterValue').value || '').trim().toLowerCase();
+  const data = getDataByDataset(dataset);
+  const result = data.filter(item => {
+    const val = String((item || {})[field] || '').toLowerCase();
+    return !value || val.includes(value);
+  });
+  $('bulkFilterCount').textContent = result.length + ' kết quả';
+  if (!result.length) {
+    $('bulkFilterPreview').innerHTML = '<div class="muted">Không tìm thấy dữ liệu phù hợp.</div>';
+    return;
+  }
+  $('bulkFilterPreview').innerHTML = result.slice(0, 12).map(item => {
+    const entries = Object.entries(item || {}).filter(([,v]) => String(v || '').trim() !== '').slice(0, 6);
+    const image = item.logo || item.categoryImage || '';
+    return `
+      <div class="soft-panel">
+        <div class="flex items-start gap-3">
+          <div class="w-14 h-14 rounded-2xl border flex items-center justify-center overflow-hidden" style="border-color:var(--line)">
+            ${image ? `<img src="${esc(image)}" alt="" class="w-11 h-11 object-contain">` : `<span class="muted text-xs">No img</span>`}
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="text-sm font-semibold mb-2">${esc(item.name || item.productName || item.fullName || item.ticketCode || item.orderCode || item.id || 'Bản ghi')}</div>
+            <div class="grid md:grid-cols-2 gap-2 text-sm">
+              ${entries.map(([k,v]) => `<div><span class="muted">${esc(k)}:</span> ${esc(v)}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function buildWarrantyReply(row) {
+  if (!row) return '';
+  const status = row.statusText || 'đang tiếp nhận';
+  const ticket = row.ticketCode || row.requestId || 'N/A';
+  const product = row.product || row.productId || 'sản phẩm của bạn';
+  const orderCode = row.orderCode || 'chưa cung cấp';
+  return `Chào anh/chị, Alpha Zone đã kiểm tra yêu cầu bảo hành ${ticket} cho ${product}. Hiện trạng xử lý: ${status}. Mã đơn liên quan: ${orderCode}. Nếu anh/chị cần bổ sung thêm thông tin hoặc hình ảnh lỗi, vui lòng phản hồi trực tiếp tin nhắn này để bên em hỗ trợ nhanh hơn.`;
+}
+
+function lookupWarranty() {
+  const keyword = String($('warrantyLookupInput').value || '').trim().toLowerCase();
+  const rows = safeArray(recordsData.warranty);
+  const found = rows.find(row => [row.requestId,row.ticketCode,row.orderCode,row.contact,row.product,row.productId].join(' ').toLowerCase().includes(keyword));
+  if (!found) {
+    $('warrantyResultBox').innerHTML = '<div class="badge pill-status-err">Không tìm thấy yêu cầu bảo hành phù hợp.</div>';
+    $('warrantyReplyOutput').value = '';
+    return;
+  }
+  const statusCls = /hoàn|xong|done|complete/i.test(found.statusText || '') ? 'pill-status-ok' : /chờ|pending|đợi/i.test(found.statusText || '') ? 'pill-status-warn' : 'pill-status-err';
+  $('warrantyResultBox').innerHTML = `
+    <div class="space-y-3">
+      <div class="badge ${statusCls}">Trạng thái: ${esc(found.statusText || 'Đang xử lý')}</div>
+      <div class="grid md:grid-cols-2 gap-3 text-sm">
+        <div><span class="muted">Mã phiếu:</span> ${esc(found.ticketCode || found.requestId || '')}</div>
+        <div><span class="muted">Mã đơn:</span> ${esc(found.orderCode || '')}</div>
+        <div><span class="muted">Sản phẩm:</span> ${esc(found.product || found.productId || '')}</div>
+        <div><span class="muted">Liên hệ:</span> ${esc(found.contact || '')}</div>
+        <div class="md:col-span-2"><span class="muted">Mô tả lỗi:</span> ${esc(found.issue || '')}</div>
+      </div>
+    </div>`;
+  $('warrantyReplyOutput').value = buildWarrantyReply(found);
+}
+
+function copyFrom(id) {
+  const el = $(id);
+  const value = el && ('value' in el ? el.value : el.textContent);
+  navigator.clipboard.writeText(value || '').then(() => setStatus('Đã copy nội dung.')).catch(() => setStatus('Không copy được. Hãy copy thủ công.', true));
+}
+
+function updateChatPreview(inMsg, outMsg) {
+  $('chatPreview').innerHTML = `
+    <div class="chat-bubble chat-in">${esc(inMsg || 'Khách chưa gửi nội dung.')}</div>
+    <div class="chat-bubble chat-out">${esc(outMsg || 'Reply sẽ hiện tại đây.')}</div>
+  `;
+}
+
+function generateReply() {
+  const intent = $('replyIntent').value;
+  const name = String($('replyCustomerName').value || '').trim() || 'anh/chị';
+  const product = String($('replyProduct').value || '').trim() || 'sản phẩm';
+  const status = String($('replyStatus').value || '').trim();
+  const customerMessage = String($('replyCustomerMessage').value || '').trim();
+  const channelHint = String($('replyChannelHint').value || '').trim();
+
+  let reply = '';
+  if (intent === 'interest') {
+    reply = `Chào ${name}, cảm ơn anh/chị đã quan tâm đến ${product}. Bên em đã nhận được tin nhắn: "${customerMessage || 'khách đang cần tư vấn'}". Hiện bên em sẽ hỗ trợ chi tiết về giá, quyền lợi và cách nhận hàng ngay trong khung chat này. ${status ? 'Thông tin thêm: ' + status + '. ' : ''}${channelHint ? 'Kênh hỗ trợ nhanh: ' + channelHint + '. ' : ''}Anh/chị cứ để lại nhu cầu cụ thể, bên em phản hồi ngay.`;
+  } else if (intent === 'warranty') {
+    reply = `Chào ${name}, bên em đã tiếp nhận yêu cầu bảo hành cho ${product}. ${status ? 'Trạng thái hiện tại: ' + status + '. ' : ''}${channelHint ? 'Anh/chị có thể gửi thêm qua ' + channelHint + ' nếu cần đối chiếu nhanh. ' : ''}Anh/chị vui lòng giữ lại mã đơn và mô tả lỗi giúp bên em, nếu cần thêm hình ảnh/video bên em sẽ báo tiếp để xử lý nhanh nhất.`;
+  } else if (intent === 'order') {
+    reply = `Chào ${name}, bên em đã kiểm tra đơn ${product}. ${status ? 'Tình trạng hiện tại: ' + status + '. ' : ''}${channelHint ? 'Kênh hỗ trợ ưu tiên: ' + channelHint + '. ' : ''}Nếu anh/chị cần xác nhận lại thông tin thanh toán hoặc thời gian bàn giao, cứ nhắn ngay để bên em hỗ trợ tiếp.`;
+  } else {
+    reply = `Chào ${name}, Alpha Zone đã nhận thông tin đăng ký ${product || 'hợp tác'} của anh/chị. ${status ? 'Ghi chú hiện tại: ' + status + '. ' : ''}${channelHint ? 'Bên em ưu tiên phản hồi qua ' + channelHint + '. ' : ''}Bên em sẽ rà soát hồ sơ và liên hệ lại theo thông tin anh/chị đã cung cấp. Cảm ơn anh/chị đã quan tâm.`;
+  }
+  $('replyOutput').value = reply;
+  updateChatPreview(customerMessage || 'Khách đang chờ tư vấn.', reply);
+}
+
+function getStoredRegistrations() {
+  try {
+    registrationEntries = JSON.parse(localStorage.getItem('alphaZoneRegistrations') || '[]');
+    if (!Array.isArray(registrationEntries)) registrationEntries = [];
+  } catch (_) { registrationEntries = []; }
+}
+
+function saveStoredRegistrations() {
+  localStorage.setItem('alphaZoneRegistrations', JSON.stringify(registrationEntries));
+}
+
+function syncRegistrationEntriesFromLeads() {
+  const localRows = Array.isArray(registrationEntries) ? registrationEntries : [];
+  const cloudRows = safeArray(recordsData.leads).filter(row => {
+    const hay = [row.productId, row.productName, row.sourcePage, row.note].join(' ').toLowerCase();
+    return hay.includes('registration') || hay.includes('đăng ký') || hay.includes('seller-channel-registration');
+  }).map(row => {
+    const text = [row.productId, row.productName, row.note].join(' ').toLowerCase();
+    let type = 'member';
+    if (text.includes('partner') || text.includes('đối tác')) type = 'partner';
+    if (text.includes('ctv') || text.includes('cộng tác viên')) type = 'ctv';
+    return {
+      id: String(row.leadId || row.contact || row.email || ('CLOUD-' + Date.now())).trim(),
+      type,
+      fullName: String(row.fullName || '').trim(),
+      phone: String(row.contact || '').trim(),
+      email: String(row.email || '').trim(),
+      company: '',
+      area: '',
+      experience: '',
+      note: String(row.note || '').trim(),
+      createdAt: row.updatedAt ? new Date(row.updatedAt).toLocaleString('vi-VN') : 'Đồng bộ từ CustomerLeads',
+      source: 'CustomerLeads'
+    };
+  });
+  const map = new Map();
+  cloudRows.concat(localRows).forEach(item => {
+    if (!item || !item.id) return;
+    map.set(item.id, item);
+  });
+  registrationEntries = Array.from(map.values());
+}
+
+function clearRegistrationForm() {
+  ['regFullName','regPhone','regEmail','regCompany','regArea','regExperience','regNote'].forEach(id => $(id).value = '');
+}
+
+function saveRegistration() {
+  const fullName = String($('regFullName').value || '').trim();
+  const phone = String($('regPhone').value || '').trim();
+  if (!fullName || !phone) {
+    setStatus('Cần nhập họ tên và số điện thoại để lưu đăng ký.', true);
+    return;
+  }
+  const item = {
+    id: 'REG-' + Date.now(),
+    type: activeRegTab,
+    fullName,
+    phone,
+    email: String($('regEmail').value || '').trim(),
+    company: String($('regCompany').value || '').trim(),
+    area: String($('regArea').value || '').trim(),
+    experience: String($('regExperience').value || '').trim(),
+    note: String($('regNote').value || '').trim(),
+    createdAt: new Date().toLocaleString('vi-VN')
+  };
+  registrationEntries.unshift(item);
+  saveStoredRegistrations();
+  renderRegistrationList();
+  clearRegistrationForm();
+  setStatus('Đã lưu hồ sơ đăng ký cục bộ, đang đồng bộ lên CustomerLeads...');
+  apiPost('saveCustomerLead', { data: {
+    leadId: item.id,
+    fullName: item.fullName,
+    contact: item.phone,
+    email: item.email,
+    note: [
+      'Loại: ' + item.type,
+      item.company ? 'Đơn vị: ' + item.company : '',
+      item.area ? 'Khu vực: ' + item.area : '',
+      item.experience ? 'Kinh nghiệm: ' + item.experience : '',
+      item.note ? 'Ghi chú: ' + item.note : ''
+    ].filter(Boolean).join(' | '),
+    productId: 'registration-' + item.type,
+    productName: activeRegTab === 'member' ? 'Đăng ký thành viên' : activeRegTab === 'partner' ? 'Đăng ký đối tác' : 'Đăng ký CTV',
+    sourcePage: 'admin-registration'
+  }}).then(() => {
+    setStatus('Đã lưu và đồng bộ hồ sơ đăng ký.');
+    loadRecords().catch(() => {});
+  }).catch(err => {
+    setStatus('Đã lưu cục bộ, nhưng đồng bộ Apps Script lỗi: ' + (err.message || err), true);
+  });
+}
+
+function renderRegistrationList() {
+  const rows = registrationEntries.filter(item => item.type === activeRegTab);
+  $('registrationCount').textContent = rows.length + ' hồ sơ';
+  if (!rows.length) {
+    $('registrationList').innerHTML = '<div class="muted">Chưa có hồ sơ nào ở nhóm này.</div>';
+    return;
+  }
+  $('registrationList').innerHTML = rows.map(item => `
+    <div class="product-card">
+      <div class="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <div class="font-semibold">${esc(item.fullName)}</div>
+          <div class="text-xs muted mono mt-1">${esc(item.id)}</div>
+        </div>
+        <div class="badge">${esc(item.createdAt)}</div>
+      </div>
+      <div class="space-y-2 text-sm">
+        <div><span class="muted">SĐT:</span> ${esc(item.phone)}</div>
+        <div><span class="muted">Email:</span> ${esc(item.email)}</div>
+        <div><span class="muted">Đơn vị:</span> ${esc(item.company)}</div>
+        <div><span class="muted">Khu vực:</span> ${esc(item.area)}</div>
+        <div><span class="muted">Kinh nghiệm:</span> ${esc(item.experience)}</div>
+        <div><span class="muted">Ghi chú:</span> ${esc(item.note)}</div>
+        ${item.source ? `<div><span class="muted">Nguồn:</span> ${esc(item.source)}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadAll() {
+  try {
+    setStatus('Đang tải dữ liệu...');
+    await Promise.all([loadProducts(), loadRecords()]);
+    getStoredRegistrations();
+    syncRegistrationEntriesFromLeads();
+    renderRegistrationList();
+    runBulkFilter();
+    updateBulkEditFields();
+    buildSmartAudit();
+    setStatus('Đã tải toàn bộ dữ liệu.');
+  } catch (err) {
+    setStatus('Lỗi tải dữ liệu: ' + (err.message || err), true);
+  }
+}
+
+document.querySelectorAll('[data-tab]').forEach(btn => btn.addEventListener('click', () => switchMainTab(btn.dataset.tab)));
+document.querySelectorAll('[data-subtab]').forEach(btn => btn.addEventListener('click', () => switchSubtab(btn.dataset.subtab)));
+document.querySelectorAll('[data-regtab]').forEach(btn => btn.addEventListener('click', () => switchRegTab(btn.dataset.regtab)));
+document.querySelectorAll('[data-quicktab]').forEach(btn => btn.addEventListener('click', () => switchMainTab(btn.dataset.quicktab)));
+$('searchProductsInput').addEventListener('input', renderProductsList);
+$('searchRecordsInput').addEventListener('input', renderRecordsTable);
+$('bulkFilterDataset').addEventListener('change', () => { updateBulkFilterFields(); runBulkFilter(); });
+$('bulkFilterField').addEventListener('change', runBulkFilter);
+$('bulkFilterValue').addEventListener('input', runBulkFilter);
+$('runBulkFilterBtn').addEventListener('click', runBulkFilter);
+$('lookupWarrantyBtn').addEventListener('click', lookupWarranty);
+$('copyWarrantyReplyBtn').addEventListener('click', () => copyFrom('warrantyReplyOutput'));
+$('generateReplyBtn').addEventListener('click', generateReply);
+$('copyReplyBtn').addEventListener('click', () => copyFrom('replyOutput'));
+$('saveRegistrationBtn').addEventListener('click', saveRegistration);
+$('clearRegistrationBtn').addEventListener('click', clearRegistrationForm);
+$('refreshSmartBtn').addEventListener('click', () => { runBulkFilter(); renderRegistrationList(); updateInsights(); setStatus('Đã làm mới khu thông minh.'); });
+$('themeToggle').addEventListener('click', toggleTheme);
+
+$('pingBtn').addEventListener('click', async () => {
+  try {
+    const r = await apiGet('ping');
+    setStatus('API OK: ' + (r.time || ''));
+  } catch (err) {
+    setStatus('Ping lỗi: ' + (err.message || err), true);
+  }
+});
+$('reloadAllBtn').addEventListener('click', loadAll);
+$('reloadProductsBtn').addEventListener('click', async () => {
+  try { setStatus('Đang nạp sản phẩm...'); await loadProducts(); setStatus('Đã nạp sản phẩm.'); }
+  catch (err) { setStatus('Lỗi nạp sản phẩm: ' + (err.message || err), true); }
+});
+$('saveBtn').addEventListener('click', async () => {
+  try { setStatus('Đang lưu sản phẩm...'); await apiPost('upsertProduct', { item: collectForm() }); await loadProducts(); setStatus('Lưu sản phẩm thành công.'); }
+  catch (err) { setStatus('Lỗi lưu: ' + (err.message || err), true); }
+});
+$('deleteBtn').addEventListener('click', async () => {
+  try {
+    const id = String($('f-id').value || '').trim();
+    if (!id) throw new Error('Nhập ID trước khi xóa');
+    if (!confirm('Xóa sản phẩm ID: ' + id + ' ?')) return;
+    setStatus('Đang xóa sản phẩm...');
+    await apiPost('deleteProduct', { id });
+    clearForm();
+    await loadProducts();
+    setStatus('Đã xóa sản phẩm.');
+  } catch (err) {
+    setStatus('Lỗi xóa: ' + (err.message || err), true);
+  }
+});
+$('clearBtn').addEventListener('click', clearForm);
+$('loadCurrentJsonBtn').addEventListener('click', () => {
+  $('bulkJson').value = JSON.stringify(allProducts, null, 2);
+  setStatus('Đã nạp JSON hiện tại.');
+});
+$('pushAllBtn').addEventListener('click', async () => {
+  try {
+    const parsed = JSON.parse($('bulkJson').value || '[]');
+    if (!Array.isArray(parsed)) throw new Error('JSON phải là mảng');
+
+    const warnings = collectValidationWarnings(parsed);
+    if (warnings.length) {
+      setStatus('Cảnh báo: ' + warnings.join(' | ') + ' — vẫn tiếp tục push all.', true);
+    } else {
+      setStatus('Đang push toàn bộ JSON...');
+    }
+
+    await apiPost('pushAllProducts', { items: parsed });
+    await loadProducts();
+    if (warnings.length) {
+      setStatus('Push all thành công. Có cảnh báo: ' + warnings.join(' | '), true);
+    } else {
+      setStatus('Push all thành công.');
+    }
+  } catch (err) {
+    setStatus('Lỗi push all: ' + (err.message || err), true);
+  }
+});
+['f-name','f-platformName'].forEach(id => {
+  $(id).addEventListener('input', () => {
+    const name = $('f-name').value.trim();
+    const platform = $('f-platformName').value.trim();
+    if (!platform && name) $('f-platformName').value = name;
+  });
+});
+
+$('bulkEditMatchField')?.addEventListener('change', previewBulkEdit);
+$('bulkEditMatchValue')?.addEventListener('input', previewBulkEdit);
+$('bulkEditTargetField')?.addEventListener('change', previewBulkEdit);
+$('bulkEditNewValue')?.addEventListener('input', previewBulkEdit);
+$('previewBulkEditBtn')?.addEventListener('click', previewBulkEdit);
+$('applyBulkEditBtn')?.addEventListener('click', applyBulkEdit);
+$('syncBulkEditToJsonBtn')?.addEventListener('click', syncBulkEditToJson);
+$('validateCode21Btn')?.addEventListener('click', () => renderCode21Result($('code21Input').value));
+$('generateCode21Btn')?.addEventListener('click', generate21DigitCode);
+$('copyCode21Btn')?.addEventListener('click', () => copyFrom('code21Input'));
+document.querySelectorAll('[data-fill-warranty]').forEach(btn => btn.addEventListener('click', () => fillWarrantyStatusTemplate(btn.dataset.fillWarranty || 'đang xử lý')));
+document.querySelectorAll('[data-channel-fill]').forEach(btn => btn.addEventListener('click', () => { $('replyChannelHint').value = btn.dataset.channelFill || ''; generateReply(); }));
+
+initTheme();
+getStoredRegistrations();
+updateBulkFilterFields();
+updateBulkEditFields();
+renderRegistrationList();
+updateChatPreview();
+buildSmartAudit();
+previewBulkEdit();
+updateClock();
+setInterval(updateClock, 1000);
+loadAll();
+
+// Auto reload dữ liệu mỗi 30 giây, không reload trang nên không làm mất vị trí đang xem.
+let alphaAutoReloadRunning = false;
+async function alphaAutoReload30s() {
+  if (alphaAutoReloadRunning || document.hidden) return;
+  const active = document.activeElement;
+  const tag = active && active.tagName ? active.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select' || (active && active.isContentEditable)) return;
+  try {
+    alphaAutoReloadRunning = true;
+    await Promise.all([loadProducts(), loadRecords()]);
+    getStoredRegistrations();
+    syncRegistrationEntriesFromLeads();
+    renderRegistrationList();
+    runBulkFilter();
+    updateBulkEditFields();
+    buildSmartAudit();
+    updateMetrics();
+    setStatus('Đã tự động cập nhật dữ liệu lúc ' + new Date().toLocaleTimeString('vi-VN') + '.');
+  } catch (err) {
+    setStatus('Tự động cập nhật lỗi: ' + (err.message || err), true);
+  } finally {
+    alphaAutoReloadRunning = false;
+  }
+}
+setInterval(alphaAutoReload30s, 30000);
+
+</script>
+<style id="az-admin-manager-style">
+.azm-wrap{margin-top:18px;display:grid;gap:16px}.azm-box{border:1px solid var(--line);border-radius:24px;padding:18px;background:rgba(255,255,255,.38)}body.dark .azm-box{background:rgba(255,255,255,.03)}.azm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.azm-card{border:1px solid var(--line);border-radius:20px;padding:14px;background:rgba(255,255,255,.45)}body.dark .azm-card{background:rgba(255,255,255,.04)}.azm-card h4{margin:0;font-size:15px;font-weight:700}.azm-meta{font-size:12px;color:var(--muted);line-height:1.55;margin-top:6px}.azm-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.azm-actions button,.azm-tabs button{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:var(--input);font-size:12px}.azm-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.azm-tabs button.active{background:var(--primary);color:var(--bg)}.azm-msg{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.azm-json{width:100%;min-height:180px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--input);color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.55;resize:vertical}.azm-seller-box{margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.28)}body.dark .azm-seller-box{background:rgba(255,255,255,.035)}
+</style>
+<script id="az-admin-manager-script">
+(function(){
+var API='https://script.google.com/macros/s/AKfycbyLALQc-nf6zFgmvH1jILt5SOGZXcPio6uQFO8g85V8gtcCkmAuDax0pYHr_nmkqcB1/exec', filter='all', leads=[], drafts=[];
+function $(id){return document.getElementById(id)}function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}function sj(r,f){try{var x=JSON.parse(r);return x==null?f:x}catch(_){return f}}function pick(note,name){var m=String(note||'').match(new RegExp(name+'\\s*:\\s*([^|]+)','i'));return m?m[1].trim():''}function roleLabel(r){return r==='partner'?'Đối tác':r==='ctv'?'CTV':'Thành viên'}function roleOf(r){var s=[r.note,r.productId,r.productName].join(' ');if(/partner|doi tac|đối tác/i.test(s))return'partner';if(/ctv|cong tac|cộng tác/i.test(s))return'ctv';return'member'}function msg(t,er){var x=$('azm-msg');if(x)x.innerHTML='<span style="color:'+(er?'#b91c1c':'inherit')+'">'+esc(t)+'</span>'}
+async function get(a){var u=new URL(API);u.searchParams.set('action',a);var r=await fetch(u.toString()),raw=await r.text(),j=null;try{j=JSON.parse(raw)}catch(_){}if(!r.ok||!j||!j.ok)throw new Error((j&&j.error)||raw||('HTTP '+r.status));return j}async function post(a,p){var r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action:a},p||{}))});var raw=await r.text(),j=null;try{j=JSON.parse(raw)}catch(_){}if(!r.ok||!j||!j.ok)throw new Error((j&&j.error)||raw||('HTTP '+r.status));return j}
+function isMember(r){return /seller-registration|admin-registration|registration|seller-channel/i.test([r.productId,r.productName,r.sourcePage,r.note].join(' ')) && (pick(r.note,'Tên đăng nhập') || /registration|đăng ký|dang ky/i.test(r.productId||r.productName||''))}
+function normLead(r){var role=roleOf(r), username=pick(r.note,'Tên đăng nhập');return Object.assign({},r,{role:role,username:username,statusText:pick(r.note,'Trạng thái')||'chờ admin duyệt',passwordHash:pick(r.note,'PasswordHash')})}
+function note(row,chg){var parts=String(row.note||'').split('|').map(function(x){return x.trim()}).filter(Boolean).filter(function(p){return !/^(Tên đăng nhập|Trạng thái|PasswordHash)\s*:/i.test(p)});var username=(chg&&chg.username)||row.username, status=(chg&&chg.statusText)||row.statusText, ph=row.passwordHash;if(username)parts.push('Tên đăng nhập: '+username);if(ph)parts.push('PasswordHash: '+ph);if(status)parts.push('Trạng thái: '+status);return parts.join(' | ')}
+function cleanSeller(raw,p){raw=raw||{};p=p||{};return {sellerId:String(raw.sellerId||raw.id||p.sellerId||'').trim(),username:String(raw.username||raw.sellerUsername||p.sellerUsername||'').trim(),fullName:String(raw.fullName||raw.name||raw.sellerName||p.sellerName||'').trim(),contact:String(raw.contact||raw.phone||raw.sellerContact||p.sellerContact||'').trim(),email:String(raw.email||raw.sellerEmail||p.sellerEmail||'').trim(),role:String(raw.role||raw.type||p.sellerRole||'seller').trim(),statusText:String(raw.statusText||raw.status||p.sellerStatus||'đã duyệt').trim()}}
+function productMarketplaceJson(item){var p=Object.assign({},item.product||{}),s=cleanSeller(item.seller,p);p.id=String(p.id||('seller-product-'+Date.now())).trim();p.platformName=p.platformName||p.name;p.category=p.category||'Kênh người bán';p.shortDescription=p.shortDescription||'Sản phẩm do người bán gửi và admin đã duyệt.';p.detailedDescription=p.detailedDescription||p.shortDescription;p.warranty=p.warranty||'Theo chính sách người bán và Alpha Zone.';p.approvalStatus='approved';p.approvedAt=new Date().toISOString();p.source='seller_marketplace';p.publishTarget='marketplace';p.marketplaceOnly=true;p.hideFromProductPage=true;p.sellerId=s.sellerId;p.sellerUsername=s.username;p.sellerName=s.fullName;p.sellerContact=s.contact;p.sellerEmail=s.email;p.sellerRole=s.role;p.sellerStatus=s.statusText;return p}
+function marketplaceDraftId(p){return 'marketplace-approved-'+String((p&&p.id)||Date.now()).trim().replace(/[^a-zA-Z0-9_-]+/g,'-')}
+function isSellerMarketplaceProduct(p){var hay=[p&&p.source,p&&p.publishTarget,p&&p.sellerId,p&&p.sellerUsername,p&&p.sellerName,p&&p.marketplaceOnly,p&&p.hideFromProductPage].join(' ');return /seller_marketplace|marketplace|true/i.test(hay) && /(seller|người bán|marketplace|true)/i.test(hay)}
+async function saveMarketplaceProduct(p){p=productMarketplaceJson({product:p,seller:p});await post('saveDraft',{data:{draftId:marketplaceDraftId(p),scope:'marketplace_product_approved',data:{scope:'marketplace_product_approved',statusText:'đã duyệt',product:p,seller:cleanSeller(p,p),updatedAt:new Date().toISOString()}}});return p}
+function putMarketplaceJson(obj){var el=$('azm-market-json');if(!el)return;obj=productMarketplaceJson({product:obj,seller:obj});var current=[];try{current=JSON.parse(el.value||'[]');if(!Array.isArray(current))current=[current]}catch(_){current=[]}var idx=current.findIndex(function(x){return x&&obj&&x.id===obj.id});if(idx>=0)current[idx]=obj;else current.unshift(obj);el.value=JSON.stringify(current,null,2)}
+function copyMarketplaceJson(){var el=$('azm-market-json');var v=el?el.value:'';if(!v){msg('Chưa có JSON để copy.',true);return}navigator.clipboard.writeText(v).then(function(){msg('Đã copy JSON marketplace.')}).catch(function(){msg('Không copy được. Hãy copy thủ công trong ô JSON.',true)})}
+async function pushMarketplaceJson(){try{var el=$('azm-market-json');var parsed=JSON.parse((el&&el.value)||'[]');if(!Array.isArray(parsed))parsed=[parsed];for(var i=0;i<parsed.length;i++){await saveMarketplaceProduct(parsed[i])}msg('Đã đồng bộ '+parsed.length+' sản phẩm vào Marketplace. Không ghi vào danh sách Product nên trang Product sẽ không hiển thị sản phẩm người bán.');await load()}catch(e){msg('Lỗi đồng bộ Marketplace: '+(e.message||e),true)}}
+async function cleanupSellerProductsFromProductPage(){try{var rows=(Array.isArray(window.allProducts)?window.allProducts:allProducts||[]).filter(isSellerMarketplaceProduct);if(!rows.length){msg('Không phát hiện sản phẩm người bán trong danh sách Product.');return}if(!confirm('Dọn '+rows.length+' sản phẩm người bán khỏi trang Product? Dữ liệu Marketplace đã duyệt vẫn được giữ trong Marketplace drafts.'))return;var ok=0;for(var i=0;i<rows.length;i++){try{await saveMarketplaceProduct(rows[i]);if(rows[i].id){await post('deleteProduct',{id:rows[i].id});ok++}}catch(_){}}msg('Đã dọn '+ok+'/'+rows.length+' sản phẩm người bán khỏi trang Product và giữ lại ở Marketplace.');if(typeof loadProducts==='function')await loadProducts();await load()}catch(e){msg('Lỗi dọn Product page: '+(e.message||e),true)}}
+function pending(){return drafts.map(function(d){var data=sj(d.dataJson||'{}',{}); if(data.data)data=data.data; var p=data.product||data, scope=d.scope||data.scope||'', status=data.statusText||p.approvalStatus||''; if(!/seller_product|pending/i.test([scope,d.draftId,status,p.approvalStatus].join(' ')))return null; if(/đã duyệt|duyet|approved|từ chối|rejected/i.test(status))return null; return {draft:d,data:data,product:p,seller:data.seller||{}}}).filter(Boolean)}
+function ensure(){var pane=$('pane-registration')||$('pane-records')||document.body;if($('azm-wrap'))return;var div=document.createElement('div');div.id='azm-wrap';div.className='azm-wrap';div.innerHTML='<section class="azm-box"><div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3"><div><h2 class="section-title">Quản trị thành viên người bán</h2><p class="small muted mt-1">Toàn quyền duyệt, khóa, cập nhật tên đăng nhập cho Thành viên / Đối tác / CTV.</p></div><button id="azm-refresh" class="btn px-4 py-3 rounded-2xl font-medium">Tải lại quản trị</button></div><div class="azm-tabs"><button data-f="all" class="active">Tất cả</button><button data-f="member">Thành viên</button><button data-f="partner">Đối tác</button><button data-f="ctv">CTV</button></div><div id="azm-msg" class="azm-msg">Sẵn sàng.</div><div id="azm-members" class="azm-grid mt-3"></div></section><section class="azm-box"><div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3"><div><h2 class="section-title">Duyệt sản phẩm người bán</h2><p class="small muted mt-1">Sản phẩm người bán gửi sẽ hiển thị kèm thông tin người bán. Khi admin duyệt, sản phẩm chỉ đồng bộ vào Marketplace, không ghi vào danh sách Product.</p></div><div id="azm-prod-count" class="badge">0 sản phẩm chờ</div></div><div class="azm-actions"><button id="azm-clean-products">Dọn Product page</button></div><div class="azm-msg">Quy tắc thông minh: Product page chỉ dành cho sản phẩm chính của shop. Sản phẩm đã duyệt từ người bán được gắn marketplaceOnly và lưu ở scope marketplace_product_approved để Marketplace đọc riêng.</div><div id="azm-products" class="azm-grid mt-3"></div><div class="azm-box" style="margin-top:14px"><div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3"><div><h3 class="font-semibold">JSON marketplace sau duyệt</h3><p class="small muted mt-1">Tự sinh sau khi bấm “Duyệt & tạo JSON”. Admin có thể copy hoặc bấm “Đồng bộ Marketplace”; thao tác này không làm sản phẩm xuất hiện ở trang Product.</p></div><div class="azm-actions"><button id="azm-copy-json">Copy JSON</button><button id="azm-push-json">Đồng bộ Marketplace</button></div></div><textarea id="azm-market-json" class="azm-json" placeholder="JSON sản phẩm đã duyệt sẽ hiện ở đây"></textarea></div></section>';pane.appendChild(div);bind()}
+function bind(){var r=$('azm-refresh');if(r)r.onclick=load;var cj=$('azm-copy-json');if(cj)cj.onclick=copyMarketplaceJson;var pj=$('azm-push-json');if(pj)pj.onclick=pushMarketplaceJson;var cp=$('azm-clean-products');if(cp)cp.onclick=cleanupSellerProductsFromProductPage;document.querySelectorAll('[data-f]').forEach(function(b){b.onclick=function(){filter=b.getAttribute('data-f');document.querySelectorAll('[data-f]').forEach(function(x){x.classList.toggle('active',x===b)});renderMembers()}})}
+async function load(){try{msg('Đang tải dữ liệu quản trị...');var lj=await get('listCustomerLeads');leads=(Array.isArray(lj.items)?lj.items:[]).filter(isMember).map(normLead);try{var dj=await get('listDrafts');drafts=Array.isArray(dj.items)?dj.items:[]}catch(_){drafts=[]}renderMembers();renderProducts();msg('Đã tải '+leads.length+' hồ sơ và '+pending().length+' sản phẩm chờ duyệt.')}catch(e){msg('Lỗi tải: '+(e.message||e),true)}}
+function renderMembers(){var host=$('azm-members');if(!host)return;var rows=leads.filter(function(x){return filter==='all'||x.role===filter});if(!rows.length){host.innerHTML='<div class="muted">Chưa có hồ sơ phù hợp.</div>';return}host.innerHTML=rows.map(function(x,i){return '<div class="azm-card"><h4>'+esc(x.fullName||x.username||x.leadId)+'</h4><div class="azm-meta">Nhóm: <b>'+roleLabel(x.role)+'</b><br>Tên đăng nhập: <b>'+esc(x.username||'chưa có')+'</b><br>Trạng thái: <b>'+esc(x.statusText)+'</b><br>Liên hệ: '+esc(x.contact||'—')+' • '+esc(x.email||'—')+'<br>Mã: <span class="mono">'+esc(x.leadId||'')+'</span></div><div class="azm-actions"><button data-approve="'+i+'">Duyệt</button><button data-lock="'+i+'">Khóa</button><button data-name="'+i+'">Cập nhật tên đăng nhập</button><button data-wait="'+i+'">Chờ duyệt</button></div></div>'}).join('');host.querySelectorAll('[data-approve]').forEach(function(b){b.onclick=function(){upd(+b.dataset.approve,{statusText:'đã duyệt'})}});host.querySelectorAll('[data-lock]').forEach(function(b){b.onclick=function(){upd(+b.dataset.lock,{statusText:'đã khóa'})}});host.querySelectorAll('[data-wait]').forEach(function(b){b.onclick=function(){upd(+b.dataset.wait,{statusText:'chờ admin duyệt'})}});host.querySelectorAll('[data-name]').forEach(function(b){b.onclick=function(){var x=leads[+b.dataset.name],n=prompt('Tên đăng nhập mới:',x.username||'');if(n)upd(+b.dataset.name,{username:n.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')})}})}
+async function upd(i,chg){try{var x=leads[i];if(!x)return;await post('saveCustomerLead',{data:{leadId:x.leadId,fullName:x.fullName,contact:x.contact,email:x.email,note:note(x,chg),productId:x.productId||('seller-registration-'+x.role),productName:x.productName||('Đăng ký '+roleLabel(x.role)),sourcePage:'admin-member-manager'}});msg('Đã cập nhật hồ sơ.');await load()}catch(e){msg('Lỗi cập nhật: '+(e.message||e),true)}}
+function renderProducts(){var host=$('azm-products'),c=$('azm-prod-count');if(!host)return;var rows=pending();if(c)c.textContent=rows.length+' sản phẩm chờ';if(!rows.length){host.innerHTML='<div class="muted">Chưa có sản phẩm chờ duyệt.</div>';return}host.innerHTML=rows.map(function(x,i){var p=x.product||{},s=cleanSeller(x.seller||{},p);return '<div class="azm-card"><h4>'+esc(p.name||p.id||'Sản phẩm')+'</h4><div class="azm-meta">ID: <span class="mono">'+esc(p.id||'')+'</span><br>Giá: '+esc(p.price||'—')+'<br>Danh mục: '+esc(p.category||'—')+'<br>Mô tả: '+esc(p.shortDescription||'—')+'</div><div class="azm-seller-box"><div class="azm-meta"><b>Thông tin người bán gửi kèm</b><br>Username: <b>'+esc(s.username||'—')+'</b><br>Họ tên: '+esc(s.fullName||'—')+'<br>Liên hệ: '+esc(s.contact||'—')+'<br>Email: '+esc(s.email||'—')+'<br>Nhóm: '+esc(roleLabel(s.role)||s.role||'—')+'<br>Trạng thái: '+esc(s.statusText||'—')+'</div></div><div class="azm-actions"><button data-prod-json="'+i+'">Tạo JSON</button><button data-prod-yes="'+i+'">Duyệt & tạo JSON</button><button data-prod-no="'+i+'">Từ chối</button></div></div>'}).join('');host.querySelectorAll('[data-prod-json]').forEach(function(b){b.onclick=function(){var item=pending()[+b.dataset.prodJson];if(item){putMarketplaceJson(productMarketplaceJson(item));msg('Đã tạo JSON marketplace để admin kiểm tra trước khi duyệt.')}}});host.querySelectorAll('[data-prod-yes]').forEach(function(b){b.onclick=function(){approve(+b.dataset.prodYes)}});host.querySelectorAll('[data-prod-no]').forEach(function(b){b.onclick=function(){mark(+b.dataset.prodNo,'từ chối')}})}
+async function approve(i){try{var item=pending()[i];if(!item)return;var p=productMarketplaceJson(item);putMarketplaceJson(p);await saveMarketplaceProduct(p);await mark(i,'đã duyệt',true);msg('Đã duyệt và đồng bộ Marketplace cho '+(p.name||p.id)+'. Sản phẩm này không được ghi vào Product page.');await load()}catch(e){msg('Lỗi duyệt: '+(e.message||e),true)}}
+async function mark(i,status,skip){var item=pending()[i];if(!item)return;var d=item.draft||{},data=item.data||{};data.statusText=status;data.reviewedAt=new Date().toISOString();await post('saveDraft',{data:{draftId:d.draftId,scope:d.scope||'seller_product_pending',data:data}});if(!skip){msg('Đã cập nhật trạng thái sản phẩm.');await load()}}
+function boot(){ensure();load();setInterval(function(){if(!document.hidden)load()},30000)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
+
+
+<script id="az-admin-unified-router">
+(function(){
+var TABS={products:1,records:1,smart:1,registration:1};
+function target(){var h=(location.hash||'').replace('#','').trim();return TABS[h]?h:'products';}
+function openTab(tab){if(!TABS[tab])tab='products';if(typeof window.switchMainTab==='function'){try{window.switchMainTab(tab)}catch(_){}}
+document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===tab);});
+['products','records','smart','registration'].forEach(function(n){var p=document.getElementById('pane-'+n);if(p)p.classList.toggle('hidden-pane',n!==tab);});}
+document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('[data-tab]');if(!b)return;var t=b.getAttribute('data-tab');if(!TABS[t])return;e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();history.replaceState(null,'','#'+t);openTab(t);},true);
+window.addEventListener('hashchange',function(){openTab(target());});
+function boot(){openTab(target());}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();setTimeout(boot,400);setTimeout(boot,1200);
+})();
+</script>
+  <script src="az-fix.js"></script>
+  <script src="az-appscript-live.js"></script>
+</body>
+</html>
