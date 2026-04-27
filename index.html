@@ -22,8 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
-    <!-- Elegant Fonts (Outfit & JetBrains Thin) -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500&family=JetBrains+Mono:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <!-- Thin Vietnamese-safe font -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -34,18 +34,33 @@
         }
         
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
             background-color: var(--bg);
             color: #fff;
             overflow-x: hidden;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            font-synthesis: none;
         }
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
+        .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 300; }
 
-        /* Minimalist Mesh Background */
+
+
+        /* Vietnamese-safe thin typography */
+        h1, h2, h3, h4, h5, h6, button, input, textarea, select {
+            font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-synthesis: none;
+        }
+        .font-thin { font-weight: 100 !important; }
+        .font-extralight { font-weight: 200 !important; }
+        .font-light { font-weight: 300 !important; }
+        .font-medium { font-weight: 400 !important; }
+        .font-semibold, .font-bold { font-weight: 500 !important; }
+
+                /* Minimalist Mesh Background */
         .ambient-glow {
             position: fixed;
             top: 50%; left: 50%;
@@ -150,7 +165,8 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Production Polish */
-        * { box-sizing: border-box; }
+        * {
+            font-synthesis: none; box-sizing: border-box; }
         a, button, input { -webkit-tap-highlight-color: transparent; }
         button:focus-visible, input:focus-visible, a:focus-visible { outline: 1px solid rgba(255, 95, 31, 0.7); outline-offset: 4px; }
         .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.35s ease; opacity: 0; }
@@ -183,7 +199,7 @@
         </div>
 
         <div class="flex items-center gap-2">
-            <button id="sync-btn" onclick="syncData()" class="text-[8px] font-light uppercase tracking-[0.2em] border border-white/10 px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all">Sync Data</button>
+            <button id="sync-btn" onclick="syncData(false, { manual: true })" class="min-w-[96px] text-[8px] font-light uppercase tracking-[0.2em] border border-white/10 px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed">Sync Data</button>
             <button onclick="toggleMobileMenu()" class="md:hidden text-white/70 border border-white/10 px-3 py-2 rounded-lg hover:bg-white hover:text-black transition-all" aria-label="Open navigation menu">
                 <span class="block w-4 h-[1px] bg-current mb-1"></span><span class="block w-4 h-[1px] bg-current"></span>
             </button>
@@ -227,6 +243,8 @@
         const PRODUCT_GID = '128531703';
         const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PRODUCT_GID}`;
         const CACHE_KEY = 'alphazone_products_minimal_v2';
+        const AUTO_SYNC_ON_LOAD = true;
+        const SYNC_DEBOUNCE_MS = 600;
         const LOGO_URL = 'https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png';
         const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80';
         const SELLER_ZALO = '0357130499';
@@ -241,6 +259,10 @@
         let allProducts = [];
         let categories = [];
         let lastOrder = null;
+        let syncInProgress = false;
+        let lastSyncTimer = null;
+        let lastProductsSignature = '';
+        let hasRenderedOnce = false;
 
         // --- HELPERS ---
         function safeText(value, fallback = '') {
@@ -291,15 +313,51 @@
             };
         }
 
-        function applyProducts(products, source = 'unknown') {
+        function getProductsSignature(products) {
+            return JSON.stringify((products || []).map(p => [p.id, p.title, p.category, p.price, p.image, p.updatedAt]).sort());
+        }
+
+        function renderCurrentRoute({ preserveScroll = true } = {}) {
+            const x = window.scrollX;
+            const y = window.scrollY;
+            handleRoute({ preserveScroll });
+            if (preserveScroll) requestAnimationFrame(() => window.scrollTo(x, y));
+        }
+
+        function applyProducts(products, source = 'unknown', options = {}) {
+            const { render = true, preserveScroll = true, force = false } = options;
             const cleaned = (Array.isArray(products) ? products : [])
                 .map(normalizeProduct)
                 .filter(p => p.title && p.title !== 'Sản phẩm chưa đặt tên');
 
-            allProducts = cleaned.length ? cleaned : FALLBACK_PRODUCTS;
+            const nextProducts = cleaned.length ? cleaned : FALLBACK_PRODUCTS;
+            const nextSignature = getProductsSignature(nextProducts);
+            const changed = force || nextSignature !== lastProductsSignature;
+
+            allProducts = nextProducts;
             categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
+            lastProductsSignature = nextSignature;
             localStorage.setItem(CACHE_KEY, JSON.stringify({ syncedAt: new Date().toISOString(), source, products: allProducts }));
-            handleRoute();
+
+            if (render && (changed || !hasRenderedOnce)) {
+                renderCurrentRoute({ preserveScroll });
+                hasRenderedOnce = true;
+            }
+            return changed;
+        }
+
+        function updateSyncButton(state = 'idle') {
+            const btn = document.getElementById('sync-btn');
+            if (!btn) return;
+            const labels = {
+                idle: 'Sync Data',
+                syncing: 'Syncing...',
+                synced: 'Synced',
+                unchanged: 'Up to date',
+                failed: 'Sync Failed'
+            };
+            btn.innerText = labels[state] || labels.idle;
+            btn.disabled = state === 'syncing';
         }
 
         function getAppsScriptUrl(action = 'products', params = {}) {
@@ -332,15 +390,23 @@
         // --- DATA ENGINE: APPS SCRIPT FIRST, CSV FALLBACK ---
         async function initApp() {
             const cached = localStorage.getItem(CACHE_KEY);
+            let hasCache = false;
             if (cached) {
                 try {
                     const data = JSON.parse(cached);
-                    allProducts = Array.isArray(data.products) && data.products.length ? data.products : FALLBACK_PRODUCTS;
-                    categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
-                    handleRoute();
+                    const cachedProducts = Array.isArray(data.products) && data.products.length ? data.products : FALLBACK_PRODUCTS;
+                    applyProducts(cachedProducts, data.source || 'cache', { render: true, preserveScroll: false, force: true });
+                    hasCache = true;
                 } catch (_) {}
             }
-            await syncData(true);
+
+            if (!hasCache) {
+                applyProducts(FALLBACK_PRODUCTS, 'fallback', { render: true, preserveScroll: false, force: true });
+            }
+
+            if (AUTO_SYNC_ON_LOAD) {
+                window.setTimeout(() => syncData(true, { background: hasCache }), 250);
+            }
         }
 
         async function fetchFromAppsScript() {
@@ -367,9 +433,16 @@
             });
         }
 
-        async function syncData(isInitial = false) {
-            const btn = document.getElementById('sync-btn');
-            if (btn) btn.innerText = 'SYNCING...';
+        async function syncData(isInitial = false, options = {}) {
+            const { manual = false, background = false } = options;
+            if (syncInProgress) return false;
+            window.clearTimeout(lastSyncTimer);
+            syncInProgress = true;
+            updateSyncButton('syncing');
+
+            // Debounce nhẹ để khi người dùng vừa mở web/nhấn nút, UI không bị giật do render liên tục.
+            await new Promise(resolve => setTimeout(resolve, manual ? 0 : SYNC_DEBOUNCE_MS));
+
             try {
                 let rows = [];
                 let source = 'apps-script';
@@ -380,20 +453,31 @@
                     source = 'google-sheet-csv';
                     rows = await fetchFromCsv();
                 }
-                applyProducts(rows, source);
-                if (btn) {
-                    btn.innerText = 'SYNCED';
-                    setTimeout(() => btn.innerText = 'Sync Data', 2000);
+
+                const changed = applyProducts(rows, source, {
+                    render: true,
+                    preserveScroll: true,
+                    force: !hasRenderedOnce
+                });
+
+                updateSyncButton(changed ? 'synced' : 'unchanged');
+                lastSyncTimer = window.setTimeout(() => updateSyncButton('idle'), changed ? 1800 : 1200);
+
+                if (manual) {
+                    showToast(changed ? `Đã đồng bộ dữ liệu từ ${source}` : 'Dữ liệu đã mới nhất', 'success');
+                } else if (!isInitial && !background) {
+                    showToast(`Đã đồng bộ dữ liệu từ ${source}`, 'success');
                 }
-                if (!isInitial) showToast(`Đã đồng bộ dữ liệu từ ${source}`, 'success');
+                return changed;
             } catch (error) {
                 console.error('Sync Error:', error);
-                if (!allProducts.length) applyProducts(FALLBACK_PRODUCTS, 'fallback');
-                if (btn) {
-                    btn.innerText = 'SYNC FAILED';
-                    setTimeout(() => btn.innerText = 'Sync Data', 2500);
-                }
-                if (!isInitial) showToast('Không thể đồng bộ Google Sheet', 'error');
+                if (!allProducts.length) applyProducts(FALLBACK_PRODUCTS, 'fallback', { render: true, preserveScroll: true, force: true });
+                updateSyncButton('failed');
+                lastSyncTimer = window.setTimeout(() => updateSyncButton('idle'), 2500);
+                if (manual || !isInitial) showToast('Không thể đồng bộ Google Sheet', 'error');
+                return false;
+            } finally {
+                syncInProgress = false;
             }
         }
 
@@ -419,14 +503,16 @@
             return { ok: true };
         }
 
-        function handleRoute() {
+        function handleRoute(options = {}) {
+            const { preserveScroll = false } = options;
             const hash = window.location.hash || '#home';
             if (hash === '#home') renderHome();
             else if (hash.startsWith('#category-')) renderCategoryPage(decodeURIComponent(hash.replace('#category-', '')));
             else if (hash.startsWith('#product-')) renderProductDetail(hash.replace('#product-', ''));
             else if (hash.startsWith('#checkout-')) renderCheckout(hash.replace('#checkout-', ''));
             else renderHome();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            hasRenderedOnce = true;
+            if (!preserveScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function navigate(path) { window.location.hash = path; }
@@ -619,7 +705,7 @@
 
         // --- INIT ---
         window.addEventListener('load', initApp);
-        window.addEventListener('hashchange', handleRoute);
+        window.addEventListener('hashchange', () => handleRoute({ preserveScroll: false }));
 
     </script>
 </body>
