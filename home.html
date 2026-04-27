@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Zone | Digital Art & Solutions</title>
+    <link rel="icon" type="image/png" href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #ff5f1f;
+            --bg: #030303;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Nghệ thuật nền Mesh Gradient */
+        .mesh-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(at 0% 0%, rgba(255, 95, 31, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 102, 255, 0.1) 0px, transparent 50%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .glass-nav {
+            background: rgba(3, 3, 3, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Card Styles */
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 30px 60px -12px rgba(255, 95, 31, 0.2);
+        }
+
+        .btn-main {
+            background: var(--accent);
+            color: #000;
+            font-weight: 800;
+            border-radius: 18px;
+            transition: all 0.3s;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Checkout specific styles */
+        .receipt-card {
+            background: #ffffff;
+            color: #000;
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mesh-gradient"></div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 w-full z-[100] px-6 md:px-12 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="navigateTo('home')">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center transition-transform group-hover:rotate-12">
+                <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-7 h-7 object-contain">
+            </div>
+            <div>
+                <div class="grotesk font-bold tracking-tighter text-xl leading-none">ALPHA<span class="text-orange-500">ZONE</span></div>
+                <div class="text-[8px] uppercase tracking-[0.4em] text-white/40 font-black">Digital Ecosystem</div>
+            </div>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest text-white/40">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-orange-500 transition-colors">Trang chủ</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('services')" class="hover:text-orange-500 transition-colors">Dịch vụ</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('contact')" class="hover:text-orange-500 transition-colors">Liên hệ</a>
+        </div>
+
+        <button onclick="syncData()" class="text-[9px] font-black uppercase tracking-widest border border-white/10 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all">
+            Đồng bộ
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <main id="app-content" class="pt-32 pb-20 px-6 md:px-12 lg:px-24">
+        <!-- Content will be injected here -->
+        <div class="flex items-center justify-center min-h-[60vh]">
+            <div class="animate-pulse text-orange-500 font-black tracking-widest uppercase text-xs">Đang khởi tạo hệ thống Alpha Zone...</div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer" class="border-t border-white/5 py-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div class="flex justify-center gap-4 opacity-20">
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+            </div>
+            <p class="text-[10px] font-black uppercase tracking-[0.5em] text-white/30">Alpha Zone Center &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- CONFIGURATION ---
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1B2FMQ9pKHFQpY4eFMIqnEEHEqvgqq72USV86HgH6d5E/export?format=csv&gid=1122697140';
+        let products = [];
+        let categories = [];
+
+        // --- APP ENGINE ---
+        async function loadData() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const csvData = await response.text();
+                
+                Papa.parse(csvData, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        products = results.data
+                            .filter(row => row.Title && row.Title.trim() !== "")
+                            .map((row, idx) => ({
+                                id: row.ID || `az-${idx}`,
+                                title: row.Title,
+                                category: row.Category || 'Chưa phân loại',
+                                price: row.Price || 'Liên hệ',
+                                duration: row.Duration || 'Vĩnh viễn',
+                                image: row.Image_URL || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe',
+                                description: row.Description || 'Sản phẩm cao cấp từ hệ sinh thái Alpha Zone.',
+                                features: row.Features ? row.Features.split('|').map(f => f.trim()) : []
+                            }));
+                        
+                        categories = [...new Set(products.map(p => p.category))];
+                        handleRouting();
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi tải dữ liệu:", error);
+                document.getElementById('app-content').innerHTML = `
+                    <div class="text-center py-20">
+                        <p class="text-white/40 mb-4 uppercase text-xs font-bold tracking-widest">Không thể tải dữ liệu từ máy chủ</p>
+                        <button onclick="location.reload()" class="btn-main px-6 py-3">Thử lại</button>
+                    </div>
+                `;
+            }
+        }
+
+        function handleRouting() {
+            const hash = window.location.hash || '#home';
+            
+            if (hash === '#home') {
+                renderHome();
+            } else if (hash.startsWith('#category-')) {
+                const catName = decodeURIComponent(hash.replace('#category-', ''));
+                renderCategory(catName);
+            } else if (hash.startsWith('#product-')) {
+                const prodId = hash.replace('#product-', '');
+                renderProductDetail(prodId);
+            } else if (hash.startsWith('#checkout-')) {
+                const prodId = hash.replace('#checkout-', '');
+                renderCheckout(prodId);
+            } else {
+                renderHome();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function navigateTo(page) {
+            window.location.hash = page;
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                navigateTo('home');
+                setTimeout(() => {
+                    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+
+        // --- RENDER VIEWS ---
+
+        function renderHome() {
+            const content = document.getElementById('app-content');
+            let html = `
+                <div id="home" class="fade-in">
+                    <header class="mb-24">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="h-[1px] w-12 bg-orange-500"></span>
+                            <span class="text-orange-500 font-black text-[10px] tracking-[0.5em] uppercase">Digital Excellence</span>
+                        </div>
+                        <h1 class="grotesk text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase">
+                            Elite <br> <span class="text-white/20">Solutions.</span>
+                        </h1>
+                        <p class="mt-8 text-white/40 max-w-lg text-sm font-medium leading-relaxed uppercase tracking-widest">
+                            Hệ sinh thái dịch vụ số hàng đầu, cung cấp các giải pháp tối ưu cho nhu cầu giải trí và công việc của bạn.
+                        </p>
+                    </header>
+
+                    <section id="services" class="space-y-16">
+                        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                            <h2 class="grotesk text-4xl font-bold tracking-tighter uppercase">Danh mục <span class="text-orange-500">Dịch vụ</span></h2>
+                            <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+                                ${categories.map(cat => `
+                                    <button onclick="navigateTo('category-${encodeURIComponent(cat)}')" class="whitespace-nowrap px-6 py-3 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                                        ${cat}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${products.slice(0, 6).map(p => renderProductCard(p)).join('')}
+                        </div>
+                    </section>
+
+                    <section id="contact" class="mt-40 bg-orange-500 rounded-[60px] p-12 md:p-24 text-black overflow-hidden relative">
+                        <div class="relative z-10">
+                            <h2 class="grotesk text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none mb-8">Bắt đầu ngay <br> hôm nay.</h2>
+                            <p class="max-w-md font-bold text-lg mb-12 opacity-80">Đội ngũ Alpha Zone sẵn sàng hỗ trợ bạn 24/7 với những giải pháp tốt nhất.</p>
+                            <a href="https://zalo.me/0357130499" target="_blank" class="bg-black text-white px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs inline-block hover:scale-105 transition-transform">
+                                Liên hệ Zalo Admin
+                            </a>
+                        </div>
+                        <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-black/10 rounded-full blur-3xl"></div>
+                    </section>
+                </div>
+            `;
+            content.innerHTML = html;
+        }
+
+        function renderCategory(catName) {
+            const content = document.getElementById('app-content');
+            const filteredProducts = products.filter(p => p.category === catName);
+            
+            let html = `
+                <div class="fade-in">
+                    <button onclick="navigateTo('home')" class="mb-12 text-[10px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">
+                        ← Trở về trang chủ
+                    </button>
+                    <div class="mb-16">
+                        <h1 class="grotesk text-6xl font-bold tracking-tighter uppercase mb-4">${catName}</h1>
+                        <p class="text-white/40 uppercase text-[10px] font-black tracking-widest">Hiển thị ${filteredProducts.length} sản phẩm</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${filteredProducts.map(p => renderProductCard(p)).join('')}
+                    </div>
+                </div>
+            `;
+            content.innerHTML = html;
+        }
+
+        function renderProductDetail(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return navigateTo('home');
+
+            const content = document.getElementById('app-content');
+            let html = `
+                <div class="max-w-7xl mx-auto fade-in">
+                    <button onclick="window.history.back()" class="mb-12 text-[10px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">
+                        ← Quay lại
+                    </button>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                        <div class="sticky top-32">
+                            <div class="aspect-[4/5] rounded-[48px] overflow-hidden border border-white/10 shadow-2xl relative">
+                                <img src="${p.image}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-12 py-8">
+                            <div>
+                                <span class="text-orange-500 font-black text-[10px] tracking-[0.4em] uppercase mb-4 block">${p.category}</span>
+                                <h1 class="grotesk text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none mb-6">${p.title}</h1>
+                                <div class="flex items-baseline gap-4">
+                                    <span class="text-4xl font-black text-white">${p.price}</span>
+                                    <span class="text-white/40 font-bold uppercase text-xs tracking-widest">/ ${p.duration}</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Mô tả dịch vụ</h4>
+                                <p class="text-white/60 leading-relaxed font-medium">${p.description}</p>
+                            </div>
+
+                            ${p.features.length > 0 ? `
+                                <div class="space-y-6">
+                                    <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Tính năng nổi bật</h4>
+                                    <div class="grid grid-cols-1 gap-4">
+                                        ${p.features.map(f => `
+                                            <div class="flex items-center gap-4 bg-white/5 p-5 rounded-3xl border border-white/5">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                                                <span class="text-xs font-bold uppercase tracking-tight text-white/80">${f}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            <div class="pt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <button onclick="navigateTo('checkout-${p.id}')" class="btn-main py-6 text-[11px] uppercase tracking-[0.3em]">
+                                    Thanh toán ngay
+                                </button>
+                                <a href="https://zalo.me/0357130499" target="_blank" class="border border-white/10 rounded-2xl py-6 text-center text-[11px] uppercase tracking-[0.3em] font-black hover:bg-white hover:text-black transition-all">
+                                    Hỗ trợ Zalo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            content.innerHTML = html;
+        }
+
+        function renderCheckout(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return navigateTo('home');
+
+            const now = new Date();
+            const txId = 'AZ-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            const activationCode = id.substring(0,5).toUpperCase() + Math.random().toString().slice(2, 18);
+            const shortPrice = p.price.replace(/[^\d]/g, '');
+
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="max-w-4xl mx-auto fade-in pb-20">
+                    <nav class="flex justify-between items-center mb-12">
+                        <button onclick="window.history.back()" class="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+                            ← Hủy thanh toán
+                        </button>
+                        <button onclick="downloadReceipt()" class="bg-white text-black px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">
+                            Xuất PDF
+                        </button>
+                    </nav>
+
+                    <div id="receipt-capture" class="receipt-card p-10 md:p-16 overflow-hidden">
+                        <!-- Receipt Header -->
+                        <div class="flex flex-col md:flex-row justify-between gap-10 mb-16 pb-12 border-b border-slate-100">
+                            <div class="flex gap-6 items-center">
+                                <div class="w-20 h-20 bg-slate-50 p-4 rounded-3xl border border-slate-100">
+                                    <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-black tracking-tighter uppercase leading-none">Phiếu Xác Nhận</h2>
+                                    <p class="text-orange-500 text-[10px] font-black tracking-[0.4em] uppercase mt-2">Alpha Zone Digital</p>
+                                </div>
+                            </div>
+                            <div class="md:text-right">
+                                <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Mã Giao Dịch</p>
+                                <p class="text-2xl font-black mono text-slate-900">${txId}</p>
+                            </div>
+                        </div>
+
+                        <!-- Content Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                            <div class="md:col-span-7 space-y-8">
+                                <div>
+                                    <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-3">Dịch Vụ Nâng Cấp</p>
+                                    <h3 class="text-3xl font-bold text-slate-950">${p.title}</h3>
+                                    <p class="text-slate-500 font-medium text-sm mt-2">${p.category} • ${p.duration}</p>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-50">
+                                    <div>
+                                        <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Thời Gian</p>
+                                        <p class="text-xs font-bold text-slate-800">${now.toLocaleDateString('vi-VN')}</p>
+                                        <p class="text-[10px] text-slate-400 font-medium">${now.toLocaleTimeString('vi-VN')}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Phương Thức</p>
+                                        <p class="text-xs font-bold text-slate-800">MB BANK QR</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-5 bg-slate-950 rounded-[40px] p-10 text-white flex flex-col justify-center items-center text-center">
+                                <p class="text-slate-500 text-[9px] font-black uppercase tracking-widest mb-4">Tổng Cộng</p>
+                                <p class="text-4xl font-black text-orange-500">${p.price}</p>
+                                <p class="text-[9px] font-bold text-white/30 mt-4 uppercase tracking-[0.2em]">Alpha Zone Guarantee</p>
+                            </div>
+                        </div>
+
+                        <!-- Payment QR -->
+                        <div class="bg-slate-50 rounded-[40px] p-10 flex flex-col items-center border border-slate-100">
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8 text-center">Quét mã để kích hoạt dịch vụ</p>
+                            <div class="w-64 h-64 bg-white p-6 rounded-[32px] shadow-sm mb-8">
+                                <img src="https://img.vietqr.io/image/MB-4499123123-compact2.jpg?amount=${shortPrice}&addInfo=${txId}" class="w-full h-full object-contain">
+                            </div>
+                            <div class="text-center space-y-2">
+                                <p class="text-xs font-bold text-slate-800 uppercase tracking-widest">Nguyễn Lê Trí</p>
+                                <p class="mono text-[10px] text-slate-400">MB Bank: 4499.123.123</p>
+                            </div>
+                        </div>
+
+                        <!-- Activation Section -->
+                        <div class="mt-16 pt-16 border-t-2 border-dashed border-slate-100 text-center">
+                            <p class="text-slate-400 text-[9px] font-black uppercase tracking-[0.4em] mb-6">Mã kích hoạt của bạn</p>
+                            <div class="bg-white border-2 border-slate-100 rounded-3xl p-8 cursor-pointer group" onclick="copyToClipboard('${activationCode}')">
+                                <p class="mono text-2xl font-black text-slate-950 tracking-wider">${activationCode}</p>
+                                <p class="text-[9px] font-bold text-orange-500 mt-4 uppercase opacity-0 group-hover:opacity-100 transition-opacity">Nhấp để sao chép</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 bg-white/5 rounded-3xl p-8 border border-white/5">
+                        <h5 class="text-[10px] font-black text-orange-500 uppercase tracking-widest mb-4">Lưu ý quan trọng</h5>
+                        <ul class="space-y-3 text-[11px] text-white/40 leading-relaxed">
+                            <li>• Sau khi chuyển khoản, hãy lưu lại phiếu này (nút Xuất PDF ở trên).</li>
+                            <li>• Gửi mã kích hoạt cho Admin qua Zalo <span class="text-white font-bold">0357130499</span>.</li>
+                            <li>• Thời gian xử lý từ 5-15 phút sau khi nhận được thông tin.</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- HELPERS ---
+
+        function renderProductCard(p) {
+            return `
+                <div class="product-card p-6 flex flex-col group cursor-pointer" onclick="navigateTo('product-${p.id}')">
+                    <div class="w-full aspect-video rounded-2xl overflow-hidden mb-6 relative">
+                        <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-[8px] font-black uppercase tracking-widest text-white/80">
+                            ${p.category}
+                        </div>
+                    </div>
+                    <div class="flex-grow space-y-3">
+                        <h3 class="text-xl font-bold tracking-tight uppercase group-hover:text-orange-500 transition-colors">${p.title}</h3>
+                        <div class="flex justify-between items-end pt-4">
+                            <div>
+                                <p class="text-[8px] font-black text-white/30 uppercase tracking-[0.2em] mb-1">Giá từ</p>
+                                <p class="text-xl font-black text-white">${p.price}</p>
+                            </div>
+                            <span class="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all text-orange-500">Xem chi tiết →</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.currentTarget.querySelector('p:last-child');
+                const oldText = btn.innerText;
+                btn.innerText = 'ĐÃ SAO CHÉP!';
+                setTimeout(() => btn.innerText = oldText, 2000);
+            });
+        }
+
+        function downloadReceipt() {
+            const element = document.getElementById('receipt-capture');
+            const opt = {
+                margin: 0,
+                filename: 'AlphaZone-Receipt.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 3, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function syncData() {
+            const btn = event.currentTarget;
+            btn.innerText = 'ĐANG ĐỒNG BỘ...';
+            loadData().then(() => {
+                btn.innerText = 'ĐÃ XONG';
+                setTimeout(() => btn.innerText = 'Đồng bộ', 2000);
+            });
+        }
+
+        // Initialize App
+        window.addEventListener('load', loadData);
+        window.addEventListener('hashchange', handleRouting);
+    </script>
+</body>
+</html>
