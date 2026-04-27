@@ -215,7 +215,6 @@
       .card { padding:16px; }
       .hero-actions{ flex-direction:column; }
     }
-  
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -251,7 +250,7 @@
       font-weight: 300;
       opacity: 0.72;
     }
-    
+
 /* --- overflow safety --- */
 body, .glass, .card, .card-tight, .soft-panel, .product-card, table, td, th, .badge, .chat-bubble, .field, .area, .select, .mini-note {
   overflow-wrap: anywhere;
@@ -330,7 +329,6 @@ th, td { max-width: 0; }
   margin-top:6px;
 }
 
-
 /* --- stable records/orders table fix: keep UI unchanged, prevent order rows from making layout jump --- */
 .records-stable-table {
   width: 100%;
@@ -375,8 +373,6 @@ body.dark .records-stable-table .cell-status {
   color: var(--muted);
 }
 
-
-
 /* --- mobile stability: prevent horizontal shake while keeping the same UI --- */
 html, body {
   width: 100%;
@@ -409,6 +405,8 @@ input, textarea, select, button { font-size: 16px; }
 }
 
 </style>
+<link rel="stylesheet" href="az-fix.css">
+<script src="az-fix.js" defer></script>
 </head>
 <body class="p-4 md:p-8">
   <div class="max-w-7xl mx-auto space-y-6">
@@ -533,7 +531,6 @@ input, textarea, select, button { font-size: 16px; }
           </div>
         </section>
 
-        
 <section class="glass card space-y-5">
   <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
     <div>
@@ -601,7 +598,6 @@ input, textarea, select, button { font-size: 16px; }
       </section>
     </section>
 
-    
 <section id="pane-smart" class="hidden-pane space-y-6">
   <div class="grid grid-cols-1 xl:grid-cols-[1.15fr,.85fr] gap-6">
     <section class="glass card space-y-5">
@@ -862,7 +858,6 @@ async function apiPost(action, payload) {
   return json;
 }
 
-
 function collectValidationWarnings(items) {
   const warnings = [];
   safeArray(items).forEach((item, idx) => {
@@ -984,7 +979,6 @@ function applyForm(item) {
 }
 
 function clearForm() { applyForm({}); }
-
 
 function updateBulkEditFields() {
   if (!$('bulkEditMatchField') || !$('bulkEditTargetField')) return;
@@ -1125,7 +1119,6 @@ function fillWarrantyStatusTemplate(statusText) {
   }
 }
 
-
 function renderProductsList() {
   const q = String($('searchProductsInput').value || '').trim().toLowerCase();
   const items = allProducts.filter(item => {
@@ -1136,7 +1129,7 @@ function renderProductsList() {
   $('productList').innerHTML = items.map(item => `
     <div class="product-card">
       <div class="product-visual mb-3">
-        ${item.logo || item.categoryImage ? `<img src="${esc(item.logo || item.categoryImage)}" alt="${esc(item.name || item.id || 'product')}" onerror="this.style.display='none'">` : `<div class="muted text-sm text-center px-5">Chưa có ảnh sản phẩm</div>`}
+        ${item.logo || item.categoryImage ? `<img src="${esc(item.logo || item.categoryImage)}" alt="${esc(item.name || item.id || 'product')}" onerror="this.dataset.azFallbackApplied='';this.dispatchEvent(new Event('error'))">` : `<div class="muted text-sm text-center px-5">Chưa có ảnh sản phẩm</div>`}
       </div>
       <div class="min-w-0">
         <div class="font-semibold text-lg product-title">${esc(item.name)}</div>
@@ -1510,7 +1503,6 @@ function saveRegistration() {
   });
 }
 
-
 function renderRegistrationList() {
   const rows = registrationEntries.filter(item => item.type === activeRegTab);
   $('registrationCount').textContent = rows.length + ' hồ sơ';
@@ -1728,39 +1720,18 @@ function boot(){ensure();load();setInterval(function(){if(!document.hidden)load(
 </script>
 
 
-<script id="az-split-page-bridge">
+<script id="az-admin-unified-router">
 (function(){
-  window.AZ_FORCE_TAB = "products";
-  var links = {
-    products: 'admin-products.html',
-    records: 'admin-records.html',
-    smart: 'admin-smart.html',
-    registration: 'admin-registration.html'
-  };
-  function replaceTabButtons(){
-    document.querySelectorAll('[data-tab]').forEach(function(btn){
-      var tab = btn.getAttribute('data-tab');
-      if(!links[tab] || btn.tagName.toLowerCase()==='a') return;
-      var a = document.createElement('a');
-      a.className = btn.className;
-      a.setAttribute('data-tab', tab);
-      a.href = links[tab];
-      a.textContent = btn.textContent;
-      btn.parentNode.replaceChild(a, btn);
-    });
-  }
-  function apply(){
-    replaceTabButtons();
-    if (typeof window.switchMainTab === 'function') window.switchMainTab(window.AZ_FORCE_TAB);
-    document.querySelectorAll('[data-tab]').forEach(function(el){
-      var tab = el.getAttribute('data-tab');
-      el.classList.toggle('active', tab === window.AZ_FORCE_TAB);
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true}); else apply();
-  setTimeout(apply, 300);
+var TABS={products:1,records:1,smart:1,registration:1};
+function target(){var h=(location.hash||'').replace('#','').trim();return TABS[h]?h:'products';}
+function openTab(tab){if(!TABS[tab])tab='products';if(typeof window.switchMainTab==='function'){try{window.switchMainTab(tab)}catch(_){}}
+document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===tab);});
+['products','records','smart','registration'].forEach(function(n){var p=document.getElementById('pane-'+n);if(p)p.classList.toggle('hidden-pane',n!==tab);});}
+document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('[data-tab]');if(!b)return;var t=b.getAttribute('data-tab');if(!TABS[t])return;e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();history.replaceState(null,'','#'+t);openTab(t);},true);
+window.addEventListener('hashchange',function(){openTab(target());});
+function boot(){openTab(target());}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();setTimeout(boot,400);setTimeout(boot,1200);
 })();
 </script>
-
 </body>
 </html>
