@@ -30,3 +30,46 @@
   function openHashPage(){ var p=pathName(), h=(location.hash||'').replace(/^#/,''); if(!/^(shop|seller|support)\.html$/.test(p) || !h) return; setTimeout(function(){ if(typeof window.showPage==='function'){ try{window.showPage(h)}catch(_){} } installCatalogFilter(); },120); } window.addEventListener('hashchange',openHashPage); function boot(){ installDockRouter(); installCatalogFilter(); installCheckoutLink(); hydrateCheckout(); adminLinks(); openHashPage(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot(); setInterval(installCatalogFilter,900);
 })();
+
+/* Alpha Zone checkout separation hard guard: no activation/order popup on shop pages */
+(function(){
+  if(window.__AZ_CHECKOUT_SEPARATION_GUARD_V2__) return;
+  window.__AZ_CHECKOUT_SEPARATION_GUARD_V2__ = true;
+  function fileName(){return (location.pathname.split('/').pop()||'index.html').toLowerCase();}
+  function isCheckout(){return fileName()==='checkout.html';}
+  function text(v){return String(v==null?'':v).trim();}
+  function snapshot(){
+    var p={};
+    try{ if(typeof window.getCurrentProduct==='function') p=window.getCurrentProduct()||{}; }catch(_){ }
+    p=p||{};
+    p.id=text(p.id||p.productId||window.currentSelectedId||window.selectedProductId||(document.getElementById('detail-id')||{}).textContent||(document.getElementById('modal-product-id')||{}).textContent);
+    p.productId=p.id;
+    p.name=text(p.name||p.productName||p.platformName||(document.getElementById('detail-title')||{}).textContent||(document.getElementById('modal-title')||{}).textContent);
+    p.productName=p.name;
+    p.price=text(p.price||(document.getElementById('detail-price')||{}).textContent||(document.getElementById('modal-price')||{}).textContent);
+    try{localStorage.setItem('azCheckoutProduct',JSON.stringify(p));}catch(_){ }
+  }
+  function goCheckout(){snapshot(); if(!isCheckout()) location.href='checkout.html';}
+  function shouldCheckoutPopup(id){return /activation|order|payment|receipt|checkout/i.test(String(id||''));}
+  function wrap(){
+    var sm=window.showMiniPopup;
+    if(typeof sm==='function' && !sm.__azCheckoutHardGuard){
+      window.showMiniPopup=function(id){
+        if(!isCheckout() && shouldCheckoutPopup(id)){goCheckout(); return false;}
+        return sm.apply(this,arguments);
+      };
+      window.showMiniPopup.__azCheckoutHardGuard=true;
+    }
+  }
+  document.addEventListener('click',function(e){
+    var el=e.target&&e.target.closest&&e.target.closest('#detail-buy-btn,[data-checkout],.az-checkout-link,[onclick*="activation-popup"],[onclick*="generateReceipt"],[onclick*="payment"]');
+    if(!el || isCheckout()) return;
+    var label=text(el.textContent).toLowerCase();
+    var onclick=text(el.getAttribute&&el.getAttribute('onclick')).toLowerCase();
+    if(el.id==='detail-buy-btn'||el.hasAttribute('data-checkout')||/đặt|mua|thanh toán|checkout|kích hoạt|xac nhan|xác nhận/.test(label+' '+onclick)){
+      e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); goCheckout();
+    }
+  },true);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wrap,{once:true});else wrap();
+  setInterval(wrap,700);
+})();
