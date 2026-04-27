@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Zone | Minimalist Digital Solutions</title>
+    <meta name="description" content="Alpha Zone cung cấp các giải pháp số tối giản, thanh lịch và tối ưu cho người dùng hiện đại.">
+    <meta name="theme-color" content="#050505">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://alphazone.io.vn/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Alpha Zone | Minimalist Digital Solutions">
+    <meta property="og:description" content="Khám phá catalog dịch vụ số cao cấp, quy trình thanh toán rõ ràng và hỗ trợ nhanh qua Zalo.">
+    <meta property="og:image" content="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+    <meta property="og:url" content="https://alphazone.io.vn/">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
     
     <!-- External Scripts -->
@@ -138,10 +148,21 @@
         ::-webkit-scrollbar-thumb:hover { background: #555; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Production Polish */
+        * { box-sizing: border-box; }
+        a, button, input { -webkit-tap-highlight-color: transparent; }
+        button:focus-visible, input:focus-visible, a:focus-visible { outline: 1px solid rgba(255, 95, 31, 0.7); outline-offset: 4px; }
+        .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.35s ease; opacity: 0; }
+        .mobile-menu.open { max-height: 240px; opacity: 1; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        @media (max-width: 640px) { .receipt-card { border-radius: 20px; padding: 28px !important; } }
     </style>
 </head>
 <body>
     <div class="ambient-glow"></div>
+    <noscript><div style="padding:16px;text-align:center;background:#ff5f1f;color:#050505;font-family:Arial,sans-serif;position:relative;z-index:9999;">Trình duyệt cần bật JavaScript để xem catalog và tạo hóa đơn Alpha Zone.</div></noscript>
 
     <!-- Navigation Bar -->
     <nav class="glass-nav fixed top-0 w-full z-[100] px-6 md:px-12 py-4 flex justify-between items-center transition-all duration-300">
@@ -161,10 +182,21 @@
             <a href="https://zalo.me/0357130499" target="_blank" class="hover:text-white transition-colors">Support</a>
         </div>
 
-        <button id="sync-btn" onclick="syncData()" class="text-[8px] font-light uppercase tracking-[0.2em] border border-white/10 px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all">
-            Sync Data
-        </button>
+        <div class="flex items-center gap-2">
+            <button id="sync-btn" onclick="syncData()" class="text-[8px] font-light uppercase tracking-[0.2em] border border-white/10 px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all">Sync Data</button>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-white/70 border border-white/10 px-3 py-2 rounded-lg hover:bg-white hover:text-black transition-all" aria-label="Open navigation menu">
+                <span class="block w-4 h-[1px] bg-current mb-1"></span><span class="block w-4 h-[1px] bg-current"></span>
+            </button>
+        </div>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu fixed top-[65px] left-0 right-0 z-[90] md:hidden glass-nav px-6 safe-bottom">
+        <div class="py-5 flex flex-col gap-4 text-[10px] font-light uppercase tracking-[0.25em] text-white/60">
+            <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
+            <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
+            <a href="https://zalo.me/0357130499" target="_blank" rel="noopener" class="hover:text-white transition-colors">Support Zalo</a>
+        </div>
+    </div>
 
     <!-- Main Content Area -->
     <main id="app-container" class="pt-32 pb-24 px-6 md:px-12 lg:px-24 min-h-screen">
@@ -190,6 +222,12 @@
         // --- CONFIGURATION ---
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1B2FMQ9pKHFQpY4eFMIqnEEHEqvgqq72USV86HgH6d5E/export?format=csv&gid=1122697140';
         const CACHE_KEY = 'alphazone_products_minimal';
+        const LOGO_URL = 'https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png';
+        const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80';
+        const FALLBACK_PRODUCTS = [
+            { id: 'az-demo-01', title: 'Premium Digital Workspace', category: 'Workspace', price: 'Contact', duration: 'Flexible', image: LOGO_URL, description: 'Gói dịch vụ mẫu hiển thị khi chưa thể đồng bộ dữ liệu từ Google Sheets.', features: ['Catalog vẫn hoạt động khi mất kết nối', 'Có thể đồng bộ lại bằng nút Sync Data', 'Hỗ trợ đặt hàng qua Zalo'] },
+            { id: 'az-demo-02', title: 'Account Service', category: 'Digital Service', price: 'Contact', duration: 'Monthly', image: FALLBACK_IMAGE, description: 'Giải pháp số được trình bày theo phong cách tối giản của Alpha Zone.', features: ['Quy trình rõ ràng', 'Tạo hóa đơn tự động', 'Tải PDF sau khi thanh toán'] }
+        ];
         
         let allProducts = [];
         let categories = [];
@@ -221,14 +259,37 @@
 
         // --- APP ENGINE ---
         async function initApp() {
-            const cached = localStorage.getItem(CACHE_KEY);
-            if (cached) {
-                const data = JSON.parse(cached);
-                allProducts = data.products;
-                categories = [...new Set(allProducts.map(p => p.category))];
+            try {
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    setProducts(data.products);
+                    handleRoute();
+                }
+            } catch (error) {
+                console.warn('Cache unavailable:', error);
+                setProducts(FALLBACK_PRODUCTS);
                 handleRoute();
             }
             await syncData(true);
+        }
+
+        function normalizeProduct(row, idx) {
+            return {
+                id: String(row.ID || `az-${idx}`).trim(),
+                title: String(row.Title || '').trim(),
+                category: String(row.Category || 'Uncategorized').trim(),
+                price: String(row.Price || 'Contact').trim(),
+                duration: String(row.Duration || 'Lifetime').trim(),
+                image: String(row.Image_URL || FALLBACK_IMAGE).trim(),
+                description: String(row.Description || 'Exclusive digital solution by Alpha Zone.').trim(),
+                features: row.Features ? String(row.Features).split('|').map(f => f.trim()).filter(Boolean) : []
+            };
+        }
+
+        function setProducts(products) {
+            allProducts = Array.isArray(products) && products.length ? products : FALLBACK_PRODUCTS;
+            categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
         }
 
         async function syncData(isInitial = false) {
@@ -243,20 +304,10 @@
                     header: true,
                     skipEmptyLines: true,
                     complete: function(results) {
-                        allProducts = results.data
-                            .filter(row => row.Title && row.Title.trim() !== "")
-                            .map((row, idx) => ({
-                                id: row.ID || `az-${idx}`,
-                                title: row.Title,
-                                category: row.Category || 'Uncategorized',
-                                price: row.Price || 'Contact',
-                                duration: row.Duration || 'Lifetime',
-                                image: row.Image_URL || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80',
-                                description: row.Description || 'Exclusive digital solution by Alpha Zone.',
-                                features: row.Features ? row.Features.split('|').map(f => f.trim()) : []
-                            }));
-                        
-                        categories = [...new Set(allProducts.map(p => p.category))];
+                        const parsedProducts = results.data
+                            .filter(row => row.Title && String(row.Title).trim() !== "")
+                            .map((row, idx) => normalizeProduct(row, idx));
+                        setProducts(parsedProducts);
                         
                         localStorage.setItem(CACHE_KEY, JSON.stringify({
                             syncedAt: new Date().toISOString(),
@@ -274,8 +325,12 @@
                 });
             } catch (error) {
                 console.error("Sync Error:", error);
+                if (!allProducts.length) {
+                    setProducts(FALLBACK_PRODUCTS);
+                    handleRoute();
+                }
                 if (btn) btn.innerText = 'SYNC FAILED';
-                showToast('Failed to connect to database', 'error');
+                if (!isInitial) showToast('Failed to connect to database. Showing cached/fallback data.', 'error');
             }
         }
 
@@ -286,16 +341,19 @@
             } else if (hash.startsWith('#category-')) {
                 renderCategoryPage(decodeURIComponent(hash.replace('#category-', '')));
             } else if (hash.startsWith('#product-')) {
-                renderProductDetail(hash.replace('#product-', ''));
+                renderProductDetail(decodeURIComponent(hash.replace('#product-', '')));
             } else if (hash.startsWith('#checkout-')) {
-                renderCheckout(hash.replace('#checkout-', ''));
+                renderCheckout(decodeURIComponent(hash.replace('#checkout-', '')));
             } else {
                 renderHome();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function navigate(path) { window.location.hash = path; }
+        function navigate(path) { closeMobileMenu(); window.location.hash = path; }
+
+        function toggleMobileMenu() { document.getElementById('mobile-menu')?.classList.toggle('open'); }
+        function closeMobileMenu() { document.getElementById('mobile-menu')?.classList.remove('open'); }
 
         function scrollToServices() {
             if (window.location.hash !== '#home') {
@@ -368,6 +426,15 @@
                         <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             ${allProducts.slice(0, 9).map(p => productCardTemplate(p)).join('')}
                         </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
+                            ${['Chọn gói phù hợp', 'Thanh toán qua QR', 'Nhận mã kích hoạt', 'Gửi mã cho seller'].map((step, index) => `
+                                <div class="border border-white/5 rounded-2xl p-5 bg-white/[0.015]">
+                                    <p class="mono text-orange-500/80 text-[10px] mb-3">0${index + 1}</p>
+                                    <p class="text-white/50 text-[10px] font-light uppercase tracking-[0.2em] leading-relaxed">${step}</p>
+                                </div>
+                            `).join('')}
+                        </div>
                     </section>
                 </div>
             `;
@@ -409,7 +476,7 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div class="aspect-[3/4] rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a]">
-                            <img src="${p.image}" class="w-full h-full object-cover opacity-80" crossorigin="anonymous">
+                            <img src="${p.image}" onerror="this.onerror=null;this.src=LOGO_URL" alt="${p.title}" class="w-full h-full object-cover opacity-80" crossorigin="anonymous">
                         </div>
 
                         <div class="space-y-12">
@@ -444,10 +511,10 @@
                             ` : ''}
 
                             <div class="pt-8 flex flex-col sm:flex-row gap-4">
-                                <button onclick="triggerCheckoutProcess('${p.id}')" class="btn-accent px-10 py-4 text-[10px] uppercase tracking-[0.3em] flex-1 text-center">
+                                <button onclick="triggerCheckoutProcess('${encodeURIComponent(p.id)}')" class="btn-accent px-10 py-4 text-[10px] uppercase tracking-[0.3em] flex-1 text-center">
                                     Khởi tạo Đơn Hàng
                                 </button>
-                                <button onclick="shareProduct('${p.id}')" class="btn-ghost px-6 py-4 flex items-center justify-center">
+                                <button onclick="shareProduct('${encodeURIComponent(p.id)}')" class="btn-ghost px-6 py-4 flex items-center justify-center">
                                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-11-4 5-5 5 5m-5-5v11"/></svg>
                                 </button>
                             </div>
@@ -478,6 +545,7 @@
             const txId = 'AZ-' + Math.random().toString(36).substr(2, 9).toUpperCase();
             const activationCode = id.substring(0, 4).toUpperCase() + '-' + Math.random().toString().slice(2, 8) + '-' + Math.random().toString().slice(2, 6);
             const amount = p.price.replace(/[^\d]/g, '');
+            const qrAmount = amount ? `amount=${amount}&` : '';
 
             const container = document.getElementById('app-container');
             container.innerHTML = `
@@ -536,7 +604,7 @@
                             <!-- QR Code Minimal -->
                             <div class="flex flex-col items-center justify-center">
                                 <div class="w-56 h-56 bg-white border border-gray-100 p-4 rounded-3xl shadow-sm mb-6">
-                                    <img src="https://img.vietqr.io/image/MB-4499123123-compact2.jpg?amount=${amount}&addInfo=${txId}" class="w-full h-full object-contain">
+                                    <img src="https://img.vietqr.io/image/MB-4499123123-compact2.jpg?${qrAmount}addInfo=${txId}" class="w-full h-full object-contain">
                                 </div>
                                 <div class="text-center">
                                     <p class="text-[9px] font-medium text-gray-400 uppercase tracking-[0.3em] mb-1">MB Bank Transfer</p>
@@ -559,14 +627,14 @@
         // --- TEMPLATES ---
         function productCardTemplate(p) {
             return `
-                <div class="product-card p-5 flex flex-col group cursor-pointer" onclick="navigate('product-${p.id}')">
+                <div class="product-card p-5 flex flex-col group cursor-pointer" onclick="navigate('product-${encodeURIComponent(p.id)}')">
                     <div class="w-full aspect-video rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative">
-                        <img src="${p.image}" class="w-full h-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-105" loading="lazy">
+                        <img src="${p.image}" onerror="this.onerror=null;this.src=LOGO_URL" class="w-full h-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-105" loading="lazy" alt="${p.title}">
                     </div>
                     <div class="flex-grow flex flex-col justify-between">
                         <div class="mb-6">
                             <p class="text-[8px] font-light text-white/30 uppercase tracking-[0.3em] mb-2">${p.category}</p>
-                            <h3 class="text-lg font-light tracking-tight uppercase leading-snug group-hover:text-orange-500 transition-colors">${p.title}</h3>
+                            <h3 class="text-lg font-light tracking-tight uppercase leading-snug group-hover:text-orange-500 transition-colors line-clamp-2">${p.title}</h3>
                         </div>
                         <div class="flex justify-between items-center border-t border-white/5 pt-4">
                             <p class="font-light text-white tracking-wide">${p.price}</p>
@@ -587,8 +655,9 @@
         }
 
         async function shareProduct(id) {
+            id = decodeURIComponent(id);
             const p = allProducts.find(prod => prod.id === id);
-            const url = window.location.origin + window.location.pathname + '#product-' + id;
+            const url = window.location.origin + window.location.pathname + '#product-' + encodeURIComponent(id);
             if (navigator.share) {
                 await navigator.share({ title: `Alpha Zone | ${p.title}`, url: url });
             } else {
