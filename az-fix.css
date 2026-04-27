@@ -1,73 +1,258 @@
-img[data-az-smart-img="1"]{max-width:100%;object-fit:contain;background:rgba(255,255,255,.08)}
-img.az-img-fallback{padding:10%;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(0,0,0,.04))}
-.az-admin-popup-tools{position:fixed;right:18px;bottom:18px;z-index:99999;width:min(330px,calc(100vw - 36px));border:1px solid rgba(0,0,0,.12);border-radius:22px;padding:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(0,0,0,.16);font-family:Plus Jakarta Sans,system-ui,sans-serif;color:#111}
-.az-admin-popup-tools.az-collapsed{width:auto;padding:10px 12px;border-radius:999px}.az-admin-popup-tools.az-collapsed .az-admin-popup-body{display:none}.az-admin-popup-head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.az-admin-popup-body{display:grid;gap:10px;margin-top:12px;font-size:12px;line-height:1.45;color:#555}.az-admin-popup-row{display:flex;flex-wrap:wrap;gap:8px}.az-admin-popup-btn{border:1px solid rgba(0,0,0,.14);border-radius:999px;background:#fff;color:#111;padding:9px 11px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}.az-admin-popup-btn.active{background:#111;color:#fff}.az-admin-popup-status{padding:10px 12px;border-radius:16px;background:#f4f4f2;color:#333}.az-smart-link-btn{border:1px solid rgba(0,0,0,.12)!important;border-radius:999px!important;background:#111!important;color:#fff!important;padding:12px 14px!important;font-size:12px!important;font-weight:900!important;text-decoration:none!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;white-space:nowrap!important}.az-smart-link-btn:hover{filter:brightness(.92)}
-body.dark .az-admin-popup-tools{background:rgba(15,15,15,.92);color:#fff;border-color:rgba(255,255,255,.12)}body.dark .az-admin-popup-btn{background:#151515;color:#fff;border-color:rgba(255,255,255,.14)}body.dark .az-admin-popup-btn.active{background:#fff;color:#111}body.dark .az-admin-popup-status{background:#222;color:#ddd}
+/* Alpha Zone Apps Script API - migrated to the new Google Sheet.
+ * Paste this file into Apps Script as Code.gs, then Deploy > Manage deployments > Edit > New version.
+ */
 
-/* AZ UI Safety Patch: keep action buttons visible and prevent floating controls overlapping */
-:root{--az-dock-safe-width:210px;--az-dock-safe-gap:18px;--az-bottom-safe:86px}
-button,a,[role="button"],.btn,.tab-btn,.subtab-btn,.chip,.inline-chip,.dock-btn,.az-admin-popup-btn,.az-smart-link-btn{position:relative;z-index:2;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-button:not([hidden]),a:not([hidden]),.btn:not([hidden]),.tab-btn:not([hidden]),.subtab-btn:not([hidden]),.chip:not([hidden]),.inline-chip:not([hidden]){opacity:1;visibility:visible}
-.hero-actions,.azm-actions,.inline-chip-row,.grid[class*="grid-cols"],.flex.flex-wrap{min-width:0}
-.azm-actions,.hero-actions,.inline-chip-row{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:10px!important;overflow:visible!important}
-.azm-actions button,.hero-actions button,.inline-chip,.btn,.tab-btn,.subtab-btn,.chip{min-height:40px;max-width:100%;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
-.product-card,.soft-panel,.card,.card-tight,.glass{min-width:0}
-.glass.card,.glass.card-tight,.soft-panel:has(button),.product-card:has(button){overflow:visible!important}
-#alpha-right-dock{position:fixed!important;right:18px!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;z-index:2147482000!important;display:flex!important;flex-direction:column!important;pointer-events:auto!important;overflow:visible!important;max-height:calc(100vh - 32px)!important;overflow-y:auto!important;scrollbar-width:none!important}
-#alpha-right-dock::-webkit-scrollbar{display:none!important}
-#alpha-right-dock .dock-btn{display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;flex-shrink:0!important;box-sizing:border-box!important}
-#alpha-right-dock .dock-icon,#alpha-right-dock .dock-label{pointer-events:none!important}
-@media (min-width:901px){
-  body:has(#alpha-right-dock){padding-right:calc(var(--az-dock-safe-width) + var(--az-dock-safe-gap))!important}
-  #alpha-right-dock{width:var(--az-dock-safe-width)!important;padding:10px!important;gap:10px!important;border-radius:24px!important;align-items:stretch!important}
-  #alpha-right-dock .dock-btn{width:100%!important;min-width:100%!important;justify-content:flex-start!important;gap:12px!important;padding:0 14px!important;height:44px!important;min-height:44px!important;overflow:visible!important;white-space:nowrap!important}
-  #alpha-right-dock .dock-label{display:inline-block!important;opacity:1!important;visibility:visible!important;max-width:150px!important;overflow:visible!important;transform:none!important;white-space:nowrap!important;color:inherit!important}
-}
-@media (max-width:900px){
-  body:has(#alpha-right-dock){padding-right:70px!important}
-  #alpha-right-dock{right:8px!important;width:56px!important;padding:7px!important;gap:8px!important;border-radius:20px!important;overflow:hidden!important}
-  #alpha-right-dock.expanded,#alpha-right-dock.az-touch-expanded{width:min(190px,calc(100vw - 20px))!important;overflow:visible!important}
-  #alpha-right-dock.expanded .dock-btn,#alpha-right-dock.az-touch-expanded .dock-btn{justify-content:flex-start!important;gap:10px!important;padding:0 12px!important}
-  #alpha-right-dock .dock-label{opacity:0!important;visibility:hidden!important;max-width:0!important;overflow:hidden!important}
-  #alpha-right-dock.expanded .dock-label,#alpha-right-dock.az-touch-expanded .dock-label{opacity:1!important;visibility:visible!important;max-width:120px!important;overflow:visible!important;transform:none!important}
-}
-body.modal-open #alpha-right-dock,.az-modal-open #alpha-right-dock{display:none!important}
-#az-admin-popup-tools{z-index:2147480900!important}
-#az-admin-unified-links{z-index:2147480800!important;bottom:calc(var(--az-bottom-safe) + 12px)!important;left:14px!important;right:auto!important;max-width:min(520px,calc(100vw - 28px))!important}
-#az-admin-unified-links a{box-shadow:0 10px 30px rgba(0,0,0,.12)}
-.az-admin-popup-tools{bottom:14px!important;right:14px!important;max-height:calc(100vh - 28px)!important;overflow:auto!important}
-@media (max-width:768px){
-  #az-admin-unified-links{position:static!important;margin:14px 0!important;display:flex!important;max-width:100%!important}
-  .az-admin-popup-tools{left:10px!important;right:10px!important;bottom:10px!important;width:auto!important;max-width:none!important}
-  .az-admin-popup-tools:not(.az-collapsed){max-height:46vh!important}
-}
-/* prevent duplicated floating layers from blocking main actions */
-#alpha-right-dock ~ #alpha-right-dock{display:none!important}
-[data-az-hidden-by-safety="1"]{display:none!important}
+const SPREADSHEET_ID = '1B2FMQ9pKHFQpY4eFMIqnEEHEqvgqq72USV86HgH6d5E';
 
-/* AZ Deep Feature Patch: top popup, custom link buttons, stronger action safety */
-:root{--az-popup-height:0px;--az-linkbar-height:0px}
-.az-top-page-popup{position:fixed;left:14px;right:14px;top:12px;z-index:2147482600;pointer-events:none;font-family:Plus Jakarta Sans,system-ui,sans-serif}
-.az-top-popup-content{pointer-events:auto;margin:0 auto;max-width:min(980px,calc(100vw - 28px));display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;border:1px solid rgba(0,0,0,.12);border-radius:22px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);box-shadow:0 18px 60px rgba(0,0,0,.16);color:#111}
-.az-top-popup-text{display:grid;gap:3px;min-width:0}.az-top-popup-text strong{font-size:14px;line-height:1.25}.az-top-popup-text span{font-size:12px;color:#555;line-height:1.35}.az-top-popup-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.az-top-popup-link,.az-top-popup-close{display:inline-flex;align-items:center;justify-content:center;min-height:36px;border-radius:999px;border:1px solid rgba(0,0,0,.14);font-size:12px;font-weight:800;text-decoration:none;cursor:pointer}.az-top-popup-link{padding:0 13px;background:#111;color:#fff}.az-top-popup-close{width:36px;background:#fff;color:#111}
-.az-custom-link-bar{position:fixed;left:14px;top:calc(18px + var(--az-popup-height));z-index:2147482400;display:flex;flex-wrap:wrap;gap:8px;max-width:min(760px,calc(100vw - 260px));pointer-events:none;font-family:Plus Jakarta Sans,system-ui,sans-serif}.az-custom-link-btn{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 13px;border-radius:999px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.92);color:#111;text-decoration:none;font-size:12px;font-weight:900;box-shadow:0 12px 32px rgba(0,0,0,.10);backdrop-filter:blur(14px)}.az-custom-link-btn:hover{transform:translateY(-1px)}
-body:has(.az-top-page-popup){scroll-padding-top:calc(var(--az-popup-height) + 24px)}
-.az-admin-link-popup-manager{overflow:visible!important}.az-admin-lp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.az-admin-lp-body{display:grid;gap:14px;margin-top:14px}.az-admin-link-popup-manager.az-collapsed .az-admin-lp-body{display:none}.az-admin-lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.az-lp-list{display:grid;gap:8px}.az-lp-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line,rgba(0,0,0,.12));border-radius:16px;padding:10px;background:rgba(255,255,255,.34)}.az-lp-item a{font-size:13px;font-weight:800;color:inherit;text-decoration:none;min-width:0;overflow-wrap:anywhere}.az-lp-item button{border:1px solid var(--line,rgba(0,0,0,.12));border-radius:999px;background:var(--input,#fff);padding:8px 11px;font-size:12px}.az-popup-once{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted,#555);padding:8px 10px;border:1px solid var(--line,rgba(0,0,0,.12));border-radius:999px}
-.az-action-safe{opacity:1!important;visibility:visible!important;pointer-events:auto!important;overflow:visible!important}.az-action-minsize{min-width:36px!important;min-height:36px!important}.az-action-row-safe{display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:center!important;overflow:visible!important;max-height:none!important;clip-path:none!important}.az-action-row-safe>*{flex-shrink:0}.glass:has(.az-action-row-safe),.soft-panel:has(.az-action-row-safe),.product-card:has(.az-action-row-safe),.card:has(.az-action-row-safe){overflow:visible!important}.az-top-page-popup+*,.az-custom-link-bar+*{pointer-events:auto}
-body.dark .az-top-popup-content,body.dark .az-custom-link-btn{background:rgba(16,16,16,.94);color:#fff;border-color:rgba(255,255,255,.14)}body.dark .az-top-popup-text span{color:#cfcfcf}body.dark .az-top-popup-close{background:#191919;color:#fff;border-color:rgba(255,255,255,.14)}body.dark .az-top-popup-link{background:#fff;color:#111}
-@media (max-width:900px){.az-top-page-popup{left:10px;right:74px;top:10px}.az-top-popup-content{align-items:flex-start;flex-direction:column;border-radius:20px}.az-top-popup-actions{width:100%;justify-content:space-between}.az-top-popup-link{flex:1}.az-custom-link-bar{left:10px;right:74px;top:calc(12px + var(--az-popup-height));max-width:none;max-height:92px;overflow:auto}.az-admin-lp-grid{grid-template-columns:1fr}.az-admin-lp-head{flex-direction:column}.az-custom-link-btn{max-width:100%;overflow:hidden}.az-custom-link-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+const SHEETS = {
+  products: 'products',
+  drafts: 'drafts',
+  leads: 'customer_leads',
+  warranty: 'warranty_requests',
+  orders: 'order_records'
+};
 
-/* AZ Promo-Off + Deep Interaction Fix */
-html,body{max-width:100%!important;overflow-x:hidden!important}
-body.popup-open{overflow:auto!important}
-#promoPopup,.promo-popup-overlay,.promo-popup-box,.promo-popup-content,.az-top-page-popup,[data-az-promo],.az-promo,.promo-modal,.promotion-modal,.marketing-popup{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
-#az-admin-popup-tools{display:none!important;visibility:hidden!important;pointer-events:none!important}
-.az-custom-link-bar{z-index:2147481200!important;pointer-events:none!important}.az-custom-link-bar a{pointer-events:auto!important}
-button,a,[role="button"],input,select,textarea,.btn,.tab-btn,.subtab-btn,.chip,.inline-chip,.dock-btn,.product-card,[data-page],[data-route],[data-tab],[data-subtab]{pointer-events:auto!important;visibility:visible;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-button,.btn,.tab-btn,.subtab-btn,.chip,.inline-chip,.dock-btn,.az-action-safe,[data-page],[data-route]{min-height:36px;position:relative;z-index:5}
-.hero-actions,.azm-actions,.inline-chip-row,.tab-row,.filter-row,.quick-row,.action-row,.modal-actions,#modal-actions{display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:center!important;overflow:visible!important;max-height:none!important;clip-path:none!important}
-.glass,.card,.card-tight,.soft-panel,.product-card,.modal-card,.mini-popup-card{overflow:visible}
-.product-title,.product-desc,.card-title,.line-clamp{overflow-wrap:anywhere;word-break:break-word}
-img{max-width:100%;height:auto}.product-visual img,.category-card img,.product-card img{object-fit:contain!important}
-#alpha-right-dock{z-index:2147481500!important;pointer-events:auto!important}.dock-btn{opacity:1!important}
-@media(max-width:900px){#alpha-right-dock{right:8px!important}.az-custom-link-bar{left:8px!important;right:72px!important;max-width:none!important;max-height:96px!important;overflow:auto!important}.glass,.card,.soft-panel{max-width:100%!important}.modal-card,.mini-popup-card{max-width:calc(100vw - 24px)!important}}
+const HEADERS = {
+  products: ['id','name','platformName','logo','categoryImage','category','price','shortDescription','detailedDescription','warranty','link','page','updatedAt'],
+  drafts: ['draftId','scope','dataJson','updatedAt'],
+  leads: ['leadId','fullName','contact','email','note','productId','productName','sourcePage','updatedAt'],
+  warranty: ['requestId','ticketCode','orderCode','contact','product','issue','statusText','productId','sourcePage','updatedAt'],
+  orders: ['orderId','orderCode','productId','productName','price','shortMessage','fullMessage','statusText','customerName','customerContact','customerEmail','customerNote','sourcePage','updatedAt']
+};
+
+function doGet(e) {
+  return handle_(e && e.parameter ? e.parameter : {});
+}
+
+function doPost(e) {
+  var body = {};
+  try { body = JSON.parse(e && e.postData && e.postData.contents || '{}'); } catch (_) { body = {}; }
+  return handle_(body || {});
+}
+
+function handle_(req) {
+  try {
+    ensureAllSheets_();
+    var action = String(req.action || '').trim();
+    switch (action) {
+      case 'ping': return json_({ ok: true, time: new Date().toISOString(), spreadsheetId: SPREADSHEET_ID });
+      case 'listProducts': return json_({ ok: true, items: readObjects_('products').filter(function (x) { return !isMarketplaceOnly_(x); }) });
+      case 'upsertProduct': return json_({ ok: true, item: upsertByKey_('products', normalizeProduct_(req.item || req.data || {}), 'id') });
+      case 'deleteProduct': deleteByKey_('products', String(req.id || (req.item && req.item.id) || '').trim(), 'id'); return json_({ ok: true });
+      case 'pushAllProducts': return json_({ ok: true, items: replaceProducts_(req.items || []) });
+      case 'listCustomerLeads': return json_({ ok: true, items: readObjects_('leads') });
+      case 'saveCustomerLead': return json_({ ok: true, item: upsertByKey_('leads', normalizeLead_(req.data || req.item || {}), 'leadId') });
+      case 'listWarrantyRequests': return json_({ ok: true, items: readObjects_('warranty') });
+      case 'saveWarrantyRequest': return json_({ ok: true, item: upsertByKey_('warranty', normalizeWarranty_(req.data || req.item || {}), 'requestId') });
+      case 'listOrderRecords': return json_({ ok: true, items: readObjects_('orders') });
+      case 'saveOrderRecord': return json_({ ok: true, item: upsertByKey_('orders', normalizeOrder_(req.data || req.item || {}), 'orderId') });
+      case 'listDrafts': return json_({ ok: true, items: readObjects_('drafts') });
+      case 'saveDraft': return json_({ ok: true, item: upsertByKey_('drafts', normalizeDraft_(req.data || req.item || {}), 'draftId') });
+      case 'deleteDraft': deleteByKey_('drafts', String(req.draftId || '').trim(), 'draftId'); return json_({ ok: true });
+      case 'listMarketplaceProducts': return json_({ ok: true, items: listMarketplaceProducts_() });
+      default: return json_({ ok: false, error: 'Unknown action: ' + action });
+    }
+  } catch (err) {
+    return json_({ ok: false, error: String(err && err.message || err) });
+  }
+}
+
+function ss_() { return SpreadsheetApp.openById(SPREADSHEET_ID); }
+
+function ensureAllSheets_() {
+  Object.keys(SHEETS).forEach(function (key) { sheet_(key); });
+}
+
+function sheet_(key) {
+  var ss = ss_();
+  var name = SHEETS[key];
+  var sh = ss.getSheetByName(name) || ss.insertSheet(name);
+  var headers = HEADERS[key];
+  var first = sh.getRange(1, 1, 1, Math.max(headers.length, sh.getLastColumn() || headers.length)).getValues()[0].map(String);
+  var missing = headers.filter(function (h) { return first.indexOf(h) < 0; });
+  if (sh.getLastRow() === 0 || !first[0]) {
+    sh.getRange(1, 1, 1, headers.length).setValues([headers]);
+  } else if (missing.length) {
+    sh.getRange(1, first.length + 1, 1, missing.length).setValues([missing]);
+  }
+  return sh;
+}
+
+function headerMap_(sh) {
+  var n = Math.max(sh.getLastColumn(), 1);
+  var headers = sh.getRange(1, 1, 1, n).getValues()[0].map(String);
+  var map = {};
+  headers.forEach(function (h, i) { if (h) map[h] = i; });
+  return { headers: headers, map: map };
+}
+
+function readObjects_(key) {
+  var sh = sheet_(key);
+  var hm = headerMap_(sh);
+  var last = sh.getLastRow();
+  if (last < 2) return [];
+  return sh.getRange(2, 1, last - 1, hm.headers.length).getValues().map(function (row) {
+    var obj = {};
+    hm.headers.forEach(function (h, i) { if (h) obj[h] = row[i]; });
+    return obj;
+  }).filter(function (obj) {
+    return Object.keys(obj).some(function (k) { return k !== 'updatedAt' && String(obj[k] || '').trim() !== ''; });
+  }).map(parseDraftData_);
+}
+
+function writeObjects_(key, items) {
+  var sh = sheet_(key);
+  var headers = HEADERS[key];
+  sh.clearContents();
+  sh.getRange(1, 1, 1, headers.length).setValues([headers]);
+  if (!items.length) return [];
+  var rows = items.map(function (obj) { return headers.map(function (h) { return obj[h] == null ? '' : obj[h]; }); });
+  sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
+  return items;
+}
+
+function upsertByKey_(key, item, keyField) {
+  if (!item[keyField]) item[keyField] = key.toUpperCase() + '-' + Date.now();
+  item.updatedAt = item.updatedAt || new Date().toISOString();
+  var sh = sheet_(key);
+  var hm = headerMap_(sh);
+  var col = hm.map[keyField] + 1;
+  if (!col) throw new Error('Missing key header: ' + keyField);
+  var values = sh.getLastRow() > 1 ? sh.getRange(2, col, sh.getLastRow() - 1, 1).getValues() : [];
+  var rowIndex = -1;
+  values.some(function (r, i) { if (String(r[0]) === String(item[keyField])) { rowIndex = i + 2; return true; } return false; });
+  var headers = hm.headers;
+  var row = headers.map(function (h) { return item[h] == null ? '' : item[h]; });
+  if (rowIndex > -1) sh.getRange(rowIndex, 1, 1, headers.length).setValues([row]);
+  else sh.appendRow(row);
+  return item;
+}
+
+function deleteByKey_(key, value, keyField) {
+  if (!value) return;
+  var sh = sheet_(key);
+  var hm = headerMap_(sh);
+  var col = hm.map[keyField] + 1;
+  if (!col || sh.getLastRow() < 2) return;
+  var values = sh.getRange(2, col, sh.getLastRow() - 1, 1).getValues();
+  for (var i = values.length - 1; i >= 0; i--) {
+    if (String(values[i][0]) === String(value)) sh.deleteRow(i + 2);
+  }
+}
+
+function replaceProducts_(items) {
+  var normalized = asArray_(items).map(normalizeProduct_).filter(function (x) { return x.id; });
+  normalized = normalized.filter(function (x) { return !isMarketplaceOnly_(x); });
+  return writeObjects_('products', normalized);
+}
+
+function normalizeProduct_(x) {
+  x = x || {};
+  return keep_(HEADERS.products, {
+    id: str_(x.id),
+    name: str_(x.name),
+    platformName: str_(x.platformName || x.name),
+    logo: str_(x.logo || x.categoryImage),
+    categoryImage: str_(x.categoryImage || x.logo),
+    category: str_(x.category),
+    price: str_(x.price),
+    shortDescription: str_(x.shortDescription),
+    detailedDescription: str_(x.detailedDescription),
+    warranty: str_(x.warranty),
+    link: str_(x.link || x.page),
+    page: str_(x.page || x.link),
+    updatedAt: str_(x.updatedAt || new Date().toISOString())
+  });
+}
+
+function normalizeDraft_(x) {
+  x = x || {};
+  var data = x.dataJson || x.data || x;
+  return keep_(HEADERS.drafts, {
+    draftId: str_(x.draftId || (data && data.draftId) || ('DRAFT-' + Date.now())),
+    scope: str_(x.scope || (data && data.scope) || 'general'),
+    dataJson: typeof data === 'string' ? data : JSON.stringify(data || {}),
+    updatedAt: str_(x.updatedAt || new Date().toISOString())
+  });
+}
+
+function normalizeLead_(x) {
+  x = x || {};
+  return keep_(HEADERS.leads, {
+    leadId: str_(x.leadId || x.email || x.contact || ('LEAD-' + Date.now())),
+    fullName: str_(x.fullName || x.name),
+    contact: str_(x.contact || x.phone),
+    email: str_(x.email || x.mail),
+    note: str_(x.note),
+    productId: str_(x.productId),
+    productName: str_(x.productName || x.product),
+    sourcePage: str_(x.sourcePage),
+    updatedAt: str_(x.updatedAt || new Date().toISOString())
+  });
+}
+
+function normalizeWarranty_(x) {
+  x = x || {};
+  return keep_(HEADERS.warranty, {
+    requestId: str_(x.requestId || x.ticketCode || ('WR-' + Date.now())),
+    ticketCode: str_(x.ticketCode),
+    orderCode: str_(x.orderCode),
+    contact: str_(x.contact || x.phone),
+    product: str_(x.product || x.productName),
+    issue: str_(x.issue),
+    statusText: str_(x.statusText || 'đang tiếp nhận'),
+    productId: str_(x.productId),
+    sourcePage: str_(x.sourcePage),
+    updatedAt: str_(x.updatedAt || new Date().toISOString())
+  });
+}
+
+function normalizeOrder_(x) {
+  x = x || {};
+  return keep_(HEADERS.orders, {
+    orderId: str_(x.orderId || x.orderCode || ('ORD-' + Date.now())),
+    orderCode: str_(x.orderCode || x.orderId),
+    productId: str_(x.productId),
+    productName: str_(x.productName || x.product),
+    price: str_(x.price),
+    shortMessage: str_(x.shortMessage),
+    fullMessage: str_(x.fullMessage),
+    statusText: str_(x.statusText || 'new'),
+    customerName: str_(x.customerName || x.fullName || x.name),
+    customerContact: str_(x.customerContact || x.contact || x.phone),
+    customerEmail: str_(x.customerEmail || x.email),
+    customerNote: str_(x.customerNote || x.note),
+    sourcePage: str_(x.sourcePage),
+    updatedAt: str_(x.updatedAt || new Date().toISOString())
+  });
+}
+
+function listMarketplaceProducts_() {
+  return readObjects_('drafts').filter(function (d) {
+    return String(d.scope || '').indexOf('marketplace_product_approved') > -1;
+  }).map(function (d) {
+    var data = d.data || {};
+    return data.product || data;
+  }).filter(Boolean);
+}
+
+function parseDraftData_(obj) {
+  if (obj && obj.dataJson) {
+    try { obj.data = JSON.parse(obj.dataJson); } catch (_) { obj.data = {}; }
+  }
+  return obj;
+}
+
+function isMarketplaceOnly_(x) {
+  var s = [x.source, x.publishTarget, x.marketplaceOnly, x.hideFromProductPage, x.sellerId, x.sellerUsername, x.sellerName].join(' ').toLowerCase();
+  return /seller_marketplace|marketplace|true/.test(s) && /seller|marketplace|true/.test(s);
+}
+
+function keep_(headers, obj) {
+  var out = {};
+  headers.forEach(function (h) { out[h] = obj[h] == null ? '' : obj[h]; });
+  return out;
+}
+function str_(v) { return v == null ? '' : String(v).trim(); }
+function asArray_(v) { if (Array.isArray(v)) return v; try { var x = JSON.parse(v); return Array.isArray(x) ? x : []; } catch (_) { return []; } }
+function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON); }
