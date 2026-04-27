@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Zone | Digital Art & Solutions</title>
+    <link rel="icon" type="image/png" href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Thêm PapaParse để đọc CSV chuẩn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #ff5f1f; --bg: #030303; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; }
+        .grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .mesh-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: radial-gradient(at 0% 0%, rgba(255, 95, 31, 0.1) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.1) 0px, transparent 50%);
+        }
+        .product-card { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 24px; cursor: pointer; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); background: #111; }
+        .product-card:hover { transform: translateY(-10px) scale(1.02); }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; }
+        #view-container { transition: all 0.4s ease; }
+        .page-exit { opacity: 0; transform: translateY(10px); }
+        .btn-main { background: var(--accent); color: #000; font-weight: 800; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); transition: all 0.3s; }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); transition: all 0.3s; }
+        .text-outline { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); color: transparent; }
+        #poster-export-area { position: fixed; left: -9999px; top: 0; width: 800px; height: 1000px; }
+        .loading-spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--accent); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="mesh-gradient"></div>
+
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center mix-blend-difference">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="renderHome()">
+            <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-6 h-6 object-contain">
+            </div>
+            <span class="grotesk font-bold tracking-tighter text-xl text-white">ALPHA<span class="opacity-50">ZONE</span></span>
+        </div>
+        <div class="flex items-center gap-3"><button id="sync-products-btn" onclick="loadProducts(true)" class="text-[10px] font-black uppercase tracking-[0.25em] bg-white/10 px-4 py-2 rounded-full hover:bg-orange-500 hover:text-black transition-colors">Đồng bộ sản phẩm</button><div id="loading-indicator" class="hidden"><div class="loading-spinner"></div></div></div>
+    </nav>
+
+    <main id="view-container" class="pt-28 pb-20 px-6 md:px-20"></main>
+    <div id="poster-export-area"></div>
+
+    <script>
+        const SITE_ORIGIN = 'https://alphazone.io.vn';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBk13DTStq0brxlxFfIVh5qtRD3IfxhnJ6v1GmjTlIaBxqFmd2fyEGN7r2w22fOgw8/exec';
+        const SHEET_ID = '1B2FMQ9pKHFQpY4eFMIqnEEHEqvgqq72USV86HgH6d5E';
+        const SHEET_GID = '1122697140';
+        const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+        const PRODUCT_CACHE_KEY = 'alphazone_products_cache_v2';
+        const container = document.getElementById('view-container');
+        let products = [];
+        function absoluteUrl(path = '/') { if (/^https?:\/\//i.test(path)) return path; return SITE_ORIGIN + (path.startsWith('/') ? path : '/' + path); }
+        function setQueryParam(path, params) { const url = new URL(absoluteUrl(path)); Object.entries(params || {}).forEach(([k, v]) => { if (v !== undefined && v !== null && String(v) !== '') url.searchParams.set(k, v); }); return url.toString(); }
+        function showLoading(show = true) { const loader = document.getElementById('loading-indicator'); if (loader) loader.classList.toggle('hidden', !show); const btn = document.getElementById('sync-products-btn'); if (btn) { btn.disabled = show; btn.classList.toggle('opacity-50', show); btn.innerText = show ? 'Đang sync...' : 'Đồng bộ sản phẩm'; } }
+        function showToast(message) { let toast = document.getElementById('sync-toast'); if (!toast) { toast = document.createElement('div'); toast.id = 'sync-toast'; toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-5 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest z-[9999] opacity-0 transition-opacity shadow-2xl'; document.body.appendChild(toast); } toast.innerText = message; toast.classList.remove('opacity-0'); setTimeout(() => toast.classList.add('opacity-0'), 2600); }
+        function normalizeKey(key) { return String(key || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, ''); }
+        function pick(row, keys, fallback = '') { const normalized = {}; Object.keys(row || {}).forEach(k => normalized[normalizeKey(k)] = row[k]); for (const key of keys) { const val = normalized[normalizeKey(key)]; if (val !== undefined && val !== null && String(val).trim() !== '') return String(val).trim(); } return fallback; }
+        function parseCsv(text) { const rows = []; let row = [], cur = '', quote = false; for (let i = 0; i < text.length; i++) { const c = text[i], n = text[i + 1]; if (c === '"' && quote && n === '"') { cur += '"'; i++; continue; } if (c === '"') { quote = !quote; continue; } if (c === ',' && !quote) { row.push(cur); cur = ''; continue; } if ((c === '\n' || c === '\r') && !quote) { if (c === '\r' && n === '\n') i++; row.push(cur); cur = ''; if (row.some(cell => String(cell).trim() !== '')) rows.push(row); row = []; continue; } cur += c; } row.push(cur); if (row.some(cell => String(cell).trim() !== '')) rows.push(row); if (!rows.length) return []; const headers = rows.shift().map(h => String(h || '').trim()); return rows.map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] || '']))); }
+        async function fetchText(url) { const res = await fetch(url, { cache: 'no-store' }); if (!res.ok) throw new Error(`HTTP ${res.status}`); return await res.text(); }
+        function rowsFromPayload(payload) { if (Array.isArray(payload)) return payload; if (payload && Array.isArray(payload.products)) return payload.products; if (payload && Array.isArray(payload.data)) return payload.data; if (payload && payload.values && Array.isArray(payload.values)) { const [headers, ...body] = payload.values; return body.map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] || '']))); } return []; }
+        function slugify(text, fallback = 'product') { const slug = String(text || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); return slug || fallback; }
+        function mapProducts(rows) { return (rows || []).filter(row => pick(row, ['Title','Tên sản phẩm','Name','Product','Product Name','Ten san pham'])).map((row, index) => { const title = pick(row, ['Title','Tên sản phẩm','Name','Product','Product Name','Ten san pham']); const rawId = pick(row, ['ID','Id','SKU','Mã','Ma','Code'], slugify(title, `prod-${index}`)); return { id: slugify(rawId, `prod-${index}`), title, category: pick(row, ['Category','Danh mục','Danh muc','Type','Loại','Loai'], 'Premium'), price: pick(row, ['Price','Giá','Gia','Amount','Thanh toán','Thanh toan'], 'Liên hệ'), duration: pick(row, ['Duration','Thời hạn','Thoi han','Period','Gói','Goi'], ''), image: pick(row, ['Image_URL','Image URL','Image','Ảnh','Anh','Photo','Thumbnail'], 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400'), description: pick(row, ['Description','Mô tả','Mo ta','Desc'], ''), features: pick(row, ['Features','Tính năng','Tinh nang','Benefits'], '').split('|').map(f => f.trim()).filter(Boolean) }; }); }
+        async function loadProducts(force = false) { showLoading(true); try { const cached = localStorage.getItem(PRODUCT_CACHE_KEY); if (!force && cached) { const data = JSON.parse(cached); if (Array.isArray(data.products) && data.products.length) products = data.products; } const endpoint = `${APPS_SCRIPT_URL}?sheetId=${encodeURIComponent(SHEET_ID)}&gid=${encodeURIComponent(SHEET_GID)}&action=products&_=${Date.now()}`; let rows = []; try { const text = await fetchText(endpoint); try { rows = rowsFromPayload(JSON.parse(text)); } catch (_) { rows = parseCsv(text); } } catch (appsErr) { console.warn('Apps Script sync failed, fallback CSV:', appsErr); rows = parseCsv(await fetchText(`${SHEET_CSV_URL}&_=${Date.now()}`)); } const freshProducts = mapProducts(rows); if (!freshProducts.length) throw new Error('Không tìm thấy sản phẩm trong nguồn dữ liệu'); products = freshProducts; localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({ syncedAt: new Date().toISOString(), products })); const idFromUrl = new URLSearchParams(location.search).get('id') || new URLSearchParams(location.search).get('product'); if (idFromUrl && products.some(p => p.id === idFromUrl)) renderDetail(idFromUrl, false); else renderHome(false); showToast(`Đã đồng bộ ${products.length} sản phẩm`); } catch (err) { console.error('Sync product error:', err); if (products.length) { renderHome(false); showToast('Đang dùng dữ liệu đã lưu tạm'); } else { container.innerHTML = `<div class="text-center py-20 opacity-60">Không thể tải dữ liệu sản phẩm. Vui lòng kiểm tra Apps Script/Google Sheets và quyền truy cập.</div>`; } } finally { showLoading(false); } }
+        function openCheckout(id) { location.href = setQueryParam('/checkout.html', { product: id }); }
+        function updateBrowserUrl(id) { const nextUrl = id ? setQueryParam('/products.html', { id }) : absoluteUrl('/products.html'); try { if (location.href !== nextUrl) history.replaceState(null, '', nextUrl); } catch (_) {} }
+        function renderHome(updateUrl = true) { if (updateUrl) updateBrowserUrl(''); container.classList.add('page-exit'); setTimeout(() => { let html = `<div class="max-w-7xl mx-auto"><header class="mb-20"><h2 class="text-orange-500 font-black text-xs tracking-[0.8em] mb-4 uppercase">Ecosystem</h2><h1 class="grotesk text-6xl md:text-8xl font-bold tracking-tighter leading-none mb-6">BỘ SƯU TẬP<br><span class="text-outline">DỊCH VỤ SỐ.</span></h1></header><div class="grid grid-cols-1 md:grid-cols-3 gap-8">`; products.forEach(p => { html += `<div class="product-card group" onclick="renderDetail('${p.id}')"><img src="${p.image}" alt="${p.title}" loading="lazy" crossorigin="anonymous"><div class="card-overlay"><span class="text-[9px] font-black text-white/50 tracking-[0.4em] uppercase mb-2">${p.category}</span><h3 class="text-2xl font-bold tracking-tighter uppercase mb-1">${p.title}</h3><p class="text-orange-500 font-black text-sm">${p.price}</p></div></div>`; }); html += `</div></div>`; container.innerHTML = html; container.classList.remove('page-exit'); window.scrollTo(0, 0); }, 300); }
+        function renderDetail(productId, updateUrl = true) { const product = products.find(p => p.id === productId); if (!product) return; if (updateUrl) updateBrowserUrl(productId); container.classList.add('page-exit'); setTimeout(() => { container.innerHTML = `<div class="max-w-7xl mx-auto"><button onclick="renderHome()" class="mb-12 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity">← Quay lại bộ sưu tập</button><div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start"><div class="relative rounded-[40px] overflow-hidden aspect-[4/5] shadow-2xl bg-[#111]"><img src="${product.image}" class="w-full h-full object-cover" crossorigin="anonymous"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div></div><div class="space-y-12"><div><span class="inline-block bg-orange-500/10 text-orange-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">${product.category}</span><h1 class="grotesk text-6xl font-bold tracking-tighter mb-4 uppercase">${product.title}</h1><div class="flex items-baseline gap-4"><span class="text-4xl font-black">${product.price}</span><span class="text-white/30 text-xs font-bold uppercase tracking-widest">${product.duration ? '/ ' + product.duration : ''}</span></div></div><div class="space-y-6"><h4 class="text-xs font-black uppercase tracking-[0.3em] text-white/40">Mô tả dịch vụ</h4><p class="text-white/60 leading-relaxed text-sm">${product.description || 'Liên hệ Alpha Zone để được tư vấn và kích hoạt dịch vụ.'}</p></div><div class="space-y-6"><h4 class="text-xs font-black uppercase tracking-[0.3em] text-white/40">Đặc điểm nổi bật</h4><ul class="space-y-4">${(product.features.length ? product.features : ['Chọn gói phù hợp', 'Thanh toán theo hướng dẫn', 'Nhận mã 21 ký tự và gửi cho seller để hoàn tất']).map(f => `<li class="flex items-center gap-3 text-xs font-bold"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>${f}</li>`).join('')}</ul></div><div class="pt-10 grid grid-cols-1 sm:grid-cols-2 gap-4"><button onclick="openCheckout('${product.id}')" class="btn-main py-5 text-center text-[11px] uppercase tracking-widest shadow-xl shadow-orange-500/20">Chọn gói & thanh toán</button><a href="https://zalo.me/0357130499" class="border border-white/10 rounded-2xl py-5 text-center text-[11px] uppercase tracking-widest font-black hover:bg-white/5 transition-all">Hỗ trợ Zalo</a></div></div></div></div>`; container.classList.remove('page-exit'); window.scrollTo(0, 0); }, 300); }
+        async function shareProduct(id) { const p = products.find(prod => prod.id === id); if (!p) return; const shareData = { title: p.title + ' - Alpha Zone', text: `Dịch vụ ${p.title} tại Alpha Zone${p.price ? ' - ' + p.price : ''}.`, url: setQueryParam('/products.html', { id: p.id }) }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); showToast('Đã sao chép liên kết sản phẩm'); } } catch (err) { console.log('Share error', err); } }
+        window.onload = () => loadProducts(true);
+    </script>
+</body>
+</html>
