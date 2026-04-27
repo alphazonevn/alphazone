@@ -23,7 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Thin Vietnamese-safe font -->
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -34,14 +34,14 @@
         }
         
         body {
-            font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-weight: 300;
             background-color: var(--bg);
             color: #fff;
             overflow-x: hidden;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            -moz-osx-font-smoothing:;
             font-synthesis: none;
         }
 
@@ -51,7 +51,7 @@
 
         /* Vietnamese-safe thin typography */
         h1, h2, h3, h4, h5, h6, button, input, textarea, select {
-            font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-synthesis: none;
         }
         .font-thin { font-weight: 100 !important; }
@@ -148,6 +148,44 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+
+
+        /* Minimal checkout form */
+        .checkout-field, .checkout-area {
+            width: 100%;
+            background: #f7f7f7;
+            color: #111;
+            border: 1px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 13px 14px;
+            font-size: 12px;
+            font-weight: 300;
+            outline: none;
+            transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+        .checkout-field:focus, .checkout-area:focus {
+            background: #fff;
+            border-color: #111;
+            box-shadow: 0 0 0 4px rgba(0,0,0,.04);
+        }
+        .checkout-area { min-height: 92px; resize: vertical; }
+        .checkout-label {
+            display: block;
+            margin-bottom: 7px;
+            color: #9a9a9a;
+            font-size: 8px;
+            font-weight: 400;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+        }
+        .checkout-save-status {
+            min-height: 18px;
+            font-size: 10px;
+            font-weight: 300;
+            color: #666;
+            letter-spacing: .08em;
+        }
+
         /* Receipt PDF Styling */
         .receipt-card {
             background: #ffffff;
@@ -174,6 +212,40 @@
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
         @media (max-width: 640px) { .receipt-card { border-radius: 20px; padding: 28px !important; } }
+
+        /* Natural media and quick scroll controls */
+        img { filter: none !important; }
+        .quick-scroll-dock {
+            position: fixed;
+            right: 18px;
+            bottom: 22px;
+            z-index: 180;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: auto;
+        }
+        .quick-scroll-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(5,5,5,.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: rgba(255,255,255,.76);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 1;
+            box-shadow: 0 16px 40px rgba(0,0,0,.22);
+            transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+        }
+        .quick-scroll-btn:hover { transform: translateY(-2px); background: #fff; color: #050505; border-color: #fff; }
+        .payment-hidden { opacity: .38; filter: blur(1px); pointer-events: none; transform: translateY(4px); }
+        .payment-reveal { transition: opacity .35s ease, filter .35s ease, transform .35s ease; }
+        @media (max-width: 640px) { .quick-scroll-dock { right: 14px; bottom: 16px; } .quick-scroll-btn { width: 38px; height: 38px; } }
     </style>
 </head>
 <body>
@@ -184,7 +256,7 @@
     <nav class="glass-nav fixed top-0 w-full z-[100] px-6 md:px-12 py-4 flex justify-between items-center transition-all duration-300">
         <div class="flex items-center gap-4 cursor-pointer group" onclick="navigate('home')">
             <div class="w-8 h-8 rounded-full overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity">
-                <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-full h-full object-cover grayscale contrast-125">
+                <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-full h-full object-cover">
             </div>
             <div class="flex flex-col">
                 <span class="font-light tracking-[0.2em] text-sm uppercase leading-none">Alpha<span class="font-medium text-orange-500">Zone</span></span>
@@ -194,6 +266,7 @@
         
         <div class="hidden md:flex items-center gap-10 text-[9px] font-light uppercase tracking-[0.2em] text-white/50">
             <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
+            <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
             <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
             <a href="https://zalo.me/0357130499" target="_blank" class="hover:text-white transition-colors">Support</a>
         </div>
@@ -209,6 +282,7 @@
     <div id="mobile-menu" class="mobile-menu fixed top-[65px] left-0 right-0 z-[90] md:hidden glass-nav px-6 safe-bottom">
         <div class="py-5 flex flex-col gap-4 text-[10px] font-light uppercase tracking-[0.25em] text-white/60">
             <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
+            <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
             <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
             <a href="https://zalo.me/0357130499" target="_blank" rel="noopener" class="hover:text-white transition-colors">Support Zalo</a>
         </div>
@@ -224,12 +298,46 @@
     </main>
 
     <!-- Minimal Footer -->
-    <footer class="border-t border-white/5 py-12 px-6 text-center">
-        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6">
-            <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-6 h-6 grayscale opacity-20">
-            <p class="text-[9px] font-light uppercase tracking-[0.4em] text-white/20">© 2026 Alpha Zone Elite. Crafted with minimal perfection.</p>
+    <footer id="site-footer" class="border-t border-white/5 py-14 px-6 md:px-12 lg:px-24">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_0.8fr] gap-10 items-start">
+            <div class="space-y-5">
+                <div class="flex items-center gap-3">
+                    <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" class="w-9 h-9 rounded-full object-cover opacity-95" alt="Alpha Zone logo">
+                    <div>
+                        <p class="text-sm font-light uppercase tracking-[0.24em]">Alpha<span class="text-orange-500 font-medium">Zone</span></p>
+                        <p class="text-[8px] uppercase tracking-[0.32em] text-white/30 mt-1">Minimalist Digital Workspace</p>
+                    </div>
+                </div>
+                <p class="max-w-md text-xs font-light leading-7 text-white/35">Catalog dịch vụ số tối giản, đồng bộ trực tiếp với Google Sheet qua Apps Script, hỗ trợ tạo mã đơn và hóa đơn thanh toán tự động.</p>
+            </div>
+            <div class="space-y-4">
+                <p class="text-[9px] uppercase tracking-[0.32em] text-white/25">Điều hướng</p>
+                <div class="flex flex-col gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45">
+                    <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
+                    <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
+                    <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <p class="text-[9px] uppercase tracking-[0.32em] text-white/25">Hỗ trợ</p>
+                <div class="flex flex-col gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45">
+                    <a href="https://zalo.me/0357130499" target="_blank" rel="noopener" class="hover:text-white transition-colors">Zalo 0357.130.499</a>
+                    <button onclick="syncData(false, { manual: true })" class="text-left hover:text-white transition-colors">Sync Data</button>
+                    <button onclick="scrollToTop()" class="text-left hover:text-white transition-colors">Về đầu trang</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row gap-3 justify-between text-[8px] font-light uppercase tracking-[0.34em] text-white/20">
+            <p>© 2026 Alpha Zone Elite</p>
+            <p>Crafted with minimal perfection</p>
         </div>
     </footer>
+
+    <!-- Quick Scroll Controls -->
+    <div class="quick-scroll-dock" aria-label="Quick page navigation">
+        <button type="button" class="quick-scroll-btn" onclick="scrollToTop()" aria-label="Về đầu trang">↑</button>
+        <button type="button" class="quick-scroll-btn" onclick="scrollToBottom()" aria-label="Về cuối trang">↓</button>
+    </div>
 
     <!-- Custom Toast System -->
     <div id="toast-container" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none"></div>
@@ -284,6 +392,22 @@
                 .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
                 .replace(/[^a-z0-9]+/g, '-')
                 .replace(/^-+|-+$/g, '') || 'az-item';
+        }
+
+
+
+        function generateNumericCode(length = 21) {
+            let out = '';
+            while (out.length < length) out += Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+            return out.slice(0, length);
+        }
+
+        function cleanPhoneLike(value) {
+            return safeText(value).replace(/[^0-9+]/g, '');
+        }
+
+        function getNumericAmount(price) {
+            return safeText(price).replace(/[^\d]/g, '');
         }
 
         function parseFeatures(row) {
@@ -507,6 +631,7 @@
             const { preserveScroll = false } = options;
             const hash = window.location.hash || '#home';
             if (hash === '#home') renderHome();
+            else if (hash === '#categories') renderCategoriesPage();
             else if (hash.startsWith('#category-')) renderCategoryPage(decodeURIComponent(hash.replace('#category-', '')));
             else if (hash.startsWith('#product-')) renderProductDetail(hash.replace('#product-', ''));
             else if (hash.startsWith('#checkout-')) renderCheckout(hash.replace('#checkout-', ''));
@@ -566,6 +691,7 @@
                         <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                             <div class="flex gap-3 overflow-x-auto w-full md:w-auto pb-2 no-scrollbar">
                                 <button onclick="renderHome()" class="whitespace-nowrap px-5 py-2.5 bg-white text-black rounded-xl text-[9px] font-medium uppercase tracking-[0.2em] transition-all">All</button>
+                                <button onclick="navigate('categories')" class="whitespace-nowrap px-5 py-2.5 border border-orange-500/30 text-orange-500 rounded-xl text-[9px] font-light uppercase tracking-[0.2em] hover:bg-orange-500 hover:text-black transition-all">Trang danh mục</button>
                                 ${categories.map(cat => `
                                     <button onclick="navigate('category-${encodeURIComponent(cat)}')" class="whitespace-nowrap px-5 py-2.5 border border-white/10 rounded-xl text-[9px] font-light uppercase tracking-[0.2em] hover:bg-white/5 transition-all">${escapeHtml(cat)}</button>
                                 `).join('')}
@@ -579,6 +705,42 @@
                             ${allProducts.map(p => productCardTemplate(p)).join('')}
                         </div>
                     </section>
+                </div>`;
+        }
+
+        function renderCategoriesPage() {
+            const categoryData = categories.map(cat => {
+                const items = allProducts.filter(p => p.category === cat);
+                const first = items.find(p => p.image) || {};
+                return { name: cat, count: items.length, image: first.image || LOGO_URL, sample: items.slice(0, 3).map(p => p.title).join(' • ') };
+            });
+            document.getElementById('app-container').innerHTML = `
+                <div class="fade-in max-w-6xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 border-b border-white/5 pb-8">
+                        <button onclick="navigate('home')" class="text-[9px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors flex items-center gap-2"><span>←</span> Catalog</button>
+                        <div class="md:text-right">
+                            <p class="text-orange-500 font-light text-[9px] tracking-[0.5em] uppercase mb-4">Category Directory</p>
+                            <h1 class="font-extralight text-4xl md:text-6xl tracking-tighter uppercase">Danh mục riêng</h1>
+                            <p class="text-white/35 uppercase text-[9px] font-light tracking-[0.2em] mt-3">${categoryData.length} nhóm dịch vụ • ${allProducts.length} sản phẩm</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${categoryData.map(cat => `
+                            <button onclick="navigate('category-${encodeURIComponent(cat.name)}')" class="product-card text-left p-5 group">
+                                <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6 bg-[#0a0a0a] border border-white/5">
+                                    <img src="${escapeHtml(cat.image)}" class="w-full h-full object-contain p-8 opacity-85 transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'">
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <h2 class="font-light text-xl uppercase tracking-tight group-hover:text-orange-500 transition-colors">${escapeHtml(cat.name)}</h2>
+                                        <p class="text-white/35 text-[10px] font-light uppercase tracking-[0.18em] mt-2">${cat.count} sản phẩm</p>
+                                    </div>
+                                    <span class="text-white/35 group-hover:text-orange-500 transition-colors">→</span>
+                                </div>
+                                ${cat.sample ? `<p class="text-white/35 text-xs font-light leading-relaxed mt-5 line-clamp-2">${escapeHtml(cat.sample)}</p>` : ''}
+                            </button>
+                        `).join('')}
+                    </div>
                 </div>`;
         }
 
@@ -636,47 +798,163 @@
             if (!p) return navigate('home');
             const now = new Date();
             const txId = 'AZ-' + Math.random().toString(36).slice(2, 11).toUpperCase();
-            const activationCode = `${p.id.substring(0, 4).toUpperCase()}-${Math.random().toString().slice(2, 8)}-${Math.random().toString().slice(2, 6)}`;
-            const amount = safeText(p.price).replace(/[^\d]/g, '');
-            lastOrder = { txId, activationCode, productId: p.id, productTitle: p.title, category: p.category, price: p.price, warranty: p.duration, createdAt: now.toISOString(), status: 'pending_payment', source: 'alphazone.io.vn' };
-            sendToAppsScript('createOrder', lastOrder).then(res => {
-                if (res.ok) showToast('Đã ghi đơn hàng vào Google Sheet', 'success');
-                else showToast('Đơn hàng đã tạo cục bộ, hãy cấu hình Apps Script URL', 'default');
-            }).catch(err => {
-                console.error('Create order failed:', err);
-                showToast('Không thể ghi đơn hàng vào Apps Script', 'error');
-            });
+            const activationCode = generateNumericCode(21);
+            const amount = getNumericAmount(p.price);
+            lastOrder = {
+                orderId: txId,
+                txId,
+                orderCode: activationCode,
+                activationCode,
+                productId: p.id,
+                productName: p.title,
+                productTitle: p.title,
+                category: p.category,
+                price: p.price,
+                warranty: p.duration,
+                shortMessage: `Đơn hàng ${activationCode} - ${p.title}`,
+                fullMessage: `Khách chọn gói ${p.title} (${p.category}) giá ${p.price}. Mã đơn: ${activationCode}.`,
+                statusText: 'pending_customer_info',
+                status: 'pending_customer_info',
+                sourcePage: window.location.href,
+                source: 'alphazone.io.vn',
+                createdAt: now.toISOString(),
+                updatedAt: now.toISOString()
+            };
 
             document.getElementById('app-container').innerHTML = `
-                <div class="max-w-4xl mx-auto fade-in pb-10">
+                <div class="max-w-5xl mx-auto fade-in pb-10">
                     <nav class="flex justify-between items-center mb-10">
                         <button onclick="window.history.back()" class="text-[9px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">← Hủy</button>
-                        <button onclick="downloadPDF()" class="btn-ghost px-6 py-2.5 text-[9px] uppercase tracking-[0.2em] flex items-center gap-2"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5 5 5-5m-5 5V3"/></svg>Lưu PDF</button>
+                        <button onclick="downloadPDF()" class="btn-ghost px-6 py-2.5 text-[9px] uppercase tracking-[0.2em] flex items-center gap-2"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5 5 5-5m-5 5V3"/></svg>Tải PDF</button>
                     </nav>
-                    <div id="receipt-capture" class="receipt-card p-10 md:p-16 relative">
+                    <div id="receipt-capture" class="receipt-card p-8 md:p-14 relative">
                         <div class="flex justify-between items-start border-b border-gray-100 pb-10 mb-10">
-                            <div><h2 class="font-extralight text-3xl tracking-tight uppercase text-black mb-1">Invoice</h2><p class="text-gray-400 text-[8px] font-medium tracking-[0.3em] uppercase">Alpha Zone Digital</p></div>
-                            <div class="text-right"><img src="${LOGO_URL}" class="w-8 h-8 ml-auto grayscale opacity-80 mb-2"><p class="mono text-[9px] text-gray-500 font-medium">REF: ${txId}</p></div>
+                            <div><h2 class="font-extralight text-3xl tracking-tight uppercase text-black mb-1">Thanh toán</h2><p class="text-gray-400 text-[8px] font-medium tracking-[0.3em] uppercase">Alpha Zone Digital Invoice</p></div>
+                            <div class="text-right"><img src="${LOGO_URL}" class="w-8 h-8 ml-auto opacity-90 mb-2"><p class="mono text-[9px] text-gray-500 font-medium">REF: ${txId}</p></div>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-12">
-                            <div class="space-y-8">
-                                <div><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-2">Service Details</p><h3 class="font-light text-2xl text-black tracking-tight mb-1">${escapeHtml(p.title)}</h3><p class="text-gray-500 font-light text-[11px] uppercase tracking-wider">${escapeHtml(p.category)} • ${escapeHtml(p.duration)}</p></div>
-                                <div class="flex gap-10"><div><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-1">Date</p><p class="text-xs font-medium text-black">${now.toLocaleDateString('vi-VN')}</p></div><div><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-1">Total Due</p><p class="text-sm font-semibold text-orange-500">${escapeHtml(p.price)}</p></div></div>
-                                <div class="pt-6"><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-3">Activation Key / Order Code</p><div class="bg-gray-50 border border-gray-100 rounded-xl p-6 cursor-pointer hover:border-gray-300 transition-all" onclick="copyCode('${activationCode}')"><p class="mono text-xl font-medium text-black tracking-widest text-center">${activationCode}</p></div></div>
-                                <div class="bg-orange-50 border border-orange-100 rounded-2xl p-5"><p class="text-[9px] font-semibold text-orange-600 uppercase tracking-[0.25em] mb-2">Quy trình</p><p class="text-xs text-gray-600 leading-relaxed">Chọn gói → thanh toán → nhận mã 21 ký tự/mã đơn → gửi mã cho seller qua Zalo → hoàn tất đơn hàng.</p></div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                            <div class="space-y-7">
+                                <div>
+                                    <p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-2">Service Details</p>
+                                    <h3 class="font-light text-2xl text-black tracking-tight mb-1">${escapeHtml(p.title)}</h3>
+                                    <p class="text-gray-500 font-light text-[11px] uppercase tracking-wider">${escapeHtml(p.category)} • ${escapeHtml(p.duration)}</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4"><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-1">Date</p><p class="text-xs font-medium text-black">${now.toLocaleDateString('vi-VN')}</p></div>
+                                    <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4"><p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-1">Total Due</p><p class="text-sm font-semibold text-orange-500">${escapeHtml(p.price)}</p></div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-[8px] font-medium uppercase tracking-[0.3em] mb-3">Mã đơn 21 số</p>
+                                    <div class="bg-gray-50 border border-gray-100 rounded-xl p-6 cursor-pointer hover:border-gray-300 transition-all" onclick="copyCode('${activationCode}')"><p class="mono text-xl font-medium text-black tracking-widest text-center break-all">${activationCode}</p></div>
+                                </div>
+                                <div class="bg-orange-50 border border-orange-100 rounded-2xl p-5"><p class="text-[9px] font-semibold text-orange-600 uppercase tracking-[0.25em] mb-2">Quy trình</p><p class="text-xs text-gray-600 leading-relaxed">Điền thông tin người mua → QR thanh toán sẽ hiện → thanh toán → bấm xác nhận thanh toán → hóa đơn PDF tự tải về.</p></div>
                             </div>
-                            <div class="flex flex-col items-center justify-center"><div class="w-56 h-56 bg-white border border-gray-100 p-4 rounded-3xl shadow-sm mb-6"><img src="https://img.vietqr.io/image/${BANK_ID}-${BANK_ACCOUNT}-compact2.jpg?amount=${amount}&addInfo=${encodeURIComponent(txId)}" class="w-full h-full object-contain"></div><div class="text-center"><p class="text-[9px] font-medium text-gray-400 uppercase tracking-[0.3em] mb-1">${BANK_ID} Bank Transfer</p><p class="text-xs font-semibold text-black uppercase tracking-widest">${BANK_NAME}</p><p class="mono text-[10px] text-gray-500 mt-1">${BANK_ACCOUNT}</p></div></div>
+
+                            <div class="space-y-7">
+                                <form id="checkout-form" class="bg-white border border-gray-100 rounded-3xl p-5 space-y-4" onsubmit="submitCheckoutOrder(event)">
+                                    <div>
+                                        <label class="checkout-label" for="customer-name">Tên người mua</label>
+                                        <input id="customer-name" class="checkout-field" autocomplete="name" placeholder="Nhập tên của bạn" oninput="togglePaymentSection()" required>
+                                    </div>
+                                    <div>
+                                        <label class="checkout-label" for="customer-contact">SĐT / Zalo</label>
+                                        <input id="customer-contact" class="checkout-field" autocomplete="tel" inputmode="tel" placeholder="Số điện thoại hoặc Zalo" oninput="togglePaymentSection()" required>
+                                    </div>
+                                    <div>
+                                        <label class="checkout-label" for="customer-email">Email nếu có</label>
+                                        <input id="customer-email" class="checkout-field" autocomplete="email" inputmode="email" placeholder="Email nhận thông tin đơn hàng" oninput="togglePaymentSection()">
+                                    </div>
+                                    <div>
+                                        <label class="checkout-label" for="customer-note">Ghi chú</label>
+                                        <textarea id="customer-note" class="checkout-area" placeholder="Tài khoản cần nâng cấp, yêu cầu riêng, thời gian liên hệ..." oninput="togglePaymentSection()"></textarea>
+                                    </div>
+                                    <button id="checkout-save-btn" type="submit" class="w-full bg-black text-white rounded-2xl py-4 text-[10px] uppercase tracking-[0.28em] font-light hover:bg-orange-500 hover:text-black transition-all">Xác nhận thanh toán & tải PDF</button>
+                                    <p id="checkout-save-status" class="checkout-save-status">Nhập tên và SĐT/Zalo để hiện mã QR thanh toán.</p>
+                                </form>
+
+                                <div id="payment-section" class="payment-reveal payment-hidden flex flex-col items-center justify-center bg-gray-50 border border-gray-100 rounded-3xl p-5">
+                                    <p id="payment-hint" class="text-[9px] font-medium text-gray-400 uppercase tracking-[0.24em] mb-4 text-center">QR sẽ hiện sau khi nhập thông tin người mua</p>
+                                    <div class="w-56 h-56 bg-white border border-gray-100 p-4 rounded-3xl shadow-sm mb-6"><img src="https://img.vietqr.io/image/${BANK_ID}-${BANK_ACCOUNT}-compact2.jpg?amount=${amount}&addInfo=${encodeURIComponent(activationCode)}" class="w-full h-full object-contain"></div>
+                                    <div class="text-center"><p class="text-[9px] font-medium text-gray-400 uppercase tracking-[0.3em] mb-1">${BANK_ID} Bank Transfer</p><p class="text-xs font-semibold text-black uppercase tracking-widest">${BANK_NAME}</p><p class="mono text-[10px] text-gray-500 mt-1">${BANK_ACCOUNT}</p></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="border-t border-gray-100 pt-8 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center text-[8px] uppercase tracking-[0.2em] text-gray-400"><p>Send key to Zalo: ${SELLER_ZALO}</p><p>Thank you for choosing Alpha</p></div>
                     </div>
                 </div>`;
         }
 
+        function togglePaymentSection() {
+            const name = safeText(document.getElementById('customer-name')?.value);
+            const contact = safeText(document.getElementById('customer-contact')?.value);
+            const section = document.getElementById('payment-section');
+            const hint = document.getElementById('payment-hint');
+            const status = document.getElementById('checkout-save-status');
+            const ready = Boolean(name && contact);
+            if (section) section.classList.toggle('payment-hidden', !ready);
+            if (hint) hint.textContent = ready ? 'Quét QR để thanh toán, sau đó bấm xác nhận bên trên' : 'QR sẽ hiện sau khi nhập thông tin người mua';
+            if (status && !status.dataset.locked) status.textContent = ready ? 'Sau khi thanh toán, bấm xác nhận để lưu đơn và tự tải hóa đơn PDF.' : 'Nhập tên và SĐT/Zalo để hiện mã QR thanh toán.';
+        }
+
+        async function submitCheckoutOrder(event) {
+            event.preventDefault();
+            if (!lastOrder) return showToast('Không tìm thấy đơn hàng hiện tại', 'error');
+            const btn = document.getElementById('checkout-save-btn');
+            const status = document.getElementById('checkout-save-status');
+            const customerName = safeText(document.getElementById('customer-name')?.value);
+            const customerContact = cleanPhoneLike(document.getElementById('customer-contact')?.value) || safeText(document.getElementById('customer-contact')?.value);
+            const customerEmail = safeText(document.getElementById('customer-email')?.value);
+            const customerNote = safeText(document.getElementById('customer-note')?.value);
+            if (!customerName || !customerContact) {
+                if (status) status.textContent = 'Vui lòng nhập tên và SĐT/Zalo trước khi hiện QR thanh toán.';
+                return showToast('Thiếu thông tin người mua', 'error');
+            }
+            const orderData = {
+                ...lastOrder,
+                customerName,
+                customerContact,
+                customerEmail,
+                customerNote,
+                statusText: 'payment_confirmed',
+                status: 'payment_confirmed',
+                updatedAt: new Date().toISOString(),
+                fullMessage: `${lastOrder.fullMessage}\nKhách: ${customerName}\nLiên hệ: ${customerContact}${customerEmail ? '\nEmail: ' + customerEmail : ''}${customerNote ? '\nGhi chú: ' + customerNote : ''}`
+            };
+            lastOrder = orderData;
+            if (btn) { btn.disabled = true; btn.textContent = 'Đang xác nhận...'; }
+            if (status) { status.dataset.locked = '1'; status.textContent = 'Đang lưu xác nhận thanh toán vào Apps Script...'; }
+            try {
+                await sendToAppsScript('createOrder', orderData);
+                await sendToAppsScript('saveCustomerLead', {
+                    leadId: 'lead-' + orderData.orderCode,
+                    fullName: customerName,
+                    contact: customerContact,
+                    email: customerEmail,
+                    note: customerNote,
+                    productId: orderData.productId,
+                    productName: orderData.productName,
+                    sourcePage: orderData.sourcePage,
+                    updatedAt: orderData.updatedAt
+                });
+                if (status) status.textContent = 'Đã xác nhận thanh toán. Hóa đơn PDF đang được tải về.';
+                showToast('Đã lưu xác nhận thanh toán vào Google Sheet', 'success');
+                if (btn) btn.textContent = 'Đã xác nhận';
+                await downloadPDF(true);
+            } catch (err) {
+                console.error('Checkout save failed:', err);
+                if (status) { delete status.dataset.locked; status.textContent = 'Không thể lưu Apps Script. Vui lòng thử lại hoặc gửi mã qua Zalo.'; }
+                showToast('Lưu xác nhận thất bại', 'error');
+                if (btn) { btn.disabled = false; btn.textContent = 'Xác nhận thanh toán & tải PDF'; }
+            }
+        }
+
         // --- TEMPLATES ---
+
         function productCardTemplate(p) {
             return `
                 <div class="product-card p-5 flex flex-col group cursor-pointer" onclick="navigate('product-${escapeHtml(p.id)}')">
-                    <div class="w-full aspect-video rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative"><img src="${escapeHtml(p.image)}" class="w-full h-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-105" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'"></div>
+                    <div class="w-full aspect-square rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative border border-white/5"><img src="${escapeHtml(p.image)}" class="w-full h-full object-contain p-5 opacity-85 transition-transform duration-1000 group-hover:scale-105" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'"></div>
                     <div class="flex-grow flex flex-col justify-between">
                         <div class="mb-6"><p class="text-[8px] font-light text-white/30 uppercase tracking-[0.3em] mb-2">${escapeHtml(p.category)}</p><h3 class="text-lg font-light tracking-tight uppercase leading-snug group-hover:text-orange-500 transition-colors line-clamp-2">${escapeHtml(p.title)}</h3></div>
                         <div class="flex justify-between items-center border-t border-white/5 pt-4"><p class="font-light text-white tracking-wide">${escapeHtml(p.price)}</p><span class="text-[9px] font-light uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all text-white/50">View</span></div>
@@ -685,6 +963,9 @@
         }
 
         // --- UTILS ---
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToBottom() { window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }); }
+
         function copyCode(text) {
             navigator.clipboard.writeText(text).then(() => showToast(`Copied Key: ${text}`, 'success')).catch(() => showToast('Failed to copy', 'error'));
         }
@@ -696,11 +977,13 @@
             else { navigator.clipboard.writeText(url); showToast('Link copied to clipboard', 'success'); }
         }
 
-        function downloadPDF() {
-            showToast('Generating high-quality PDF...', 'default');
+        async function downloadPDF(auto = false) {
             const element = document.getElementById('receipt-capture');
-            const opt = { margin: [0, 0], filename: 'AlphaZone-Invoice-' + Date.now() + '.pdf', image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 3, useCORS: true, logging: false }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
-            html2pdf().set(opt).from(element).save().then(() => showToast('PDF Downloaded successfully', 'success'));
+            if (!element) return showToast('Không tìm thấy hóa đơn để tải PDF', 'error');
+            showToast(auto ? 'Đang tự tải hóa đơn PDF...' : 'Generating high-quality PDF...', 'default');
+            const opt = { margin: [0, 0], filename: 'AlphaZone-Invoice-' + (lastOrder?.orderCode || Date.now()) + '.pdf', image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 3, useCORS: true, logging: false }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+            await html2pdf().set(opt).from(element).save();
+            showToast('PDF Downloaded successfully', 'success');
         }
 
         // --- INIT ---
@@ -708,5 +991,126 @@
         window.addEventListener('hashchange', () => handleRoute({ preserveScroll: false }));
 
     </script>
+
+<script id="az-filter-swap-enhance">
+(function(){
+  if (window.__AZ_FILTER_SWAP_ENHANCE__) return;
+  window.__AZ_FILTER_SWAP_ENHANCE__ = true;
+  const FLIP_KEY = 'az_home_product_category_flip';
+  const pf = { query:'', category:'all', sort:'default' };
+  const cf = { query:'', sort:'default' };
+  function txt(v){ return String(v == null ? '' : v).trim(); }
+  function esc(v){ return txt(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+  function price(v){ const d = txt(v).replace(/[^\d]/g,''); return d ? Number(d) : 0; }
+  function flip(){ return sessionStorage.getItem(FLIP_KEY) === '1'; }
+  function setFlip(v){ sessionStorage.setItem(FLIP_KEY, v ? '1' : '0'); }
+  function toggleFlip(){ setFlip(!flip()); }
+  window.azReturnHomeSwap = function(){ toggleFlip(); if (typeof navigate === 'function') navigate('home'); else location.hash = '#home'; setTimeout(enhance, 120); };
+  function filteredProducts(list){
+    const q = txt(pf.query).toLowerCase();
+    let out = (list || window.allProducts || []).filter(p => {
+      const hitQ = !q || [p.title,p.category,p.description,p.platformName,p.price].some(x => txt(x).toLowerCase().includes(q));
+      const hitC = !pf.category || pf.category === 'all' || p.category === pf.category;
+      return hitQ && hitC;
+    });
+    out = out.slice();
+    if (pf.sort === 'name-asc') out.sort((a,b)=>txt(a.title).localeCompare(txt(b.title),'vi'));
+    if (pf.sort === 'name-desc') out.sort((a,b)=>txt(b.title).localeCompare(txt(a.title),'vi'));
+    if (pf.sort === 'price-asc') out.sort((a,b)=>price(a.price)-price(b.price));
+    if (pf.sort === 'price-desc') out.sort((a,b)=>price(b.price)-price(a.price));
+    if (pf.sort === 'newest') out.sort((a,b)=>txt(b.updatedAt).localeCompare(txt(a.updatedAt)));
+    return out;
+  }
+  function catData(){
+    const q = txt(cf.query).toLowerCase();
+    let data = (window.categories || []).map(name => {
+      const items = (window.allProducts || []).filter(p => p.category === name);
+      const first = items.find(p => p.image) || {};
+      return { name, count:items.length, image:first.image || window.LOGO_URL || '', sample:items.slice(0,3).map(p=>p.title).join(' • ') };
+    }).filter(c => !q || (c.name + ' ' + c.sample).toLowerCase().includes(q));
+    if (cf.sort === 'name-asc') data.sort((a,b)=>a.name.localeCompare(b.name,'vi'));
+    if (cf.sort === 'name-desc') data.sort((a,b)=>b.name.localeCompare(a.name,'vi'));
+    if (cf.sort === 'count-desc') data.sort((a,b)=>b.count-a.count);
+    if (cf.sort === 'count-asc') data.sort((a,b)=>a.count-b.count);
+    return data;
+  }
+  function productControls(){
+    return '<div id="az-product-filter" class="product-card p-5 md:p-6 space-y-4 mb-6">'+
+      '<div class="flex items-center justify-between gap-4"><div><p class="text-orange-500 font-light text-[8px] tracking-[0.4em] uppercase mb-2">Product Filter</p><h3 class="font-light text-xl uppercase tracking-tight">Bộ lọc sản phẩm</h3></div><span id="az-product-count" class="text-white/35 text-[9px] font-light uppercase tracking-[0.2em]"></span></div>'+
+      '<div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-3">'+
+      '<input id="az-product-search" value="'+esc(pf.query)+'" placeholder="Tìm sản phẩm, nền tảng, giá..." class="search-input w-full px-4 py-3 text-[10px] uppercase tracking-widest placeholder:text-white/20">'+
+      '<select id="az-product-category" class="search-input w-full px-4 py-3 text-[10px] uppercase tracking-widest"><option value="all">Tất cả danh mục</option>'+(window.categories||[]).map(c=>'<option value="'+esc(c)+'" '+(pf.category===c?'selected':'')+'>'+esc(c)+'</option>').join('')+'</select>'+
+      '<select id="az-product-sort" class="search-input w-full px-4 py-3 text-[10px] uppercase tracking-widest"><option value="default">Mặc định</option><option value="newest">Mới cập nhật</option><option value="name-asc">Tên A-Z</option><option value="name-desc">Tên Z-A</option><option value="price-asc">Giá thấp-cao</option><option value="price-desc">Giá cao-thấp</option></select>'+
+      '</div></div>';
+  }
+  function categoryCard(c){
+    const img = esc(c.image || window.LOGO_URL || '');
+    return '<button onclick="navigate(\'category-'+encodeURIComponent(c.name)+'\')" class="product-card text-left p-5 group">'+
+      '<div class="w-full aspect-square rounded-2xl overflow-hidden mb-6 bg-[#0a0a0a] border border-white/5"><img src="'+img+'" class="w-full h-full object-contain p-8 opacity-100 transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.src=\''+esc(window.FALLBACK_IMAGE||'')+'\'"></div>'+
+      '<div class="flex items-start justify-between gap-4"><div><h2 class="font-light text-xl uppercase tracking-tight group-hover:text-orange-500 transition-colors">'+esc(c.name)+'</h2><p class="text-white/35 text-[10px] font-light uppercase tracking-[0.18em] mt-2">'+c.count+' sản phẩm</p></div><span class="text-white/35 group-hover:text-orange-500 transition-colors">→</span></div>'+
+      (c.sample ? '<p class="text-white/35 text-xs font-light leading-relaxed mt-5 line-clamp-2">'+esc(c.sample)+'</p>' : '')+
+      '</button>';
+  }
+  function categorySection(){
+    return '<section id="az-category-section" class="space-y-6 max-w-6xl mx-auto">'+
+      '<div class="flex items-end justify-between gap-4"><div><p class="text-orange-500 font-light text-[8px] tracking-[0.5em] uppercase mb-3">Directory</p><h2 class="font-extralight text-3xl md:text-5xl tracking-tighter uppercase">Danh mục</h2></div><span id="az-category-count" class="text-white/35 uppercase text-[9px] font-light tracking-[0.2em]"></span></div>'+
+      '<div class="product-card p-5 md:p-6 space-y-4"><div class="flex items-center justify-between gap-4"><div><p class="text-orange-500 font-light text-[8px] tracking-[0.4em] uppercase mb-2">Category Filter</p><h3 class="font-light text-xl uppercase tracking-tight">Bộ lọc danh mục</h3></div></div><div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-3"><input id="az-category-search" value="'+esc(cf.query)+'" placeholder="Tìm danh mục..." class="search-input w-full px-4 py-3 text-[10px] uppercase tracking-widest placeholder:text-white/20"><select id="az-category-sort" class="search-input w-full px-4 py-3 text-[10px] uppercase tracking-widest"><option value="default">Mặc định</option><option value="count-desc">Nhiều sản phẩm nhất</option><option value="count-asc">Ít sản phẩm nhất</option><option value="name-asc">Tên A-Z</option><option value="name-desc">Tên Z-A</option></select></div></div>'+
+      '<div id="az-category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div></section>';
+  }
+  function renderProducts(){
+    const grid = document.getElementById('product-grid'); if (!grid || typeof productCardTemplate !== 'function') return;
+    const out = filteredProducts(window.allProducts || []);
+    const count = document.getElementById('az-product-count'); if (count) count.textContent = out.length + '/' + ((window.allProducts||[]).length) + ' sản phẩm';
+    grid.innerHTML = out.length ? out.map(productCardTemplate).join('') : '<div class="col-span-full text-center py-20 text-white/30 font-light text-xs uppercase tracking-[0.2em]">Không tìm thấy sản phẩm phù hợp</div>';
+  }
+  function renderCats(){
+    const grid = document.getElementById('az-category-grid'); if (!grid) return;
+    const data = catData();
+    const count = document.getElementById('az-category-count'); if (count) count.textContent = data.length + '/' + ((window.categories||[]).length) + ' danh mục';
+    grid.innerHTML = data.length ? data.map(categoryCard).join('') : '<div class="col-span-full text-center py-20 text-white/30 font-light text-xs uppercase tracking-[0.2em]">Không tìm thấy danh mục phù hợp</div>';
+  }
+  function bindFilters(){
+    const ps = document.getElementById('az-product-search'); if (ps) ps.oninput = () => { pf.query = ps.value; renderProducts(); };
+    const pc = document.getElementById('az-product-category'); if (pc) { pc.value = pf.category; pc.onchange = () => { pf.category = pc.value; renderProducts(); }; }
+    const so = document.getElementById('az-product-sort'); if (so) { so.value = pf.sort; so.onchange = () => { pf.sort = so.value; renderProducts(); }; }
+    const cs = document.getElementById('az-category-search'); if (cs) cs.oninput = () => { cf.query = cs.value; renderCats(); };
+    const cso = document.getElementById('az-category-sort'); if (cso) { cso.value = cf.sort; cso.onchange = () => { cf.sort = cso.value; renderCats(); }; }
+  }
+  function rewriteBackButtons(){
+    const root = document.getElementById('app-container'); if (!root) return;
+    root.querySelectorAll('button').forEach(btn => {
+      const text = txt(btn.textContent).toLowerCase();
+      if (text.includes('catalog') || text.includes('hủy') || text.includes('khám phá tiếp') || text.includes('trở về')) btn.onclick = window.azReturnHomeSwap;
+    });
+  }
+  function enhance(){
+    const app = document.getElementById('app-container'); if (!app) return;
+    const service = document.getElementById('services-section');
+    if (service && !document.getElementById('az-product-filter')) {
+      const grid = document.getElementById('product-grid'); if (grid) grid.insertAdjacentHTML('beforebegin', productControls());
+      const cat = document.getElementById('az-category-section'); if (cat) cat.remove();
+      if (flip()) service.insertAdjacentHTML('afterend', categorySection()); else service.insertAdjacentHTML('beforebegin', categorySection());
+    }
+    const categoryPageTitle = Array.from(app.querySelectorAll('h1,h2')).some(x => txt(x.textContent).toLowerCase().includes('danh mục riêng'));
+    if (categoryPageTitle && !document.getElementById('az-category-grid')) {
+      const oldGrid = app.querySelector('.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3');
+      if (oldGrid) oldGrid.outerHTML = '<div id="az-category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>';
+      const header = app.querySelector('.border-b'); if (header) header.insertAdjacentHTML('afterend', categorySection().replace('id="az-category-section"','id="az-category-page-filter"'));
+    }
+    bindFilters(); renderProducts(); renderCats(); rewriteBackButtons();
+  }
+  function wrap(name){
+    const old = window[name];
+    if (typeof old === 'function' && !old.__azFilterWrapped) {
+      window[name] = function(){ const r = old.apply(this, arguments); setTimeout(enhance, 0); return r; };
+      window[name].__azFilterWrapped = true;
+    }
+  }
+  ['renderHome','renderCategoriesPage','renderCategoryPage','renderProductDetail','renderCheckout'].forEach(wrap);
+  window.addEventListener('hashchange', () => setTimeout(enhance, 80));
+  window.addEventListener('load', () => setTimeout(enhance, 250));
+  setTimeout(enhance, 600);
+})();
+</script>
 </body>
 </html>
