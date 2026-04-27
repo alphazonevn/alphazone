@@ -15416,17 +15416,14 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
 
 <script id="az-compact-router">
 (function(){
-  var CURRENT='seller-channel';
-  var MAP={home:'home.html',categories:'categories.html',products:'products.html','product-detail':'products.html','engagement-hub':'engagement-hub.html','seller-channel':'seller-channel.html',marketplace:'marketplace.html',warranty:'warranty.html','about-us':'about-us.html',account:'account.html'};
-  function fileName(){var p=location.pathname.split('/').pop()||'index.html';return p==='index.html'?'home.html':p;}
-  function go(page){var url=MAP[page]||'home.html'; if(url===fileName()){ if(window.showPage){try{window.showPage(page==='product-detail'?'products':page)}catch(e){}} return; } location.href=url;}
-  function fixIcons(){
-    document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="categories"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-layer-group"></i>';});
-    document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="products"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-box-open"></i>';});
-  }
-  function mark(){fixIcons();document.querySelectorAll('#alpha-right-dock .dock-btn[data-page]').forEach(function(btn){var p=btn.getAttribute('data-page');btn.classList.toggle('active',p===CURRENT);btn.setAttribute('role','link');btn.setAttribute('tabindex','0');});}
-  document.addEventListener('click',function(e){var btn=e.target&&e.target.closest&&e.target.closest('#alpha-right-dock .dock-btn[data-page]');if(!btn)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();go(btn.getAttribute('data-page'));},true);
+  var MAP={home:'shop.html#home',categories:'shop.html#categories',products:'shop.html#products','product-detail':'shop.html#products','engagement-hub':'shop.html#engagement-hub',marketplace:'shop.html#marketplace','seller-channel':'seller.html#seller-channel',account:'seller.html#account',warranty:'support.html#warranty','about-us':'support.html#about-us',admin:'admin.html#products',records:'admin.html#records',smart:'admin.html#smart',registration:'admin.html#registration',checkout:'checkout.html'};
+  function fileName(){return location.pathname.split('/').pop()||'index.html'}
+  function go(page){var url=MAP[page]||'shop.html#home',f=url.split('#')[0],h=url.split('#')[1]||page;if(fileName()===f){if(location.hash!=='#'+h)location.hash=h;if(window.showPage){try{window.showPage(h)}catch(e){}}return;}location.href=url;}
+  function fixIcons(){document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="categories"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-layer-group"></i>';});document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="products"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-box-open"></i>';});document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="marketplace"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-store"></i>';});document.querySelectorAll('#alpha-right-dock .dock-btn[data-page="warranty"] .dock-icon').forEach(function(x){x.innerHTML='<i class="fa-solid fa-shield-halved"></i>';});}
+  function mark(){var current=(location.hash||'').replace(/^#/,'')||'home';fixIcons();document.querySelectorAll('#alpha-right-dock .dock-btn[data-page]').forEach(function(btn){var p=btn.getAttribute('data-page');btn.classList.toggle('active',p===current);btn.setAttribute('role','link');btn.setAttribute('tabindex','0');});}
+  document.addEventListener('click',function(e){var btn=e.target&&e.target.closest&&e.target.closest('#alpha-right-dock .dock-btn[data-page], [data-page][data-az-nav]');if(!btn)return;e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();go(btn.getAttribute('data-page'));},true);
   document.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var btn=e.target&&e.target.closest&&e.target.closest('#alpha-right-dock .dock-btn[data-page]');if(!btn)return;e.preventDefault();go(btn.getAttribute('data-page'));},true);
+  window.addEventListener('hashchange',function(){var h=(location.hash||'').replace(/^#/,'');if(h&&window.showPage){try{window.showPage(h)}catch(e){}}mark();});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark,{once:true});else mark();setTimeout(mark,300);setTimeout(mark,1200);setTimeout(mark,2500);
 })();
 </script>
