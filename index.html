@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
-<!-- Built by ChatGPT: merged from shop, seller/support/checkout-equivalent app, and az-fix assets; admin separated; redirect stub files removed. -->
-<!-- Alpha Zone v7: admin separated into its own file; admin button removed; APSRC sync external JS enabled. -->
-<!-- Product JSON schema: id, name, platformName, logo, categoryImage, category, price, shortDescription, detailedDescription, warranty, displayPage. displayPage accepts: products, engagement-hub, marketplace. -->
 <html lang="vi">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<link href="https://cdn.abphotos.link/photos/resized/40x40/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" rel="icon"/>
-<title>Alpha Zone - Tổng hợp</title>
-<script id="az-mobile-performance-pre-v8">
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <link rel="icon" href="https://cdn.abphotos.link/photos/resized/40x40/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+  <title>Alpha Zone - Tổng hợp</title>
+
+  <script id="az-mobile-performance-pre-v8">
     /* Alpha Zone v8 mobile performance guard: installed before app scripts. */
     (function () {
       var lite = false;
@@ -43,36 +42,53 @@
       };
     })();
   </script>
-<!-- Google tag (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2958GYNLCR"></script>
-<script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2958GYNLCR"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-2958GYNLCR');
   </script>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
-<link href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" rel="icon" type="image/png"/>
-<link href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" rel="apple-touch-icon"/>
-<!-- Open Graph (Facebook, Zalo, LinkedIn) -->
-<meta content="Alpha Zone Việt Nam - Tài khoản premium và dịch vụ số" property="og:title"/>
-<meta content="Alpha Zone Việt Nam cung cấp tài khoản premium và dịch vụ số cho AI, học tập, sáng tạo nội dung và giải trí trực tuyến." property="og:description"/>
-<meta content="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc34Bqad67_1773238655-phpcga0ey.png" property="og:image"/>
-<meta content="https://alphazonevietnam19608.abaha.vn" property="og:url"/>
-<meta content="website" property="og:type"/>
-<!-- Twitter Card -->
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Alpha Zone Việt Nam - Tài khoản premium và dịch vụ số" name="twitter:title"/>
-<meta content="Alpha Zone Việt Nam cung cấp tài khoản premium và dịch vụ số cho AI, học tập, sáng tạo nội dung và giải trí trực tuyến." name="twitter:description"/>
-<meta content="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc34Bqad67_1773238655-phpcga0ey.png" name="twitter:image"/>
-<!-- Fonts & CSS -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <link rel="icon" type="image/png"
+    href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+  <link rel="apple-touch-icon"
+    href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png">
+
+  <!-- Open Graph (Facebook, Zalo, LinkedIn) -->
+  <meta property="og:title" content="Alpha Zone Việt Nam - Tài khoản premium và dịch vụ số" />
+  <meta property="og:description"
+    content="Alpha Zone Việt Nam cung cấp tài khoản premium và dịch vụ số cho AI, học tập, sáng tạo nội dung và giải trí trực tuyến." />
+  <meta property="og:image"
+    content="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc34Bqad67_1773238655-phpcga0ey.png" />
+  <meta property="og:url" content="https://alphazonevietnam19608.abaha.vn" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alpha Zone Việt Nam - Tài khoản premium và dịch vụ số" />
+  <meta name="twitter:description"
+    content="Alpha Zone Việt Nam cung cấp tài khoản premium và dịch vụ số cho AI, học tập, sáng tạo nội dung và giải trí trực tuyến." />
+  <meta name="twitter:image"
+    content="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc34Bqad67_1773238655-phpcga0ey.png" />
+
+  <!-- Fonts & CSS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
 
     /* embedded font removed: Google Fonts fallback is used */
 
@@ -2972,7 +2988,8 @@
       }
     }
   </style>
-<style id="alpha-display-hotfix-v36">
+
+  <style id="alpha-display-hotfix-v36">
     /* Scoped display hotfixes requested by user: keep existing code intact, only override layout */
     #product-detail .alpha-detail-hero {
       display: flex !important;
@@ -3304,7 +3321,8 @@ body.dark .az-admin-popup-tools{background:rgba(15,15,15,.92);color:#fff;border-
 })();
 
 </script>
-<style id="az-mobile-performance-css-v8">
+
+  <style id="az-mobile-performance-css-v8">
     /* Mobile performance mode: keeps layout and content, removes heavy visual work on phones. */
     @media (max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce) {
       html.az-mobile-lite,
@@ -3456,309 +3474,366 @@ body.dark .az-admin-popup-tools{background:rgba(15,15,15,.92);color:#fff;border-
       }
     }
   </style>
-</link></head>
+
+</head>
+
 <body class="pb-32 pt-12">
-<div class="bg-lines"></div>
-<div class="live-toast" id="live-toast">
-<div class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-[10px] text-white">
-<i class="fa-solid fa-cart-shopping"></i>
-</div>
-<div class="flex flex-col">
-<span class="text-[10px] font-black uppercase tracking-widest" id="toast-user">Khách hàng</span>
-<span class="text-[9px] opacity-50" id="toast-action">Vừa đăng ký dịch vụ</span>
-</div>
-</div>
-<div class="max-w-md mx-auto px-6">
-<div class="page active" id="home">
-<div class="street-card p-10 relative mb-6">
-<span class="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 mb-4 block">Chào mừng</span>
-<h1 class="title-font text-5xl leading-[0.85] tracking-tighter mb-8">ALPHA<br/>ZONE<br/>VIETNAM</h1>
-<div class="absolute right-[-30px] top-[1%] floating-ball" style="width: 300px; height: 250px;">
-<img alt="Alpha logo" class="w-full h-full object-contain opacity-90" src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png"/>
-</div>
-<div class="mt-20 grid grid-cols-1 gap-3">
-<button class="btn-street w-full" onclick='showPage("categories")' type="button">
-<i class="fa-solid fa-layer-group text-[10px]"></i>
+
+  <div class="bg-lines"></div>
+
+  <div id="live-toast" class="live-toast">
+    <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-[10px] text-white">
+      <i class="fa-solid fa-cart-shopping"></i>
+    </div>
+    <div class="flex flex-col">
+      <span id="toast-user" class="text-[10px] font-black uppercase tracking-widest">Khách hàng</span>
+      <span id="toast-action" class="text-[9px] opacity-50">Vừa đăng ký dịch vụ</span>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto px-6">
+    <div id="home" class="page active">
+      <div class="street-card p-10 relative mb-6">
+        <span class="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 mb-4 block">Chào mừng</span>
+        <h1 class="title-font text-5xl leading-[0.85] tracking-tighter mb-8">ALPHA<br>ZONE<br>VIETNAM</h1>
+
+        <div class="absolute right-[-30px] top-[1%] floating-ball" style="width: 300px; height: 250px;">
+          <img
+            src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png"
+            class="w-full h-full object-contain opacity-90" alt="Alpha logo">
+        </div>
+
+        <div class="mt-20 grid grid-cols-1 gap-3">
+          <button onclick="showPage(&quot;categories&quot;)" class="btn-street w-full" type="button">
+            <i class="fa-solid fa-layer-group text-[10px]"></i>
             Khám phá Danh mục nhà Alpha Zone
           </button>
-<button class="btn-street w-full" onclick="showPage('engagement-hub')" type="button">
-<i class="fa-solid fa-layer-group text-[10px]"></i>
+          <button onclick="showPage('engagement-hub')" class="btn-street w-full" type="button">
+          <i class="fa-solid fa-layer-group text-[10px]"></i>
             Dịch vụ Seeding giá siêu rẻ </button>
-</div>
-</div>
-<div class="flex items-center justify-between mb-6 px-2">
-<div class="flex items-center gap-3">
-<div class="flex -space-x-3">
-<img alt="a" class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://i.pravatar.cc/100?u=a"/>
-<img alt="b" class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://i.pravatar.cc/100?u=b"/>
-<img alt="c" class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://i.pravatar.cc/100?u=c"/>
-<div class="w-9 h-9 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold" id="live-count">+3</div>
-</div>
-<div class="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center">
-<i class="fa-solid fa-arrow-right text-[10px]"></i>
-</div>
-</div>
-<div class="text-right">
-<span class="text-[10px] font-black uppercase tracking-widest block leading-none mb-1">Cộng đồng</span>
-<span class="text-[10px] opacity-40" id="live-viewer-text">24 khách đang mua</span>
-</div>
-</div>
-<div class="dark-card p-8">
-<h2 class="title-font vi-title text-xl mb-6">Dịch vụ nổi bật</h2>
-<div class="relative rounded-[32px] overflow-hidden aspect-video bg-zinc-800" onclick="handleCardClick('netflix')">
-<img alt="Hot" class="w-full h-full object-cover opacity-60" src="https://i.pinimg.com/736x/14/e9/82/14e9820263a849f5ee1c26a3061fb110.jpg"/>
-<div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-<p class="text-[11px] font-bold uppercase tracking-widest mb-2 italic">Dịch vụ được quan tâm</p>
-<div class="bg-[#c5beaf] text-black px-4 py-1.5 rounded-full text-[9px] font-black uppercase">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-6 px-2">
+        <div class="flex items-center gap-3">
+          <div class="flex -space-x-3">
+            <img src="https://i.pravatar.cc/100?u=a" class="w-9 h-9 rounded-full border-2 border-white object-cover"
+              alt="a">
+            <img src="https://i.pravatar.cc/100?u=b" class="w-9 h-9 rounded-full border-2 border-white object-cover"
+              alt="b">
+            <img src="https://i.pravatar.cc/100?u=c" class="w-9 h-9 rounded-full border-2 border-white object-cover"
+              alt="c">
+            <div
+              class="w-9 h-9 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold"
+              id="live-count">+3</div>
+          </div>
+          <div class="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] font-black uppercase tracking-widest block leading-none mb-1">Cộng đồng</span>
+          <span class="text-[10px] opacity-40" id="live-viewer-text">24 khách đang mua</span>
+        </div>
+      </div>
+
+      <div class="dark-card p-8">
+        <h2 class="title-font vi-title text-xl mb-6">Dịch vụ nổi bật</h2>
+        <div class="relative rounded-[32px] overflow-hidden aspect-video bg-zinc-800"
+          onclick="handleCardClick('netflix')">
+          <img src="https://i.pinimg.com/736x/14/e9/82/14e9820263a849f5ee1c26a3061fb110.jpg"
+            class="w-full h-full object-cover opacity-60" alt="Hot">
+          <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+            <p class="text-[11px] font-bold uppercase tracking-widest mb-2 italic">Dịch vụ được quan tâm</p>
+            <div class="bg-[#c5beaf] text-black px-4 py-1.5 rounded-full text-[9px] font-black uppercase">
               ★ Đã bán 2.4k lượt
             </div>
-</div>
-</div>
-</div>
-</div>
-<div class="page" id="categories">
-<header class="flex justify-between items-center mb-6">
-<h2 class="title-font vi-title text-2xl">Danh mục</h2>
-<div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center">
-<i class="fa-solid fa-list-ul"></i>
-</div>
-</header>
-<div class="flex gap-2 overflow-x-auto hide-scrollbar mb-6" id="category-filter-list">
-<div class="category-chip active" data-category="Tất cả" onclick="filterByCategory('Tất cả')">Tất cả</div>
-<div class="category-chip" data-category="Phim ảnh" onclick="filterByCategory('Phim ảnh')">Phim ảnh</div>
-<div class="category-chip" data-category="Âm nhạc" onclick="filterByCategory('Âm nhạc')">Âm nhạc</div>
-<div class="category-chip" data-category="Work" onclick="filterByCategory('Work')">Công việc</div>
-<div class="category-chip" data-category="A.I" onclick="filterByCategory('A.I')">A.I</div>
-</div>
-<div class="canvas-wrapper" id="canvas-scroll">
-<div class="discovery-canvas" id="logo-canvas">
-<div class="absolute left-1/2 top-[1300px] -translate-x-1/2 -translate-y-1/2 text-center opacity-[0.03]">
-<i class="fa-solid fa-cube text-[200px]"></i>
-</div>
-</div>
-</div>
-</div>
-<div class="page" id="products">
-<header class="mb-8">
-<span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block" id="product-category-subtitle">Danh mục dịch vụ số</span>
-<h2 class="title-font vi-title text-3xl" id="product-page-title">Sản phẩm</h2>
-</header>
-<div class="product-grid" id="products-list"></div>
-<div class="mt-12" id="recommendation-section">
-<h4 class="title-font vi-title text-sm mb-6 opacity-40">Đề xuất cho bạn</h4>
-<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4" id="recommendations-list"></div>
-</div>
-</div>
-<div class="page" id="product-detail">
-<header class="flex items-center gap-4 mb-8">
-<button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" onclick='showPage("products")' type="button">
-<i class="fa-solid fa-chevron-left"></i>
-</button>
-<h2 class="title-font vi-title text-xl">Dịch vụ</h2>
-</header>
-<div class="street-card p-8 mb-6 relative overflow-hidden">
-<div class="w-20 h-20 rounded-[28px] bg-white shadow-lg mx-auto mb-6 flex items-center justify-center p-4" id="detail-icon-bg">
-<img alt="Detail" class="w-full h-full object-contain" id="detail-logo" src=""/>
-</div>
-<div class="text-center mb-6">
-<h3 class="title-font text-3xl mb-1" id="detail-title">Service</h3>
-<span class="text-3xl title-font opacity-90 block mb-2" id="detail-price">0k</span>
-<div class="inline-block px-4 py-1 rounded-full bg-black/5 text-[9px] font-black uppercase tracking-widest" id="detail-category-label">Category</div>
-</div>
-<div class="space-y-3 mb-6">
-<div class="flex items-center justify-between px-2">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-<span class="text-[10px] font-bold uppercase opacity-60"><span id="detail-view-count">12</span> người đang
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="categories" class="page">
+      <header class="flex justify-between items-center mb-6">
+        <h2 class="title-font vi-title text-2xl">Danh mục</h2>
+        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center">
+          <i class="fa-solid fa-list-ul"></i>
+        </div>
+      </header>
+
+      <div class="flex gap-2 overflow-x-auto hide-scrollbar mb-6" id="category-filter-list">
+        <div class="category-chip active" data-category="Tất cả" onclick="filterByCategory('Tất cả')">Tất cả</div>
+        <div class="category-chip" data-category="Phim ảnh" onclick="filterByCategory('Phim ảnh')">Phim ảnh</div>
+        <div class="category-chip" data-category="Âm nhạc" onclick="filterByCategory('Âm nhạc')">Âm nhạc</div>
+        <div class="category-chip" data-category="Work" onclick="filterByCategory('Work')">Công việc</div>
+        <div class="category-chip" data-category="A.I" onclick="filterByCategory('A.I')">A.I</div>
+      </div>
+
+      <div class="canvas-wrapper" id="canvas-scroll">
+        <div class="discovery-canvas" id="logo-canvas">
+          <div class="absolute left-1/2 top-[1300px] -translate-x-1/2 -translate-y-1/2 text-center opacity-[0.03]">
+            <i class="fa-solid fa-cube text-[200px]"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="products" class="page">
+      <header class="mb-8">
+        <span id="product-category-subtitle"
+          class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Danh mục dịch vụ số</span>
+        <h2 id="product-page-title" class="title-font vi-title text-3xl">Sản phẩm</h2>
+      </header>
+
+      <div class="product-grid" id="products-list"></div>
+
+      <div id="recommendation-section" class="mt-12">
+        <h4 class="title-font vi-title text-sm mb-6 opacity-40">Đề xuất cho bạn</h4>
+        <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4" id="recommendations-list"></div>
+      </div>
+    </div>
+
+    <div id="product-detail" class="page">
+      <header class="flex items-center gap-4 mb-8">
+        <button onclick="showPage(&quot;products&quot;)"
+          class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <h2 class="title-font vi-title text-xl">Dịch vụ</h2>
+      </header>
+
+      <div class="street-card p-8 mb-6 relative overflow-hidden">
+        <div id="detail-icon-bg"
+          class="w-20 h-20 rounded-[28px] bg-white shadow-lg mx-auto mb-6 flex items-center justify-center p-4">
+          <img id="detail-logo" src="" class="w-full h-full object-contain" alt="Detail">
+        </div>
+
+        <div class="text-center mb-6">
+          <h3 id="detail-title" class="title-font text-3xl mb-1">Service</h3>
+          <span id="detail-price" class="text-3xl title-font opacity-90 block mb-2">0k</span>
+          <div class="inline-block px-4 py-1 rounded-full bg-black/5 text-[9px] font-black uppercase tracking-widest"
+            id="detail-category-label">Category</div>
+        </div>
+
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center justify-between px-2">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+              <span class="text-[10px] font-bold uppercase opacity-60"><span id="detail-view-count">12</span> người đang
                 xem</span>
-</div>
-<span class="text-[9px] font-black text-red-600 bg-red-50 px-2 py-0.5 rounded italic">Sắp hết hạn!</span>
-</div>
-<div class="detail-sim-alert">
-<i class="fa-solid fa-clock-rotate-left text-[11px] text-green-700"></i>
-<p class="text-[9px] font-bold text-green-800/80 leading-tight">
-<span id="detail-recent-buyer">Anh Trí</span> vừa kích hoạt gói này 4 phút trước.
+            </div>
+            <span class="text-[9px] font-black text-red-600 bg-red-50 px-2 py-0.5 rounded italic">Sắp hết hạn!</span>
+          </div>
+
+          <div class="detail-sim-alert">
+            <i class="fa-solid fa-clock-rotate-left text-[11px] text-green-700"></i>
+            <p class="text-[9px] font-bold text-green-800/80 leading-tight">
+              <span id="detail-recent-buyer">Anh Trí</span> vừa kích hoạt gói này 4 phút trước.
             </p>
-</div>
-<div class="detail-meta-grid">
-<div class="detail-meta-card">
-<span class="detail-meta-label">Danh mục</span>
-<div class="detail-meta-value" id="detail-meta-category">Category</div>
-</div>
-<div class="detail-meta-card">
-<span class="detail-meta-label">Mức giá</span>
-<div class="detail-meta-value" id="detail-meta-price">0k</div>
-</div>
-<div class="detail-meta-card">
-<span class="detail-meta-label">Trạng thái</span>
-<div class="detail-meta-value" id="detail-meta-status">Đồng bộ kích hoạt ngay</div>
-</div>
-<div class="detail-meta-card">
-<span class="detail-meta-label">Hỗ trợ</span>
-<div class="detail-meta-value" id="detail-meta-support">Hotline / Zalo / Messenger / Email</div>
-</div>
-</div>
-<div class="detail-summary-card">
-<div class="detail-summary-title">Thông tin sản phẩm</div>
-<div class="detail-summary-text" id="detail-summary-text">Gói dịch vụ đang sẵn sàng để thiết lập. Chọn
+          </div>
+
+          <div class="detail-meta-grid">
+            <div class="detail-meta-card">
+              <span class="detail-meta-label">Danh mục</span>
+              <div id="detail-meta-category" class="detail-meta-value">Category</div>
+            </div>
+            <div class="detail-meta-card">
+              <span class="detail-meta-label">Mức giá</span>
+              <div id="detail-meta-price" class="detail-meta-value">0k</div>
+            </div>
+            <div class="detail-meta-card">
+              <span class="detail-meta-label">Trạng thái</span>
+              <div id="detail-meta-status" class="detail-meta-value">Đồng bộ kích hoạt ngay</div>
+            </div>
+            <div class="detail-meta-card">
+              <span class="detail-meta-label">Hỗ trợ</span>
+              <div id="detail-meta-support" class="detail-meta-value">Hotline / Zalo / Messenger / Email</div>
+            </div>
+          </div>
+
+          <div class="detail-summary-card">
+            <div class="detail-summary-title">Thông tin sản phẩm</div>
+            <div id="detail-summary-text" class="detail-summary-text">Gói dịch vụ đang sẵn sàng để thiết lập. Chọn
               phương thức thanh toán phù hợp, nhận mã kích hoạt và gửi lại để hoàn tất.</div>
-<div class="mt-3 text-[10px] font-semibold text-black/60">Liên hệ nhanh: Hotline 0357130499 · Zalo ·
+            <div class="mt-3 text-[10px] font-semibold text-black/60">Liên hệ nhanh: Hotline 0357130499 · Zalo ·
               Messenger Alpha Zone Việt Nam · Email alphazone582@gmail.com</div>
-</div>
-</div>
-<div>
-<h4 class="title-font vi-title text-[10px] opacity-40 mb-4 tracking-widest">QUY TRÌNH THỰC HIỆN TRONG 03 BƯỚC</h4>
-<div class="ownership-box" id="activation-flow-container"></div>
-</div>
-</div>
-<div class="mb-6">
-<div class="featured-comment-label">
-<i class="fa-solid fa-comments"></i>
+          </div>
+        </div>
+        <div>
+          <h4 class="title-font vi-title text-[10px] opacity-40 mb-4 tracking-widest">QUY TRÌNH THỰC HIỆN TRONG 03 BƯỚC</h4>
+          <div id="activation-flow-container" class="ownership-box"></div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="featured-comment-label">
+          <i class="fa-solid fa-comments"></i>
           Bình luận nổi bật
         </div>
-<div class="comment-featured-wrap">
-<div class="comment-featured-track" id="comment-marquee-track"></div>
-</div>
-</div>
-<button class="btn-street w-full py-6 text-sm mb-4" id="detail-buy-btn" onclick="openModalFromDetail()" type="button">
-<span id="btn-text">Tiến hành đặt hàng</span>
-<div class="absolute right-6" id="btn-loader"></div>
-</button>
-</div>
-<div class="page" id="warranty">
-<header class="text-center mb-8">
-<span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Quality
+        <div class="comment-featured-wrap">
+          <div id="comment-marquee-track" class="comment-featured-track"></div>
+        </div>
+      </div>
+
+      <button id="detail-buy-btn" onclick="openModalFromDetail()" class="btn-street w-full py-6 text-sm mb-4"
+        type="button">
+        <span id="btn-text">Tiến hành đặt hàng</span>
+        <div id="btn-loader" class="absolute right-6"></div>
+      </button>
+    </div>
+
+    <div id="warranty" class="page">
+      <header class="text-center mb-8">
+        <span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Quality
           Control</span>
-<h2 class="title-font vi-title text-3xl">Bảo Hành</h2>
-</header>
-<div class="street-card p-10 text-center mb-6">
-<div class="w-24 h-24 border-2 border-black rounded-full mx-auto mb-6 flex items-center justify-center">
-<i class="fa-solid fa-shield-halved text-4xl"></i>
-</div>
-<h3 class="title-font vi-title text-xl mb-2">Cam kết chất lượng</h3>
-<p class="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] mb-6 leading-relaxed">
-          Cam kết thông tin minh bạch<br/>Hỗ trợ bảo hành theo chính sách áp dụng
+        <h2 class="title-font vi-title text-3xl">Bảo Hành</h2>
+      </header>
+      <div class="street-card p-10 text-center mb-6">
+        <div class="w-24 h-24 border-2 border-black rounded-full mx-auto mb-6 flex items-center justify-center">
+          <i class="fa-solid fa-shield-halved text-4xl"></i>
+        </div>
+        <h3 class="title-font vi-title text-xl mb-2">Cam kết chất lượng</h3>
+        <p class="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] mb-6 leading-relaxed">
+          Cam kết thông tin minh bạch<br>Hỗ trợ bảo hành theo chính sách áp dụng
         </p>
-<div class="warranty-ticket-card mb-4">
-<div class="popup-section-title">Phiếu bảo hành điện tử</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Trạng thái</div>
-<div class="warranty-meta-value">Đồng bộ tạo phiếu</div>
-</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Hình thức</div>
-<div class="warranty-meta-value">Phát hành Phiếu bảo hành</div>
-</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Kích hoạt</div>
-<div class="warranty-meta-value">Mã phiếu riêng</div>
-</div>
-</div>
-<button class="btn-street w-full" onclick="openWarrantyPopup()" type="button">
-<i class="fa-solid fa-file-shield"></i>
+        <div class="warranty-ticket-card mb-4">
+          <div class="popup-section-title">Phiếu bảo hành điện tử</div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Trạng thái</div>
+            <div class="warranty-meta-value">Đồng bộ tạo phiếu</div>
+          </div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Hình thức</div>
+            <div class="warranty-meta-value">Phát hành Phiếu bảo hành</div>
+          </div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Kích hoạt</div>
+            <div class="warranty-meta-value">Mã phiếu riêng</div>
+          </div>
+        </div>
+        <button class="btn-street w-full" type="button" onclick="openWarrantyPopup()">
+          <i class="fa-solid fa-file-shield"></i>
           Tạo phiếu bảo hành
         </button>
-</div>
-</div>
-<div class="page" id="order-message">
-<header class="text-center mb-8">
-<span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Order
+      </div>
+    </div>
+
+    <div id="order-message" class="page">
+      <header class="text-center mb-8">
+        <span class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 mb-2 block">Alpha Order
           Assistant</span>
-<h2 class="title-font vi-title text-3xl">Tin nhắn đặt hàng</h2>
-</header>
-<div class="street-card p-10 mb-6 order-chat-page">
-<div class="order-chat-shell">
-<div class="order-chat-topbar">
-<div class="order-chat-avatar"><i class="fa-solid fa-headset"></i></div>
-<div class="order-chat-headline">
-<h3>Hỗ trợ đơn hàng</h3>
-<p>Soạn sẵn nội dung liên hệ để quý khách sao chép và gửi nhanh</p>
-</div>
-<div class="order-chat-badge">Online</div>
-</div>
-<div class="order-chat-card mb-4">
-<div class="order-chat-card-title">Thông tin đơn hàng đang chọn</div>
-<div class="order-chat-summary-grid">
-<div class="order-chat-summary-item">
-<span>Sản phẩm</span>
-<strong id="order-message-product">—</strong>
-</div>
-<div class="order-chat-summary-item">
-<span>Mã sản phẩm</span>
-<strong class="mono" id="order-message-product-id">—</strong>
-</div>
-<div class="order-chat-summary-item">
-<span>Giá</span>
-<strong id="order-message-price">—</strong>
-</div>
-<div class="order-chat-summary-item">
-<span>Mã 21 số</span>
-<strong class="mono" id="order-message-code">—</strong>
-</div>
-</div>
-</div>
-<div class="order-chat-window mb-4">
-<div class="order-chat-date">Mẫu nội dung trao đổi với bộ phận hỗ trợ</div>
-<div class="order-chat-row support">
-<div class="order-chat-bubble support">
+        <h2 class="title-font vi-title text-3xl">Tin nhắn đặt hàng</h2>
+      </header>
+      <div class="street-card p-10 mb-6 order-chat-page">
+        <div class="order-chat-shell">
+          <div class="order-chat-topbar">
+            <div class="order-chat-avatar"><i class="fa-solid fa-headset"></i></div>
+            <div class="order-chat-headline">
+              <h3>Hỗ trợ đơn hàng</h3>
+              <p>Soạn sẵn nội dung liên hệ để quý khách sao chép và gửi nhanh</p>
+            </div>
+            <div class="order-chat-badge">Online</div>
+          </div>
+
+          <div class="order-chat-card mb-4">
+            <div class="order-chat-card-title">Thông tin đơn hàng đang chọn</div>
+            <div class="order-chat-summary-grid">
+              <div class="order-chat-summary-item">
+                <span>Sản phẩm</span>
+                <strong id="order-message-product">—</strong>
+              </div>
+              <div class="order-chat-summary-item">
+                <span>Mã sản phẩm</span>
+                <strong id="order-message-product-id" class="mono">—</strong>
+              </div>
+              <div class="order-chat-summary-item">
+                <span>Giá</span>
+                <strong id="order-message-price">—</strong>
+              </div>
+              <div class="order-chat-summary-item">
+                <span>Mã 21 số</span>
+                <strong id="order-message-code" class="mono">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-chat-window mb-4">
+            <div class="order-chat-date">Mẫu nội dung trao đổi với bộ phận hỗ trợ</div>
+
+            <div class="order-chat-row support">
+              <div class="order-chat-bubble support">
                 Kính chào quý khách, vui lòng gửi mã sản phẩm hoặc mã xác nhận 21 số. Alpha Zone hỗ trợ qua hotline 0357130499, Zalo, Messenger và email alphazone582@gmail.com.
               </div>
-</div>
-<div class="order-chat-row user">
-<div class="order-chat-bubble user" id="order-message-short-preview">Em muốn đặt dịch vụ này, nhờ anh/chị hỗ trợ giúp em.</div>
-</div>
-<div class="order-chat-row support">
-<div class="order-chat-bubble support">
+            </div>
+
+            <div class="order-chat-row user">
+              <div class="order-chat-bubble user" id="order-message-short-preview">Em muốn đặt dịch vụ này, nhờ anh/chị hỗ trợ giúp em.</div>
+            </div>
+
+            <div class="order-chat-row support">
+              <div class="order-chat-bubble support">
                 Alpha Zone đã tiếp nhận thông tin. Nếu cần đối chiếu thêm, quý khách vui lòng gửi bổ sung qua hotline, Zalo, Messenger hoặc email alphazone582@gmail.com.
               </div>
-</div>
-<div class="order-chat-row user full">
-<div class="order-chat-bubble user full" id="order-message-full-preview">Chào anh/chị, em gửi thông tin đơn hàng như sau...</div>
-</div>
-</div>
-<div class="order-chat-actions-grid mb-4">
-<div class="detail-summary-card order-chat-action-card">
-<div class="detail-summary-title">Tin nhắn ngắn</div>
-<textarea class="ticket-field ticket-textarea order-chat-hidden-source" id="order-message-short" readonly=""></textarea>
-<button class="btn-street w-full mt-4" onclick="copyOrderMessage('short')" type="button">
-<i class="fa-solid fa-copy"></i>
+            </div>
+
+            <div class="order-chat-row user full">
+              <div class="order-chat-bubble user full" id="order-message-full-preview">Chào anh/chị, em gửi thông tin đơn hàng như sau...</div>
+            </div>
+          </div>
+
+          <div class="order-chat-actions-grid mb-4">
+            <div class="detail-summary-card order-chat-action-card">
+              <div class="detail-summary-title">Tin nhắn ngắn</div>
+              <textarea id="order-message-short" class="ticket-field ticket-textarea order-chat-hidden-source"
+                readonly></textarea>
+              <button class="btn-street w-full mt-4" type="button" onclick="copyOrderMessage('short')">
+                <i class="fa-solid fa-copy"></i>
                 Sao chép tin nhắn ngắn
               </button>
-</div>
-<div class="detail-summary-card order-chat-action-card">
-<div class="detail-summary-title">Tin nhắn đầy đủ</div>
-<textarea class="ticket-field ticket-textarea order-chat-hidden-source" id="order-message-full" readonly=""></textarea>
-<button class="btn-street w-full mt-4" onclick="copyOrderMessage('full')" type="button">
-<i class="fa-solid fa-copy"></i>
+            </div>
+
+            <div class="detail-summary-card order-chat-action-card">
+              <div class="detail-summary-title">Tin nhắn đầy đủ</div>
+              <textarea id="order-message-full" class="ticket-field ticket-textarea order-chat-hidden-source"
+                readonly></textarea>
+              <button class="btn-street w-full mt-4" type="button" onclick="copyOrderMessage('full')">
+                <i class="fa-solid fa-copy"></i>
                 Sao chép tin nhắn đầy đủ
               </button>
-</div>
-</div>
-<div class="admin-status" id="order-message-status"></div>
-</div>
-</div>
-</div>
-<div class="page" id="account">
-<div class="street-card p-10 text-center mb-6">
-<div class="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white shadow-xl overflow-hidden bg-gray-100 hold-avatar" id="admin-avatar-trigger">
-<img alt="Alpha member" class="w-full h-full object-cover" src="https://i.pinimg.com/1200x/82/d3/b4/82d3b48e4700d599990390e505754a43.jpg"/>
-</div>
-<h3 class="title-font text-xl mb-1">Alpha Member</h3>
-<p class="text-[10px] font-black text-black/30 uppercase tracking-[0.3em]">Premium Access</p>
-<div class="admin-panel text-left" id="admin-panel">
-<div class="text-[9px] font-black uppercase tracking-[0.35em] opacity-35 mb-3">Admin Access</div>
-<div class="admin-grid">
-<input autocomplete="off" class="admin-field mono" id="admin-code-input" inputmode="numeric" maxlength="6" placeholder="Nhập mã admin" type="password"/>
-<button class="btn-street w-full" onclick="checkAdminCode()" type="button">
-<i class="fa-solid fa-lock"></i>
+            </div>
+          </div>
+
+          <div id="order-message-status" class="admin-status"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="account" class="page">
+      <div class="street-card p-10 text-center mb-6">
+        <div id="admin-avatar-trigger"
+          class="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white shadow-xl overflow-hidden bg-gray-100 hold-avatar">
+          <img src="https://i.pinimg.com/1200x/82/d3/b4/82d3b48e4700d599990390e505754a43.jpg"
+            class="w-full h-full object-cover" alt="Alpha member">
+        </div>
+        <h3 class="title-font text-xl mb-1">Alpha Member</h3>
+        <p class="text-[10px] font-black text-black/30 uppercase tracking-[0.3em]">Premium Access</p>
+
+        <div id="admin-panel" class="admin-panel text-left">
+          <div class="text-[9px] font-black uppercase tracking-[0.35em] opacity-35 mb-3">Admin Access</div>
+          <div class="admin-grid">
+            <input id="admin-code-input" class="admin-field mono" type="password" inputmode="numeric" autocomplete="off"
+              maxlength="6" placeholder="Nhập mã admin">
+            <button class="btn-street w-full" type="button" onclick="checkAdminCode()">
+              <i class="fa-solid fa-lock"></i>
               Xác nhận admin
             </button>
-<div class="admin-status" id="admin-status"></div>
-<div class="hidden" id="admin-json-area">
-<div class="admin-helper mb-3">Admin toàn quyền: thêm mới hoặc cập nhật theo id. JSON chuẩn dùng 1 schema
+            <div id="admin-status" class="admin-status"></div>
+
+            <div id="admin-json-area" class="hidden">
+              <div class="admin-helper mb-3">Admin toàn quyền: thêm mới hoặc cập nhật theo id. JSON chuẩn dùng 1 schema
                 duy nhất: id, name, platformName, logo, category, price. Phần cách sở hữu và comments trong card chi
                 tiết là cố định.</div>
-<textarea class="admin-textarea" id="admin-json-input" spellcheck="false">[
+              <textarea id="admin-json-input" class="admin-textarea" spellcheck="false">[
   {
     "id": "notion",
     "name": "Notion Plus",
@@ -3768,266 +3843,302 @@ body.dark .az-admin-popup-tools{background:rgba(15,15,15,.92);color:#fff;border-
     "price": "55.000 VND"
   }
 ]</textarea>
-<div class="admin-actions">
-<button class="btn-street w-full" onclick="importProductsFromJson()" type="button">
-<i class="fa-solid fa-file-import"></i>
+              <div class="admin-actions">
+                <button class="btn-street w-full" type="button" onclick="importProductsFromJson()">
+                  <i class="fa-solid fa-file-import"></i>
                   Nhập JSON
                 </button>
-<button class="btn-street w-full" onclick="fillJsonTemplate()" type="button">
-<i class="fa-solid fa-wand-magic-sparkles"></i>
+                <button class="btn-street w-full" type="button" onclick="fillJsonTemplate()">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
                   Mẫu JSON
                 </button>
-</div>
-<div class="admin-actions">
-<button class="btn-street w-full" onclick="exportCurrentProductsJson()" type="button">
-<i class="fa-solid fa-download"></i>
+              </div>
+              <div class="admin-actions">
+                <button class="btn-street w-full" type="button" onclick="exportCurrentProductsJson()">
+                  <i class="fa-solid fa-download"></i>
                   Xuất dữ liệu
                 </button>
-<button class="btn-street w-full" onclick="resetAdminStatus()" type="button">
-<i class="fa-solid fa-rotate-left"></i>
+                <button class="btn-street w-full" type="button" onclick="resetAdminStatus()">
+                  <i class="fa-solid fa-rotate-left"></i>
                   Xóa trạng thái
                 </button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="modal-overlay" id="product-modal" onclick="closeModal(event)">
-<div class="modal-content" onclick="event.stopPropagation()">
-<div class="w-12 h-1 bg-black/10 rounded-full mx-auto mb-8"></div>
-<div class="flex justify-between items-start mb-8">
-<div>
-<span class="text-[9px] font-black uppercase tracking-[0.3em] opacity-40 block mb-2" id="modal-category">Hệ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="w-12 h-1 bg-black/10 rounded-full mx-auto mb-8"></div>
+      <div class="flex justify-between items-start mb-8">
+        <div>
+          <span id="modal-category" class="text-[9px] font-black uppercase tracking-[0.3em] opacity-40 block mb-2">Hệ
             thống sẵn sàng</span>
-<h3 class="title-font text-2xl leading-none" id="modal-title">Product</h3>
-</div>
-<div class="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-xl overflow-hidden" id="modal-icon-container">
-</div>
-</div>
-<div class="hidden mb-8" id="sim-section">
-<div class="flex justify-between items-center mb-3">
-<span class="mono text-[9px] uppercase font-bold text-black/40" id="sim-status">Đang chuẩn bị...</span>
-<span class="mono text-[9px] font-black" id="sim-percent">0%</span>
-</div>
-<div class="progress-track mb-4">
-<div class="progress-fill" id="sim-bar"></div>
-</div>
-</div>
-<div class="pay-box mb-6" id="alpha-customer-collect-modal">
-<div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2" id="alpha-customer-collect-title">Thông tin khách hàng</div>
-<div class="grid grid-cols-1 gap-3">
-<input class="ticket-field" id="customer-name" placeholder="Họ và tên"/>
-<input class="ticket-field" id="customer-contact" placeholder="Số điện thoại / Telegram / Zalo"/>
-<input class="ticket-field" id="customer-email" placeholder="Email nhận hỗ trợ"/>
-<textarea class="ticket-field ticket-textarea" id="customer-note" placeholder="Ghi chú thêm"></textarea>
-</div>
-<div class="helper-note" id="alpha-customer-collect-helper">Vui lòng nhập thông tin trước khi xác nhận hoàn tất quy trình.</div>
-</div>
-<div class="flex gap-3" id="modal-actions">
-<button class="btn-street flex-1 shadow-2xl shadow-black/20" onclick="startSimulation()" type="button">Hoàn tất
+          <h3 id="modal-title" class="title-font text-2xl leading-none">Product</h3>
+        </div>
+        <div id="modal-icon-container"
+          class="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center text-xl overflow-hidden">
+        </div>
+      </div>
+
+      <div id="sim-section" class="hidden mb-8">
+        <div class="flex justify-between items-center mb-3">
+          <span id="sim-status" class="mono text-[9px] uppercase font-bold text-black/40">Đang chuẩn bị...</span>
+          <span id="sim-percent" class="mono text-[9px] font-black">0%</span>
+        </div>
+        <div class="progress-track mb-4">
+          <div id="sim-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div id="alpha-customer-collect-modal" class="pay-box mb-6">
+        <div id="alpha-customer-collect-title" class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Thông tin khách hàng</div>
+        <div class="grid grid-cols-1 gap-3">
+          <input id="customer-name" class="ticket-field" placeholder="Họ và tên">
+          <input id="customer-contact" class="ticket-field" placeholder="Số điện thoại / Telegram / Zalo">
+          <input id="customer-email" class="ticket-field" placeholder="Email nhận hỗ trợ">
+          <textarea id="customer-note" class="ticket-field ticket-textarea" placeholder="Ghi chú thêm"></textarea>
+        </div>
+        <div id="alpha-customer-collect-helper" class="helper-note">Vui lòng nhập thông tin trước khi xác nhận hoàn tất quy trình.</div>
+      </div>
+
+      <div class="flex gap-3" id="modal-actions">
+        <button onclick="startSimulation()" class="btn-street flex-1 shadow-2xl shadow-black/20" type="button">Hoàn tất
           quy trình</button>
-<button class="w-16 h-16 rounded-full border border-black/10 flex items-center justify-center active:scale-90 transition-all" onclick="closeModalDirect()" type="button"><i class="fa-solid fa-xmark"></i></button>
-</div>
-<button class="hidden w-full btn-street bg-green-600 uppercase py-6" id="finish-btn" onclick="window.location.href='https://zalo.me/0357130499'" type="button">Liên hệ hỗ trợ</button>
-</div>
-</div>
-<div class="mini-popup-overlay" id="payment-popup" onclick="closeMiniPopup(event, 'payment-popup')">
-<div class="mini-popup-card" onclick="event.stopPropagation()">
-<div class="flex items-start justify-between gap-3 mb-4">
-<div class="min-w-0 flex-1 pr-2">
-<div class="payment-badge"><i class="fa-solid fa-wallet"></i> Hướng dẫn thanh toán</div>
-<h3 class="title-font vi-title text-2xl mt-3 leading-none">Thanh toán</h3>
-<div class="text-[11px] mt-2 leading-relaxed opacity-70 break-words">Hotline: 0357130499 · Zalo: Alpha Zone · Messenger: Alpha Zone Việt Nam · Email: alphazone582@gmail.com</div>
-</div>
-<button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center shrink-0" onclick="hideMiniPopup('payment-popup')" type="button">
-<i class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<div class="method-switch">
-<button class="method-btn active" id="method-bank-btn" onclick="selectPaymentMethod('bank')" type="button">
-<span class="text-[11px] font-black uppercase tracking-[0.12em]">QR ngân hàng</span>
-<small>Quét mã và chuyển khoản đúng nội dung</small>
-</button>
-<button class="method-btn" id="method-usdt-btn" onclick="selectPaymentMethod('usdt')" type="button">
-<span class="text-[11px] font-black uppercase tracking-[0.12em]">USDT</span>
-<small>Tự đổi từ VND sang USD để thanh toán crypto</small>
-</button>
-</div>
-<div class="pay-box">
-<div class="pay-row">
-<div class="pay-label">Dịch vụ</div>
-<div class="pay-value" id="payment-product-name">—</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Thanh toán</div>
-<div class="pay-value" id="payment-amount-main">—</div>
-</div>
-<div class="pay-row" id="payment-amount-secondary-row">
-<div class="pay-label">Quy đổi USDT</div>
-<div class="pay-value" id="payment-amount-secondary">—</div>
-</div>
-</div>
-<div id="bank-payment-section">
-<div class="qr-card mb-3">
-<div class="qr-frame">
-<img alt="QR thanh toán ngân hàng" id="bank-qr-image" src=""/>
-</div>
-<div class="text-[10px] font-black uppercase tracking-[0.16em] mb-1">QR chuyển khoản tự động</div>
-<div class="text-[10px] opacity-60 font-bold">Khách chỉ cần quét đúng mã để điền sẵn số tiền và nội dung.</div>
-</div>
-<div class="pay-box">
-<div class="pay-row">
-<div class="pay-label">Ngân hàng</div>
-<div class="pay-value">MB Bank</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Chủ tài khoản</div>
-<div class="pay-value">Nguyễn Lê Trí</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Số tài khoản</div>
-<div class="pay-value mono">4499123123</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Nội dung CK</div>
-<div class="pay-value mono" id="payment-transfer-content">ALPHA</div>
-</div>
-</div>
-</div>
-<div class="hidden" id="usdt-payment-section">
-<div class="pay-box">
-<div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Chọn mạng thanh toán</div>
-<div class="network-grid" id="usdt-network-list"></div>
-<div class="helper-note">TON, SOL, TRC20 và các mạng khác có thể cập nhật thêm sớm. Phần quy đổi hiện dùng tỷ giá cấu hình sẵn trong file HTML để giữ web chạy ổn định.</div>
-</div>
-<div class="pay-box">
-<div class="pay-row">
-<div class="pay-label">Ví nhận</div>
-<div class="pay-value mono" id="usdt-wallet-address">—</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Mạng</div>
-<div class="pay-value" id="usdt-network-name">—</div>
-</div>
-<div class="pay-row">
-<div class="pay-label">Thanh toán</div>
-<div class="pay-value" id="usdt-amount-display">—</div>
-</div>
-</div>
-</div>
-<div class="pay-box">
-<div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Ghi chú</div>
-<div class="text-[11px] leading-relaxed opacity-75" id="payment-note">Vui lòng chọn đúng phương thức thanh toán. Hóa đơn sẽ tự động tải xuống sau khi khách xác nhận đã thanh toán.</div>
-</div>
-<div class="grid grid-cols-1 gap-3 mt-4">
-<button class="btn-light w-full" onclick="copyPaymentInfo()" type="button">
-<i class="fa-solid fa-copy"></i>
+        <button onclick="closeModalDirect()"
+          class="w-16 h-16 rounded-full border border-black/10 flex items-center justify-center active:scale-90 transition-all"
+          type="button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <button id="finish-btn" onclick="window.location.href='https://zalo.me/0357130499'"
+        class="hidden w-full btn-street bg-green-600 uppercase py-6" type="button">Liên hệ hỗ trợ</button>
+    </div>
+  </div>
+
+  <div id="payment-popup" class="mini-popup-overlay" onclick="closeMiniPopup(event, 'payment-popup')">
+    <div class="mini-popup-card" onclick="event.stopPropagation()">
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div class="min-w-0 flex-1 pr-2">
+          <div class="payment-badge"><i class="fa-solid fa-wallet"></i> Hướng dẫn thanh toán</div>
+          <h3 class="title-font vi-title text-2xl mt-3 leading-none">Thanh toán</h3>
+          <div class="text-[11px] mt-2 leading-relaxed opacity-70 break-words">Hotline: 0357130499 · Zalo: Alpha Zone · Messenger: Alpha Zone Việt Nam · Email: alphazone582@gmail.com</div>
+        </div>
+        <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center shrink-0" type="button"
+          onclick="hideMiniPopup('payment-popup')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="method-switch">
+        <button id="method-bank-btn" class="method-btn active" type="button" onclick="selectPaymentMethod('bank')">
+          <span class="text-[11px] font-black uppercase tracking-[0.12em]">QR ngân hàng</span>
+          <small>Quét mã và chuyển khoản đúng nội dung</small>
+        </button>
+        <button id="method-usdt-btn" class="method-btn" type="button" onclick="selectPaymentMethod('usdt')">
+          <span class="text-[11px] font-black uppercase tracking-[0.12em]">USDT</span>
+          <small>Tự đổi từ VND sang USD để thanh toán crypto</small>
+        </button>
+      </div>
+
+      <div class="pay-box">
+        <div class="pay-row">
+          <div class="pay-label">Dịch vụ</div>
+          <div id="payment-product-name" class="pay-value">—</div>
+        </div>
+        <div class="pay-row">
+          <div class="pay-label">Thanh toán</div>
+          <div id="payment-amount-main" class="pay-value">—</div>
+        </div>
+        <div class="pay-row" id="payment-amount-secondary-row">
+          <div class="pay-label">Quy đổi USDT</div>
+          <div id="payment-amount-secondary" class="pay-value">—</div>
+        </div>
+      </div>
+
+      <div id="bank-payment-section">
+        <div class="qr-card mb-3">
+          <div class="qr-frame">
+            <img id="bank-qr-image" src="" alt="QR thanh toán ngân hàng">
+          </div>
+          <div class="text-[10px] font-black uppercase tracking-[0.16em] mb-1">QR chuyển khoản tự động</div>
+          <div class="text-[10px] opacity-60 font-bold">Khách chỉ cần quét đúng mã để điền sẵn số tiền và nội dung.</div>
+        </div>
+
+        <div class="pay-box">
+          <div class="pay-row">
+            <div class="pay-label">Ngân hàng</div>
+            <div class="pay-value">MB Bank</div>
+          </div>
+          <div class="pay-row">
+            <div class="pay-label">Chủ tài khoản</div>
+            <div class="pay-value">Nguyễn Lê Trí</div>
+          </div>
+          <div class="pay-row">
+            <div class="pay-label">Số tài khoản</div>
+            <div class="pay-value mono">4499123123</div>
+          </div>
+          <div class="pay-row">
+            <div class="pay-label">Nội dung CK</div>
+            <div id="payment-transfer-content" class="pay-value mono">ALPHA</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="usdt-payment-section" class="hidden">
+        <div class="pay-box">
+          <div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Chọn mạng thanh toán</div>
+          <div id="usdt-network-list" class="network-grid"></div>
+          <div class="helper-note">TON, SOL, TRC20 và các mạng khác có thể cập nhật thêm sớm. Phần quy đổi hiện dùng tỷ giá cấu hình sẵn trong file HTML để giữ web chạy ổn định.</div>
+        </div>
+
+        <div class="pay-box">
+          <div class="pay-row">
+            <div class="pay-label">Ví nhận</div>
+            <div id="usdt-wallet-address" class="pay-value mono">—</div>
+          </div>
+          <div class="pay-row">
+            <div class="pay-label">Mạng</div>
+            <div id="usdt-network-name" class="pay-value">—</div>
+          </div>
+          <div class="pay-row">
+            <div class="pay-label">Thanh toán</div>
+            <div id="usdt-amount-display" class="pay-value">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pay-box">
+        <div class="text-[10px] font-black uppercase tracking-[0.15em] mb-2">Ghi chú</div>
+        <div id="payment-note" class="text-[11px] leading-relaxed opacity-75">Vui lòng chọn đúng phương thức thanh toán. Hóa đơn sẽ tự động tải xuống sau khi khách xác nhận đã thanh toán.</div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 mt-4">
+        <button class="btn-light w-full" type="button" onclick="copyPaymentInfo()">
+          <i class="fa-solid fa-copy"></i>
           Sao chép thông tin thanh toán
         </button>
-<button class="btn-street w-full" onclick="confirmPaymentAndContinue()" type="button">
-<i class="fa-solid fa-circle-check"></i>
+        <button class="btn-street w-full" type="button" onclick="confirmPaymentAndContinue()">
+          <i class="fa-solid fa-circle-check"></i>
           Tôi đã thanh toán xong
         </button>
-</div>
-</div>
-</div>
-<div class="mini-popup-overlay" id="activation-popup" onclick="closeMiniPopup(event, 'activation-popup')">
-<div class="mini-popup-card" onclick="event.stopPropagation()">
-<div class="flex items-center justify-between gap-3 mb-4">
-<div>
-<div class="payment-badge"><i class="fa-solid fa-receipt"></i> Kích hoạt đơn hàng</div>
-<h3 class="title-font vi-title text-2xl mt-3 leading-none">Mã xác nhận</h3>
-</div>
-<button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" onclick="hideMiniPopup('activation-popup')" type="button">
-<i class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<div class="order-code-box mb-4 order-code-box-singleline">
-<div class="text-[9px] font-black uppercase tracking-[0.18em] opacity-40 mb-2">Mã đơn hàng</div>
-<div class="mono text-[18px] font-black tracking-[0.14em] leading-relaxed" id="activation-order-code">
+      </div>
+    </div>
+  </div>
+
+  <div id="activation-popup" class="mini-popup-overlay" onclick="closeMiniPopup(event, 'activation-popup')">
+    <div class="mini-popup-card" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <div>
+          <div class="payment-badge"><i class="fa-solid fa-receipt"></i> Kích hoạt đơn hàng</div>
+          <h3 class="title-font vi-title text-2xl mt-3 leading-none">Mã xác nhận</h3>
+        </div>
+        <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button"
+          onclick="hideMiniPopup('activation-popup')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="order-code-box mb-4 order-code-box-singleline">
+        <div class="text-[9px] font-black uppercase tracking-[0.18em] opacity-40 mb-2">Mã đơn hàng</div>
+        <div id="activation-order-code" class="mono text-[18px] font-black tracking-[0.14em] leading-relaxed">
           000000000000000000000</div>
-</div>
-<div class="text-[11px] leading-relaxed opacity-75 mb-4">
+      </div>
+
+      <div class="text-[11px] leading-relaxed opacity-75 mb-4">
         Vui lòng gửi đúng <b>mã xác nhận 21 số</b> này qua một trong các kênh hỗ trợ bên dưới để kích hoạt đơn hàng ngay.
       </div>
-<input class="code-field mono mb-4" id="activation-order-input" inputmode="numeric" maxlength="21" placeholder="Nhập mã xác nhận 21 số"/>
-<div class="grid grid-cols-1 gap-3">
-<button class="btn-light w-full" onclick="copyActivationCode()" type="button">
-<i class="fa-solid fa-copy"></i>
+
+      <input id="activation-order-input" class="code-field mono mb-4" placeholder="Nhập mã xác nhận 21 số" maxlength="21"
+        inputmode="numeric">
+
+      <div class="grid grid-cols-1 gap-3">
+        <button class="btn-light w-full" type="button" onclick="copyActivationCode()">
+          <i class="fa-solid fa-copy"></i>
           Sao chép mã kích hooạt
         </button>
-<a class="btn-light w-full flex items-center justify-center gap-2" href="tel:0357130499">
-<i class="fa-solid fa-phone"></i>
+        <a class="btn-light w-full flex items-center justify-center gap-2" href="tel:0357130499">
+          <i class="fa-solid fa-phone"></i>
           Hotline 0357130499
         </a>
-<button class="btn-light w-full" onclick="sendActivationChannel('zalo')" type="button">
-<i class="fa-solid fa-comment-dots"></i>
+        <button class="btn-light w-full" type="button" onclick="sendActivationChannel('zalo')">
+          <i class="fa-solid fa-comment-dots"></i>
           Zalo
         </button>
-<a class="btn-light w-full flex items-center justify-center gap-2" href="mailto:alphazone582@gmail.com?subject=Ho%20tro%20kich%20hoat%20Alpha%20Zone">
-<i class="fa-solid fa-envelope"></i>
+        <a class="btn-light w-full flex items-center justify-center gap-2"
+          href="mailto:alphazone582@gmail.com?subject=Ho%20tro%20kich%20hoat%20Alpha%20Zone">
+          <i class="fa-solid fa-envelope"></i>
           Email
         </a>
-<div class="btn-light w-full flex items-center justify-center gap-2 opacity-80 cursor-default">
-<i class="fa-brands fa-facebook-messenger"></i>
+        <div class="btn-light w-full flex items-center justify-center gap-2 opacity-80 cursor-default">
+          <i class="fa-brands fa-facebook-messenger"></i>
           Messenger
         </div>
-</div>
-<div class="admin-status mt-4" id="activation-status"></div>
-</div>
-</div>
-<div class="mini-popup-overlay" id="warranty-popup" onclick="closeMiniPopup(event, 'warranty-popup')">
-<div class="mini-popup-card" onclick="event.stopPropagation()">
-<div class="flex items-center justify-between gap-3 mb-4">
-<div>
-<div class="payment-badge"><i class="fa-solid fa-file-shield"></i> Phiếu bảo hành</div>
-<h3 class="title-font vi-title text-2xl mt-3 leading-none">Tạo phiếu</h3>
-</div>
-<button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" onclick="hideMiniPopup('warranty-popup')" type="button">
-<i class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<div class="compact-grid">
-<div>
-<div class="popup-section-title">Thông tin bảo hành</div>
-<input class="ticket-field mono mb-3" id="warranty-order-input" inputmode="numeric" maxlength="30" placeholder="Mã đơn hàng"/>
-<input class="ticket-field mb-3" id="warranty-product-input" placeholder="ID sản phẩm/ dịch vụ cần bảo hành"/>
-<input class="ticket-field mb-3" id="warranty-contact-input" placeholder="Số điện thoại liên hệ"/>
-<input class="ticket-field mb-3" id="warranty-contact-input" placeholder="Email nhận kết quả bảo hành"/>
-<textarea class="ticket-field ticket-textarea" id="warranty-issue-input" placeholder="Mô tả lỗi hoặc yêu cầu bảo hành"></textarea>
-</div>
-<div class="warranty-ticket-card">
-<div class="popup-section-title">Phiếu sẽ tạo tự động</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Mã phiếu</div>
-<div class="warranty-meta-value mono" id="warranty-ticket-code">—</div>
-</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Hiệu lực</div>
-<div class="warranty-meta-value">1 đổi 1 theo chính sách</div>
-</div>
-<div class="warranty-meta">
-<div class="warranty-meta-label">Định dạng</div>
-<div class="warranty-meta-value">Phát hành Phiếu bảo hành tự động</div>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-3 mt-4">
-<button class="btn-light w-full" onclick="prefillWarrantyFromCurrent()" type="button">
-<i class="fa-solid fa-wand-magic-sparkles"></i>
+      </div>
+
+      <div id="activation-status" class="admin-status mt-4"></div>
+    </div>
+  </div>
+
+  <div id="warranty-popup" class="mini-popup-overlay" onclick="closeMiniPopup(event, 'warranty-popup')">
+    <div class="mini-popup-card" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <div>
+          <div class="payment-badge"><i class="fa-solid fa-file-shield"></i> Phiếu bảo hành</div>
+          <h3 class="title-font vi-title text-2xl mt-3 leading-none">Tạo phiếu</h3>
+        </div>
+        <button class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center" type="button"
+          onclick="hideMiniPopup('warranty-popup')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="compact-grid">
+        <div>
+          <div class="popup-section-title">Thông tin bảo hành</div>
+          <input id="warranty-order-input" class="ticket-field mono mb-3" placeholder="Mã đơn hàng" maxlength="30"
+            inputmode="numeric">
+          <input id="warranty-product-input" class="ticket-field mb-3" placeholder="ID sản phẩm/ dịch vụ cần bảo hành">
+          <input id="warranty-contact-input" class="ticket-field mb-3" placeholder="Số điện thoại liên hệ">
+            <input id="warranty-contact-input" class="ticket-field mb-3" placeholder="Email nhận kết quả bảo hành">
+          <textarea id="warranty-issue-input" class="ticket-field ticket-textarea"
+            placeholder="Mô tả lỗi hoặc yêu cầu bảo hành"></textarea>
+        </div>
+
+        <div class="warranty-ticket-card">
+          <div class="popup-section-title">Phiếu sẽ tạo tự động</div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Mã phiếu</div>
+            <div id="warranty-ticket-code" class="warranty-meta-value mono">—</div>
+          </div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Hiệu lực</div>
+            <div class="warranty-meta-value">1 đổi 1 theo chính sách</div>
+          </div>
+          <div class="warranty-meta">
+            <div class="warranty-meta-label">Định dạng</div>
+            <div class="warranty-meta-value">Phát hành Phiếu bảo hành tự động</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 mt-4">
+        <button class="btn-light w-full" type="button" onclick="prefillWarrantyFromCurrent()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
           Điền nhanh từ dịch vụ đang xem
         </button>
-<button class="btn-street w-full" onclick="generateWarrantyTicket()" type="button">
-<i class="fa-solid fa-download"></i>
+        <button class="btn-street w-full" type="button" onclick="generateWarrantyTicket()">
+          <i class="fa-solid fa-download"></i>
           Tạo phiếu bảo hành
         </button>
-</div>
-<div class="admin-status mt-4" id="warranty-status"></div>
-</div>
-</div>
-<script>
+      </div>
+
+      <div id="warranty-status" class="admin-status mt-4"></div>
+    </div>
+  </div>
+
+  <script>
     const ADMIN_CODE = '729903';
     const ZALO_LINK = 'https://zalo.me/0357130499';
     const HOTLINE_NUMBER = '0357130499';
@@ -5738,7 +5849,8 @@ So tien: ${usdAmount} USDT`;
       window.addEventListener('resize', fitActivationOrderCode);
     };
   </script>
-<style>
+
+  <style>
     .category-smooth-zone {
       scroll-behavior: smooth;
     }
@@ -5806,8 +5918,9 @@ So tien: ${usdAmount} USDT`;
       resize: vertical;
     }
   </style>
-<!-- customer-info-font-sync-injection -->
-<style>
+
+  <!-- customer-info-font-sync-injection -->
+  <style>
     html,
     body,
     body *:not(.fa-solid):not(.fa-regular):not(.fa-brands) {
@@ -5931,8 +6044,9 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<!-- title-weight-case-fix -->
-<style>
+
+  <!-- title-weight-case-fix -->
+  <style>
     /* Giữ tiêu đề đậm, chữ thường về bình thường; chỉ giữ IN HOA cho tiêu đề chính và nút */
     body :where(p, span, small, div, label, a, li, td, th, strong, b, input, textarea):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(button):not([role="button"]):not(.title-font):not(.title-font *):not(.vi-title):not(.vi-title *):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not([class*="title"]):not([class*="Title"]):not([class*="heading"]):not([class*="Heading"]):not([id*="title"]):not([id*="Title"]):not([id*="heading"]):not([id*="Heading"]) {
       font-weight: 400 !important;
@@ -5979,7 +6093,8 @@ So tien: ${usdAmount} USDT`;
       text-transform: uppercase !important;
     }
   </style>
-<style id="alpha-scroll-chat-addon">
+
+  <style id="alpha-scroll-chat-addon">
     .alpha-anchor-fabs {
       position: fixed;
       right: 18px;
@@ -6083,7 +6198,8 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<style id="alpha-i18n-platform-addon-style">
+
+  <style id="alpha-i18n-platform-addon-style">
     .alpha-lang-widget {
       position: fixed;
       top: 16px;
@@ -6225,7 +6341,8 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<style id="alpha-zone-order-upgrade-patch-v1">
+
+  <style id="alpha-zone-order-upgrade-patch-v1">
     .alpha-search-shell {
       margin-bottom: 18px;
       display: grid;
@@ -6328,7 +6445,8 @@ So tien: ${usdAmount} USDT`;
       overflow-wrap: anywhere;
     }
   </style>
-<style id="alpha-product-detail-schema-v4-style">
+
+  <style id="alpha-product-detail-schema-v4-style">
     #product-detail .alpha-detail-header-card,
     #product-detail .alpha-detail-field-card {
       background: #fff;
@@ -6458,9 +6576,11 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<!-- product-card-structure-and-detail-fix-v7 -->
-<!-- alpha-v8-admin-detail-fix -->
-<style>
+
+  <!-- product-card-structure-and-detail-fix-v7 -->
+
+  <!-- alpha-v8-admin-detail-fix -->
+  <style>
     .admin-advanced-wrap {
       margin-top: 14px;
       border-top: 1px dashed rgba(0, 0, 0, 0.08);
@@ -6609,8 +6729,9 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<!-- alpha dynamic category patch v10 -->
-<style id="alpha-dynamic-category-patch-style">
+
+  <!-- alpha dynamic category patch v10 -->
+  <style id="alpha-dynamic-category-patch-style">
     #category-filter-list .category-chip.alpha-chip-with-media {
       display: inline-flex;
       align-items: center;
@@ -6737,7 +6858,8 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<style id="alpha-admin-inbox-style">
+
+  <style id="alpha-admin-inbox-style">
     .alpha-admin-addon {
       margin-top: 16px;
       border-top: 1px solid rgba(0, 0, 0, .08);
@@ -6979,7 +7101,8 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<script id="alpha-zone-core-rebuild-v20">
+
+  <script id="alpha-zone-core-rebuild-v20">
     (function () {
       'use strict';
 
@@ -7327,7 +7450,7 @@ So tien: ${usdAmount} USDT`;
         } else {
           if (title) title.textContent = category;
           if (subtitle) subtitle.textContent = 'Danh mục';
-          renderProducts(getProducts().filter(function (item) { return String(item.category || '').trim() === category; }));
+          renderProducts(getProducts().filter(function (item) { return String(item.platformName || item.name || '').trim() === category; }));
         }
         renderRecommendations(category);
         showPage('products');
@@ -7593,7 +7716,8 @@ So tien: ${usdAmount} USDT`;
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
-<script id="alpha-v21-interaction-fix">
+
+  <script id="alpha-v21-interaction-fix">
     (function () {
       function getProductsSafe() {
         try { return Array.isArray(window.brands) ? window.brands : []; } catch (e) { return []; }
@@ -7677,8 +7801,9 @@ So tien: ${usdAmount} USDT`;
       window.addEventListener('load', boot);
     })();
   </script>
-<!-- SEARCH_FILTER_DRAWER_PATCH_V23 -->
-<style>
+
+  <!-- SEARCH_FILTER_DRAWER_PATCH_V23 -->
+  <style>
     .alpha-tool-btn {
       width: 40px;
       height: 40px;
@@ -7806,75 +7931,77 @@ So tien: ${usdAmount} USDT`;
       margin-top: 10px;
     }
   </style>
-<div class="alpha-drawer-backdrop" id="alpha-drawer-backdrop"></div>
-<div aria-hidden="true" class="alpha-drawer" id="alpha-category-drawer">
-<div class="flex items-center justify-between mb-4">
-<div>
-<div class="alpha-drawer-title">Danh mục</div>
-<div class="text-[11px] opacity-50 mt-1">Tìm kiếm và lọc nhanh ngay tại trang danh mục</div>
-</div>
-<button class="alpha-tool-btn" data-close-drawer="category" type="button"><i class="fa-solid fa-xmark"></i></button>
-</div>
-<label class="alpha-drawer-label">Tìm kiếm danh mục</label>
-<input class="alpha-drawer-field" id="alpha-category-search" placeholder="Nhập tên danh mục...">
-<div class="alpha-drawer-grid mt-3">
-<div>
-<label class="alpha-drawer-label">Sắp xếp</label>
-<select class="alpha-drawer-field" id="alpha-category-sort">
-<option value="default">Mặc định</option>
-<option value="az">A → Z</option>
-<option value="za">Z → A</option>
-</select>
-</div>
-<div>
-<label class="alpha-drawer-label">Hiển thị</label>
-<select class="alpha-drawer-field" id="alpha-category-mode">
-<option value="all">Tất cả</option>
-<option value="only">Chỉ khớp từ khóa</option>
-</select>
-</div>
-</div>
-<div class="alpha-drawer-actions">
-<button class="alpha-drawer-btn secondary" id="alpha-category-reset" type="button">Đặt lại</button>
-<button class="alpha-drawer-btn primary" id="alpha-category-apply" type="button">Áp dụng</button>
-</div>
-<div class="alpha-drawer-hint">Bộ lọc này chỉ bổ sung thêm cho icon góc phải, không thay đổi logic cũ của trang.
+  <div id="alpha-drawer-backdrop" class="alpha-drawer-backdrop"></div>
+  <div id="alpha-category-drawer" class="alpha-drawer" aria-hidden="true">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="alpha-drawer-title">Danh mục</div>
+        <div class="text-[11px] opacity-50 mt-1">Tìm kiếm và lọc nhanh ngay tại trang danh mục</div>
+      </div>
+      <button type="button" class="alpha-tool-btn" data-close-drawer="category"><i
+          class="fa-solid fa-xmark"></i></button>
     </div>
-</input></div>
-<div aria-hidden="true" class="alpha-drawer" id="alpha-product-drawer">
-<div class="flex items-center justify-between mb-4">
-<div>
-<div class="alpha-drawer-title">Sản phẩm</div>
-<div class="text-[11px] opacity-50 mt-1">Tìm kiếm và lọc nhanh tại trang sản phẩm</div>
-</div>
-<button class="alpha-tool-btn" data-close-drawer="product" type="button"><i class="fa-solid fa-xmark"></i></button>
-</div>
-<label class="alpha-drawer-label">Tìm kiếm sản phẩm</label>
-<input class="alpha-drawer-field" id="alpha-product-search" placeholder="Tên, ID hoặc mô tả ngắn...">
-<div class="alpha-drawer-grid mt-3">
-<div>
-<label class="alpha-drawer-label">Danh mục</label>
-<select class="alpha-drawer-field" id="alpha-product-category"></select>
-</div>
-<div>
-<label class="alpha-drawer-label">Sắp xếp</label>
-<select class="alpha-drawer-field" id="alpha-product-sort">
-<option value="default">Mặc định</option>
-<option value="name-asc">Tên A → Z</option>
-<option value="name-desc">Tên Z → A</option>
-<option value="price-asc">Giá tăng dần</option>
-<option value="price-desc">Giá giảm dần</option>
-</select>
-</div>
-</div>
-<div class="alpha-drawer-actions">
-<button class="alpha-drawer-btn secondary" id="alpha-product-reset" type="button">Đặt lại</button>
-<button class="alpha-drawer-btn primary" id="alpha-product-apply" type="button">Áp dụng</button>
-</div>
-<div class="alpha-drawer-hint">Kết quả lọc sẽ render lại danh sách hiện tại, vẫn dùng giao diện và thẻ sản phẩm sẵn
+    <label class="alpha-drawer-label">Tìm kiếm danh mục</label>
+    <input id="alpha-category-search" class="alpha-drawer-field" placeholder="Nhập tên danh mục..." />
+    <div class="alpha-drawer-grid mt-3">
+      <div>
+        <label class="alpha-drawer-label">Sắp xếp</label>
+        <select id="alpha-category-sort" class="alpha-drawer-field">
+          <option value="default">Mặc định</option>
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+        </select>
+      </div>
+      <div>
+        <label class="alpha-drawer-label">Hiển thị</label>
+        <select id="alpha-category-mode" class="alpha-drawer-field">
+          <option value="all">Tất cả</option>
+          <option value="only">Chỉ khớp từ khóa</option>
+        </select>
+      </div>
+    </div>
+    <div class="alpha-drawer-actions">
+      <button type="button" id="alpha-category-reset" class="alpha-drawer-btn secondary">Đặt lại</button>
+      <button type="button" id="alpha-category-apply" class="alpha-drawer-btn primary">Áp dụng</button>
+    </div>
+    <div class="alpha-drawer-hint">Bộ lọc này chỉ bổ sung thêm cho icon góc phải, không thay đổi logic cũ của trang.
+    </div>
+  </div>
+  <div id="alpha-product-drawer" class="alpha-drawer" aria-hidden="true">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="alpha-drawer-title">Sản phẩm</div>
+        <div class="text-[11px] opacity-50 mt-1">Tìm kiếm và lọc nhanh tại trang sản phẩm</div>
+      </div>
+      <button type="button" class="alpha-tool-btn" data-close-drawer="product"><i
+          class="fa-solid fa-xmark"></i></button>
+    </div>
+    <label class="alpha-drawer-label">Tìm kiếm sản phẩm</label>
+    <input id="alpha-product-search" class="alpha-drawer-field" placeholder="Tên, ID hoặc mô tả ngắn..." />
+    <div class="alpha-drawer-grid mt-3">
+      <div>
+        <label class="alpha-drawer-label">Danh mục</label>
+        <select id="alpha-product-category" class="alpha-drawer-field"></select>
+      </div>
+      <div>
+        <label class="alpha-drawer-label">Sắp xếp</label>
+        <select id="alpha-product-sort" class="alpha-drawer-field">
+          <option value="default">Mặc định</option>
+          <option value="name-asc">Tên A → Z</option>
+          <option value="name-desc">Tên Z → A</option>
+          <option value="price-asc">Giá tăng dần</option>
+          <option value="price-desc">Giá giảm dần</option>
+        </select>
+      </div>
+    </div>
+    <div class="alpha-drawer-actions">
+      <button type="button" id="alpha-product-reset" class="alpha-drawer-btn secondary">Đặt lại</button>
+      <button type="button" id="alpha-product-apply" class="alpha-drawer-btn primary">Áp dụng</button>
+    </div>
+    <div class="alpha-drawer-hint">Kết quả lọc sẽ render lại danh sách hiện tại, vẫn dùng giao diện và thẻ sản phẩm sẵn
       có của web.</div>
-</input></div>
-<script>
+  </div>
+  <script>
     (function () {
       const backdrop = document.getElementById('alpha-drawer-backdrop');
       const categoryDrawer = document.getElementById('alpha-category-drawer');
@@ -8110,7 +8237,8 @@ So tien: ${usdAmount} USDT`;
       };
     })();
   </script>
-<style id="alpha-customer-chat-fix-style">
+
+  <style id="alpha-customer-chat-fix-style">
     .alpha-customer-chat-wrap {
       margin-top: 16px;
       padding-top: 12px;
@@ -8224,7 +8352,7 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<script id="alpha-customer-chat-fix">
+  <script id="alpha-customer-chat-fix">
     (function () {
       const STORE_ADMIN_THREADS = 'alpha_zone_admin_threads_v20';
       const STORE_ADMIN_ACTIVE = 'alpha_zone_admin_active_thread_v20';
@@ -8354,7 +8482,8 @@ So tien: ${usdAmount} USDT`;
       window.addEventListener('load', boot);
     })();
   </script>
-<style id="alpha-admin-product-crud-style">
+
+  <style id="alpha-admin-product-crud-style">
     .alpha-admin-crud {
       margin-top: 16px;
       border-top: 1px solid rgba(0, 0, 0, .08);
@@ -8454,7 +8583,7 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<script id="alpha-admin-product-crud-module">
+  <script id="alpha-admin-product-crud-module">
     (function () {
       const STORE_PRODUCTS = 'alpha_zone_products_v20';
       const STORE_ADMIN_DRAFT = 'alpha_zone_admin_draft_v20';
@@ -8594,7 +8723,8 @@ So tien: ${usdAmount} USDT`;
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
-<style id="alpha-final-safe-addon-style">
+
+  <style id="alpha-final-safe-addon-style">
     .alpha-customer-collect-box {
       margin: 0 0 18px;
       padding: 16px;
@@ -8748,7 +8878,7 @@ So tien: ${usdAmount} USDT`;
       }
     }
   </style>
-<script id="alpha-final-safe-addon-script">
+  <script id="alpha-final-safe-addon-script">
     (function () {
       const THREAD_KEY = 'alpha_zone_admin_threads_v20';
       const PRODUCT_STORE_KEY = 'alpha_zone_products_v20';
@@ -8915,7 +9045,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
-<style id="alpha-admin-apps-script-bridge-style">
+
+  <style id="alpha-admin-apps-script-bridge-style">
     .alpha-apps-script-card {
       margin-top: 14px;
       padding: 14px;
@@ -9001,7 +9132,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }
     }
   </style>
-<script id="alpha-admin-apps-script-bridge">
+  <script id="alpha-admin-apps-script-bridge">
     (function () {
       const STORE_URL = 'alpha_zone_supabase_url_v1';
       const STORE_KEY = 'alpha_zone_supabase_publishable_key_v1';
@@ -9308,7 +9439,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
-<style id="alpha-google-sheet-bridge-style">
+
+  <style id="alpha-google-sheet-bridge-style">
     .alpha-sheet-bridge {
       margin-top: 14px;
       padding: 14px;
@@ -9359,7 +9491,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }
     }
   </style>
-<script id="alpha-google-sheet-bridge-script">
+  <script id="alpha-google-sheet-bridge-script">
     (function () {
       const API_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
       const BOX_ID = 'alpha-google-sheet-bridge';
@@ -9567,7 +9699,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
     })();
   </script>
-<style>
+
+  <style>
     .alpha-home-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -9780,7 +9913,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }
     }
   </style>
-<script>
+
+  <script>
     (function () {
       (function () {
         (function () {
@@ -10043,24 +10177,30 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       });
     })();
   </script>
-<button aria-label="Trở về" id="global-back-btn" title="Trở về" type="button">←</button>
-<div aria-label="Điều hướng trang" id="global-page-controls">
-<button aria-label="" class="" data-action="" data-external-link="" id="" title="" type=""></button>
-<button aria-label="Lên đầu trang" class="gpc-btn" data-scroll="top" title="Lên đầu trang" type="button">↑</button>
-<button aria-label="Xuống cuối trang" class="gpc-btn" data-scroll="bottom" title="Xuống cuối trang" type="button">↓</button>
-</div>
-<div aria-label="Thanh cạnh trang" id="alpha-right-dock">
-<button class="dock-btn" data-page="home" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-house"></i></span><span class="dock-label">Trang chủ</span></button>
-<button class="dock-btn" data-page="categories" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-layer-group"></i></span><span class="dock-label">Danh mục</span></button>
-<button class="dock-btn" data-page="products" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-box-open"></i></span><span class="dock-label">Sản phẩm</span></button>
-<button class="dock-btn" data-page="engagement-hub" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-table-cells"></i></span><span class="dock-label">Tăng tương tác</span></button>
-<button class="dock-btn" data-page="seller-channel" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-bars"></i></span><span class="dock-label">Kênh người bán</span></button>
-<button class="dock-btn" data-page="marketplace" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-regular fa-compass"></i></span><span class="dock-label">Marketplace</span></button>
-<button class="dock-btn" data-page="warranty" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-regular fa-circle"></i></span><span class="dock-label">Bảo hành</span></button>
-<button class="dock-btn" data-page="about-us" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-regular fa-circle-dot"></i></span><span class="dock-label">Giới thiệu</span></button>
-<button class="dock-btn" data-page="account" type="button"><span aria-hidden="true" class="dock-icon"><i class="fa-solid fa-circle"></i></span><span class="dock-label">Tài khoản</span></button>
-</div>
-<script>
+
+  <button id="global-back-btn" type="button" aria-label="Trở về" title="Trở về">←</button>
+  <div id="global-page-controls" aria-label="Điều hướng trang">
+    <button class="" type="" id="" data-action="" aria-label=""
+      title=""
+      data-external-link=""></button>
+    <button class="gpc-btn" type="button" data-scroll="top" aria-label="Lên đầu trang" title="Lên đầu trang">↑</button>
+    <button class="gpc-btn" type="button" data-scroll="bottom" aria-label="Xuống cuối trang"
+      title="Xuống cuối trang">↓</button>
+  </div>
+
+  <div id="alpha-right-dock" aria-label="Thanh cạnh trang">
+    <button class="dock-btn" type="button" data-page="home"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span><span class="dock-label">Trang chủ</span></button>
+    <button class="dock-btn" type="button" data-page="categories"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><span class="dock-label">Danh mục</span></button>
+    <button class="dock-btn" type="button" data-page="products"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span><span class="dock-label">Sản phẩm</span></button>
+    <button class="dock-btn" type="button" data-page="engagement-hub"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-table-cells"></i></span><span class="dock-label">Tăng tương tác</span></button>
+    <button class="dock-btn" type="button" data-page="seller-channel"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-bars"></i></span><span class="dock-label">Kênh người bán</span></button>
+    <button class="dock-btn" type="button" data-page="marketplace"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-compass"></i></span><span class="dock-label">Marketplace</span></button>
+    <button class="dock-btn" type="button" data-page="warranty"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-circle"></i></span><span class="dock-label">Bảo hành</span></button>
+    <button class="dock-btn" type="button" data-page="about-us"><span class="dock-icon" aria-hidden="true"><i class="fa-regular fa-circle-dot"></i></span><span class="dock-label">Giới thiệu</span></button>
+    <button class="dock-btn" type="button" data-page="account"><span class="dock-icon" aria-hidden="true"><i class="fa-solid fa-circle"></i></span><span class="dock-label">Tài khoản</span></button>
+  </div>
+
+  <script>
     (function () {
       var pageHistory = [];
       var historyPatched = false;
@@ -10188,7 +10328,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       setTimeout(bindFloatingUI, 1000);
     })();
   </script>
-<script id="alpha-global-apps-script-dock">
+
+  <script id="alpha-global-apps-script-dock">
     (function () {
       var DEFAULT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
       var STORE_KEYS = ['alpha_zone_apps_script_webapp_url_v1', 'alpha_zone_apps_script_url_v33'];
@@ -10317,7 +10458,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       setTimeout(bootAppsDock, 1800);
     })();
   </script>
-<script>
+
+  <script>
     (function () {
       function makeFooterNavHorizontal() {
         var selectors = [
@@ -10385,8 +10527,10 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       setTimeout(applyHorizontalSavingAreas, 1000);
     })();
   </script>
-<!-- Promo Popup removed completely in v11. -->
-<script>
+  <!-- Promo Popup removed completely in v11. -->
+
+
+  <script>
     (function () {
       function buildAboutPatch() {
         const page = document.getElementById('about-us');
@@ -10593,7 +10737,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }, 250);
     })();
   </script>
-<script id="alpha-floating-cmd-link">
+
+  <script id="alpha-floating-cmd-link">
     (function () {
       var CMD_LINK = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
 
@@ -10627,7 +10772,8 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }, 300);
     })();
   </script>
-<style id="alpha-admin-smart-suite-style">
+
+  <style id="alpha-admin-smart-suite-style">
     .alpha-smart-suite {
       margin: 16px 0 20px;
       padding: 16px;
@@ -10972,7 +11118,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       }
     }
   </style>
-<script id="alpha-admin-smart-suite-script">
+  <script id="alpha-admin-smart-suite-script">
     (function () {
       var SNAP = 'alpha_admin_smart_snapshot_v2';
       var DRAFT = 'alpha_admin_smart_draft_v2';
@@ -11028,6 +11174,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
       var tries = 0, timer = setInterval(function () { boot(); tries += 1; if (tries > 120) clearInterval(timer) }, 500)
     })();
   </script>
+
 <style id="alpha-safe-visual-override">
   /* safer typography */
   body :where(p, span, small, div, label, a, button, input, textarea, li):not(.title-font):not(.title-font *):not(.fa-solid):not(.fa-regular):not(.fa-brands) {
@@ -11205,6 +11352,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
     }
   }
 </style>
+
 <script id="alpha-safe-runtime-override">
 (function () {
   const API_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
@@ -11488,6 +11636,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   }
 })();
 </script>
+
 <style id="alpha-safe-button-overrides">
   /* Chống tràn chữ cho tất cả nút hành động, ưu tiên khu admin */
   .btn-street,
@@ -11551,6 +11700,69 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
     }
   }
 </style>
+
+<script id="alpha-products-reset-override">
+(function () {
+  function resetProductsToAllSafe() {
+    var allProducts = Array.isArray(window.brands) ? window.brands.slice() : [];
+    var title = document.getElementById('product-page-title');
+    var subtitle = document.getElementById('product-category-subtitle');
+
+    if (title) title.textContent = 'Sản phẩm';
+    if (subtitle) subtitle.textContent = 'Alpha Marketplace';
+
+    if (typeof window.renderProducts === 'function') {
+      try { window.renderProducts(allProducts); } catch (_) {}
+    }
+    if (typeof window.renderRecommendations === 'function') {
+      try { window.renderRecommendations('Tất cả'); } catch (_) {}
+    }
+
+    document.querySelectorAll('#category-filter-list .category-chip').forEach(function (chip) {
+      var isAll = String(chip.dataset.category || '').trim() === 'Tất cả';
+      chip.classList.toggle('active', isAll);
+    });
+
+    window.currentCategory = 'Tất cả';
+  }
+
+  function bindProductButtons() {
+    document.querySelectorAll('[data-page="products"], [onclick*="showPage(\'products\')"], [onclick*="showPage(&quot;products&quot;)"]').forEach(function (btn) {
+      if (btn.dataset.alphaProductsResetBound) return;
+      btn.dataset.alphaProductsResetBound = '1';
+      btn.addEventListener('click', function () {
+        setTimeout(resetProductsToAllSafe, 30);
+      }, true);
+    });
+  }
+
+  function patchShowPage() {
+    if (typeof window.showPage !== 'function' || window.__alphaShowPageProductsResetPatched) return;
+    window.__alphaShowPageProductsResetPatched = true;
+    var originalShowPage = window.showPage;
+    window.showPage = function (id) {
+      var result = originalShowPage.apply(this, arguments);
+      if (String(id || '').trim() === 'products') {
+        setTimeout(resetProductsToAllSafe, 30);
+      }
+      return result;
+    };
+  }
+
+  function boot() {
+    patchShowPage();
+    bindProductButtons();
+    setTimeout(bindProductButtons, 400);
+    setTimeout(bindProductButtons, 1200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
 
 <script id="alpha-restore-autosync">
 (function () {
@@ -11686,6 +11898,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   }
 })();
 </script>
+
 <script id="alpha-detail-json-fallback-fix">
 (function () {
   const API_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
@@ -11939,6 +12152,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   }
 })();
 </script>
+
 <script id="alpha-detail-product-resolver-optimizer">
 (function () {
   const STORAGE_KEYS = [
@@ -12167,6 +12381,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   }
 })();
 </script>
+
 <script id="alpha-payment-restore-patch">
 (function () {
   const STORAGE_KEYS = [
@@ -12408,6 +12623,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   }
 })();
 </script>
+
 <style id="alpha-catalog-science-style">
   .alpha-catalog-shell { display:grid; gap:14px; }
   .alpha-catalog-hero {
@@ -12731,6 +12947,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   window.addEventListener('load', function () { setTimeout(bootCatalogPatch, 120); });
 })();
 </script>
+
 <script>
 (function(){
   function escHtml(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
@@ -12885,6 +13102,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
     object-fit: cover !important;
   }
 </style>
+
 <script id="alpha-qr-repair-patch">
 (function(){
   function safeEnsureQr(){
@@ -12979,6 +13197,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   window.addEventListener('load', function(){ setTimeout(safeEnsureQr, 180); });
 })();
 </script>
+
 <script id="alpha-dock-pages-patch">
 (function(){
   function esc(v){
@@ -13179,6 +13398,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) setTimeout(renderEngagementPage, 120); });
 })();
 </script>
+
 <script id="alpha-engagement-visibility-fix">
 (function(){
   var STORAGE_KEYS = [
@@ -13319,6 +13539,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   setTimeout(scheduleRefresh, 1200);
 })();
 </script>
+
 <script id="alpha-engagement-dock-click-fix">
 (function(){
   function openEngagement(){
@@ -13385,6 +13606,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   window.addEventListener('load', function(){ setTimeout(bind, 50); });
 })();
 </script>
+
 <script id="alpha-engagement-final-fix">
 (function(){
   function esc(v){
@@ -13569,6 +13791,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   window.addEventListener('storage', renderEngagementProducts);
 })();
 </script>
+
 <script id="alpha-global-state-bridge-fix">
 (function(){
   function bridgeProp(name, getter, setter) {
@@ -13650,6 +13873,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
   try { window.selectedUsdtNetwork = typeof selectedUsdtNetwork !== 'undefined' ? selectedUsdtNetwork : (window.selectedUsdtNetwork || 'TRC20'); } catch (_) {}
 })();
 </script>
+
 <script id="alpha-seller-channel-upgrade">
 (function(){
   var PROFILE_KEY = 'alpha_zone_seller_hồ sơs_v1';
@@ -14411,6 +14635,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
 })();
 
 </script>
+
 <style id="alpha-seller-layout-hotfix">
   #seller-channel .seller-upgrade-wrap{
     grid-template-columns:1fr !important;
@@ -14434,6 +14659,7 @@ Exemple : Je souhaite commander ce produit. Merci de vérifier pour moi.', chat_
     }
   }
 </style>
+
 <script id="alpha-dock-expand-script">
 document.addEventListener('DOMContentLoaded', function () {
   var dock = document.getElementById('alpha-right-dock');
@@ -14469,6 +14695,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { passive: true });
 });
 </script>
+
 <script id="alpha-cloud-products-sync-inline">
 (function () {
   const API_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
@@ -14557,6 +14784,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })();
 </script>
+
 <script id="alpha-final-current-api-sync">
 (function () {
   const API_URL = 'https://script.google.com/macros/s/AKfycbxp_m762szsWcSche_zpsRmKYTXiY_xdj30xjIThQVOhAEKbsExhlPHfSTFCJa0PCE/exec';
@@ -14661,6 +14889,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })();
 </script>
+
 <script id="alpha-appscript-website-sync-v3-all-sides">
 (function(){
   'use strict';
@@ -14696,6 +14925,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function boot(){bind();flush();setTimeout(bind,600);setTimeout(bind,1800);setTimeout(bind,3500);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('online',flush);document.addEventListener('visibilitychange',function(){if(!document.hidden)flush();});
 })();
 </script>
+
 <script id="alpha-seller-registration-block-from-admin">
 (function(){
   'use strict';
@@ -14897,6 +15127,7 @@ document.addEventListener('DOMContentLoaded', function () {
   else boot();
 })();
 </script>
+
 <script id="alpha-seller-registration-3objects-hard-fix">
 (function(){
   'use strict';
@@ -15020,6 +15251,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
 })();
 </script>
+
 <!-- Alpha hotfix: open Seller Channel dock button without changing existing UI -->
 <script id="alpha-seller-channel-open-button-hotfix">
 (function(){
@@ -15108,6 +15340,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('load', boot);
 })();
 </script>
+
 <style id="az-seller-sync-v4-style">
 #seller-channel .azv4-wrap{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}#seller-channel .azv4-panel{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(15,23,42,.10);border-radius:26px;padding:20px;box-shadow:0 18px 44px rgba(15,23,42,.08)}#seller-channel .azv4-dark{background:linear-gradient(135deg,#111827,#1e40af);color:#fff}#seller-channel .azv4-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}#seller-channel .azv4-field{display:flex;flex-direction:column;gap:7px}#seller-channel .azv4-field label{font-size:12px;font-weight:800;opacity:.75}#seller-channel .azv4-input,#seller-channel .azv4-textarea,#seller-channel .azv4-select{width:100%;border-radius:16px;border:1px solid rgba(15,23,42,.12);background:#fff;padding:12px 14px;font-size:16px;line-height:1.45;outline:none}#seller-channel .azv4-dark .azv4-input{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.20)}#seller-channel .azv4-dark .azv4-input::placeholder{color:rgba(255,255,255,.65)}#seller-channel .azv4-textarea{min-height:110px;resize:vertical}#seller-channel .azv4-row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}#seller-channel .azv4-chip{border:1px solid rgba(15,23,42,.12);background:#fff;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800;cursor:pointer}#seller-channel .azv4-chip.active{background:#111827;color:#fff;border-color:#111827}#seller-channel .azv4-status{border-radius:18px;padding:12px 14px;font-size:12px;line-height:1.55;border:1px solid rgba(15,23,42,.08);background:#f8fafc;margin-top:12px}.azv4-status.ok{background:rgba(34,197,94,.08)!important;border-color:rgba(34,197,94,.18)!important;color:#166534}.azv4-status.err{background:rgba(239,68,68,.08)!important;border-color:rgba(239,68,68,.18)!important;color:#991b1b}.azv4-status.info{background:rgba(37,99,235,.08)!important;border-color:rgba(37,99,235,.18)!important;color:#1d4ed8}#seller-channel .azv4-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}#seller-channel .azv4-kpi{border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:12px;background:rgba(255,255,255,.12)}#seller-channel .azv4-kpi small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.12em;opacity:.75;font-weight:800}#seller-channel .azv4-kpi b{display:block;font-size:18px;margin-top:4px}@media(max-width:900px){#seller-channel .azv4-wrap,#seller-channel .azv4-grid,#seller-channel .azv4-kpis{grid-template-columns:1fr}}
 </style>
@@ -15127,6 +15360,7 @@ function patch(){if(window.__azv4patch)return;window.__azv4patch=1;var old=windo
 function boot(){render();patch();setTimeout(render,900)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',function(){setTimeout(render,1100)})
 })();
 </script>
+
 <script id="az-single-file-router">
 (function(){
   var ALIASES={
@@ -15174,8 +15408,11 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
   window.addEventListener('load', function(){ setTimeout(route,300); });
 })();
 </script>
-<script src="alpha-zone-apsrc-sync-v2.js"></script>
-<script id="az-mobile-performance-runtime-v8">
+
+
+  <script src="alpha-zone-apsrc-sync-v2.js"></script>
+
+  <script id="az-mobile-performance-runtime-v8">
     /* Runtime cleanup for touch devices: prevents hover-expansion and repeated paint spikes. */
     (function () {
       function isLite() { return document.documentElement.classList.contains('az-mobile-lite'); }
@@ -15207,7 +15444,9 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
       window.addEventListener('hashchange', function () { idle(apply); }, { passive: true });
     })();
   </script>
-<style id="az-no-promopopup-payment-fix-v9">
+
+
+  <style id="az-no-promopopup-payment-fix-v9">
     #product-modal,#az-admin-popup-tools,.az-admin-popup-tools,.az-smart-link-btn,[data-az-smart-link-btn],.promo-popup,#promo-popup,[data-promo-popup],[data-promopopup]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
     #alpha-payment-customer-fields{margin:0 0 14px!important;padding:14px!important;border:1px solid rgba(0,0,0,.08)!important;border-radius:20px!important;background:rgba(255,255,255,.9)!important;box-shadow:none!important}
     #alpha-payment-customer-fields .az-pay-customer-title{font-size:10px!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:.14em!important;opacity:.48!important;margin-bottom:10px!important}
@@ -15217,7 +15456,8 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
     #alpha-payment-customer-fields .az-pay-customer-helper{margin-top:8px!important;font-size:10px!important;line-height:1.5!important;opacity:.58!important}
     #detail-buy-btn{pointer-events:auto!important;opacity:1!important}
   </style>
-<script id="az-no-promopopup-payment-fix-v9">
+
+  <script id="az-no-promopopup-payment-fix-v9">
     (function(){
       if(window.__AZ_NO_PROMOPOPUP_PAYMENT_FIX_V9__)return;window.__AZ_NO_PROMOPOPUP_PAYMENT_FIX_V9__=true;
       function t(v){return String(v==null?'':v).trim()}function byId(id){return document.getElementById(id)}
@@ -15238,12 +15478,172 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
       if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wireButton,{once:true});else wireButton();window.addEventListener('load',wireButton,{once:true});window.addEventListener('hashchange',function(){setTimeout(wireButton,60)},{passive:true});setInterval(hardDisablePromoPopup,1500);
     })();
   </script>
+
 <style id="az-displaypage-payment-fix-v10">
   #detail-pay-btn{pointer-events:auto!important;opacity:1!important;cursor:pointer!important}
   #detail-pay-btn *{pointer-events:none!important}
 </style>
+<script id="az-displaypage-payment-fix-v10">
+(function(){
+  if(window.__AZ_DISPLAYPAGE_PAYMENT_FIX_V10__) return;
+  window.__AZ_DISPLAYPAGE_PAYMENT_FIX_V10__ = true;
 
-<style id="az-v11-no-promo-payment-hardfix">
+  function t(v){ return String(v == null ? '' : v).trim(); }
+  function byId(id){ return document.getElementById(id); }
+  function esc(v){ return t(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function normalizePage(v){
+    v = t(v).toLowerCase().replace(/^#/,'');
+    if(v === 'engagement' || v === 'engagementhub' || v === 'engagement_hub') return 'engagement-hub';
+    if(v === 'market' || v === 'seller-marketplace') return 'marketplace';
+    if(v === 'product' || v === 'shop' || v === 'categories' || v === 'home' || !v) return 'products';
+    return v;
+  }
+  function activePageId(){
+    var active = document.querySelector('.page.active');
+    var id = active ? active.id : '';
+    var hash = t(location.hash).replace(/^#/,'');
+    if(id === 'engagement-hub' || hash === 'engagement-hub') return 'engagement-hub';
+    if(id === 'marketplace' || hash === 'marketplace') return 'marketplace';
+    return 'products';
+  }
+  function productPageOf(item){ return normalizePage(item && item.displayPage ? item.displayPage : 'products'); }
+  function pool(){ return Array.isArray(window.brands) ? window.brands : []; }
+  function visibleFor(page, list){
+    page = normalizePage(page || activePageId());
+    return (Array.isArray(list) ? list : pool()).filter(function(item){ return productPageOf(item) === page; });
+  }
+  window.azProductDisplayPage = productPageOf;
+  window.azVisibleProductsForPage = visibleFor;
+
+  window.renderProducts = function(list){
+    var container = byId('products-list');
+    if(!container) return;
+    var data = visibleFor(activePageId(), Array.isArray(list) ? list : pool());
+    if(!data.length){
+      container.innerHTML = '<div class="col-span-2 py-10 text-center opacity-30 text-xs font-bold uppercase">Chưa có sản phẩm cho trang này</div>';
+      return;
+    }
+    container.innerHTML = data.map(function(item){
+      var id = esc(item.id), name = esc(item.name || item.platformName), logo = esc(item.logo || item.categoryImage), category = esc(item.category), price = esc(item.price);
+      var shortDescription = esc(item.shortDescription || item.short_description || item.summary || item.detailedDescription || '');
+      return '<div class="product-card-enhanced p-4 flex flex-col relative overflow-hidden" data-display-page="'+esc(productPageOf(item))+'" onclick="handleCardClick(\''+id.replace(/'/g,'&#39;')+'\', this)">'
+        + '<div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin opacity-20"></i></div>'
+        + '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center"><img src="'+logo+'" alt="'+name+'" class="w-full h-full object-contain"></div>'
+        + '<div class="product-card-id mono text-center">'+id+'</div>'
+        + '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">'+name+'</h5>'
+        + '<div class="product-card-category text-center">'+category+'</div>'
+        + '<div class="product-card-desc text-center">'+shortDescription+'</div>'
+        + '<div class="product-card-price mono text-center">'+price+'</div>'
+        + '</div>';
+    }).join('');
+  };
+  window.renderProducts.__azCatalogFilter = true;
+  window.renderProducts.__azDisplayPageV10 = true;
+
+  window.renderRecommendations = function(excludeCategory){
+    var container = byId('recommendations-list');
+    var recSection = byId('recommendation-section');
+    if(!container || !recSection) return;
+    var page = activePageId();
+    var base = visibleFor(page, pool());
+    var recs = (excludeCategory && excludeCategory !== 'Tất cả') ? base.filter(function(b){return b.category !== excludeCategory;}) : base;
+    recs = recs.slice().sort(function(){return 0.5 - Math.random();}).slice(0,4);
+    if(!recs.length){ recSection.style.display = 'none'; container.innerHTML = ''; return; }
+    recSection.style.display = 'block';
+    container.innerHTML = recs.map(function(item){
+      var id = esc(item.id), name = esc(item.name || item.platformName), logo = esc(item.logo || item.categoryImage), category = esc(item.category), price = esc(item.price);
+      var shortDescription = esc(item.shortDescription || item.short_description || item.summary || '');
+      return '<div class="product-card-enhanced p-4 min-w-[160px] flex flex-col relative overflow-hidden" data-display-page="'+esc(productPageOf(item))+'" onclick="handleCardClick(\''+id.replace(/'/g,'&#39;')+'\', this)">'
+        + '<div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin text-[10px] opacity-10"></i></div>'
+        + '<div class="w-10 h-10 mb-3 bg-white rounded-2xl p-2 border border-black/5 shadow-sm self-center"><img src="'+logo+'" alt="'+name+'" class="w-full h-full object-contain opacity-100"></div>'
+        + '<div class="product-card-id mono text-center">'+id+'</div><h6 class="text-[9px] font-black uppercase tracking-widest mb-1 text-center">'+name+'</h6>'
+        + '<div class="product-card-category text-center">'+category+'</div><div class="product-card-desc text-center">'+shortDescription+'</div><div class="product-card-price mono text-center">'+price+'</div></div>';
+    }).join('');
+  };
+
+  window.filterByCategory = function(category){
+    category = t(category) || 'Tất cả';
+    var title = byId('product-page-title');
+    var subtitle = byId('product-category-subtitle');
+    try{ if(typeof window.setActiveCategoryChip === 'function') window.setActiveCategoryChip(category); }catch(_){}
+    var page = activePageId();
+    var list = visibleFor(page, pool());
+    if(category !== 'Tất cả') list = list.filter(function(b){ return t(b.category) === category; });
+    if(title) title.innerText = category === 'Tất cả' ? (page === 'engagement-hub' ? 'Engagement Hub' : page === 'marketplace' ? 'Marketplace' : 'Sản phẩm') : category;
+    if(subtitle) subtitle.innerText = page === 'engagement-hub' ? 'Dịch vụ seeding' : page === 'marketplace' ? 'Sản phẩm marketplace' : 'Danh mục dịch vụ số';
+    window.renderProducts(list);
+    window.renderRecommendations(category);
+    if(typeof window.showPage === 'function') window.showPage('products');
+  };
+
+  function refreshPageProducts(page){
+    page = normalizePage(page || activePageId());
+    var title = byId('product-page-title');
+    var subtitle = byId('product-category-subtitle');
+    if(title) title.innerText = page === 'engagement-hub' ? 'Engagement Hub' : page === 'marketplace' ? 'Marketplace' : 'Sản phẩm';
+    if(subtitle) subtitle.innerText = page === 'engagement-hub' ? 'displayPage: engagement-hub' : page === 'marketplace' ? 'displayPage: marketplace' : 'displayPage: products';
+    window.renderProducts(visibleFor(page, pool()));
+    window.renderRecommendations('Tất cả');
+  }
+  window.azRefreshDisplayPageProducts = refreshPageProducts;
+
+  if(typeof window.showPage === 'function' && !window.showPage.__azDisplayPageV10){
+    var oldShow = window.showPage;
+    window.showPage = function(pageId){
+      var result = oldShow.apply(this, arguments);
+      var p = normalizePage(pageId);
+      if(p === 'products' || p === 'engagement-hub' || p === 'marketplace') setTimeout(function(){ refreshPageProducts(p); }, 0);
+      return result;
+    };
+    window.showPage.__azDisplayPageV10 = true;
+  }
+
+  function openPaymentNow(){
+    try{ if(typeof window.hardDisablePromoPopup === 'function') window.hardDisablePromoPopup(); }catch(_){}
+    if(!window.currentSelectedId){
+      var title = t((byId('detail-title') || {}).textContent);
+      var found = pool().find(function(x){ return t(x.name) === title || t(x.platformName) === title; });
+      if(found) window.currentSelectedId = found.id;
+    }
+    try{ if(typeof window.openPaymentPopup === 'function') return window.openPaymentPopup(); }catch(err){ console.error(err); }
+    try{ if(typeof window.openPaymentDirect === 'function') return window.openPaymentDirect(); }catch(err2){ console.error(err2); }
+    var popup = byId('payment-popup');
+    if(popup){ popup.classList.add('active'); document.body.classList.add('modal-open'); }
+    return false;
+  }
+
+  function fixPaymentButton(){
+    var btn = byId('detail-buy-btn') || byId('detail-pay-btn');
+    if(!btn) return;
+    btn.id = 'detail-pay-btn';
+    btn.setAttribute('type','button');
+    btn.classList.remove('opacity-50','pointer-events-none');
+    btn.style.pointerEvents = 'auto';
+    btn.style.opacity = '1';
+    var text = byId('btn-text') || btn.querySelector('span');
+    if(text) text.textContent = 'Thanh toán';
+    var loader = byId('btn-loader');
+    if(loader) loader.classList.add('hidden');
+    btn.onclick = function(e){ if(e){ e.preventDefault(); e.stopPropagation(); } return openPaymentNow(); };
+  }
+  window.azOpenPaymentNow = openPaymentNow;
+  window.openModalFromDetail = openPaymentNow;
+
+  function boot(){
+    fixPaymentButton();
+    refreshPageProducts(activePageId());
+    setTimeout(fixPaymentButton,80);
+    setTimeout(function(){ refreshPageProducts(activePageId()); fixPaymentButton(); },500);
+    setTimeout(function(){ refreshPageProducts(activePageId()); fixPaymentButton(); },1200);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot();
+  window.addEventListener('load', boot, {once:true});
+  window.addEventListener('hashchange', function(){ setTimeout(boot,80); }, {passive:true});
+})();
+</script>
+
+
+  <style id="az-v11-no-promo-payment-hardfix">
     #promoPopup,.promo-popup-overlay,.promo-popup-box,.promo-popup-content,#product-modal,#az-admin-popup-tools,.az-admin-popup-tools,.az-smart-link-btn,[data-az-smart-link-btn]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
     body.popup-open{overflow:auto!important}
     #detail-buy-btn,#detail-pay-btn{pointer-events:auto!important;opacity:1!important;cursor:pointer!important;touch-action:manipulation!important;user-select:none!important;-webkit-user-select:none!important;position:relative!important;z-index:20!important}
@@ -15258,7 +15658,7 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
     #alpha-payment-customer-fields textarea{min-height:72px!important;resize:vertical!important}
     #alpha-payment-customer-fields .az-pay-customer-helper{margin-top:8px!important;font-size:10px!important;line-height:1.5!important;opacity:.58!important}
   </style>
-<script id="az-v11-no-promo-payment-hardfix">
+  <script id="az-v11-no-promo-payment-hardfix">
     (function(){
       if(window.__AZ_V11_NO_PROMO_PAYMENT_HARDFIX__)return;window.__AZ_V11_NO_PROMO_PAYMENT_HARDFIX__=true;
       function t(v){return String(v==null?'':v).trim()}function byId(id){return document.getElementById(id)}
@@ -15280,7 +15680,9 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
       if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();window.addEventListener('load',boot,{once:true});window.addEventListener('hashchange',function(){setTimeout(boot,60)},{passive:true});setInterval(function(){removePromo();fixButton()},1000);
     })();
   </script>
-<style id="az-v12-payment-mobile-hardfix">
+
+
+  <style id="az-v12-payment-mobile-hardfix">
     body.modal-open{overflow:hidden!important;touch-action:none!important}
     #payment-popup{align-items:center!important;justify-content:center!important;padding:12px!important;overscroll-behavior:contain!important;background:rgba(0,0,0,.42)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
     #payment-popup.active{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
@@ -15313,9 +15715,11 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
     #payment-popup .mini-popup-card > .grid.grid-cols-1.gap-3.mt-4 .btn-light,#payment-popup .mini-popup-card > .grid.grid-cols-1.gap-3.mt-4 .btn-street{min-height:48px!important;height:auto!important;padding:12px 14px!important;font-size:12px!important;line-height:1.25!important;pointer-events:auto!important;touch-action:manipulation!important;opacity:1!important}
     @media (max-width:520px){#payment-popup{align-items:flex-end!important;padding:0!important}#payment-popup .mini-popup-card{width:100%!important;max-width:100%!important;max-height:94dvh!important;border-radius:26px 26px 0 0!important;padding:16px 14px 12px!important}#payment-popup .mini-popup-card > .flex.items-start.justify-between{top:-16px!important;margin:-16px -14px 10px!important;padding:14px 14px 10px!important;border-radius:26px 26px 0 0!important}#payment-popup h3{font-size:20px!important}#payment-popup .text-\[11px\].mt-2{display:none!important}#alpha-payment-customer-fields{padding:12px!important;margin-bottom:10px!important}#alpha-payment-customer-fields input,#alpha-payment-customer-fields textarea{min-height:42px!important;padding:10px 12px!important;font-size:16px!important}#alpha-payment-customer-fields textarea{min-height:58px!important;max-height:76px!important}#payment-popup .method-switch{gap:8px!important;margin-bottom:10px!important}#payment-popup .method-btn{min-height:64px!important;padding:10px 11px!important;border-radius:18px!important}#payment-popup .method-btn small{font-size:11px!important}#payment-popup .pay-box{padding:11px!important;margin-bottom:9px!important}#payment-popup .qr-frame{width:132px!important;height:132px!important}#payment-popup .mini-popup-card > .grid.grid-cols-1.gap-3.mt-4{bottom:-12px!important;margin:10px -14px -12px!important;padding:10px 14px 12px!important;border-radius:0!important}}
   </style>
-<script id="az-v12-payment-mobile-hardfix">
+  <script id="az-v12-payment-mobile-hardfix">
     (function(){if(window.__AZ_V12_PAYMENT_MOBILE_HARDFIX__)return;window.__AZ_V12_PAYMENT_MOBILE_HARDFIX__=true;function id(x){return document.getElementById(x)}function activePayment(){var p=id('payment-popup');return p&&p.classList.contains('active')}function lockBody(){document.body.classList.toggle('modal-open',!!activePayment())}function fixPaymentSheet(){var p=id('payment-popup');if(!p)return;if(p.classList.contains('active')){p.style.display='flex';p.style.visibility='visible';p.style.opacity='1';p.style.pointerEvents='auto'}var card=p.querySelector('.mini-popup-card');if(card){card.style.transform='none';card.style.transition='none'}var action=card&&card.querySelector('.grid.grid-cols-1.gap-3.mt-4');if(action){action.querySelectorAll('button').forEach(function(b){b.disabled=false;b.style.pointerEvents='auto';b.style.opacity='1';b.style.cursor='pointer'})}var confirmBtn=Array.prototype.find.call(p.querySelectorAll('button'),function(b){return /thanh toán xong|thanh toan xong/i.test(b.textContent||'')});if(confirmBtn&&!confirmBtn.dataset.azV12Confirm){confirmBtn.dataset.azV12Confirm='1';confirmBtn.addEventListener('click',function(e){e.stopPropagation();if(window.validateCustomerInfo&&!window.validateCustomerInfo()){e.preventDefault();return false}},true)}lockBody()}var oldShow=window.showMiniPopup;window.showMiniPopup=function(name){var r=oldShow?oldShow.apply(this,arguments):(function(){var p=id(name);if(p){p.classList.add('active');return true}return false})();if(String(name)==='payment-popup')setTimeout(fixPaymentSheet,0);return r};var oldHide=window.hideMiniPopup;window.hideMiniPopup=function(name){var r=oldHide?oldHide.apply(this,arguments):(function(){var p=id(name);if(p)p.classList.remove('active');return true})();setTimeout(lockBody,0);return r};document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('#payment-popup .mini-popup-card'))setTimeout(fixPaymentSheet,0)},true);document.addEventListener('DOMContentLoaded',fixPaymentSheet,{once:true});window.addEventListener('load',fixPaymentSheet,{once:true});setInterval(function(){if(activePayment())fixPaymentSheet()},700)})();
   </script>
+
+
 <style id="az-v13-vietnamese-text-fix">
   #payment-customer-name::placeholder,#payment-customer-contact::placeholder,#payment-customer-email::placeholder,#payment-customer-note::placeholder{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif!important}
 </style>
@@ -15354,6 +15758,9 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
   window.azFixVietnamesePaymentText=fix;
 })();
 </script>
+
+
+
 <style id="az-v14-stable-products-no-jump-css">
   /* V14: chống nhảy list sản phẩm khi mở trang sản phẩm */
   #products-list{
@@ -15377,6 +15784,235 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
     #products-list{scroll-margin-top:0!important;}
   }
 </style>
+<script id="az-v14-stable-products-no-jump">
+(function(){
+  if(window.__AZ_V14_STABLE_PRODUCTS_NO_JUMP__) return;
+  window.__AZ_V14_STABLE_PRODUCTS_NO_JUMP__ = true;
+
+  var PRODUCT_KEYS = ['alpha_zone_products_json_v34','alpha_zone_products_v20','alpha_zone_admin_draft_v20'];
+  var lastProductsKey = '';
+  var lastRecsKey = '';
+  var renderTimer = null;
+  var showTimer = null;
+  var activeCategory = 'Tất cả';
+  var activeDisplayPage = 'products';
+
+  function id(x){ return document.getElementById(x); }
+  function text(v){ return String(v == null ? '' : v).trim(); }
+  function esc(s){ return text(s).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];}); }
+  function normalizePage(v){
+    v = text(v || '').replace(/^#/,'').toLowerCase();
+    if(v === 'engagement' || v === 'engagementhub' || v === 'engagement-hub') return 'engagement-hub';
+    if(v === 'market' || v === 'marketplace') return 'marketplace';
+    return 'products';
+  }
+  function currentPage(){
+    var h = text(location.hash).replace(/^#/,'');
+    if(h === 'engagement-hub' || h === 'marketplace' || h === 'products') return normalizePage(h);
+    return activeDisplayPage || 'products';
+  }
+  function productPage(p){ return normalizePage(p && (p.displayPage || p.display_page || p.showOn || p.show_on || p.publishTarget || p.publish_target || p.page || p.target) || 'products'); }
+  function formatPrice(v){ return text(v); }
+
+  function readSavedMap(){
+    var map = Object.create(null);
+    PRODUCT_KEYS.forEach(function(k){
+      try{
+        var arr = JSON.parse(localStorage.getItem(k) || '[]');
+        if(!Array.isArray(arr)) return;
+        arr.forEach(function(p){
+          var pid = text(p && p.id);
+          if(pid && !map[pid]) map[pid] = p;
+        });
+      }catch(_){ }
+    });
+    return map;
+  }
+  function canonicalProducts(){
+    var saved = readSavedMap();
+    var source = Array.isArray(window.brands) ? window.brands : [];
+    var list = source.map(function(p){
+      var pid = text(p && p.id);
+      var old = pid ? saved[pid] : null;
+      var merged = Object.assign({}, old || {}, p || {});
+      if(!text(merged.displayPage) && old && text(old.displayPage)) merged.displayPage = old.displayPage;
+      if(!text(merged.displayPage)) merged.displayPage = 'products';
+      if(!text(merged.categoryImage)) merged.categoryImage = merged.logo || '';
+      if(!text(merged.platformName)) merged.platformName = merged.name || '';
+      return merged;
+    }).filter(function(p){ return text(p.id) && text(p.name || p.platformName); });
+
+    // Nếu sync cũ làm mất displayPage, ghi lại bản đã phục hồi vào window.brands để các hàm cũ không làm nhảy trang.
+    if(list.length){
+      window.brands = list;
+      try{ localStorage.setItem('alpha_zone_products_json_v34', JSON.stringify(list)); }catch(_){ }
+    }
+    return list;
+  }
+
+  function visibleProducts(list, page, category){
+    page = normalizePage(page || currentPage());
+    category = text(category || activeCategory || 'Tất cả') || 'Tất cả';
+    var arr = Array.isArray(list) ? list : canonicalProducts();
+    arr = arr.filter(function(p){ return productPage(p) === page; });
+    if(category !== 'Tất cả') arr = arr.filter(function(p){ return text(p.category) === category; });
+    return arr;
+  }
+
+  function cardHtml(item, compact){
+    var pid = esc(item.id);
+    var name = esc(item.name || item.platformName);
+    var logo = esc(item.logo || item.categoryImage);
+    var category = esc(item.category);
+    var desc = esc(item.shortDescription || item.short_description || item.summary || item.detailedDescription || '');
+    var price = esc(formatPrice(item.price));
+    var cls = compact ? 'product-card-enhanced p-4 min-w-[160px] flex flex-col relative overflow-hidden' : 'product-card-enhanced p-4 flex flex-col relative overflow-hidden';
+    return '<div class="'+cls+'" data-product-id="'+pid+'" data-display-page="'+esc(productPage(item))+'" onclick="handleCardClick(\''+String(pid).replace(/'/g,'&#39;')+'\', this)">'
+      + '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center"><img src="'+logo+'" alt="'+name+'" class="w-full h-full object-contain" loading="lazy" decoding="async"></div>'
+      + '<div class="product-card-id mono text-center">'+pid+'</div>'
+      + '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">'+name+'</h5>'
+      + '<div class="product-card-category text-center">'+category+'</div>'
+      + '<div class="product-card-desc text-center">'+desc+'</div>'
+      + '<div class="product-card-price mono text-center">'+price+'</div>'
+      + '</div>';
+  }
+
+  function updateTitles(page, category){
+    var title = id('product-page-title');
+    var subtitle = id('product-category-subtitle');
+    category = text(category || activeCategory || 'Tất cả') || 'Tất cả';
+    page = normalizePage(page || currentPage());
+    if(title){
+      if(category !== 'Tất cả') title.textContent = category;
+      else title.textContent = page === 'engagement-hub' ? 'Engagement Hub' : page === 'marketplace' ? 'Marketplace' : 'Sản phẩm';
+    }
+    if(subtitle){
+      subtitle.textContent = page === 'engagement-hub' ? 'displayPage: engagement-hub' : page === 'marketplace' ? 'displayPage: marketplace' : 'displayPage: products';
+    }
+    document.querySelectorAll('#category-filter-list .category-chip').forEach(function(chip){
+      chip.classList.toggle('active', text(chip.dataset.category) === category);
+    });
+  }
+
+  function renderProductsStable(list){
+    var container = id('products-list');
+    if(!container) return;
+    var page = currentPage();
+    var items = visibleProducts(Array.isArray(list) ? list : canonicalProducts(), page, activeCategory);
+    var key = page + '|' + activeCategory + '|' + items.map(function(p){return [p.id,p.name,p.price,p.displayPage,p.category].map(text).join('~');}).join('||');
+    if(key === lastProductsKey && container.children.length) return;
+    lastProductsKey = key;
+    if(!items.length){
+      container.innerHTML = '<div class="col-span-2 py-10 text-center opacity-30 text-xs font-bold uppercase">Chưa có sản phẩm cho trang này</div>';
+      return;
+    }
+    container.innerHTML = items.map(function(item){ return cardHtml(item,false); }).join('');
+  }
+
+  function renderRecommendationsStable(category){
+    var container = id('recommendations-list');
+    var section = id('recommendation-section');
+    if(!container || !section) return;
+    var page = currentPage();
+    category = text(category || activeCategory || 'Tất cả') || 'Tất cả';
+    var recs = visibleProducts(canonicalProducts(), page, 'Tất cả');
+    if(category !== 'Tất cả') recs = recs.filter(function(p){ return text(p.category) !== category; });
+    recs = recs.slice(0,4); // Không random để tránh danh sách đổi vị trí nhiều lần.
+    var key = page + '|' + category + '|' + recs.map(function(p){return text(p.id);}).join('|');
+    if(key === lastRecsKey && container.children.length) return;
+    lastRecsKey = key;
+    if(!recs.length){ section.style.display = 'none'; container.innerHTML = ''; return; }
+    section.style.display = 'block';
+    container.innerHTML = recs.map(function(item){ return cardHtml(item,true); }).join('');
+  }
+
+  function scheduleRender(delay){
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(function(){
+      updateTitles(activeDisplayPage, activeCategory);
+      renderProductsStable(canonicalProducts());
+      renderRecommendationsStable(activeCategory);
+    }, typeof delay === 'number' ? delay : 40);
+  }
+
+  window.renderProducts = function(list){
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(function(){ renderProductsStable(list); }, 16);
+  };
+  window.renderProducts.__azV14Stable = true;
+
+  window.renderRecommendations = function(category){
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(function(){
+      renderProductsStable(canonicalProducts());
+      renderRecommendationsStable(category || activeCategory);
+    }, 16);
+  };
+  window.renderRecommendations.__azV14Stable = true;
+
+  window.filterByCategory = function(category){
+    activeCategory = text(category || 'Tất cả') || 'Tất cả';
+    updateTitles(activeDisplayPage, activeCategory);
+    scheduleRender(20);
+    if(typeof window.__alphaOriginalShowPage === 'function'){
+      try{ window.__alphaOriginalShowPage('products'); }catch(_){ }
+    }else if(typeof window.showPage === 'function' && !window.showPage.__azV14Calling){
+      try{ window.showPage.__azV14Calling = true; window.showPage('products'); }catch(_){ } finally{ window.showPage.__azV14Calling = false; }
+    }
+  };
+
+  if(typeof window.showPage === 'function' && !window.showPage.__azV14StablePage){
+    var originalShowPage = window.showPage;
+    window.showPage = function(pageId){
+      var raw = text(pageId || '');
+      if(raw === 'products' || raw === 'engagement-hub' || raw === 'marketplace'){
+        activeDisplayPage = normalizePage(raw);
+        activeCategory = 'Tất cả';
+        lastProductsKey = '';
+        lastRecsKey = '';
+      }
+      var result = originalShowPage.apply(this, arguments);
+      if(raw === 'products' || raw === 'engagement-hub' || raw === 'marketplace'){
+        clearTimeout(showTimer);
+        showTimer = setTimeout(function(){
+          updateTitles(activeDisplayPage, activeCategory);
+          renderProductsStable(canonicalProducts());
+          renderRecommendationsStable(activeCategory);
+          // Không dùng smooth scroll để tránh lắc trên mobile.
+          try{ window.scrollTo(0,0); }catch(_){ }
+        }, 60);
+      }
+      return result;
+    };
+    window.showPage.__azV14StablePage = true;
+  }
+
+  function stopInteractionSyncStorm(){
+    // Các autosync cũ lắng nghe click/touch rồi render lại sau 800ms. Không thể gỡ closure cũ,
+    // nên ta render ổn định và bỏ qua DOM update nếu dữ liệu không đổi.
+    document.addEventListener('click', function(e){
+      var btn = e.target && e.target.closest && e.target.closest('[data-page="products"], [onclick*="products"], #nav-products, .dock-btn[data-page="products"]');
+      if(!btn) return;
+      activeDisplayPage = 'products';
+      activeCategory = 'Tất cả';
+      scheduleRender(80);
+      scheduleRender(900);
+    }, true);
+  }
+
+  function boot(){
+    canonicalProducts();
+    stopInteractionSyncStorm();
+    if(id('products') && id('products').classList.contains('active')) scheduleRender(40);
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot();
+  window.addEventListener('load', function(){ scheduleRender(120); }, {once:true});
+  window.addEventListener('hashchange', function(){ activeDisplayPage = currentPage(); activeCategory = 'Tất cả'; scheduleRender(80); }, {passive:true});
+})();
+</script>
+
+
 
 <style id="az-v15-payment-confirm-fixed-css">
   /* V15: giữ nguyên giao diện, chỉ đảm bảo nút xác nhận thanh toán luôn bấm được */
@@ -15559,306 +16195,43 @@ function boot(){render();patch();setTimeout(render,900)}if(document.readyState==
   setInterval(markButton, 600);
 })();
 </script>
-<style id="az-category-controller-rebuilt-v18-css">
-/* v18: rebuilt category/product controller + mobile smoothness */
-#products-list{overflow-anchor:none!important;contain:layout paint!important;min-height:260px!important;}
-#products-list .product-card-enhanced,#recommendations-list .product-card-enhanced{animation:none!important;transition:none!important;transform:none!important;}
-#products-list .loading-shimmer,#recommendations-list .loading-shimmer{display:none!important;opacity:0!important;pointer-events:none!important;}
-#category-filter-list{scroll-behavior:auto!important;-webkit-overflow-scrolling:touch!important;}
-#category-filter-list .category-chip{touch-action:manipulation!important;}
-@media(max-width:768px),(pointer:coarse){
-  html,body{scroll-behavior:auto!important;overscroll-behavior-y:contain!important;}
-  .canvas-wrapper{height:auto!important;max-height:none!important;overflow:visible!important;mask-image:none!important;-webkit-mask-image:none!important;}
-  #logo-canvas{height:auto!important;min-height:0!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;position:relative!important;}
-  #logo-canvas .canvas-item{position:relative!important;left:auto!important;top:auto!important;width:auto!important;height:112px!important;animation:none!important;transform:none!important;border-radius:24px!important;}
-  #logo-canvas .canvas-item:hover,#logo-canvas .canvas-item:active,.category-chip:hover,.category-chip:active{transform:none!important;}
-  .floating-ball,.comment-featured-track{animation:none!important;}
-  .modal-overlay,.mini-popup-overlay,#alpha-right-dock,.alpha-lang-widget,.alpha-lang-widget-final{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
-  .street-card,.dark-card,.product-card-enhanced,.modal-content,.mini-popup-card{box-shadow:0 6px 16px rgba(0,0,0,.07)!important;}
-}
-</style><script id="az-category-controller-rebuilt-v18">
+<style id="az-displaypage-final-v24-css">
+  .az-v24-empty{grid-column:1/-1;padding:42px 12px;text-align:center;opacity:.42;font-size:12px;font-weight:800;line-height:1.55;text-transform:uppercase}
+  .az-v24-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}.az-v24-kicker{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.28em;opacity:.38;margin-bottom:8px}.az-v24-title{font-size:26px;font-weight:900;text-transform:uppercase;line-height:1.08}.az-v24-count{min-width:86px;border-radius:22px;background:#fff;padding:12px 14px;text-align:center;font-size:12px;font-weight:800}.az-v24-shell{background:var(--paper-white,#f5f3f0);border-radius:34px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.08)}
+  #logo-canvas.az-v24-category-grid{height:auto!important;min-height:0!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;position:relative!important;padding:2px 0 24px}.az-v24-category-card{border:0;background:var(--paper-white,#f5f3f0);border-radius:24px;padding:16px 12px;min-height:142px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;box-shadow:0 10px 24px rgba(0,0,0,.05);cursor:pointer}.az-v24-category-card img{width:54px;height:54px;object-fit:contain;border-radius:18px;background:#fff;padding:8px}.az-v24-category-card b{font-size:12px;line-height:1.35;text-transform:uppercase;letter-spacing:.06em}.az-v24-category-card span{font-size:10px;opacity:.55;font-weight:800}
+  @media(max-width:768px),(pointer:coarse){html,body{scroll-behavior:auto!important;overscroll-behavior-y:none!important}*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.bg-lines{display:none!important}.floating-ball,.comment-featured-track,.canvas-item{animation:none!important;transform:none!important}.street-card,.dark-card,.product-card-enhanced,.mini-popup-card,.modal-content,#alpha-right-dock{box-shadow:0 6px 16px rgba(0,0,0,.07)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.product-card-enhanced:hover,.category-chip:hover,.canvas-item:hover{transform:none!important;filter:none!important}}
+</style>
+<script id="az-displaypage-final-v24-js">
 (function(){
-  'use strict';
-  if(window.__AZ_CATEGORY_CONTROLLER_REBUILT_V18__) return;
-  window.__AZ_CATEGORY_CONTROLLER_REBUILT_V18__ = true;
-
-  var STORAGE_KEYS = ['alpha_zone_products_json_v34','alpha_zone_products_v20','alpha_zone_admin_draft_v20','az_products','products'];
-  var activeCategory = 'Tất cả';
-  var activePage = 'products';
-  var renderToken = 0;
-  var suppressShowReset = false;
-  var observerLock = false;
-
-  function byId(id){ return document.getElementById(id); }
-  function text(v){ return String(v == null ? '' : v).trim(); }
-  function esc(v){ return text(v).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-  function stripAccent(v){ try { return text(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); } catch(_) { return text(v).toLowerCase(); } }
-  function normCat(v){ return stripAccent(v).replace(/\s+/g,' ').trim(); }
-  function normPage(v){
-    v = stripAccent(v).replace(/^#/,'').replace(/[\s_]+/g,'-');
-    if(!v || v === 'home' || v === 'categories' || v === 'category' || v === 'product' || v === 'products' || v === 'shop' || v === 'catalog') return 'products';
-    if(v === 'engagement' || v === 'engagementhub' || v === 'engagement-hub' || v === 'seeding' || v === 'tuong-tac') return 'engagement-hub';
-    if(v === 'market' || v === 'marketplace' || v === 'seller-marketplace') return 'marketplace';
-    return v;
-  }
-  function productPage(p){ return normPage(p && (p.displayPage || p.display_page || p.showOn || p.show_on || p.publishTarget || p.publish_target || p.pageTarget || p.targetPage || p.page) || 'products'); }
-  function productCategory(p){ return text(p && (p.category || p.group || p.type || 'Khác')) || 'Khác'; }
-  function normalizeProduct(p, i){
-    p = p && typeof p === 'object' ? p : {};
-    var out = {};
-    for(var k in p) out[k] = p[k];
-    out.id = text(out.id || out.productId || out.sku || ('product-' + (i+1)));
-    out.name = text(out.name || out.productName || out.title || out.platformName || out.id);
-    out.platformName = text(out.platformName || out.platform || out.brand || out.name);
-    out.category = productCategory(out);
-    out.logo = text(out.logo || out.image || out.icon || out.categoryImage);
-    out.categoryImage = text(out.categoryImage || out.category_image || out.logo || out.image);
-    out.price = text(out.price || out.priceText || out.amount);
-    out.shortDescription = text(out.shortDescription || out.short_description || out.summary || out.description || out.detailedDescription);
-    out.detailedDescription = text(out.detailedDescription || out.detailed_description || out.detail || out.description || out.shortDescription);
-    out.warranty = text(out.warranty || out.warrantyPolicy || out.guarantee || 'Bảo hành theo chính sách người bán.');
-    out.displayPage = productPage(out);
-    return out;
-  }
-  function readStoredProducts(){
-    var out = [];
-    STORAGE_KEYS.forEach(function(k){
-      try{
-        var raw = localStorage.getItem(k);
-        if(!raw) return;
-        var arr = JSON.parse(raw);
-        if(Array.isArray(arr)) out = out.concat(arr);
-      }catch(_){ }
-    });
-    return out;
-  }
-  function allProducts(){
-    var arr = [];
-    if(Array.isArray(window.brands)) arr = arr.concat(window.brands);
-    if(Array.isArray(window.allProducts)) arr = arr.concat(window.allProducts);
-    if(Array.isArray(window.products)) arr = arr.concat(window.products);
-    arr = arr.concat(readStoredProducts());
-    var seen = Object.create(null), out = [];
-    arr.forEach(function(x,i){
-      var p = normalizeProduct(x,i);
-      if(!p.id || !p.name) return;
-      if(seen[p.id]){
-        // merge later record over earlier one, keeping displayPage/category when available
-        var old = seen[p.id];
-        Object.assign(old, p);
-        if(!text(old.category)) old.category = productCategory(p);
-        if(!text(old.displayPage)) old.displayPage = productPage(p);
-        return;
-      }
-      seen[p.id] = p;
-      out.push(p);
-    });
-    if(out.length){
-      window.brands = out;
-      try{ localStorage.setItem('alpha_zone_products_json_v34', JSON.stringify(out)); }catch(_){ }
-    }
-    return out;
-  }
-  function visibleProducts(page, category){
-    page = normPage(page || activePage);
-    category = text(category || activeCategory || 'Tất cả') || 'Tất cả';
-    var catKey = normCat(category);
-    return allProducts().filter(function(p){
-      if(productPage(p) !== page) return false;
-      if(category !== 'Tất cả' && normCat(productCategory(p)) !== catKey) return false;
-      return true;
-    });
-  }
-  function setPageVisible(pageId){
-    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-    var page = byId(pageId);
-    if(page) page.classList.add('active');
-    document.querySelectorAll('.nav-link').forEach(function(l){ l.classList.remove('active'); });
-    var nav = byId(pageId === 'product-detail' ? 'nav-products' : 'nav-' + pageId);
-    if(nav) nav.classList.add('active');
-  }
-  function titleFor(page, category){
-    if(category && category !== 'Tất cả') return category;
-    if(page === 'engagement-hub') return 'Engagement Hub';
-    if(page === 'marketplace') return 'Marketplace';
-    return 'Sản phẩm';
-  }
-  function updateHeader(){
-    var title = byId('product-page-title');
-    var subtitle = byId('product-category-subtitle');
-    if(title) title.textContent = titleFor(activePage, activeCategory);
-    if(subtitle){
-      if(activeCategory && activeCategory !== 'Tất cả') subtitle.textContent = 'Danh mục';
-      else subtitle.textContent = activePage === 'engagement-hub' ? 'Dịch vụ seeding' : activePage === 'marketplace' ? 'Sản phẩm marketplace' : 'Danh mục dịch vụ số';
-    }
-    document.querySelectorAll('#category-filter-list .category-chip').forEach(function(chip){
-      chip.classList.toggle('active', normCat(chip.dataset.category) === normCat(activeCategory));
-    });
-  }
-  function cardHtml(item, compact){
-    var id = esc(item.id), name = esc(item.name || item.platformName), logo = esc(item.logo || item.categoryImage), category = esc(productCategory(item));
-    var desc = esc(item.shortDescription || item.short_description || item.summary || item.detailedDescription || '');
-    var price = esc(item.price || '');
-    var cls = compact ? 'product-card-enhanced p-4 min-w-[160px] flex flex-col relative overflow-hidden' : 'product-card-enhanced p-4 flex flex-col relative overflow-hidden';
-    return '<div class="'+cls+'" data-product-id="'+id+'" data-category="'+category+'" data-display-page="'+esc(productPage(item))+'" onclick="handleCardClick(\''+String(id).replace(/'/g,'&#39;')+'\', this)">'
-      + '<div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center"><img src="'+logo+'" alt="'+name+'" class="w-full h-full object-contain" loading="lazy" decoding="async"></div>'
-      + '<div class="product-card-id mono text-center">'+id+'</div>'
-      + '<h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">'+name+'</h5>'
-      + '<div class="product-card-category text-center">'+category+'</div>'
-      + '<div class="product-card-desc text-center">'+desc+'</div>'
-      + '<div class="product-card-price mono text-center">'+price+'</div>'
-      + '</div>';
-  }
-  function renderProductsNow(list){
-    var container = byId('products-list');
-    if(!container) return;
-    var items = Array.isArray(list) ? list : visibleProducts(activePage, activeCategory);
-    observerLock = true;
-    if(!items.length){
-      container.innerHTML = '<div class="col-span-2 py-10 text-center opacity-30 text-xs font-bold uppercase">Chưa có sản phẩm trong danh mục này</div>';
-    }else{
-      container.innerHTML = items.map(function(item){ return cardHtml(item,false); }).join('');
-    }
-    observerLock = false;
-  }
-  function renderRecommendationsNow(){
-    var container = byId('recommendations-list');
-    var section = byId('recommendation-section');
-    if(!container || !section) return;
-    var recs = visibleProducts(activePage, 'Tất cả');
-    if(activeCategory !== 'Tất cả') recs = recs.filter(function(p){ return normCat(productCategory(p)) !== normCat(activeCategory); });
-    recs = recs.slice(0,4);
-    observerLock = true;
-    if(!recs.length){ section.style.display='none'; container.innerHTML=''; }
-    else { section.style.display='block'; container.innerHTML = recs.map(function(item){ return cardHtml(item,true); }).join(''); }
-    observerLock = false;
-  }
-  function renderAll(delay){
-    var token = ++renderToken;
-    setTimeout(function(){
-      if(token !== renderToken) return;
-      updateHeader();
-      renderProductsNow();
-      renderRecommendationsNow();
-    }, delay || 0);
-  }
-  function selectCategory(category, page){
-    activeCategory = text(category || 'Tất cả') || 'Tất cả';
-    activePage = normPage(page || activePage || 'products');
-    try{ sessionStorage.setItem('az_selected_category_v18', activeCategory); }catch(_){ }
-    suppressShowReset = true;
-    setPageVisible(activePage);
-    updateHeader();
-    renderProductsNow(visibleProducts(activePage, activeCategory));
-    renderRecommendationsNow();
-    setTimeout(function(){ suppressShowReset = false; }, 500);
-    // Render again after older async sync handlers finish.
-    renderAll(80); renderAll(350); renderAll(1000);
-    try{ window.scrollTo(0,0); }catch(_){ }
-  }
-  function rebuildCategoryUi(){
-    var host = byId('category-filter-list');
-    var canvas = byId('logo-canvas');
-    var products = visibleProducts(activePage, 'Tất cả');
-    var map = Object.create(null);
-    products.forEach(function(p){
-      var cat = productCategory(p);
-      var key = normCat(cat);
-      if(!map[key]) map[key] = {name:cat,count:0,image:''};
-      map[key].count += 1;
-      if(!map[key].image) map[key].image = text(p.categoryImage || p.logo);
-    });
-    var cats = [{name:'Tất cả',count:products.length,image:''}].concat(Object.keys(map).map(function(k){return map[k];}));
-    if(host){
-      host.innerHTML = cats.map(function(c){
-        var active = normCat(c.name) === normCat(activeCategory) ? ' active' : '';
-        return '<button type="button" class="category-chip'+active+'" data-category="'+esc(c.name)+'">'+esc(c.name === 'Work' ? 'Công việc' : c.name)+'</button>';
-      }).join('');
-    }
-    if(canvas){
-      canvas.innerHTML = cats.map(function(c,i){
-        var img = c.image ? '<img src="'+esc(c.image)+'" alt="'+esc(c.name)+'" loading="lazy" decoding="async">' : '<i class="fa-solid fa-layer-group text-2xl opacity-40"></i>';
-        var left = 8 + (i % 2) * 43;
-        var top = 22 + i * 70;
-        return '<div class="canvas-item" data-category="'+esc(c.name)+'" style="left:'+left+'%;top:'+top+'px;">'+img+'</div>';
-      }).join('');
-      if(window.matchMedia && matchMedia('(max-width:768px)').matches) canvas.style.height = 'auto';
-      else canvas.style.height = Math.max(720, cats.length * 78 + 120) + 'px';
-    }
-  }
-
-  // Public API: from now on category filtering is category-field based only.
-  window.renderProducts = function(list){
-    var items = Array.isArray(list) ? list.filter(function(p){ return productPage(p) === activePage && (activeCategory === 'Tất cả' || normCat(productCategory(p)) === normCat(activeCategory)); }) : visibleProducts(activePage, activeCategory);
-    renderProductsNow(items);
-  };
-  window.renderRecommendations = function(){ renderRecommendationsNow(); };
-  window.filterByCategory = function(category){ selectCategory(category, 'products'); };
-  window.azSelectCategory = selectCategory;
-
-  if(typeof window.showPage === 'function' && !window.showPage.__azCategoryControllerV18){
-    var oldShowPage = window.showPage;
-    window.showPage = function(pageId){
-      var raw = text(pageId || '');
-      var productPage = raw === 'products' || raw === 'engagement-hub' || raw === 'marketplace';
-      if(productPage){
-        activePage = normPage(raw);
-        if(!suppressShowReset) activeCategory = 'Tất cả';
-      }
-      var result;
-      try{ result = oldShowPage.apply(this, arguments); }catch(_){ setPageVisible(raw); }
-      if(productPage){
-        rebuildCategoryUi();
-        renderAll(20);
-        if(!suppressShowReset) renderAll(300);
-      }
-      return result;
-    };
-    window.showPage.__azCategoryControllerV18 = true;
-  }
-
-  document.addEventListener('click', function(e){
-    var el = e.target && e.target.closest && e.target.closest('#category-filter-list [data-category], #logo-canvas [data-category], .canvas-item[onclick*="filterByCategory"], .category-chip[onclick*="filterByCategory"]');
-    if(!el) return;
-    var cat = text(el.dataset && el.dataset.category);
-    if(!cat){
-      var oc = text(el.getAttribute('onclick'));
-      var m = oc.match(/filterByCategory\((['\"])(.*?)\1\)/);
-      if(m) cat = m[2];
-    }
-    if(!cat) return;
-    e.preventDefault();
-    e.stopPropagation();
-    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-    selectCategory(cat, 'products');
-  }, true);
-
-  function installObserver(){
-    var target = byId('products-list');
-    if(!target || !window.MutationObserver) return;
-    var obs = new MutationObserver(function(){
-      if(observerLock || activeCategory === 'Tất cả') return;
-      var cards = Array.prototype.slice.call(target.querySelectorAll('[data-category], .product-card-category'));
-      var wrong = false;
-      cards.forEach(function(node){
-        var c = node.dataset && node.dataset.category ? node.dataset.category : node.textContent;
-        if(c && normCat(c) !== normCat(activeCategory)) wrong = true;
-      });
-      if(wrong) renderAll(0);
-    });
-    obs.observe(target, {childList:true,subtree:true,characterData:true});
-  }
-  function boot(){
-    try{ var saved = sessionStorage.getItem('az_selected_category_v18'); if(saved) activeCategory = saved; }catch(_){ }
-    allProducts();
-    rebuildCategoryUi();
-    installObserver();
-    if(byId('products') && byId('products').classList.contains('active')) renderAll(20);
-  }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot();
-  window.addEventListener('load', function(){ rebuildCategoryUi(); renderAll(100); }, {once:true});
+  if(window.__AZ_DISPLAYPAGE_FINAL_V24__) return; window.__AZ_DISPLAYPAGE_FINAL_V24__ = true;
+  var state = { page:'products', category:'Tất cả' }, renderTimer = 0, master = [];
+  function t(v){return String(v==null?'':v).trim()}
+  function esc(v){return t(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function norm(v){try{return t(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}catch(e){return t(v).toLowerCase()}}
+  function pageOf(v){var k=norm(v).replace(/[\s_]+/g,'-'); if(['engagement','engagement-hub','seeding','seed','tuong-tac','tang-tuong-tac'].indexOf(k)>=0) return 'engagement-hub'; if(['market','marketplace','seller','seller-marketplace'].indexOf(k)>=0) return 'marketplace'; return 'products'}
+  function productPage(p){return pageOf(p && (p.displayPage||p.display_page||p.showOn||p.show_on||p.publishTarget||p.publish_target||p.pageTarget||p.targetPage||p.page||p.target)||'products')}
+  function normalize(p,i){p=p&&typeof p==='object'?p:{}; var o={}; for(var k in p)o[k]=p[k]; o.id=t(o.id||o.productId||o.sku||('az-'+i)); o.name=t(o.name||o.productName||o.title||o.platformName||'Sản phẩm'); o.platformName=t(o.platformName||o.platform||o.brand||o.name); o.logo=t(o.logo||o.image||o.icon||o.categoryImage); o.categoryImage=t(o.categoryImage||o.category_image||o.categoryLogo||o.logo||o.image); o.category=t(o.category||o.group||o.type||'Khác'); o.price=t(o.price||o.priceText||o.amount); o.shortDescription=t(o.shortDescription||o.short_description||o.summary||o.description); o.detailedDescription=t(o.detailedDescription||o.detailed_description||o.detail||o.description||o.shortDescription); o.warranty=t(o.warranty||o.warrantyPolicy||o.guarantee||'Bảo hành theo chính sách người bán.'); o.displayPage=productPage(o); return o}
+  function storageProducts(){var keys=['alpha_zone_products_json_v34','alpha_zone_products_v20','alpha_zone_admin_draft_v20','az_products','products']; var out=[]; keys.forEach(function(k){try{var raw=localStorage.getItem(k); if(!raw)return; var j=JSON.parse(raw); if(Array.isArray(j))out=out.concat(j); else if(j&&Array.isArray(j.products))out=out.concat(j.products)}catch(e){}}); return out}
+  function runtimeProducts(){var out=[]; ['brands','allProducts','products','marketplaceProducts','items'].forEach(function(k){try{if(Array.isArray(window[k]))out=out.concat(window[k])}catch(e){}}); try{if(typeof brands!=='undefined'&&Array.isArray(brands))out=out.concat(brands)}catch(e){} return out}
+  function rebuildMaster(extra){var input=[]; if(Array.isArray(extra)) input=input.concat(extra); input=input.concat(runtimeProducts(), storageProducts(), master); var map=new Map(); input.forEach(function(x,i){var p=normalize(x,i+1); if(!p.id&&!p.name)return; var key=p.id||p.name+'|'+p.category+'|'+p.price; var old=map.get(key)||{}; map.set(key,Object.assign({},old,p,{displayPage:p.displayPage||old.displayPage||'products'}));}); master=Array.from(map.values()); try{window.brands=master.slice()}catch(e){} return master}
+  function byPage(page,cat){page=pageOf(page||state.page); cat=t(cat||state.category||'Tất cả'); return rebuildMaster().filter(function(p){ if(productPage(p)!==page) return false; return cat==='Tất cả'||norm(p.category)===norm(cat); });}
+  function card(p){var id=esc(p.id), name=esc(p.name), logo=esc(p.logo||p.categoryImage), cat=esc(p.category), desc=esc(p.shortDescription||p.detailedDescription), price=esc(p.price); return '<div class="product-card-enhanced p-4 flex flex-col relative overflow-hidden" data-product-id="'+id+'" data-display-page="'+esc(p.displayPage)+'" data-category="'+cat+'" onclick="window.AZDisplayPageFinal.openProduct(this.getAttribute(\'data-product-id\'),this)"><div class="loading-shimmer"><i class="fa-solid fa-circle-notch fa-spin opacity-20"></i></div><div class="w-14 h-14 mb-3 flex items-center justify-center bg-white rounded-3xl shadow-sm border border-black/5 p-3 self-center"><img src="'+logo+'" alt="'+name+'" class="w-full h-full object-contain" loading="lazy" decoding="async"></div><div class="product-card-id mono text-center">'+id+'</div><h5 class="text-[10px] font-black uppercase tracking-widest mb-1 text-center">'+name+'</h5><div class="product-card-category text-center">'+cat+'</div><div class="product-card-desc text-center">'+desc+'</div><div class="product-card-price mono text-center">'+price+'</div></div>'}
+  function ensurePage(page){var id=page==='products'?'products':page; var el=document.getElementById(id); if(!el){el=document.createElement('div'); el.id=id; el.className='page'; (document.querySelector('.max-w-md.mx-auto')||document.body).appendChild(el)} if(page!=='products'){var title=page==='engagement-hub'?'Sản phẩm Engagement':'Marketplace'; var kicker=page==='engagement-hub'?'TĂNG TƯƠNG TÁC':'MARKETPLACE'; var listId=page+'-products-list'; el.innerHTML='<div class="az-v24-shell"><div class="az-v24-head"><div><div class="az-v24-kicker">'+kicker+'</div><div class="az-v24-title">'+title+'</div><p class="mt-3 opacity-60">Chỉ hiển thị sản phẩm có <b>displayPage = '+page+'</b>.</p></div><div class="az-v24-count"><span id="'+page+'-count">0</span><br>sản phẩm</div></div><div class="product-grid" id="'+listId+'"></div></div>'} return el}
+  function activate(page){ensurePage(page); document.querySelectorAll('.page').forEach(function(x){x.classList.remove('active')}); var el=document.getElementById(page==='products'?'products':page); if(el)el.classList.add('active'); document.querySelectorAll('.nav-link,#alpha-right-dock .dock-btn').forEach(function(n){n.classList.remove('active')}); var dock=document.querySelector('#alpha-right-dock .dock-btn[data-page="'+page+'"]'); if(dock)dock.classList.add('active'); try{window.scrollTo(0,0)}catch(e){}}
+  function titleFor(page){return page==='engagement-hub'?'Sản phẩm Engagement':page==='marketplace'?'Marketplace':'Sản phẩm'}
+  function render(){var page=pageOf(state.page), items=byPage(page,state.category); var listId=page==='products'?'products-list':page+'-products-list'; ensurePage(page); var box=document.getElementById(listId); if(!box)return; box.innerHTML=items.length?items.map(card).join(''):'<div class="az-v24-empty">Chưa có sản phẩm đúng displayPage này</div>'; var count=document.getElementById(page+'-count'); if(count)count.textContent=String(items.length); var title=document.getElementById('product-page-title'), sub=document.getElementById('product-category-subtitle'); if(page==='products'){ if(title)title.textContent=state.category&&state.category!=='Tất cả'?state.category:titleFor(page); if(sub)sub.textContent=(state.category&&state.category!=='Tất cả'?'Danh mục: '+state.category:'displayPage: products'); } renderRecs(page); updateChips(); }
+  function renderRecs(page){var box=document.getElementById('recommendations-list'), sec=document.getElementById('recommendation-section'); if(!box||!sec)return; var recs=byPage(page,'Tất cả').filter(function(p){return state.category==='Tất cả'||norm(p.category)!==norm(state.category)}).slice(0,4); sec.style.display=recs.length?'block':'none'; box.innerHTML=recs.map(card).join('')}
+  function categoriesFor(page){var m=new Map(); byPage(page,'Tất cả').forEach(function(p){var n=t(p.category)||'Khác'; var k=norm(n); if(!m.has(k))m.set(k,{name:n,count:0,img:p.categoryImage||p.logo}); var r=m.get(k); r.count++; if(!r.img)r.img=p.categoryImage||p.logo}); return Array.from(m.values()).sort(function(a,b){return a.name.localeCompare(b.name,'vi')})}
+  function updateCategoryPage(){var cats=categoriesFor('products'); var chip=document.getElementById('category-filter-list'); if(chip){chip.innerHTML=[{name:'Tất cả',count:byPage('products','Tất cả').length,img:''}].concat(cats).map(function(c){return '<button type="button" class="category-chip '+(norm(c.name)===norm(state.category)?'active':'')+'" data-category="'+esc(c.name)+'" data-display-page="products">'+esc(c.name)+'</button>'}).join('')} var canvas=document.getElementById('logo-canvas'); if(canvas){canvas.className='az-v24-category-grid'; canvas.innerHTML=cats.map(function(c){return '<button type="button" class="az-v24-category-card" data-category="'+esc(c.name)+'" data-display-page="products">'+(c.img?'<img src="'+esc(c.img)+'" alt="'+esc(c.name)+'">':'<i class="fa-solid fa-layer-group text-2xl"></i>')+'<b>'+esc(c.name)+'</b><span>'+c.count+' sản phẩm</span></button>'}).join('')||'<div class="az-v24-empty">Chưa có danh mục</div>'}}
+  function updateChips(){document.querySelectorAll('[data-category]').forEach(function(x){x.classList.toggle('active',norm(x.getAttribute('data-category'))===norm(state.category))})}
+  function openPage(page){state.page=pageOf(page); state.category='Tất cả'; activate(state.page); render();}
+  function openCategory(cat,page){state.page=pageOf(page||'products'); state.category=t(cat)||'Tất cả'; activate(state.page); render();}
+  function openProduct(id,el){try{window.currentSelectedId=id; window.selectedProductId=id}catch(e){} if(typeof window.goToDetail==='function') return window.goToDetail(id); if(typeof window.handleCardClick==='function') return window.handleCardClick(id,el||null); activate('product-detail')}
+  function clickGuard(e){var cat=e.target&&e.target.closest&&e.target.closest('[data-category],[data-market-category],[data-catalog-category]'); if(cat){e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); openCategory(cat.getAttribute('data-category')||cat.getAttribute('data-market-category')||cat.getAttribute('data-catalog-category')||'Tất cả', cat.getAttribute('data-display-page')||state.page||'products'); return false} var nav=e.target&&e.target.closest&&e.target.closest('[data-page],button[onclick*="showPage"],a[onclick*="showPage"]'); if(nav){var s=nav.getAttribute('data-page')||nav.getAttribute('onclick')||''; var m=s.match(/showPage\(['\"]([^'\"]+)/); var p=m?m[1]:s; if(['products','engagement-hub','marketplace','categories'].indexOf(p)>=0){e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); if(p==='categories'){activate('categories'); updateCategoryPage()} else openPage(p); return false}}}
+  function boot(){rebuildMaster(); window.AZDisplayPageFinal={openPage:openPage,openCategory:openCategory,render:render,openProduct:openProduct,state:state}; window.showPage=function(page){ if(page==='categories'){activate('categories'); updateCategoryPage(); return} if(['products','engagement-hub','marketplace'].indexOf(page)>=0)return openPage(page); activate(page)}; window.filterByCategory=function(cat){return openCategory(cat,'products')}; window.renderProducts=function(list){rebuildMaster(Array.isArray(list)?list:[]); clearTimeout(renderTimer); renderTimer=setTimeout(render,30)}; window.renderRecommendations=function(){renderRecs(state.page)}; document.addEventListener('click',clickGuard,true); updateCategoryPage(); var h=t(location.hash).replace(/^#/,''); if(['engagement-hub','marketplace','products'].indexOf(h)>=0)openPage(h); else if(document.querySelector('.page.active')&&document.querySelector('.page.active').id==='categories')updateCategoryPage(); }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot(); window.addEventListener('load',function(){setTimeout(function(){rebuildMaster(); updateCategoryPage(); render()},200); setTimeout(function(){rebuildMaster(); updateCategoryPage(); render()},1000)},{once:true});
 })();
 </script>
-&lt;!-- v18 rebuilt category controller: removed reset scripts: az-displaypage-payment-fix-v10, az-v14-stable-products-no-jump, alpha-products-reset-override --&gt;
+
 </body>
 </html>
