@@ -21,9 +21,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Thin Vietnamese-safe font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700;800&family=JetBrains+Mono:wght@200;300;400&family=Oswald:wght@200;300;400;500;700&family=Montserrat:wght@300;400;600;800&family=Playfair+Display:wght@400;600;800&family=Bebas+Neue&family=Anton&family=Space+Grotesk:wght@300;400;600;700&family=Orbitron:wght@400;600;800&family=Roboto+Slab:wght@300;400;700&family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -247,6 +248,7 @@
         .payment-reveal { transition: opacity .35s ease, filter .35s ease, transform .35s ease; }
         @media (max-width: 640px) { .quick-scroll-dock { right: 14px; bottom: 16px; } .quick-scroll-btn { width: 38px; height: 38px; } }
     </style>
+    <link rel="stylesheet" href="az-product-card-maker.css">
 </head>
 <body>
     <div class="ambient-glow"></div>
@@ -267,6 +269,7 @@
         <div class="hidden md:flex items-center gap-10 text-[9px] font-light uppercase tracking-[0.2em] text-white/50">
             <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
             <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
+            <a href="javascript:void(0)" onclick="openCardMaker()" class="hover:text-white transition-colors">Tạo card</a>
             <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
             <a href="https://zalo.me/0357130499" target="_blank" class="hover:text-white transition-colors">Support</a>
         </div>
@@ -283,6 +286,7 @@
         <div class="py-5 flex flex-col gap-4 text-[10px] font-light uppercase tracking-[0.25em] text-white/60">
             <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
             <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
+            <a href="javascript:void(0)" onclick="openCardMaker()" class="hover:text-white transition-colors">Tạo card</a>
             <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
             <a href="https://zalo.me/0357130499" target="_blank" rel="noopener" class="hover:text-white transition-colors">Support Zalo</a>
         </div>
@@ -315,6 +319,7 @@
                 <div class="flex flex-col gap-3 text-[10px] uppercase tracking-[0.22em] text-white/45">
                     <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-white transition-colors">Catalog</a>
                     <a href="javascript:void(0)" onclick="navigate('categories')" class="hover:text-white transition-colors">Danh mục</a>
+            <a href="javascript:void(0)" onclick="openCardMaker()" class="hover:text-white transition-colors">Tạo card</a>
                     <a href="javascript:void(0)" onclick="scrollToServices()" class="hover:text-white transition-colors">Services</a>
                 </div>
             </div>
@@ -354,7 +359,7 @@
         const AUTO_SYNC_ON_LOAD = true;
         const SYNC_DEBOUNCE_MS = 600;
         const LOGO_URL = 'https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png';
-        const FALLBACK_IMAGE = 'logo_url';
+        const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80';
         const SELLER_ZALO = '0357130499';
         const BANK_ID = 'MB';
         const BANK_ACCOUNT = '4499123123';
@@ -775,6 +780,7 @@
                             ${p.features.length > 0 ? `<div class="space-y-6"><h4 class="text-[8px] font-medium uppercase tracking-[0.4em] text-white/30">Đặc quyền</h4><ul class="space-y-3">${p.features.map(f => `<li class="flex items-start gap-4"><span class="text-orange-500 text-xs mt-0.5 font-light">+</span><span class="text-xs font-light tracking-wide text-white/70">${escapeHtml(f)}</span></li>`).join('')}</ul></div>` : ''}
                             <div class="pt-8 flex flex-col sm:flex-row gap-4">
                                 <button onclick="triggerCheckoutProcess('${escapeHtml(p.id)}')" class="btn-accent px-10 py-4 text-[10px] uppercase tracking-[0.3em] flex-1 text-center">Khởi tạo Đơn Hàng</button>
+                                <button onclick="openCardMaker('${escapeHtml(p.id)}')" class="btn-ghost px-6 py-4 text-[10px] uppercase tracking-[0.2em] flex items-center justify-center">Tạo card</button>
                                 ${p.link ? `<a href="${escapeHtml(p.link)}" target="_blank" rel="noopener" class="btn-ghost px-6 py-4 text-[10px] uppercase tracking-[0.2em] flex items-center justify-center">Link</a>` : ''}
                                 <button onclick="shareProduct('${escapeHtml(p.id)}')" class="btn-ghost px-6 py-4 flex items-center justify-center"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-11-4 5-5 5 5m-5-5v11"/></svg></button>
                             </div>
@@ -957,7 +963,7 @@
                     <div class="w-full aspect-square rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative border border-white/5"><img src="${escapeHtml(p.image)}" class="w-full h-full object-contain p-5 opacity-85 transition-transform duration-1000 group-hover:scale-105" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'"></div>
                     <div class="flex-grow flex flex-col justify-between">
                         <div class="mb-6"><p class="text-[8px] font-light text-white/30 uppercase tracking-[0.3em] mb-2">${escapeHtml(p.category)}</p><h3 class="text-lg font-light tracking-tight uppercase leading-snug group-hover:text-orange-500 transition-colors line-clamp-2">${escapeHtml(p.title)}</h3></div>
-                        <div class="flex justify-between items-center border-t border-white/5 pt-4"><p class="font-light text-white tracking-wide">${escapeHtml(p.price)}</p><span class="text-[9px] font-light uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all text-white/50">View</span></div>
+                        <div class="flex justify-between items-center border-t border-white/5 pt-4 gap-3"><p class="font-light text-white tracking-wide">${escapeHtml(p.price)}</p><div class="flex items-center gap-3"><button type="button" onclick="event.stopPropagation(); openCardMaker('${escapeHtml(p.id)}')" class="text-[9px] font-light uppercase tracking-widest text-orange-500/80 hover:text-orange-500 transition-all">Card</button><span class="text-[9px] font-light uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all text-white/50">View</span></div></div>
                     </div>
                 </div>`;
         }
@@ -1112,5 +1118,6 @@
   setTimeout(enhance, 600);
 })();
 </script>
+    <script src="az-product-card-maker.js"></script>
 </body>
 </html>
