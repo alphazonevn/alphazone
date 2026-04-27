@@ -164,6 +164,8 @@
         }
         h1, h2, h3, h4, .font-thin, .font-extralight, .font-light {
             font-weight: 200 !important;
+            letter-spacing: -0.025em;
+            line-height: 1.14;
         }
         .font-medium, .font-semibold, .font-bold, .font-black {
             font-weight: 300 !important;
@@ -172,6 +174,9 @@
             filter: none !important;
             -webkit-filter: none !important;
         }
+        .az-logo-image { object-fit: contain !important; background:#0a0a0a; padding:12%; filter:none !important; -webkit-filter:none !important; opacity:1 !important; }
+        .az-detail-logo-image { object-fit: contain !important; background:#0a0a0a; padding:14%; filter:none !important; -webkit-filter:none !important; opacity:1 !important; }
+        .product-detail-title { font-family: 'Be Vietnam Pro', system-ui, sans-serif !important; font-weight:200 !important; letter-spacing:-0.035em !important; line-height:1.16 !important; text-transform:none !important; }
     </style>
 </head>
 <body>
@@ -238,19 +243,20 @@
         // --- CONFIGURATION ---
         // Dán URL Web App Apps Script vào đây sau khi Deploy as Web app.
         // Ví dụ: const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec';
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLALQc-nf6zFgmvH1jILt5SOGZXcPio6uQFO8g85V8gtcCkmAuDax0pYHr_nmkqcB1/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwKIJmQ1eoenQ0lHXbpoVZDcpkxyGR8vNnusTgyYVoMR8ItJ2QL1jkSPOmwo8GDEFF/exec';
         const SHEET_ID = '1B2FMQ9pKHFQpY4eFMIqnEEHEqvgqq72USV86HgH6d5E';
         const PRODUCT_GID = '128531703';
         const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PRODUCT_GID}`;
         const CACHE_KEY = 'alphazone_products_minimal_v2';
         const LOGO_URL = 'https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png';
+        const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80';
         const SELLER_ZALO = '0357130499';
         const BANK_ID = 'MB';
         const BANK_ACCOUNT = '4499123123';
         const BANK_NAME = 'Nguyễn Lê Trí';
         const FALLBACK_PRODUCTS = [
             { id: 'az-demo-01', title: 'Premium Digital Workspace', category: 'Workspace', price: 'Liên hệ', duration: 'Linh hoạt', image: LOGO_URL, description: 'Gói dịch vụ mẫu hiển thị khi chưa thể đồng bộ dữ liệu từ Google Sheets hoặc Apps Script.', features: ['Catalog vẫn hoạt động khi mất kết nối', 'Có thể đồng bộ lại bằng nút Sync Data', 'Hỗ trợ đặt hàng qua Zalo'], link: '', platformName: 'Alpha Zone' },
-            { id: 'az-demo-02', title: 'Account Service', category: 'Digital Service', price: 'Liên hệ', duration: 'Theo gói', image: FALLBACK_IMAGE, description: 'Giải pháp số được trình bày theo phong cách tối giản của Alpha Zone.', features: ['Quy trình rõ ràng', 'Tạo hóa đơn tự động', 'Tải PDF sau khi thanh toán'], link: '', platformName: 'Alpha Zone' }
+            { id: 'az-demo-02', title: 'Account Service', category: 'Digital Service', price: 'Liên hệ', duration: 'Theo gói', image: LOGO_URL, description: 'Giải pháp số được trình bày theo phong cách tối giản của Alpha Zone.', features: ['Quy trình rõ ràng', 'Tạo hóa đơn tự động', 'Tải PDF sau khi thanh toán'], link: '', platformName: 'Alpha Zone' }
         ];
 
         let allProducts = [];
@@ -289,7 +295,7 @@
             const id = safeText(row.id || row.ID || row.productId || row.sku || row.SKU) || `${toSlug(row.name || row.Title || row.title)}-${idx + 1}`;
             const title = safeText(row.name || row.Name || row.title || row.Title || row.platformName || row['Tên sản phẩm'], 'Sản phẩm chưa đặt tên');
             const category = safeText(row.category || row.Category || row.platformName || row.Platform || row['Danh mục'], 'Uncategorized');
-            const image = safeText(row.logo || row.Logo || row.image || row.Image_URL || row.categoryImage || row['Hình ảnh'], FALLBACK_IMAGE);
+            const image = safeText(row.logo || row.Logo || row['Logo'] || row['logo'] || row.productLogo || row['Logo sản phẩm'], LOGO_URL);
             const description = safeText(row.detailedDescription || row.description || row.Description || row.shortDescription || row['Mô tả'], 'Dịch vụ số bởi Alpha Zone.');
             return {
                 id,
@@ -614,11 +620,11 @@
                 <div class="max-w-5xl mx-auto fade-in">
                     <button onclick="window.history.back()" class="mb-12 text-[9px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors flex items-center gap-3"><span class="w-8 h-[1px] bg-white/40"></span> Khám phá tiếp</button>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        <div class="aspect-[3/4] rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a]"><img src="${escapeHtml(p.image)}" class="w-full h-full object-cover" crossorigin="anonymous" onerror="this.src='${FALLBACK_IMAGE}'"></div>
+                        <div class="aspect-square rounded-3xl overflow-hidden border border-white/5 bg-[#0a0a0a]"><img src="${escapeHtml(p.image)}" class="w-full h-full az-detail-logo-image" crossorigin="anonymous" onerror="this.src='${LOGO_URL}'"></div>
                         <div class="space-y-12">
                             <div>
                                 <span class="text-orange-500 font-light text-[9px] tracking-[0.4em] uppercase block mb-4">${escapeHtml(p.category)}</span>
-                                <h1 class="font-thin text-5xl md:text-6xl tracking-tighter uppercase leading-tight mb-8">${escapeHtml(p.title)}</h1>
+                                <h1 class="product-detail-title text-5xl md:text-6xl mb-8">${escapeHtml(p.title)}</h1>
                                 <div class="flex items-end gap-4"><span class="font-light text-4xl text-white tracking-tight">${escapeHtml(p.price)}</span><span class="text-white/30 font-light uppercase text-[10px] tracking-widest pb-1">/ ${escapeHtml(p.duration)}</span></div>
                             </div>
                             <div class="h-[1px] w-full bg-white/5"></div>
@@ -689,9 +695,9 @@
         function productCardTemplate(p) {
             return `
                 <div class="product-card p-5 flex flex-col group cursor-pointer" onclick="navigate('product-${escapeHtml(p.id)}')">
-                    <div class="w-full aspect-video rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative"><img src="${escapeHtml(p.image)}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'"></div>
+                    <div class="w-full aspect-square rounded-xl overflow-hidden mb-6 bg-[#0a0a0a] relative"><img src="${escapeHtml(p.image)}" class="w-full h-full az-logo-image transition-transform duration-1000 group-hover:scale-105" loading="lazy" onerror="this.src='${LOGO_URL}'"></div>
                     <div class="flex-grow flex flex-col justify-between">
-                        <div class="mb-6"><p class="text-[8px] font-light text-white/30 uppercase tracking-[0.3em] mb-2">${escapeHtml(p.category)}</p><h3 class="text-lg font-light tracking-tight uppercase leading-snug group-hover:text-orange-500 transition-colors line-clamp-2">${escapeHtml(p.title)}</h3></div>
+                        <div class="mb-6"><p class="text-[8px] font-light text-white/30 uppercase tracking-[0.3em] mb-2">${escapeHtml(p.category)}</p><h3 class="text-lg font-light leading-snug group-hover:text-orange-500 transition-colors line-clamp-2">${escapeHtml(p.title)}</h3></div>
                         <div class="flex justify-between items-center border-t border-white/5 pt-4"><p class="font-light text-white tracking-wide">${escapeHtml(p.price)}</p><span class="text-[9px] font-light uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all text-white/50">View</span></div>
                     </div>
                 </div>`;
