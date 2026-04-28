@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA WITH YOU - Sponsorship Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --accent-color: #00d2ff;
+            --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(58, 123, 213, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 0; left: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 32px 32px 0 0;
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .step.active { display: flex; flex-direction: column; height: 100%; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .label-tag {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 18px;
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .file-upload-zone {
+            border: 1px dashed var(--glass-border);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            background: rgba(255,255,255,0.01);
+            margin-bottom: 15px;
+        }
+
+        .btn-group {
+            margin-top: auto;
+            display: flex;
+            gap: 12px;
+            padding-top: 20px;
+        }
+
+        .btn {
+            padding: 18px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-primary { background: #ffffff; color: #000000; flex: 2; }
+        .btn-secondary { background: transparent; color: var(--text-secondary); border: 1px solid var(--glass-border); flex: 1; }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="progress-line" id="progress"></div>
+
+            <!-- STEP 1: Welcome -->
+            <div class="step active" id="step1">
+                <div style="margin: auto 0; text-align: center;">
+                    <span class="label-tag">Elite Program 2026</span>
+                    <h1>Khai phóng<br><span style="color: var(--accent-color);">Bản sắc số</span> Dự án.</h1>
+                    <p class="desc">Cơ hội nhận đặc quyền tài trợ Website Portfolio trị giá 20.000.000 VNĐ cho các nhóm sinh viên tiềm năng.</p>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="move(2)">Bắt đầu thẩm định</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Project Info -->
+            <div class="step" id="step2">
+                <span class="label-tag">Bước 01 / 04</span>
+                <h1>Thông tin Dự án</h1>
+                <p class="desc">Cung cấp định danh và lĩnh vực hoạt động của đội nhóm.</p>
+                <input type="text" id="p_name" placeholder="Tên dự án..." autocomplete="off">
+                <input type="text" id="p_field" placeholder="Lĩnh vực (Y tế, Môi trường, AI...)" autocomplete="off">
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="move(1)">←</button>
+                    <button class="btn btn-primary" onclick="move(3)">Tiếp tục</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Vision & File -->
+            <div class="step" id="step3">
+                <span class="label-tag">Bước 02 / 04</span>
+                <h1>Hồ sơ Năng lực</h1>
+                <p class="desc">Tải lên Pitch Deck hoặc tài liệu dự án để chúng tôi đánh giá tiềm năng.</p>
+                <textarea id="p_vision" rows="3" placeholder="Mô tả ngắn về giá trị cốt lõi..."></textarea>
+                <div class="file-upload-zone">
+                    <input type="text" id="p_file" style="margin-bottom: 0; background: transparent; border: none; padding: 0; text-align: center;" placeholder="Dán link Google Drive / Dropbox hồ sơ">
+                    <div style="font-size: 10px; color: #555; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;">Vui lòng mở quyền truy cập "Bất kỳ ai có liên kết"</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="move(2)">←</button>
+                    <button class="btn btn-primary" onclick="move(4)">Tiếp tục</button>
+                </div>
+            </div>
+
+            <!-- STEP 4: Contact -->
+            <div class="step" id="step4">
+                <span class="label-tag">Bước 03 / 04</span>
+                <h1>Kết nối Founder</h1>
+                <p class="desc">Hội đồng thẩm định sẽ liên hệ trực tiếp qua thông tin này.</p>
+                <input type="text" id="f_name" placeholder="Họ và tên Trưởng nhóm">
+                <input type="tel" id="f_contact" placeholder="Số điện thoại / Zalo">
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="move(3)">←</button>
+                    <button id="submit-btn" class="btn btn-primary" onclick="send()">Gửi hồ sơ</button>
+                </div>
+            </div>
+
+            <!-- STEP 5: Success -->
+            <div class="step" id="step5">
+                <div style="margin: auto 0; text-align: center;">
+                    <div class="success-icon">✦</div>
+                    <h1>Hồ sơ đang được thẩm định</h1>
+                    <p class="desc">Cảm ơn đội ngũ. Alpha Zone sẽ phản hồi kết quả sơ khảo qua Zalo trong vòng 48h tới.</p>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="location.reload()">Hoàn tất</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function move(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            const p = n === 1 ? 0 : (n === 5 ? 100 : (n-1)/4 * 100);
+            document.getElementById('progress').style.width = p + '%';
+        }
+
+        async function send() {
+            const btn = document.getElementById('submit-btn');
+            const data = {
+                "Dự án": document.getElementById('p_name').value,
+                "Lĩnh vực": document.getElementById('p_field').value,
+                "Mô tả": document.getElementById('p_vision').value,
+                "Link Hồ sơ": document.getElementById('p_file').value,
+                "Trưởng nhóm": document.getElementById('f_name').value,
+                "Liên hệ": document.getElementById('f_contact').value,
+                "_subject": "THẨM ĐỊNH 20M - " + document.getElementById('p_name').value
+            };
+
+            if(!data["Dự án"] || !data["Liên hệ"] || !data["Link Hồ sơ"]) {
+                alert("Vui lòng cung cấp link Hồ sơ năng lực và thông tin liên hệ.");
+                return;
+            }
+
+            btn.innerText = "Đang truyền tải...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch("https://formspree.io/f/mgorgkvp", {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+                });
+                if (response.ok) move(5);
+                else throw new Error();
+            } catch (e) {
+                alert("Lỗi kết nối. Vui lòng kiểm tra lại mạng.");
+                btn.innerText = "Gửi hồ sơ";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+    </html>
