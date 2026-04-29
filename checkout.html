@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trang chính - Hệ thống Thanh toán</title>
+<style>
+/* ===== Popup Overlay và nội dung ===== */
+.modal-overlay, .mini-popup-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  visibility: hidden; opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;  /* Overlay bắt sự kiện click */
+}
+.modal-overlay.active, .mini-popup-overlay.active {
+  visibility: visible; opacity: 1;
+}
+
+/* Popup dạng bottom-sheet (nếu cần) */
+.modal-content {
+  width: 100%; background: #fff;
+  border-radius: 50px 50px 0 0;
+  padding: 40px 30px 60px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  position: relative; z-index: 10;
+}
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+/* Popup nhỏ ở giữa (ví dụ cho thanh toán) */
+.mini-popup-card {
+  width: min(100%, 380px); background: #fff;
+  border-radius: 32px; padding: 22px 18px;
+  transform: scale(0.9); transition: transform 0.25s ease;
+  position: relative; z-index: 10;
+}
+.mini-popup-overlay.active .mini-popup-card {
+  transform: scale(1);
+}
+
+/* Nút đóng */
+.popup-close {
+  position: absolute; top: 14px; right: 14px;
+  z-index: 9999; cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold;
+}
+
+/* Khóa cuộn trang khi popup mở */
+body.modal-open {
+  overflow: hidden;
+  position: fixed; width: 100%;
+}
+
+/* === Các style khác của UI ban đầu (giữ nguyên) === */
+/* ... (không thay đổi các style cũ) ... */
+</style>
+</head>
+<body>
+
+<h1>Hệ thống Thanh toán</h1>
+<p>Nội dung giao diện chính của trang.</p>
+<!-- Nút mở popup -->
+<button onclick="openPopup('paymentPopup')">Mở thanh toán</button>
+
+<!-- Popup overlay và nội dung (ví dụ: Thanh toán) -->
+<div class="mini-popup-overlay" id="paymentPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div class="mini-popup-card">
+    <!-- Nút đóng -->
+    <button type="button" class="popup-close" aria-label="Đóng">&times;</button>
+    <h2 id="popupTitle">Thanh toán</h2>
+    <p><strong>Quét mã QR để thanh toán:</strong><br>
+       <img src="placeholder-qrcode.png" alt="Mã QR chuyển khoản">
+    </p>
+    <p><strong>Số tài khoản:</strong> 1234 567 890</p>
+  </div>
+</div>
+
+<script>
+// ===== Mã JS điều khiển popup =====
+
+// Hàm mở popup theo ID
+function openPopup(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add("active");
+  document.body.classList.add("modal-open");
+}
+
+// Hàm đóng tất cả popup
+function closeAllPopups() {
+  document.querySelectorAll(".modal-overlay, .mini-popup-overlay")
+    .forEach(el => el.classList.remove("active"));
+  document.body.classList.remove("modal-open");
+}
+
+// Xử lý sự kiện click và phím Escape
+document.addEventListener("click", function(e) {
+  // Nếu click vào nút đóng (hoặc phần tử có data-close)
+  if (e.target.closest(".popup-close") || e.target.closest("[data-close]")) {
+    closeAllPopups();
+  }
+  // Nếu click ra ngoài popup (trên overlay)
+  if (e.target.classList.contains("modal-overlay") || 
+      e.target.classList.contains("mini-popup-overlay")) {
+    closeAllPopups();
+  }
+});
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeAllPopups();
+  }
+});
+</script>
+
+</body>
+</html>
