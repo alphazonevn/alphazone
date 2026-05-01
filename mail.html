@@ -1,94 +1,149 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Alpha Mail Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Mail SaaS</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style>
-  body{background:#020202;color:#fff}
-  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-  .otp{color:#10b981;font-weight:700;cursor:pointer}
-  .link{color:#60a5fa}
+body { background:#020202; color:#fff; font-family:sans-serif; }
+.card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.05); }
+.otp { color:#10b981; font-weight:bold; cursor:pointer; }
+.link { color:#3b82f6; word-break:break-all; }
+.tab-active { background:#10b981; color:#000; }
 </style>
 </head>
+
 <body class="max-w-md mx-auto p-4">
 
-<h1 class="text-center font-bold mb-4">📩 Alpha Mail Hub</h1>
+<h1 class="text-center text-lg font-bold mb-4">📩 Alpha Mail SaaS</h1>
 
-<input id="mail" class="w-full p-3 mb-3 rounded bg-black border border-gray-700" placeholder="abc@domain.com"/>
+<!-- CURRENT MAIL -->
+<div id="currentMail" class="text-center text-emerald-400 font-mono mb-3"></div>
+
+<!-- ACTION -->
 <div class="grid grid-cols-2 gap-2 mb-4">
-  <button onclick="saveMail()" class="bg-emerald-500 p-3 rounded font-bold">LƯU</button>
-  <button onclick="copyMail()" class="bg-white text-black p-3 rounded font-bold">COPY</button>
+  <button onclick="generateInbox()" class="bg-purple-500 p-3 rounded font-bold">⚡ New Inbox</button>
+  <button onclick="copyMail()" class="bg-white text-black p-3 rounded font-bold">📋 Copy</button>
 </div>
 
+<!-- TABS -->
 <div id="tabs" class="flex gap-2 overflow-x-auto mb-4"></div>
 
+<!-- INBOX -->
 <div id="inbox"></div>
 
 <script>
-const GAS_URL = "https://script.google.com/macros/s/AKfycbzakSCoa9j-2e9ixoUMad-J4rQ33FpjoJKgo2gmTvUvpDcI7tnpRelxxZza2e3smm8gWw/exec";
-let mails = JSON.parse(localStorage.getItem("mails")||"[]");
-let current = localStorage.getItem("current")||"";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxtGGcKcF8bRnrXLQA7BbAHBFPM4SBSM45rCdMxLFEvJXBnshiXlYFHQqXh9m_q_YBh/exec";
 
-function saveMail(){
-  const m=document.getElementById("mail").value.toLowerCase();
-  if(!m)return;
-  if(!mails.includes(m))mails.unshift(m);
-  current=m;
-  persist();
+let inboxes = JSON.parse(localStorage.getItem("inboxes") || "[]");
+let current = localStorage.getItem("current") || "";
+let lastCount = 0;
+
+// 🔥 INIT USER + MAIL
+async function init() {
+  if (!current) {
+    const res = await fetch(`${GAS_URL}?action=init&email=user_${Date.now()}`);
+    const data = await res.json();
+
+    current = data.inbox;
+    inboxes.unshift(current);
+    save();
+  }
+  render();
 }
 
-function copyMail(){
+// ⚡ GENERATE NEW MAIL
+async function generateInbox() {
+  const res = await fetch(`${GAS_URL}?action=init&email=user_${Date.now()}`);
+  const data = await res.json();
+
+  current = data.inbox;
+
+  if (!inboxes.includes(current)) inboxes.unshift(current);
+  save();
+}
+
+// 📋 COPY
+function copyMail() {
   navigator.clipboard.writeText(current);
-  alert("Copied "+current);
+  alert("Copied: " + current);
 }
 
-function persist(){
-  localStorage.setItem("mails",JSON.stringify(mails));
-  localStorage.setItem("current",current);
-  renderTabs();
+// 💾 SAVE
+function save() {
+  localStorage.setItem("inboxes", JSON.stringify(inboxes));
+  localStorage.setItem("current", current);
+  render();
+}
+
+// 🔄 SWITCH
+function switchInbox(mail) {
+  current = mail;
+  save();
+}
+
+// 🎨 RENDER UI
+function render() {
+  document.getElementById("currentMail").innerText = current;
+
+  document.getElementById("tabs").innerHTML = inboxes.map(m => `
+    <button onclick="switchInbox('${m}')" 
+      class="px-3 py-2 rounded text-xs ${m===current?'tab-active':'bg-gray-800'}">
+      ${m.split('@')[0]}
+    </button>
+  `).join("");
+
   load();
 }
 
-function renderTabs(){
-  document.getElementById("tabs").innerHTML = mails.map(m=>`
-    <button onclick="switchMail('${m}')" 
-      class="px-3 py-2 rounded ${m===current?'bg-emerald-500':'bg-gray-800'} text-xs">
-      ${m.split('@')[0]}
-    </button>`).join("");
+// 🔢 HIGHLIGHT OTP
+function highlightOTP(text) {
+  return text.replace(/\b\d{4,8}\b/g, m =>
+    `<span class="otp" onclick="copy('${m}')">${m}</span>`
+  );
 }
 
-function switchMail(m){
-  current=m;persist();
+// 🔗 HIGHLIGHT LINK
+function highlightLinks(text) {
+  return text.replace(/https?:\/\/[^\s]+/g, url =>
+    `<a href="${url}" target="_blank" class="link">${url}</a>`
+  );
 }
 
-function hOTP(t){
-  return t.replace(/\b\d{4,8}\b/g, m=>`<span class="otp" onclick="copy('${m}')">${m}</span>`);
-}
-function hLink(t){
-  return t.replace(/https?:\/\/[^\s]+/g, u=>`<a href="${u}" target="_blank" class="link">${u}</a>`);
-}
-function copy(t){ navigator.clipboard.writeText(t); }
+// 📥 LOAD MAIL
+async function load() {
+  if (!current) return;
 
-async function load(){
-  if(!current)return;
-  const res=await fetch(`${GAS_URL}?mail=${current}&limit=30`);
-  const data=await res.json();
+  const res = await fetch(`${GAS_URL}?action=mails&address=${current}`);
+  const data = await res.json();
 
-  document.getElementById("inbox").innerHTML = data.map(m=>{
-    let c=hLink(hOTP(m.content||""));
-    return `<div class="card p-4 rounded mb-3">
+  // 🔔 sound
+  if (data.length > lastCount) {
+    new Audio("https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3").play();
+  }
+  lastCount = data.length;
+
+  document.getElementById("inbox").innerHTML = data.map(m => {
+    let content = highlightLinks(highlightOTP(m.content || ""));
+
+    return `
+    <div class="card p-4 rounded mb-3">
       <div class="text-xs text-gray-400">${m.time}</div>
-      <div class="font-bold text-sm">${m.subject||""}</div>
-      <div class="text-xs text-gray-500 mb-1">${m.from||""}</div>
-      <div class="text-sm break-words">${c}</div>
+      <div class="font-bold text-sm">${m.subject || ""}</div>
+      <div class="text-xs text-gray-500 mb-1">${m.from || ""}</div>
+      <div class="text-sm break-words">${content}</div>
     </div>`;
-  }).join("") || `<div class="text-center text-gray-600 mt-10">Chưa có mail</div>`;
+  }).join("") || `<div class="text-center text-gray-600 mt-10">No mail</div>`;
 }
 
-setInterval(load,5000); // polling 5s
-window.onload = renderTabs;
+// 🔁 AUTO REFRESH
+setInterval(load, 5000);
+
+// 🚀 START
+init();
 </script>
 
 </body>
