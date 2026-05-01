@@ -1,144 +1,95 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Alpha Mail Hub - Pro Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020202; color: #fff; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .tab-active { background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        @keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .animate-mail { animation: slideIn 0.3s ease-out forwards; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Alpha Mail Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body{background:#020202;color:#fff}
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+  .otp{color:#10b981;font-weight:700;cursor:pointer}
+  .link{color:#60a5fa}
+</style>
 </head>
-<body class="min-h-screen p-4 flex flex-col items-center">
-    
-    <div class="w-full max-w-md mt-6 mb-6 text-center">
-        <h1 class="text-xl font-bold tracking-tighter text-white/90 uppercase italic">Alpha Zone <span class="text-emerald-500">Mail Hub</span></h1>
-    </div>
+<body class="max-w-md mx-auto p-4">
 
-    <div class="w-full max-w-md glass rounded-[32px] p-6 shadow-2xl mb-4">
-        <label class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mb-3 block text-center">Địa chỉ đang chọn</label>
-        <div id="mailAddress" class="w-full bg-white/5 border border-white/5 p-4 rounded-2xl text-emerald-400 font-mono text-lg text-center break-all mb-4">
-            Đang tải...
-        </div>
+<h1 class="text-center font-bold mb-4">📩 Alpha Mail Hub</h1>
 
-        <div class="grid grid-cols-3 gap-2 mb-4 text-white">
-            <button onclick="generateMail('netflix')" class="glass hover:bg-red-500/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">Netflix</button>
-            <button onclick="generateMail('gpt')" class="glass hover:bg-emerald-500/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">ChatGPT</button>
-            <button onclick="generateMail('canva')" class="glass hover:bg-purple-500/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">Canva</button>
-            <button onclick="generateMail('spotify')" class="glass hover:bg-green-500/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">Spotify</button>
-            <button onclick="generateMail('youtube')" class="glass hover:bg-red-600/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">Youtube</button>
-            <button onclick="generateMail('adobe')" class="glass hover:bg-blue-500/20 py-3 rounded-xl text-[10px] font-bold transition-all active:scale-95">Adobe</button>
-        </div>
+<input id="mail" class="w-full p-3 mb-3 rounded bg-black border border-gray-700" placeholder="abc@domain.com"/>
+<div class="grid grid-cols-2 gap-2 mb-4">
+  <button onclick="saveMail()" class="bg-emerald-500 p-3 rounded font-bold">LƯU</button>
+  <button onclick="copyMail()" class="bg-white text-black p-3 rounded font-bold">COPY</button>
+</div>
 
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <button onclick="createCustom()" class="bg-emerald-500 text-white py-3 rounded-2xl font-bold transition-all active:scale-95 text-[11px] uppercase tracking-wider shadow-lg shadow-emerald-500/10">⚡ Tạo Tên Riêng</button>
-            <button onclick="copyMail()" class="bg-white text-black py-3 rounded-2xl font-bold transition-all active:scale-95 text-[11px] uppercase tracking-wider">📋 Sao Chép</button>
-        </div>
+<div id="tabs" class="flex gap-2 overflow-x-auto mb-4"></div>
 
-        <label class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mb-2 block">Lịch sử phiên làm việc</label>
-        <div id="mailTabs" class="flex space-x-2 overflow-x-auto no-scrollbar pb-2"></div>
-    </div>
+<div id="inbox"></div>
 
-    <div class="w-full max-w-md">
-        <div class="flex justify-between items-center mb-4 px-2">
-            <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Hộp thư đến</h2>
-            <div id="loader" class="hidden h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-        </div>
-        
-        <div id="inbox" class="space-y-3 pb-10">
-            <div class="text-center py-20 opacity-20 text-[10px] uppercase tracking-widest italic">Đang chờ tín hiệu...</div>
-        </div>
-    </div>
+<script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzakSCoa9j-2e9ixoUMad-J4rQ33FpjoJKgo2gmTvUvpDcI7tnpRelxxZza2e3smm8gWw/exec";
+let mails = JSON.parse(localStorage.getItem("mails")||"[]");
+let current = localStorage.getItem("current")||"";
 
-    <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbyCUjSzuFsUeQiNOEeH4iiD9uZDliTIMGxb843OEiX8gXK9Bao3VxuFogcftIXOUWNQJg/exec";
-        const DOMAIN = "alphazone.io.vn";
-        const notifySound = new Audio('https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3');
+function saveMail(){
+  const m=document.getElementById("mail").value.toLowerCase();
+  if(!m)return;
+  if(!mails.includes(m))mails.unshift(m);
+  current=m;
+  persist();
+}
 
-        let mailHistory = JSON.parse(localStorage.getItem('az_v3_history')) || [];
-        let currentMail = localStorage.getItem('az_v3_current') || "";
-        let lastCount = 0;
+function copyMail(){
+  navigator.clipboard.writeText(current);
+  alert("Copied "+current);
+}
 
-        function generateMail(platform) {
-            const count = mailHistory.filter(m => m.startsWith(platform)).length + 1;
-            const order = count < 10 ? `0${count}` : count;
-            const newMail = `${platform}.${order}@${DOMAIN}`;
-            addToHistory(newMail);
-        }
+function persist(){
+  localStorage.setItem("mails",JSON.stringify(mails));
+  localStorage.setItem("current",current);
+  renderTabs();
+  load();
+}
 
-        function createCustom() {
-            let name = prompt("Nhập tên mail tùy chỉnh:");
-            if (name) {
-                name = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '');
-                addToHistory(`${name}@${DOMAIN}`);
-            }
-        }
+function renderTabs(){
+  document.getElementById("tabs").innerHTML = mails.map(m=>`
+    <button onclick="switchMail('${m}')" 
+      class="px-3 py-2 rounded ${m===current?'bg-emerald-500':'bg-gray-800'} text-xs">
+      ${m.split('@')[0]}
+    </button>`).join("");
+}
 
-        function addToHistory(newMail) {
-            if (!mailHistory.includes(newMail)) {
-                mailHistory.unshift(newMail);
-                if (mailHistory.length > 15) mailHistory.pop();
-            }
-            switchMail(newMail);
-        }
+function switchMail(m){
+  current=m;persist();
+}
 
-        function switchMail(mail) {
-            currentMail = mail;
-            lastCount = 0;
-            localStorage.setItem('az_v3_current', currentMail);
-            localStorage.setItem('az_v3_history', JSON.stringify(mailHistory));
-            updateUI();
-            checkMail(true);
-        }
+function hOTP(t){
+  return t.replace(/\b\d{4,8}\b/g, m=>`<span class="otp" onclick="copy('${m}')">${m}</span>`);
+}
+function hLink(t){
+  return t.replace(/https?:\/\/[^\s]+/g, u=>`<a href="${u}" target="_blank" class="link">${u}</a>`);
+}
+function copy(t){ navigator.clipboard.writeText(t); }
 
-        function updateUI() {
-            document.getElementById("mailAddress").innerText = currentMail;
-            document.getElementById("mailTabs").innerHTML = mailHistory.map(m => `
-                <button onclick="switchMail('${m}')" class="px-4 py-2 rounded-xl text-[10px] font-bold whitespace-nowrap border transition-all ${m === currentMail ? 'tab-active' : 'glass text-gray-500'}">
-                    ${m.split('@')[0]}
-                </button>
-            `).join('');
-        }
+async function load(){
+  if(!current)return;
+  const res=await fetch(`${GAS_URL}?mail=${current}&limit=30`);
+  const data=await res.json();
 
-        async function checkMail(force = false) {
-            if (!currentMail) return;
-            document.getElementById("loader").classList.remove("hidden");
-            try {
-                const res = await fetch(`${GAS_URL}?mail=${currentMail}`);
-                const data = await res.json();
-                if (data.length > lastCount) {
-                    if (!force && lastCount !== 0) notifySound.play();
-                    lastCount = data.length;
-                    document.getElementById("inbox").innerHTML = data.map(m => `
-                        <div class="glass p-5 rounded-[24px] animate-mail border-l-2 border-emerald-500 mb-3">
-                            <div class="flex justify-between mb-2">
-                                <span class="text-emerald-400 font-bold text-[10px] uppercase">Từ: ${m.from.split('<')[0]}</span>
-                                <span class="text-[10px] text-gray-600 font-mono">${m.time}</span>
-                            </div>
-                            <h3 class="font-bold text-sm mb-1 text-white">${m.subject}</h3>
-                            <div class="text-gray-400 text-[11px] leading-relaxed break-words">${m.content}</div>
-                        </div>`).join('');
-                } else if (data.length === 0) {
-                    document.getElementById("inbox").innerHTML = '<div class="text-center py-20 text-gray-700 text-[10px] uppercase tracking-[0.2em]">Hộp thư trống</div>';
-                }
-            } catch (e) { console.log("Syncing..."); }
-            document.getElementById("loader").classList.add("hidden");
-        }
+  document.getElementById("inbox").innerHTML = data.map(m=>{
+    let c=hLink(hOTP(m.content||""));
+    return `<div class="card p-4 rounded mb-3">
+      <div class="text-xs text-gray-400">${m.time}</div>
+      <div class="font-bold text-sm">${m.subject||""}</div>
+      <div class="text-xs text-gray-500 mb-1">${m.from||""}</div>
+      <div class="text-sm break-words">${c}</div>
+    </div>`;
+  }).join("") || `<div class="text-center text-gray-600 mt-10">Chưa có mail</div>`;
+}
 
-        function copyMail() {
-            navigator.clipboard.writeText(currentMail);
-            const b = event.target; b.innerText = "COPIED!";
-            setTimeout(() => b.innerText = "📋 SAO CHÉP", 1000);
-        }
+setInterval(load,5000); // polling 5s
+window.onload = renderTabs;
+</script>
 
-        window.onload = () => { if(currentMail) updateUI(); else generateMail('alpha'); };
-        setInterval(checkMail, 5000);
-    </script>
 </body>
 </html>
