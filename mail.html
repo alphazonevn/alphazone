@@ -1,148 +1,70 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Mail SaaS</title>
-
+<title>Mail PRO</title>
 <script src="https://cdn.tailwindcss.com"></script>
-
 <style>
-body { background:#020202; color:#fff; font-family:sans-serif; }
-.card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.05); }
-.otp { color:#10b981; font-weight:bold; cursor:pointer; }
-.link { color:#3b82f6; word-break:break-all; }
-.tab-active { background:#10b981; color:#000; }
+body{background:#020202;color:#fff}
+.otp{color:#10b981;font-weight:bold;cursor:pointer}
 </style>
 </head>
-
 <body class="max-w-md mx-auto p-4">
 
-<h1 class="text-center text-lg font-bold mb-4">📩 Alpha Mail SaaS</h1>
+<h1 class="text-center font-bold mb-4">⚡ Mail PRO</h1>
 
-<!-- CURRENT MAIL -->
-<div id="currentMail" class="text-center text-emerald-400 font-mono mb-3"></div>
-
-<!-- ACTION -->
-<div class="grid grid-cols-2 gap-2 mb-4">
-  <button onclick="generateInbox()" class="bg-purple-500 p-3 rounded font-bold">⚡ New Inbox</button>
-  <button onclick="copyMail()" class="bg-white text-black p-3 rounded font-bold">📋 Copy</button>
-</div>
-
-<!-- TABS -->
-<div id="tabs" class="flex gap-2 overflow-x-auto mb-4"></div>
-
-<!-- INBOX -->
+<div id="mail" class="text-center mb-3"></div>
 <div id="inbox"></div>
 
 <script>
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxPz-Zj3pymRZtnRh5Uoc9xADYzYQ2AvJXJ0FlHvNKc9FCtpC3LLR99qrKSnvtKJSm7/exec";
+const GAS="https://script.google.com/macros/s/AKfycbyYxSz6TgL3jhJTbaX2TMNIaYb-VzghQ8DNFBH08PR-bb_fp3gDcieL_Ie-sg5IIK5D/exec";
 
-let inboxes = JSON.parse(localStorage.getItem("inboxes") || "[]");
-let current = localStorage.getItem("current") || "";
-let lastCount = 0;
+let current="";
+let lastTime=null;
 
-// 🔥 INIT USER + MAIL
-async function init() {
-  if (!current) {
-    const res = await fetch(`${GAS_URL}?action=init&email=user_${Date.now()}`);
-    const data = await res.json();
-
-    current = data.inbox;
-    inboxes.unshift(current);
-    save();
-  }
-  render();
-}
-
-// ⚡ GENERATE NEW MAIL
-async function generateInbox() {
-  const res = await fetch(`${GAS_URL}?action=init&email=user_${Date.now()}`);
-  const data = await res.json();
-
-  current = data.inbox;
-
-  if (!inboxes.includes(current)) inboxes.unshift(current);
-  save();
-}
-
-// 📋 COPY
-function copyMail() {
-  navigator.clipboard.writeText(current);
-  alert("Copied: " + current);
-}
-
-// 💾 SAVE
-function save() {
-  localStorage.setItem("inboxes", JSON.stringify(inboxes));
-  localStorage.setItem("current", current);
-  render();
-}
-
-// 🔄 SWITCH
-function switchInbox(mail) {
-  current = mail;
-  save();
-}
-
-// 🎨 RENDER UI
-function render() {
-  document.getElementById("currentMail").innerText = current;
-
-  document.getElementById("tabs").innerHTML = inboxes.map(m => `
-    <button onclick="switchInbox('${m}')" 
-      class="px-3 py-2 rounded text-xs ${m===current?'tab-active':'bg-gray-800'}">
-      ${m.split('@')[0]}
-    </button>
-  `).join("");
-
+// init
+async function init(){
+  current=Math.random().toString(36).slice(2,10)+"@alphazone.io.vn";
+  document.getElementById("mail").innerText=current;
   load();
 }
 
-// 🔢 HIGHLIGHT OTP
-function highlightOTP(text) {
-  return text.replace(/\b\d{4,8}\b/g, m =>
-    `<span class="otp" onclick="copy('${m}')">${m}</span>`
-  );
+// highlight OTP
+function hOTP(t){
+  return t.replace(/\b\d{4,6}\b/g,
+    m=>`<span class="otp" onclick="copy('${m}')">${m}</span>`);
 }
 
-// 🔗 HIGHLIGHT LINK
-function highlightLinks(text) {
-  return text.replace(/https?:\/\/[^\s]+/g, url =>
-    `<a href="${url}" target="_blank" class="link">${url}</a>`
-  );
+// copy
+function copy(t){
+  navigator.clipboard.writeText(t);
 }
 
-// 📥 LOAD MAIL
-async function load() {
-  if (!current) return;
+// load incremental
+async function load(){
+  let url = `${GAS}?address=${current}`;
+  if(lastTime) url += `&since=${lastTime}`;
 
-  const res = await fetch(`${GAS_URL}?action=mails&address=${current}`);
+  const res = await fetch(url);
   const data = await res.json();
 
-  // 🔔 sound
-  if (data.length > lastCount) {
+  if(data.length){
+    lastTime = data[data.length-1].time;
+
     new Audio("https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3").play();
+
+    const html = data.map(m=>`
+      <div class="p-3 border mb-2">
+        <b>${m.subject||""}</b><br>
+        ${hOTP(m.content||"")}
+      </div>
+    `).join("");
+
+    document.getElementById("inbox").innerHTML = html + document.getElementById("inbox").innerHTML;
   }
-  lastCount = data.length;
-
-  document.getElementById("inbox").innerHTML = data.map(m => {
-    let content = highlightLinks(highlightOTP(m.content || ""));
-
-    return `
-    <div class="card p-4 rounded mb-3">
-      <div class="text-xs text-gray-400">${m.time}</div>
-      <div class="font-bold text-sm">${m.subject || ""}</div>
-      <div class="text-xs text-gray-500 mb-1">${m.from || ""}</div>
-      <div class="text-sm break-words">${content}</div>
-    </div>`;
-  }).join("") || `<div class="text-center text-gray-600 mt-10">No mail</div>`;
 }
 
-// 🔁 AUTO REFRESH
-setInterval(load, 5000);
-
-// 🚀 START
+setInterval(load,3000);
 init();
 </script>
 
