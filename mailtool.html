@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaZone Outsourcing Mailer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background: #020617; color: #e2e8f0; font-family: 'Be Vietnam Pro', , Geneva, Verdana, sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- CÀI ĐẶT & SOẠN THẢO -->
+        <div class="lg:col-span-7 space-y-6">
+            <header class="mb-8">
+                <h1 class="text-3xl font-black text-indigo-500 tracking-tight">ALPHAZONE <span class="text-white">v9.0</span></h1>
+                <p class="text-slate-500 text-sm">Hệ thống gửi mail Outsource - Auto Schedule & Audio Alert.</p>
+            </header>
+
+            <div class="glass p-6 rounded-3xl space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase">Security Token</label>
+                        <input type="password" id="apiToken" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 mt-1 outline-none focus:border-indigo-500" placeholder="••••">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase">Tiêu đề Mail</label>
+                        <input type="text" id="subject" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 mt-1 outline-none focus:border-indigo-500" value="Chào {{Tên}}, AlphaZone tặng quà bạn!">
+                    </div>
+                </div>
+
+                <!-- TÍNH NĂNG MỚI: LÊN LỊCH GỬI -->
+                <div class="grid grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase">Chế độ gửi</label>
+                        <select id="scheduleType" class="w-full bg-[#020617] border border-white/10 rounded-xl px-4 py-3 mt-1 outline-none focus:border-indigo-500 text-sm cursor-pointer text-indigo-300">
+                            <option value="now">🚀 Gửi ngay lập tức</option>
+                            <option value="datetime">⏰ Lên lịch giờ cụ thể</option>
+                            <option value="daily">📅 Gửi lặp lại hàng ngày</option>
+                        </select>
+                    </div>
+                    <div id="timePickerContainer" class="hidden">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase">Chọn thời gian</label>
+                        <input type="datetime-local" id="scheduleTime" class="w-full bg-[#020617] border border-white/10 rounded-xl px-4 py-3 mt-1 outline-none focus:border-indigo-500 text-sm" style="color-scheme: dark;">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-[10px] font-bold text-indigo-400 uppercase flex flex-col">
+                            <span>Thiết kế HTML mẫu</span>
+                            <span class="text-slate-500 lowercase font-normal mt-1">Hỗ trợ: {{Tên}}, {{Sản phẩm}}, {{AI_MESSAGE}}</span>
+                        </label>
+                        <!-- TÍNH NĂNG MỚI: ĐỌC FILE HTML -->
+                        <input type="file" id="htmlFileInput" accept=".html, .htm" class="text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-500/20 file:text-indigo-400 hover:file:bg-indigo-500/30 cursor-pointer transition-all">
+                    </div>
+                    <textarea id="htmlSource" class="w-full h-72 bg-black/50 border border-white/10 rounded-2xl p-4 font-mono text-xs text-indigo-300 outline-none focus:border-indigo-500 transition-all" 
+                    placeholder="<html><body style='color:blue'>Chào {{Tên}}...</body></html>"></textarea>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" id="resetMode" class="w-4 h-4 accent-indigo-500">
+                        <span class="text-xs font-bold text-slate-400">Gửi đợt mới (Reset trạng thái)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" id="useAI" class="w-4 h-4 accent-indigo-500">
+                        <span class="text-xs font-bold text-indigo-400">Sử dụng AI Gemini</span>
+                    </label>
+                </div>
+
+                <button id="runBtn" onclick="execute()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-2xl font-bold text-white transition-all shadow-xl shadow-indigo-500/10 flex items-center justify-center gap-2">
+                    <span id="btnText">KÍCH HOẠT CHIẾN DỊCH</span>
+                    <i class="fas fa-paper-plane" id="btnIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- NHẬT KÝ VÀ TRẠNG THÁI -->
+        <div class="lg:col-span-5 space-y-6">
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Nhật ký thực thi</h3>
+            <div id="logPanel" class="glass rounded-3xl p-6 h-[600px] overflow-y-auto font-mono text-[11px] space-y-2">
+                <div class="text-slate-600 italic">Hệ thống đang chờ lệnh...</div>
+            </div>
+            
+            <div id="stats" class="grid grid-cols-2 gap-4">
+                <div class="glass p-4 rounded-2xl text-center">
+                    <div id="countSuccess" class="text-2xl font-bold text-green-400">0</div>
+                    <div class="text-[9px] text-slate-500 uppercase">Thành công</div>
+                </div>
+                <div class="glass p-4 rounded-2xl text-center">
+                    <div id="countTotal" class="text-2xl font-bold text-indigo-400">0</div>
+                    <div class="text-[9px] text-slate-500 uppercase">Tổng xử lý</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxv94hZ7httVJs5dh4J5y43xBzjvUVzT7ThlO2BAF8n9Ag_SpLNW-KNcV_fQWkQzOoPfg/exec"; 
+
+        // ÂM BÁO (Sử dụng URL public của Google)
+        const soundSuccess = new Audio('https://actions.google.com/sounds/v1/water/glass_water_pour_short.ogg');
+        const soundError = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+
+        // Logic đọc file HTML
+        document.getElementById('htmlFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('htmlSource').value = evt.target.result;
+                document.getElementById('logPanel').insertAdjacentHTML('afterbegin', `<div class="text-blue-400 py-1">Đã tải thành công mẫu HTML từ file: ${file.name}</div>`);
+            };
+            reader.readAsText(file);
+        });
+
+        // Logic thay đổi UI Hẹn giờ
+        document.getElementById('scheduleType').addEventListener('change', function(e) {
+            const container = document.getElementById('timePickerContainer');
+            const input = document.getElementById('scheduleTime');
+            if (e.target.value === 'now') {
+                container.classList.add('hidden');
+            } else {
+                container.classList.remove('hidden');
+                input.type = (e.target.value === 'daily') ? 'time' : 'datetime-local';
+            }
+        });
+
+        async function execute() {
+            const btn = document.getElementById('runBtn');
+            const logs = document.getElementById('logPanel');
+            const schedType = document.getElementById('scheduleType').value;
+            const schedTime = document.getElementById('scheduleTime').value;
+            
+            const payload = {
+                token: document.getElementById('apiToken').value,
+                subject: document.getElementById('subject').value,
+                htmlSource: document.getElementById('htmlSource').value,
+                resetMode: document.getElementById('resetMode').checked,
+                useAI: document.getElementById('useAI').checked,
+                scheduleType: schedType,
+                scheduleTime: schedTime
+            };
+
+            if(!payload.token || !payload.htmlSource) return alert("Vui lòng nhập đầy đủ Token và Nội dung HTML!");
+            if(schedType !== 'now' && !schedTime) return alert("Vui lòng chọn thời gian gửi!");
+
+            btn.disabled = true;
+            document.getElementById('btnText').innerText = 'ĐANG XỬ LÝ...';
+            document.getElementById('btnIcon').className = 'fas fa-spinner fa-spin ml-2';
+            logs.innerHTML = `<div class="text-indigo-400 font-bold">[${new Date().toLocaleTimeString()}] BẮT ĐẦU GỬI LỆNH ĐẾN SERVER...</div>`;
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                const resData = await response.json();
+
+                if(resData.status === "success") {
+                    soundSuccess.play().catch(e => console.log("Trình duyệt chặn autoplay âm thanh"));
+                    document.getElementById('countSuccess').innerText = resData.count || 0;
+                    document.getElementById('countTotal').innerText = resData.details ? resData.details.length : 0;
+                    
+                    resData.details.forEach(item => {
+                        const color = item.status.includes("Thành công") || item.status.includes("lên lịch") ? "text-green-400" : "text-red-400";
+                        logs.insertAdjacentHTML('afterbegin', `<div class="py-1 border-b border-white/5 ${color}">● ${item.email} - ${item.status}</div>`);
+                    });
+                } else {
+                    soundError.play().catch(e=>e);
+                    logs.insertAdjacentHTML('afterbegin', `<div class="text-red-500 font-bold">LỖI BACKEND: ${resData.msg}</div>`);
+                }
+            } catch (err) {
+                soundError.play().catch(e=>e);
+                logs.insertAdjacentHTML('afterbegin', `<div class="text-red-500 font-bold">LỖI MẠNG: KHÔNG THỂ KẾT NỐI SERVER</div>`);
+            } finally {
+                btn.disabled = false;
+                document.getElementById('btnText').innerText = 'KÍCH HOẠT CHIẾN DỊCH';
+                document.getElementById('btnIcon').className = 'fas fa-paper-plane ml-2';
+            }
+        }
+    </script>
+</body>
+</html>
