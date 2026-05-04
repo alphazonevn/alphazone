@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yummy Express - Đặt đồ ăn trực tuyến</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5A00;
+            --primary-hover: #E04E00;
+            --secondary: #2C3E50;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --text-main: #333333;
+            --text-muted: #777777;
+            --border: #EEEEEE;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #f0f0f0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover { background: #ffe4d6; }
+
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #fff0e6 0%, var(--white) 100%);
+        }
+        .hero h1 { font-size: 32px; margin-bottom: 10px; color: var(--secondary); }
+        .hero p { color: var(--text-muted); font-size: 16px; }
+
+        /* Menu Grid */
+        .menu-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card:hover { transform: translateY(-5px); }
+
+        .food-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .food-name { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .food-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; }
+        .food-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .food-price { font-size: 18px; font-weight: 700; color: var(--primary); }
+        
+        .btn-add {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-add:hover { background: var(--primary-hover); }
+
+        /* General Modal Overlay */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none;
+            justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+
+        /* Cart Sidebar Style */
+        .cart-modal-container {
+            justify-content: flex-end;
+        }
+        .cart-sidebar {
+            width: 100%; max-width: 400px; background: var(--white);
+            height: 100%; display: flex; flex-direction: column;
+            animation: slideIn 0.3s forwards;
+        }
+
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .cart-header {
+            padding: 20px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .close-btn { cursor: pointer; font-size: 24px; color: var(--text-muted); }
+
+        .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px; }
+        .empty-cart { text-align: center; color: var(--text-muted); margin-top: 50px; }
+
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed var(--border);
+        }
+        .item-info h4 { font-size: 15px; margin-bottom: 5px; }
+        .item-price { color: var(--primary); font-weight: 600; font-size: 14px;}
+        .qty-controls { display: flex; align-items: center; gap: 10px; }
+        .qty-btn { width: 25px; height: 25px; border-radius: 5px; border: 1px solid var(--border); background: var(--bg-light); cursor: pointer; }
+
+        .checkout-section { padding: 20px; border-top: 1px solid var(--border); background: var(--bg-light); }
+        .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; margin-bottom: 15px; }
+
+        /* Login Modal & Generic Forms */
+        .auth-box {
+            background: var(--white); padding: 30px; border-radius: var(--radius);
+            width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .auth-box h2 { margin-bottom: 20px; text-align: center; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 600; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px 15px; border: 1px solid var(--border);
+            border-radius: 8px; font-size: 14px; outline: none; transition: border 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+        
+        .btn-full {
+            width: 100%; padding: 12px; background: var(--primary); color: var(--white);
+            border: none; border-radius: 8px; font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-full:hover { background: var(--primary-hover); }
+
+        .btn-checkout:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* Success Modal */
+        .success-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none;
+            justify-content: center; align-items: center; z-index: 2000;
+        }
+        .success-box {
+            background: var(--white); padding: 40px; border-radius: var(--radius);
+            text-align: center; max-width: 400px; width: 90%;
+        }
+        .success-icon { font-size: 50px; color: #4CAF50; margin-bottom: 15px; }
+
+        .remember-info { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; margin-top: 10px;}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🍔 YummyExpress</div>
+        <div class="header-actions">
+            <div id="userHeaderBtn" class="user-profile-btn" onclick="openLoginModal()">
+                <span>Đăng nhập</span>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 1 0 0-2zm10 0a1 1 0 1 0 0 2 1 1 0 1 0 0-2zM1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span class="cart-badge" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Món ngon nóng hổi, giao ngay tới cửa</h1>
+        <p>Chọn món yêu thích của bạn từ menu dưới đây</p>
+    </div>
+
+    <div class="menu-container" id="menuGrid">
+        <!-- Render bằng JS -->
+    </div>
+
+    <!-- Modal Đăng nhập -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="auth-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="margin: 0;">Đăng nhập</h2>
+                <span class="close-btn" onclick="closeAuthModals()">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="tel" id="loginPhone" placeholder="Nhập số điện thoại của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" id="loginName" placeholder="Tên để chúng mình gọi bạn" required>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ mặc định</label>
+                    <textarea id="loginAddress" rows="2" placeholder="Ghi nhớ địa chỉ để đặt hàng nhanh hơn" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Email (Nhận hóa đơn)</label>
+                    <input type="email" id="loginEmail" placeholder="email@gmail.com" required>
+                </div>
+                <button type="submit" class="btn-full">LƯU THÔNG TIN</button>
+                <div class="remember-info">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Thông tin sẽ được ghi nhớ trên thiết bị này
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Giỏ hàng Sidebar -->
+    <div class="modal-overlay cart-modal-container" id="cartModal">
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h2>Giỏ hàng của bạn</h2>
+                <div class="close-btn" onclick="toggleCart()">&times;</div>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">Giỏ hàng đang trống</div>
+            </div>
+
+            <div class="checkout-section">
+                <div class="total-row">
+                    <span>Tổng cộng:</span>
+                    <span id="cartTotal">0đ</span>
+                </div>
+                
+                <form id="orderForm">
+                    <div class="form-group">
+                        <input type="text" id="cusName" placeholder="Họ và tên người nhận" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="cusPhone" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="cusEmail" placeholder="Email (để nhận hóa đơn)" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="cusAddress" rows="2" placeholder="Địa chỉ giao hàng" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="cusNote" rows="2" placeholder="Ghi chú món ăn..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-checkout btn-full" id="submitBtn">ĐẶT HÀNG NGAY</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thành Công -->
+    <div class="success-modal" id="successModal">
+        <div class="success-box">
+            <div class="success-icon">✔️</div>
+            <h2>Đặt hàng thành công!</h2>
+            <p style="color: var(--text-muted); margin: 15px 0;">Đơn hàng của bạn đã được ghi nhận. Hóa đơn đã được gửi vào email của bạn.</p>
+            <button class="btn-add" style="width: 100%" onclick="location.reload()">Quay lại trang chủ</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. CONFIG ---
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpMnKw1_4JmY9TzeHRszHIVVhf0CulfA-L7fpNtIPwDIM1ss_vmapZ-ubNWzGYjUcSBg/exec"; 
+
+        // --- 2. DỮ LIỆU MENU ---
+        const menuData = [
+            { id: 'f1', name: 'Phở Bò Đặc Biệt', price: 65000, desc: 'Phở bò thố đá, nhiều thịt bò tái và nạm.', img: 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=400&q=80' },
+            { id: 'f2', name: 'Bánh Mì Heo Quay', price: 30000, desc: 'Bánh mì giòn rụm với heo quay da giòn.', img: 'https://images.unsplash.com/photo-1626804475297-41609ea005eb?auto=format&fit=crop&w=400&q=80' },
+            { id: 'f3', name: 'Cơm Tấm Sườn Bì Chả', price: 55000, desc: 'Sườn nướng than hoa mềm ngọt, kèm mỡ hành.', img: 'https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&w=400&q=80' },
+            { id: 'f4', name: 'Gà Rán Sốt Cay', price: 85000, desc: 'Gà rán Hàn Quốc sốt cay ngọt, phủ mè rang.', img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80' },
+            { id: 'f5', name: 'Trà Sữa Trân Châu', price: 35000, desc: 'Trà sữa đậm vị trà, trân châu đen dai giòn.', img: 'https://images.unsplash.com/photo-1558857563-b37102e99f50?auto=format&fit=crop&w=400&q=80' },
+            { id: 'f6', name: 'Gỏi Cuốn Tôm Thịt', price: 25000, desc: 'Gỏi cuốn thanh mát, tương đen đậu phộng.', img: 'https://images.unsplash.com/photo-1556694795-b6423d3d5b28?auto=format&fit=crop&w=400&q=80' }
+        ];
+
+        let cart = [];
+        let currentUser = null;
+
+        // --- 3. QUẢN LÝ NGƯỜI DÙNG & GHI NHỚ ---
+        function initUser() {
+            const savedUser = localStorage.getItem('yummy_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserUI();
+                fillOrderForm();
+            }
+        }
+
+        function updateUserUI() {
+            const btn = document.getElementById('userHeaderBtn');
+            if (currentUser) {
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>${currentUser.name}</span>`;
+            }
+        }
+
+        function fillOrderForm() {
+            if (currentUser) {
+                document.getElementById('cusName').value = currentUser.name;
+                document.getElementById('cusPhone').value = currentUser.phone;
+                document.getElementById('cusEmail').value = currentUser.email;
+                document.getElementById('cusAddress').value = currentUser.address;
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+            if (currentUser) {
+                document.getElementById('loginName').value = currentUser.name;
+                document.getElementById('loginPhone').value = currentUser.phone;
+                document.getElementById('loginEmail').value = currentUser.email;
+                document.getElementById('loginAddress').value = currentUser.address;
+            }
+        }
+
+        function closeAuthModals() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = {
+                name: document.getElementById('loginName').value,
+                phone: document.getElementById('loginPhone').value,
+                email: document.getElementById('loginEmail').value,
+                address: document.getElementById('loginAddress').value
+            };
+            localStorage.setItem('yummy_user', JSON.stringify(user));
+            currentUser = user;
+            updateUserUI();
+            fillOrderForm();
+            closeAuthModals();
+        });
+
+        // --- 4. LOGIC GIỎ HÀNG ---
+        function formatMoney(num) { return num.toLocaleString('vi-VN') + 'đ'; }
+
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = menuData.map(item => `
+                <div class="food-card">
+                    <img src="${item.img}" alt="${item.name}" class="food-img">
+                    <div class="food-info">
+                        <div class="food-name">${item.name}</div>
+                        <div class="food-desc">${item.desc}</div>
+                        <div class="food-bottom">
+                            <span class="food-price">${formatMoney(item.price)}</span>
+                            <button class="btn-add" onclick="addToCart('${item.id}')">Thêm +</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('active');
+            // Nếu chưa đăng nhập, tự động mở modal đăng nhập khi vào giỏ hàng
+            if (!currentUser) {
+                // Ta không chặn, nhưng gợi ý điền thông tin nhanh
+            }
+        }
+
+        function addToCart(id) {
+            const item = menuData.find(i => i.id === id);
+            const existing = cart.find(i => i.id === id);
+            if (existing) existing.qty += 1;
+            else cart.push({ ...item, qty: 1 });
+            updateCartUI();
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            const countBadge = document.getElementById('cartCount');
+            const totalEl = document.getElementById('cartTotal');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            countBadge.innerText = totalItems;
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            totalEl.innerText = formatMoney(totalPrice);
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="empty-cart">Giỏ hàng đang trống</div>';
+                document.getElementById('submitBtn').disabled = true;
+                return;
+            }
+
+            document.getElementById('submitBtn').disabled = false;
+            container.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <div class="item-price">${formatMoney(item.price)}</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 5. ĐẶT HÀNG ---
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(cart.length === 0) return;
+
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "ĐANG XỬ LÝ...";
+            btn.disabled = true;
+
+            // Nếu người dùng thay đổi thông tin khi đặt hàng, ta cập nhật lại Profile luôn
+            const user = {
+                name: document.getElementById('cusName').value,
+                phone: document.getElementById('cusPhone').value,
+                email: document.getElementById('cusEmail').value,
+                address: document.getElementById('cusAddress').value
+            };
+            localStorage.setItem('yummy_user', JSON.stringify(user));
+            currentUser = user;
+            updateUserUI();
+
+            const orderData = {
+                customerName: user.name,
+                phone: user.phone,
+                email: user.email,
+                address: user.address,
+                note: document.getElementById('cusNote').value,
+                items: cart,
+                totalAmount: cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
+            };
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+                document.getElementById('cartModal').classList.remove('active');
+                document.getElementById('successModal').style.display = 'flex';
+                cart = [];
+                updateCartUI();
+            } catch (error) {
+                alert("Lỗi kết nối server!");
+            } finally {
+                btn.innerText = "ĐẶT HÀNG NGAY";
+                btn.disabled = false;
+            }
+        });
+
+        // Khởi tạo
+        renderMenu();
+        initUser();
+    </script>
+</body>
+</html>
