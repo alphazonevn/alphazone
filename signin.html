@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALPHA PARTNER - Đăng Ký Cộng Tác Viên</title>
-    <!-- Import Be Vietnam Pro font với đầy đủ các weights -->
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,20 +17,17 @@
             --border-color: rgba(197, 160, 35, 0.2);
             --input-bg: rgba(255, 255, 255, 0.05);
             --danger: #ff4d4d;
-            /* Thiết lập font-family mặc định cho toàn bộ project */
             --font-main: 'Be Vietnam Pro', sans-serif;
         }
 
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            /* Đồng bộ font cho mọi element */
             font-family: var(--font-main);
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -69,30 +65,20 @@
         }
 
         .subtitle {
-            font-size: 16px;
-            opacity: 0.7;
-            max-width: 600px;
-            margin: 10px auto 0;
-            font-weight: 400;
+            font-size: 16px; opacity: 0.7;
+            max-width: 600px; margin: 10px auto 0;
         }
 
         .main-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1200px; margin: 0 auto;
             padding: 0 20px 80px;
             display: grid;
             grid-template-columns: 1fr 1.4fr;
             gap: 30px;
         }
 
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 1024px) { .main-container { grid-template-columns: 1fr; } }
 
-        /* Section Styling */
         .content-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -104,233 +90,77 @@
 
         h3 {
             color: var(--gold-light);
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 18px; font-weight: 700;
             margin: 0 0 25px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 10px;
             border-bottom: 1px solid rgba(197, 160, 35, 0.1);
             padding-bottom: 15px;
         }
 
-        /* Form Styling */
         .form-section-title {
-            font-size: 13px;
-            color: var(--gold-primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 25px 0 15px;
-            font-weight: 800;
-            display: block;
+            font-size: 13px; color: var(--gold-primary);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin: 25px 0 15px; font-weight: 800; display: block;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
 
-        @media (max-width: 600px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
+        .form-group { margin-bottom: 18px; }
         label {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 0.5px;
+            display: block; font-size: 11px; font-weight: 700;
+            margin-bottom: 6px; color: rgba(255,255,255,0.5);
         }
 
-        input, select, textarea, button {
-            width: 100%;
-            padding: 12px 16px;
+        input {
+            width: 100%; padding: 12px 16px;
             background: var(--input-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 14px;
+            border-radius: 10px; color: #fff;
             transition: all 0.3s ease;
-            /* Ép lại font cho các input element vì trình duyệt đôi khi ghi đè */
-            font-family: var(--font-main);
         }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold-primary);
-            background: rgba(197, 160, 35, 0.05);
-        }
+        input:focus { outline: none; border-color: var(--gold-primary); background: rgba(197, 160, 35, 0.1); }
 
         /* Upload Styling */
-        .upload-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
+        .upload-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .upload-box {
-            position: relative;
-            border: 1px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            background: rgba(255,255,255,0.02);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            position: relative; border: 1px dashed var(--border-color);
+            border-radius: 12px; height: 100px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.02); cursor: pointer; overflow: hidden;
         }
-
-        .upload-box:hover {
-            border-color: var(--gold-primary);
-            background: rgba(197, 160, 35, 0.05);
+        .upload-box img {
+            position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: none;
         }
-
-        .upload-box svg {
-            color: var(--gold-primary);
-            margin-bottom: 8px;
-            opacity: 0.7;
-        }
-
-        .upload-box span {
-            display: block;
-            font-size: 11px;
-            color: rgba(255,255,255,0.6);
-            font-weight: 500;
-        }
-
-        .upload-box input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
+        .upload-box span { font-size: 11px; color: rgba(255,255,255,0.6); z-index: 2; text-align: center; padding: 5px; }
+        .upload-box input[type="file"] { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 3; }
 
         .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 12px;
-            color: #000;
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s transform;
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            width: 100%; padding: 16px;
+            background: var(--accent-gradient); border: none;
+            border-radius: 12px; color: #000; font-weight: 800;
+            cursor: pointer; transition: all 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(1); }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(197, 160, 35, 0.3);
-        }
+        .policy-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .policy-title { font-weight: 700; color: var(--gold-primary); display: block; font-size: 15px; }
+        .policy-desc { font-size: 12px; opacity: 0.7; text-align: justify; margin: 5px 0; }
+        .penalty-text { color: var(--danger); font-size: 11px; font-weight: 600; display: block; }
 
-        /* Policy Styling */
-        .policy-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .stat-card { background: rgba(255,255,255,0.02); padding: 12px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .stat-val { display: block; font-size: 20px; font-weight: 800; color: var(--gold-primary); }
+        .stat-label { font-size: 9px; opacity: 0.5; letter-spacing: 1px; }
 
-        .policy-title {
-            font-weight: 700;
-            color: var(--gold-primary);
-            margin-bottom: 6px;
-            display: block;
-            font-size: 15px;
-        }
-
-        .policy-desc {
-            font-size: 12px;
-            opacity: 0.7;
-            margin: 0;
-            text-align: justify;
-        }
-
-        .policy-desc b {
-            color: var(--gold-light);
-            font-weight: 600;
-        }
-
-        .penalty-text {
-            color: var(--danger);
-            font-size: 11px;
-            margin-top: 5px;
-            display: block;
-            font-weight: 600;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 12px;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.02);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .stat-val {
-            display: block;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--gold-primary);
-        }
-
-        .stat-label {
-            font-size: 9px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        /* Modal */
         .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            backdrop-filter: blur(10px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: none;
+            justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(10px);
         }
-
-        .modal-content {
-            background: #0a0a0a;
-            border: 1px solid var(--gold-primary);
-            padding: 40px;
-            border-radius: 32px;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .modal-content h2 {
-            font-weight: 800;
-            margin: 0 0 15px 0;
-        }
+        .modal-content { background: #0a0a0a; border: 1px solid var(--gold-primary); padding: 40px; border-radius: 32px; max-width: 450px; text-align: center; }
     </style>
 </head>
 <body>
@@ -338,161 +168,193 @@
     <header class="header-section">
         <div class="brand-badge">Alpha With You</div>
         <h1>HỒ SƠ ĐỐI TÁC</h1>
-        <p class="subtitle">Vui lòng đọc kỹ các điều khoản bảo mật và quy định xử phạt trước khi gửi hồ sơ đăng ký.</p>
+        <p class="subtitle">Tham gia mạng lưới cộng tác viên chuyên nghiệp của Alpha Zone.</p>
     </header>
 
     <main class="main-container">
-        
-        <!-- CỘT 1: CHÍNH SÁCH CHI TIẾT -->
-        <section class="policy-section">
+        <!-- PHẦN CHÍNH SÁCH -->
+        <section>
             <div class="content-card">
                 <h3>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
                     </svg> 
-                    Chính sách & Cam kết
+                    Điều khoản Partner
                 </h3>
                 
                 <div class="policy-item">
-                    <span class="policy-title">Cam kết Bảo mật Thông tin</span>
-                    <p class="policy-desc">
-                        Alpha Zone cam kết bảo vệ dữ liệu cá nhân của CTV theo tiêu chuẩn mã hóa cao nhất. 
-                        <b>Dữ liệu CCCD và Ngân hàng</b> chỉ được sử dụng cho mục đích xác thực định danh và quyết toán thu nhập theo quy định pháp luật. 
-                        Chúng tôi tuyệt đối không tiết lộ thông tin cho bên thứ ba vì bất kỳ mục đích thương mại nào.
-                    </p>
+                    <span class="policy-title">Bảo mật dữ liệu</span>
+                    <p class="policy-desc">Mã hóa mọi thông tin cá nhân và tài khoản ngân hàng. Chỉ sử dụng cho mục đích đối soát và chi trả hoa hồng định kỳ.</p>
                 </div>
 
                 <div class="policy-item">
-                    <span class="policy-title">Quy định Xử phạt Vi phạm</span>
-                    <p class="policy-desc">
-                        Để duy trì môi trường kinh doanh minh bạch, các hành vi sau sẽ bị <b>đóng tài khoản CTV vĩnh viễn</b> và thu hồi hoa hồng:
-                    </p>
-                    <span class="penalty-text">• Giả mạo thông tin khách hàng hoặc hồ sơ cá nhân.</span>
-                    <span class="penalty-text">• Chào mời khách hàng sai sự thật về dịch vụ Alpha Zone.</span>
-                    <span class="penalty-text">• Tiết lộ thông tin dự án, bí mật kinh doanh cho đối thủ.</span>
+                    <span class="policy-title">Hình thức xử phạt</span>
+                    <p class="policy-desc">Khóa tài khoản vĩnh viễn nếu phát hiện gian lận thông tin hoặc vi phạm quy tắc ứng xử của Alpha Zone.</p>
+                    <span class="penalty-text">• Không spam khách hàng</span>
+                    <span class="penalty-text">• Không cung cấp dữ liệu sai lệch</span>
                 </div>
 
-                <div class="policy-item">
-                    <span class="policy-title">Quy trình Thanh toán</span>
-                    <p class="policy-desc">
-                        Hoa hồng được đối soát tự động trên hệ thống. CTV nhận thu nhập vào <b>ngày 05 hàng tháng</b> qua tài khoản ngân hàng chính chủ.
-                    </p>
-                    <div class="stat-grid">
-                        <div class="stat-card">
-                            <span class="stat-val">Ngày 05</span>
-                            <span class="stat-label">Ngày trả lương</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-val">100%</span>
-                            <span class="stat-label">Minh bạch</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: rgba(197, 160, 35, 0.1); border-radius: 12px; padding: 15px; font-size: 11px; border: 1px solid var(--border-color); color: rgba(255,255,255,0.8); font-weight: 500;">
-                    Bằng việc hoàn tất form bên phải, bạn xác nhận đã đọc, hiểu và đồng ý tuân thủ toàn bộ các quy định trên của Alpha Zone.
+                <div class="stat-grid">
+                    <div class="stat-card"><span class="stat-val">Ngày 05</span><span class="stat-label">THANH TOÁN</span></div>
+                    <div class="stat-card"><span class="stat-val">Unlimited</span><span class="stat-label">THU NHẬP</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- CỘT 2: FORM ĐĂNG KÝ -->
-        <section class="registration-form">
+        <!-- FORM ĐĂNG KÝ -->
+        <section>
             <div class="content-card">
                 <h3>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    Hồ sơ Đăng ký CTV
+                        <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
+                    </svg> 
+                    Đăng ký hồ sơ
                 </h3>
                 
-                <form id="partnerForm" onsubmit="handleSubmit(event)">
-                    
-                    <span class="form-section-title">1. Thông tin cá nhân</span>
+                <form id="partnerForm">
+                    <span class="form-section-title">1. Định danh cá nhân</span>
                     <div class="form-grid">
                         <div class="form-group">
                             <label>HỌ VÀ TÊN *</label>
-                            <input type="text" placeholder="Nguyễn Văn A" required>
+                            <input type="text" id="fullName" placeholder="NGUYỄN VĂN A" required>
                         </div>
                         <div class="form-group">
-                            <label>SỐ ĐIỆN THOẠI (ZALO) *</label>
-                            <input type="tel" placeholder="090 xxx xxxx" required>
+                            <label>ZALO / SĐT *</label>
+                            <input type="tel" id="phone" placeholder="09xxxxxxx" required>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label>EMAIL LIÊN HỆ *</label>
-                        <input type="email" placeholder="email@example.com" required>
+                        <label>EMAIL *</label>
+                        <input type="email" id="email" placeholder="partner@gmail.com" required>
                     </div>
 
-                    <label>ẢNH CĂN CƯỚC CÔNG DÂN (2 MẶT) *</label>
+                    <label>HÌNH ẢNH CCCD *</label>
                     <div class="upload-container">
-                        <div class="upload-box">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                            <span>Mặt trước CCCD</span>
-                            <input type="file" accept="image/*" required>
+                        <div class="upload-box" id="box-front">
+                            <img id="prev-front" src="" alt="preview">
+                            <span id="text-front">Mặt trước</span>
+                            <input type="file" accept="image/*" onchange="previewImg(this, 'prev-front', 'text-front')" required>
                         </div>
-                        <div class="upload-box">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                            <span>Mặt sau CCCD</span>
-                            <input type="file" accept="image/*" required>
+                        <div class="upload-box" id="box-back">
+                            <img id="prev-back" src="" alt="preview">
+                            <span id="text-back">Mặt sau</span>
+                            <input type="file" accept="image/*" onchange="previewImg(this, 'prev-back', 'text-back')" required>
                         </div>
                     </div>
 
-                    <span class="form-section-title">2. Thông tin thanh toán</span>
+                    <span class="form-section-title">2. Tài khoản nhận lương</span>
                     <div class="form-group">
-                        <label>TÊN NGÂN HÀNG *</label>
-                        <input type="text" placeholder="Ví dụ: Vietcombank, MB Bank..." required>
+                        <label>NGÂN HÀNG *</label>
+                        <input type="text" id="bankName" placeholder="Ví dụ: MB Bank, Techcombank" required>
                     </div>
                     <div class="form-grid">
                         <div class="form-group">
                             <label>SỐ TÀI KHOẢN *</label>
-                            <input type="text" placeholder="Nhập STK ngân hàng" required>
+                            <input type="text" id="bankID" required>
                         </div>
                         <div class="form-group">
                             <label>CHỦ TÀI KHOẢN *</label>
-                            <input type="text" placeholder="VIET HOA KHONG DAU" required>
+                            <input type="text" id="bankOwner" placeholder="VIET HOA KHONG DAU" required>
                         </div>
                     </div>
 
-                    <div style="font-size: 11px; opacity: 0.5; margin-top: 10px; font-weight: 400; font-style: italic;">
-                        * Vui lòng kiểm tra kỹ thông tin tài khoản. Alpha Zone không chịu trách nhiệm nếu thông tin chuyển khoản sai lệch.
-                    </div>
-
-                    <button type="submit" class="btn-submit">XÁC NHẬN ĐĂNG KÝ HỒ SƠ</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">XÁC NHẬN ĐĂNG KÝ HỒ SƠ</button>
                 </form>
             </div>
         </section>
     </main>
 
-    <!-- Success Modal -->
+    <!-- Modal Thành công -->
     <div id="successModal" class="modal">
         <div class="modal-content">
-            <div style="font-size: 50px; margin-bottom: 20px;">📜</div>
-            <h2 style="color: var(--gold-primary); font-size: 22px;">HỒ SƠ ĐÃ ĐƯỢC GỬI!</h2>
-            <p style="opacity: 0.8; margin-bottom: 30px; font-weight: 400; font-size: 14px;">Hệ thống đã ghi nhận hồ sơ của bạn. Chúng tôi sẽ phê duyệt dựa trên các chính sách đã nêu trong vòng 12-24 giờ làm việc.</p>
-            <button class="btn-submit" onclick="closeModal()">QUAY LẠI TRANG CHỦ</button>
+            <div style="font-size: 50px; margin-bottom: 20px;">✅</div>
+            <h2 style="color: var(--gold-primary); margin-bottom: 10px;">GỬI HỒ SƠ THÀNH CÔNG</h2>
+            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 30px;">
+                Cảm ơn <b>Anh Minh</b> đã tin tưởng tham gia. Chúng tôi sẽ phê duyệt hồ sơ trong vòng 12-24h làm việc. Một email xác nhận đã được gửi đến bạn.
+            </p>
+            <button class="btn-submit" onclick="location.reload()">ĐỒNG Ý</button>
         </div>
     </div>
 
     <script>
-        function handleSubmit(event) {
-            event.preventDefault();
-            const modal = document.getElementById('successModal');
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('successModal');
-            modal.style.display = 'none';
-            document.getElementById('partnerForm').reset();
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('successModal');
-            if (event.target == modal) {
-                closeModal();
+        // HÀM XỬ LÝ XEM TRƯỚC ẢNH
+        function previewImg(input, imgId, textId) {
+            const file = input.files[0];
+            if (file) {
+                // Giới hạn kích thước ảnh (Ví dụ: tối đa 5MB) để tránh lỗi Google Script
+                if (file.size > 5 * 1024 * 1024) {
+                    alert("Ảnh quá nặng! Vui lòng chọn ảnh dưới 5MB.");
+                    input.value = "";
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(imgId);
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    document.getElementById(textId).style.opacity = '0';
+                }
+                reader.readAsDataURL(file);
             }
         }
+
+        // HÀM CHUYỂN FILE SANG BASE64
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        // XỬ LÝ GỬI FORM
+        document.getElementById('partnerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            
+            // Chặn bấm liên tục
+            btn.disabled = true;
+            btn.innerText = "ĐANG TẢI DỮ LIỆU...";
+
+            try {
+                const fileInputs = document.querySelectorAll('input[type="file"]');
+                const fileFront = fileInputs[0].files[0];
+                const fileBack = fileInputs[1].files[0];
+
+                // Đóng gói dữ liệu khớp với Backend
+                const payload = {
+                    name: document.getElementById('fullName').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    bank: document.getElementById('bankName').value,
+                    stk: document.getElementById('bankID').value,
+                    owner: document.getElementById('bankOwner').value,
+                    cccdFront: await toBase64(fileFront),
+                    cccdBack: await toBase64(fileBack)
+                };
+
+                // THAY THẾ LINK NÀY BẰNG LINK TRIỂN KHAI (EXEC) MỚI CỦA BẠN
+                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbylFakJQNlpMH6KtXDX8IuW0op5Lv68T_hv7R9snZP5QfNxDRVzHfXcIeQCRks2iFeH/exec";
+
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    document.getElementById('successModal').style.display = 'flex';
+                } else {
+                    throw new Error(result.message || "Lỗi hệ thống");
+                }
+                
+            } catch (error) {
+                console.error("Lỗi:", error);
+                alert("Gửi hồ sơ thất bại: " + error.message + ". Vui lòng kiểm tra lại kết nối mạng!");
+                btn.disabled = false;
+                btn.innerText = "XÁC NHẬN ĐĂNG KÝ HỒ SƠ";
+            }
+        });
     </script>
 </body>
 </html>
