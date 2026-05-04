@@ -150,7 +150,15 @@
 
         <h1 class="text-4xl font-black uppercase mb-2 tracking-tighter">Thanh toán</h1>
         <div class="text-[11px] text-gray-500 leading-relaxed mb-10">
-            Hotline: 0357130499</br>Zalo: 0357130499 </br> Messenger: Alpha Zone Việt Nam</br>Email: admin@alphazone.io.vn
+            Hotline: 0357130499 · Zalo: Alpha Zone · Messenger: <br>
+            Alpha Zone Việt Nam · Email: alphazone582@gmail.com
+        </div>
+
+        <!-- Order Summary Card -->
+        <div class="glass-card p-5 mb-6 border-l-4 border-black">
+            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">Đang thanh toán cho:</p>
+            <h2 id="summary-product-name" class="text-lg font-black uppercase tracking-tighter">Đang tải sản phẩm...</h2>
+            <p id="summary-product-price" class="text-sm font-medium text-gray-600">0đ</p>
         </div>
 
         <!-- Timer -->
@@ -267,29 +275,33 @@
         </div>
     </div>
 
-    <style>
-        @keyframes pop {
-            to { transform: scale(1); }
-        }
-    </style>
-
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbxtdL1aYyHzeaaqmT3tWCEyP_XI2tXlXqptGCftw63Za-uRlo6iT1YpSfpNYQQbmtiPuQ/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbyIT8vKSr-QTnfXdIJNeQiG2KuaHjYm9uXVlRDttoqbiVwveeF2GjFqGZufzJX2UqozmQ/exec";
         const RATE = 25650;
         const FEE_PCT = 0.05;
 
+        // Trạng thái đơn hàng - mapping dữ liệu từ URL
         let state = {
             step: 1,
             method: 'mb',
             id: 'AZ' + Math.random().toString(36).substring(2, 7).toUpperCase(),
-            product: { name: "Telegram Premium 12 Tháng", base: 1250000, total: 1250000, usdt: 0 },
+            product: { 
+                name: "Telegram Premium", 
+                base: 1250000, 
+                total: 1250000, 
+                usdt: 0 
+            },
             timeLeft: 900
         };
 
         // Âm thanh thông báo
         function playSound(type) {
             const s = document.getElementById(`sound-${type}`);
-            if(s) { s.currentTime = 0; s.play().catch(()=>{}); }
+            if(s) { 
+                s.pause();
+                s.currentTime = 0; 
+                s.play().catch(e => console.log("Audio blocked: Use interaction to enable.")); 
+            }
         }
 
         // Thông báo Toast
@@ -317,10 +329,18 @@
             }, 3000);
         }
 
+        // Mapping dữ liệu từ trang chính vào Checkout
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
-            if(params.get('price')) state.product.base = parseInt(params.get('price'));
+            
+            // Tìm và gán dữ liệu từ URL Mapping
             if(params.get('item')) state.product.name = params.get('item');
+            if(params.get('price')) state.product.base = parseInt(params.get('price'));
+            
+            // Cập nhật UI Summary
+            document.getElementById('summary-product-name').innerText = state.product.name;
+            document.getElementById('summary-product-price').innerText = formatVND(state.product.base);
+            
             updateTotals();
         };
 
@@ -386,7 +406,8 @@
                 state.timeLeft--;
                 const m = Math.floor(state.timeLeft/60);
                 const s = state.timeLeft%60;
-                document.getElementById('countdown').innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                const display = document.getElementById('countdown');
+                if(display) display.innerText = `${m}:${s < 10 ? '0'+s : s}`;
                 if(state.timeLeft <= 0) { clearInterval(itv); window.location.reload(); }
             }, 1000);
         }
@@ -442,10 +463,6 @@
         async function generatePDF(d) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
-            // Sửa lỗi tiếng Việt: Sử dụng font hỗ trợ Unicode có sẵn trong hệ thống hoặc NotoSans
-            // jspdf tự động dùng font mặc định ko dấu, ta cần set font chuẩn. 
-            // Ở đây tôi dùng giải pháp vẽ text theo dạng standard Unicode encoding.
             
             doc.setFillColor(26, 26, 26);
             doc.rect(0, 0, 210, 45, 'F');
@@ -457,10 +474,9 @@
             doc.setFontSize(9);
             doc.text("MA GIAO DICH: " + d.orderId, 20, 35);
 
-            // Bảng thông tin - AutoTable tự động xử lý ký tự Unicode tốt hơn
             doc.autoTable({
                 startY: 55,
-                styles: { font: 'Helvetica', fontStyle: 'normal' }, // Font chuẩn quốc tế
+                styles: { font: 'Helvetica', fontStyle: 'normal' },
                 head: [['THONG TIN', 'CHI TIET']],
                 body: [
                     ['KHACH HANG', d.name.toUpperCase()],
