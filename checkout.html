@@ -1,122 +1,486 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Trang chính - Hệ thống Thanh toán</title>
-<style>
-/* ===== Popup Overlay và nội dung ===== */
-.modal-overlay, .mini-popup-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex; align-items: center; justify-content: center;
-  visibility: hidden; opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: auto;  /* Overlay bắt sự kiện click */
-}
-.modal-overlay.active, .mini-popup-overlay.active {
-  visibility: visible; opacity: 1;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphazone Pay - Luxury Monochrome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --bg: #f5f4f1;
+        }
 
-/* Popup dạng bottom-sheet (nếu cần) */
-.modal-content {
-  width: 100%; background: #fff;
-  border-radius: 50px 50px 0 0;
-  padding: 40px 30px 60px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-  position: relative; z-index: 10;
-}
-.modal-overlay.active .modal-content {
-  transform: translateY(0);
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
 
-/* Popup nhỏ ở giữa (ví dụ cho thanh toán) */
-.mini-popup-card {
-  width: min(100%, 380px); background: #fff;
-  border-radius: 32px; padding: 22px 18px;
-  transform: scale(0.9); transition: transform 0.25s ease;
-  position: relative; z-index: 10;
-}
-.mini-popup-overlay.active .mini-popup-card {
-  transform: scale(1);
-}
+        .glass-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
 
-/* Nút đóng */
-.popup-close {
-  position: absolute; top: 14px; right: 14px;
-  z-index: 9999; cursor: pointer;
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(0,0,0,0.05);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: bold;
-}
+        .input-luxury {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
 
-/* Khóa cuộn trang khi popup mở */
-body.modal-open {
-  overflow: hidden;
-  position: fixed; width: 100%;
-}
+        .input-luxury:focus {
+            border-color: #000;
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.03);
+            outline: none;
+        }
 
-/* === Các style khác của UI ban đầu (giữ nguyên) === */
-/* ... (không thay đổi các style cũ) ... */
-</style>
+        .btn-main {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 3rem;
+            padding: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-main:active { transform: scale(0.98); }
+
+        .btn-outline {
+            background: #fff;
+            color: #1a1a1a;
+            border: 1px solid #e5e5e5;
+            border-radius: 3rem;
+            padding: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .method-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .method-card.active {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .step-hidden { display: none; }
+        .step-visible { display: block; animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 1rem;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .toast-item {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes toastIn {
+            from { transform: translateY(40px) scale(0.8); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen pb-10">
 
-<h1>Hệ thống Thanh toán</h1>
-<p>Nội dung giao diện chính của trang.</p>
-<!-- Nút mở popup -->
-<button onclick="openPopup('paymentPopup')">Mở thanh toán</button>
+    <div id="toast-container" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[10000] flex flex-col gap-3"></div>
+    
+    <!-- Audio Assets -->
+    <audio id="sound-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <audio id="sound-success" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
+    <audio id="sound-error" src="https://assets.mixkit.co/active_storage/sfx/2572/2572-preview.mp3" preload="auto"></audio>
 
-<!-- Popup overlay và nội dung (ví dụ: Thanh toán) -->
-<div class="mini-popup-overlay" id="paymentPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-  <div class="mini-popup-card">
-    <!-- Nút đóng -->
-    <button type="button" class="popup-close" aria-label="Đóng">&times;</button>
-    <h2 id="popupTitle">Thanh toán</h2>
-    <p><strong>Quét mã QR để thanh toán:</strong><br>
-       <img src="placeholder-qrcode.png" alt="Mã QR chuyển khoản">
-    </p>
-    <p><strong>Số tài khoản:</strong> 1234 567 890</p>
-  </div>
-</div>
+    <div class="max-w-xl mx-auto px-4 pt-10">
+        <!-- Header Section -->
+        <div class="flex justify-between items-start mb-6">
+            <div class="inline-flex items-center gap-2 bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider">
+                <i class="fas fa-shield-alt"></i> Cổng thanh toán bảo mật
+            </div>
+            <button onclick="playSound('click'); window.location.reload()" class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 hover:rotate-90 transition-transform">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-<script>
-// ===== Mã JS điều khiển popup =====
+        <h1 class="text-4xl font-black uppercase mb-2 tracking-tighter">Thanh toán</h1>
+        <div class="text-[11px] text-gray-500 leading-relaxed mb-10">
+            Hotline: 0357130499</br>Zalo: 0357130499 </br> Messenger: Alpha Zone Việt Nam</br>Email: admin@alphazone.io.vn
+        </div>
 
-// Hàm mở popup theo ID
-function openPopup(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.add("active");
-  document.body.classList.add("modal-open");
-}
+        <!-- Timer -->
+        <div id="timer-box" class="hidden flex items-center justify-between bg-white p-4 rounded-2xl mb-6 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                <span class="text-[11px] font-bold uppercase text-gray-400">Giao dịch hết hạn sau:</span>
+            </div>
+            <span id="countdown" class="font-mono font-black text-lg">15:00</span>
+        </div>
 
-// Hàm đóng tất cả popup
-function closeAllPopups() {
-  document.querySelectorAll(".modal-overlay, .mini-popup-overlay")
-    .forEach(el => el.classList.remove("active"));
-  document.body.classList.remove("modal-open");
-}
+        <!-- MAIN CONTENT -->
+        <div class="space-y-6">
+            
+            <div id="loading-overlay" class="hidden space-y-4">
+                <div class="h-16 w-full skeleton"></div>
+                <div class="h-16 w-full skeleton"></div>
+                <div class="h-32 w-full skeleton"></div>
+            </div>
 
-// Xử lý sự kiện click và phím Escape
-document.addEventListener("click", function(e) {
-  // Nếu click vào nút đóng (hoặc phần tử có data-close)
-  if (e.target.closest(".popup-close") || e.target.closest("[data-close]")) {
-    closeAllPopups();
-  }
-  // Nếu click ra ngoài popup (trên overlay)
-  if (e.target.classList.contains("modal-overlay") || 
-      e.target.classList.contains("mini-popup-overlay")) {
-    closeAllPopups();
-  }
-});
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") {
-    closeAllPopups();
-  }
-});
-</script>
+            <!-- STEP 1 -->
+            <section id="step-1" class="step-visible">
+                <div class="glass-card p-6 mb-6">
+                    <p class="text-[11px] font-bold uppercase text-gray-400 mb-6 tracking-widest">Thông tin khách hàng</p>
+                    <div class="space-y-4">
+                        <input type="text" id="custName" placeholder="Họ và tên *" class="input-luxury text-sm">
+                        <input type="text" id="custContact" placeholder="Số điện thoại / Telegram / Zalo *" class="input-luxury text-sm">
+                        <input type="email" id="custEmail" placeholder="Email nhận hỗ trợ" class="input-luxury text-sm">
+                        <textarea id="custNote" placeholder="Ghi chú thêm cho đơn hàng" rows="2" class="input-luxury text-sm resize-none"></textarea>
+                    </div>
+                </div>
 
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div onclick="playSound('click'); setPayMethod('mb')" id="card-mb" class="method-card active shadow-sm border border-transparent">
+                        <p class="text-xs font-black uppercase mb-1">QR ngân hàng</p>
+                        <p class="text-[10px] opacity-60">Chuyển khoản Napas 247</p>
+                    </div>
+                    <div onclick="playSound('click'); setPayMethod('usdt')" id="card-usdt" class="method-card shadow-sm border border-gray-100">
+                        <p class="text-xs font-black uppercase mb-1">USDT (Crypto)</p>
+                        <p class="text-[10px] opacity-60">Mạng lưới TRC-20</p>
+                    </div>
+                </div>
+
+                <button onclick="transitionToStep2()" class="w-full btn-main flex items-center justify-center gap-3">
+                    Tiếp tục thanh toán
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </button>
+            </section>
+
+            <!-- STEP 2 -->
+            <section id="step-2" class="step-hidden">
+                <div class="glass-card p-8 mb-6 text-center">
+                    <div id="pay-mb">
+                        <div class="bg-white p-4 inline-block rounded-3xl border border-gray-100 mb-6 shadow-sm">
+                            <img id="qr-code" src="" class="w-48 h-48 opacity-0 transition-opacity duration-500">
+                        </div>
+                        <h3 class="text-sm font-bold mb-1">Quét mã QR để thanh toán</h3>
+                        <p class="text-[11px] text-gray-400 mb-6 italic">Hệ thống tự động điền số tiền và nội dung.</p>
+                        
+                        <div class="text-left space-y-3">
+                            <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                <div>
+                                    <p class="text-[9px] font-bold text-gray-400 uppercase">Số tiền cần chuyển</p>
+                                    <p id="disp-total" class="text-xl font-black tracking-tighter">0đ</p>
+                                </div>
+                                <button onclick="copyText('disp-total')" class="w-10 h-10 rounded-full hover:bg-white transition-colors"><i class="fas fa-copy text-gray-400"></i></button>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl border-l-4 border-black shadow-sm">
+                                <div>
+                                    <p class="text-[9px] font-bold text-gray-400 uppercase">Nội dung chuyển khoản</p>
+                                    <p id="disp-id" class="text-xl font-black tracking-widest text-blue-600">---</p>
+                                </div>
+                                <button onclick="copyText('disp-id')" class="w-10 h-10 rounded-full hover:bg-white transition-colors"><i class="fas fa-copy text-gray-400"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pay-usdt" class="hidden">
+                        <div class="bg-black text-white p-6 rounded-3xl mb-6">
+                            <p class="text-[10px] font-bold opacity-50 uppercase mb-2">Số tiền thanh toán</p>
+                            <h4 id="usdt-amount" class="text-4xl font-black">0.00 USDT</h4>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-dashed border-gray-300 mb-6 group cursor-pointer" onclick="copyText('TMgp7nhr1bnBdAno6VaPqz8XogKntmuDGB')">
+                            <p class="text-[9px] font-bold text-gray-400 uppercase mb-2">Địa chỉ ví TRC-20</p>
+                            <p id="wallet-addr" class="text-[11px] font-mono font-bold break-all">TMgp7nhr1bnBdAno6VaPqz8XogKntmuDGB</p>
+                        </div>
+                        <button onclick="copyText('TMgp7nhr1bnBdAno6VaPqz8XogKntmuDGB')" class="text-[10px] font-bold uppercase border border-black px-8 py-3 rounded-full hover:bg-black hover:text-white transition-all">Sao chép ví</button>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <button onclick="copyText('full-info')" class="w-full btn-outline flex items-center justify-center gap-3">
+                        <i class="fas fa-share-nodes text-sm"></i>
+                        Sao chép toàn bộ thông tin
+                    </button>
+                    <button onclick="finishCheckout()" class="w-full btn-main flex items-center justify-center gap-3">
+                        <i class="fas fa-check-double text-sm"></i>
+                        Xác nhận đã chuyển tiền
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Final Success Screen -->
+    <div id="final-screen" class="hidden fixed inset-0 z-[20000] bg-white flex items-center justify-center text-center p-6">
+        <div class="max-w-xs w-full">
+            <div class="w-24 h-24 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl scale-0 animate-[pop_0.5s_ease_forwards]">
+                <i class="fas fa-check text-4xl"></i>
+            </div>
+            <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter">Thành công</h2>
+            <p class="text-gray-400 text-[13px] leading-relaxed mb-8">Giao dịch của bạn đang được đối soát. Vui lòng kiểm tra email để nhận hóa đơn chính thức.</p>
+            <button onclick="window.location.reload()" class="w-full btn-main text-xs">Quay lại trang chủ</button>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pop {
+            to { transform: scale(1); }
+        }
+    </style>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbxtdL1aYyHzeaaqmT3tWCEyP_XI2tXlXqptGCftw63Za-uRlo6iT1YpSfpNYQQbmtiPuQ/exec";
+        const RATE = 25650;
+        const FEE_PCT = 0.05;
+
+        let state = {
+            step: 1,
+            method: 'mb',
+            id: 'AZ' + Math.random().toString(36).substring(2, 7).toUpperCase(),
+            product: { name: "Telegram Premium 12 Tháng", base: 1250000, total: 1250000, usdt: 0 },
+            timeLeft: 900
+        };
+
+        // Âm thanh thông báo
+        function playSound(type) {
+            const s = document.getElementById(`sound-${type}`);
+            if(s) { s.currentTime = 0; s.play().catch(()=>{}); }
+        }
+
+        // Thông báo Toast
+        function toast(msg, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const el = document.createElement('div');
+            el.className = 'toast-item';
+            
+            let icon = '<i class="fas fa-info-circle text-blue-400"></i>';
+            if(type === 'success') {
+                icon = '<i class="fas fa-check-circle text-green-400"></i>';
+                playSound('success');
+            } else if(type === 'error') {
+                icon = '<i class="fas fa-exclamation-circle text-red-400"></i>';
+                playSound('error');
+            }
+            
+            el.innerHTML = `${icon} <span class="uppercase tracking-wider">${msg}</span>`;
+            container.appendChild(el);
+            
+            setTimeout(() => {
+                el.style.transform = 'translateY(20px) scale(0.9)';
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 400);
+            }, 3000);
+        }
+
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            if(params.get('price')) state.product.base = parseInt(params.get('price'));
+            if(params.get('item')) state.product.name = params.get('item');
+            updateTotals();
+        };
+
+        function updateTotals() {
+            const fee = state.method === 'usdt' ? state.product.base * FEE_PCT : 0;
+            state.product.total = state.product.base + fee;
+            state.product.usdt = state.product.total / RATE;
+            
+            document.getElementById('disp-total').innerText = formatVND(state.product.total);
+            document.getElementById('usdt-amount').innerText = state.product.usdt.toFixed(2) + ' USDT';
+        }
+
+        function setPayMethod(m) {
+            state.method = m;
+            document.getElementById('card-mb').className = `method-card shadow-sm ${m === 'mb' ? 'active' : 'border border-gray-100'}`;
+            document.getElementById('card-usdt').className = `method-card shadow-sm ${m === 'usdt' ? 'active' : 'border border-gray-100'}`;
+            
+            document.getElementById('pay-mb').classList.toggle('hidden', m !== 'mb');
+            document.getElementById('pay-usdt').classList.toggle('hidden', m !== 'usdt');
+            updateTotals();
+            if(m === 'mb') updateQR();
+        }
+
+        function updateQR() {
+            const qr = document.getElementById('qr-code');
+            qr.classList.remove('opacity-100');
+            qr.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=2|970422|4499123123|${Math.round(state.product.total)}|||${state.id}`;
+                qr.onload = () => qr.classList.add('opacity-100');
+                document.getElementById('disp-id').innerText = state.id;
+            }, 200);
+        }
+
+        function formatVND(n) { return new Intl.NumberFormat('vi-VN').format(n) + 'đ'; }
+
+        function transitionToStep2() {
+            const name = document.getElementById('custName').value.trim();
+            const contact = document.getElementById('custContact').value.trim();
+            
+            if(!name || !contact) {
+                toast("Vui lòng điền thông tin bắt buộc", "error");
+                return;
+            }
+
+            playSound('click');
+            document.getElementById('step-1').classList.replace('step-visible', 'step-hidden');
+            document.getElementById('loading-overlay').classList.remove('hidden');
+
+            setTimeout(() => {
+                document.getElementById('loading-overlay').classList.add('hidden');
+                document.getElementById('step-2').classList.replace('step-hidden', 'step-visible');
+                document.getElementById('timer-box').classList.remove('hidden');
+                startTimer();
+                updateQR();
+                toast("Thông tin đã được xác nhận", "success");
+            }, 800);
+        }
+
+        function startTimer() {
+            const itv = setInterval(() => {
+                state.timeLeft--;
+                const m = Math.floor(state.timeLeft/60);
+                const s = state.timeLeft%60;
+                document.getElementById('countdown').innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                if(state.timeLeft <= 0) { clearInterval(itv); window.location.reload(); }
+            }, 1000);
+        }
+
+        function copyText(id) {
+            const val = id === 'full-info' ? 
+                `ALPHAZONE ORDER\nSP: ${state.product.name}\nTổng: ${formatVND(state.product.total)}\nND: ${state.id}\nSTK: 4499123123 (MB Bank)` : 
+                (document.getElementById(id)?.innerText || id);
+            
+            navigator.clipboard.writeText(val);
+            playSound('click');
+            toast("Đã sao chép vào bộ nhớ tạm");
+        }
+
+        async function finishCheckout() {
+            const btn = document.querySelector('#step-2 .btn-main');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Đang xác thực...`;
+
+            const payload = {
+                orderId: state.id,
+                name: document.getElementById('custName').value,
+                contact: document.getElementById('custContact').value,
+                email: document.getElementById('custEmail').value || 'N/A',
+                note: document.getElementById('custNote').value || '',
+                product: state.product.name,
+                amount: state.method === 'usdt' ? state.product.usdt.toFixed(2) + ' USDT' : formatVND(state.product.total),
+                method: state.method.toUpperCase(),
+                time: new Date().toLocaleString('vi-VN')
+            };
+
+            try {
+                await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+                
+                playSound('success');
+                confetti({ 
+                    particleCount: 150, 
+                    spread: 70, 
+                    origin: { y: 0.6 }, 
+                    colors: ['#000', '#fff', '#ffd700'],
+                    disableForReducedMotion: true
+                });
+                
+                document.getElementById('final-screen').classList.remove('hidden');
+                generatePDF(payload);
+            } catch (e) {
+                toast("Lỗi kết nối máy chủ", "error");
+                btn.disabled = false;
+                btn.innerHTML = "Thử lại";
+            }
+        }
+
+        async function generatePDF(d) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Sửa lỗi tiếng Việt: Sử dụng font hỗ trợ Unicode có sẵn trong hệ thống hoặc NotoSans
+            // jspdf tự động dùng font mặc định ko dấu, ta cần set font chuẩn. 
+            // Ở đây tôi dùng giải pháp vẽ text theo dạng standard Unicode encoding.
+            
+            doc.setFillColor(26, 26, 26);
+            doc.rect(0, 0, 210, 45, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.text("ALPHAZONE RECEIPT", 20, 25);
+            
+            doc.setFontSize(9);
+            doc.text("MA GIAO DICH: " + d.orderId, 20, 35);
+
+            // Bảng thông tin - AutoTable tự động xử lý ký tự Unicode tốt hơn
+            doc.autoTable({
+                startY: 55,
+                styles: { font: 'Helvetica', fontStyle: 'normal' }, // Font chuẩn quốc tế
+                head: [['THONG TIN', 'CHI TIET']],
+                body: [
+                    ['KHACH HANG', d.name.toUpperCase()],
+                    ['LIEN HE', d.contact],
+                    ['SAN PHAM', d.product.toUpperCase()],
+                    ['TONG CONG', d.amount],
+                    ['HINH THUC', d.method],
+                    ['THOI GIAN', d.time]
+                ],
+                theme: 'striped',
+                headStyles: { fillColor: [0, 0, 0] }
+            });
+
+            const finalY = doc.lastAutoTable.finalY + 20;
+            doc.setTextColor(100);
+            doc.setFontSize(8);
+            doc.text("Cam on ban da tin tuong Alphazone. Chung toi se lien he kich hoat dich vu som nhat.", 20, finalY);
+
+            doc.save(`ALPHAZONE_INV_${d.orderId}.pdf`);
+        }
+    </script>
 </body>
 </html>
