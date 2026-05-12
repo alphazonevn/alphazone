@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HMM PERFUMES | Luxury Experience</title>
+
+    <link rel="icon" type="image/jpeg" href="https://i.pinimg.com/474x/5c/7c/df/5c7cdf2ce4f48ee05b2eb064237eeaaa.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root{
+            --burgundy:#0a0102;
+            --gold:#f3cf7a;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            margin:0;
+            padding:0;
+            font-family:'Be Vietnam Pro',sans-serif;
+            background:#0a0102;
+            color:#fff;
+            overflow-x:hidden;
+            font-weight:100;
+            letter-spacing:.08em;
+        }
+
+        .bg-luxury{
+            background:
+                radial-gradient(circle at center,#2d050d 0%,#0a0102 100%);
+            background-attachment:fixed;
+        }
+
+        .text-gold-gradient{
+            background:linear-gradient(135deg,#f3cf7a 0%,#b8860b 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .mirror-effect{
+            -webkit-box-reflect:
+                below 0px
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0) 35%,
+                    rgba(255,255,255,.45) 55%,
+                    rgba(255,255,255,.2) 70%,
+                    transparent 95%
+                );
+        }
+
+        .glass-card{
+            background:rgba(15,5,8,.65);
+            backdrop-filter:blur(16px);
+            border:1px solid rgba(243,207,122,.18);
+            box-shadow:
+                0 30px 70px -20px rgba(0,0,0,.8),
+                inset 0 0 45px rgba(243,207,122,.08);
+            transition:.6s;
+        }
+
+        .glass-card:hover{
+            border-color:rgba(243,207,122,.35);
+            box-shadow:
+                0 40px 80px -15px rgba(243,207,122,.15),
+                inset 0 0 50px rgba(243,207,122,.12);
+        }
+
+        .btn-luxury{
+            padding:12px 35px;
+            border:.5px solid var(--gold);
+            background:transparent;
+            color:var(--gold);
+            text-transform:uppercase;
+            font-size:9px;
+            letter-spacing:.6em;
+            cursor:pointer;
+            transition:.5s;
+        }
+
+        .btn-luxury:hover{
+            background:var(--gold);
+            color:#000;
+            box-shadow:0 0 25px rgba(243,207,122,.3);
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            background:transparent !important;
+            border:none;
+            border-bottom:.5px solid rgba(243,207,122,.2);
+            color:#fff !important;
+            padding:14px 0;
+            font-size:11px;
+            font-weight:100;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus{
+            outline:none;
+            border-bottom-color:var(--gold);
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        option{
+            background:#120406;
+            color:#fff;
+        }
+
+        .centered-content{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            text-align:center;
+        }
+
+        .page-hidden{
+            display:none;
+        }
+
+        .fade-in{
+            animation:fadeIn .8s ease forwards;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(10px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .loading{
+            opacity:.6;
+            pointer-events:none;
+        }
+
+        @media(max-width:768px){
+
+            nav{
+                padding:20px;
+            }
+
+            .tracking-mobile{
+                letter-spacing:.25em !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-luxury">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 py-6 px-10 flex justify-between items-center backdrop-blur-md border-b border-white/5">
+
+        <div
+            class="flex items-center gap-3 cursor-pointer"
+            onclick="showPage('home-page')"
+        >
+            <img
+                src="https://i.pinimg.com/474x/5c/7c/df/5c7cdf2ce4f48ee05b2eb064237eeaaa.jpg"
+                class="w-8 h-8 rounded-full border border-gold/20"
+            >
+
+            <span class="text-lg tracking-[0.4em] text-gold-gradient">
+                HMM
+            </span>
+        </div>
+
+        <div class="hidden md:flex gap-12">
+            <a href="#"
+               onclick="showPage('home-page')"
+               class="text-[9px] uppercase tracking-[0.4em] hover:text-yellow-300 transition-colors">
+                Home
+            </a>
+
+            <a href="#collections"
+               class="text-[9px] uppercase tracking-[0.4em] hover:text-yellow-300 transition-colors">
+                Archive
+            </a>
+
+            <a href="#contact"
+               class="text-[9px] uppercase tracking-[0.4em] hover:text-yellow-300 transition-colors">
+                Contact
+            </a>
+        </div>
+
+        <i data-lucide="shopping-bag"
+           class="w-4 h-4 text-yellow-200/70"></i>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <main id="home-page" class="fade-in">
+
+        <!-- HERO -->
+        <section class="min-h-screen centered-content justify-center px-6">
+
+            <div class="mirror-effect mb-10 flex flex-col items-center">
+
+                <img
+                    src="https://i.pinimg.com/474x/5c/7c/df/5c7cdf2ce4f48ee05b2eb064237eeaaa.jpg"
+                    class="w-32 h-32 md:w-40 md:h-40 rounded-full border border-yellow-200/20 p-1 mb-8"
+                >
+
+                <h1 class="text-6xl md:text-8xl text-gold-gradient">
+                    HMM
+                </h1>
+
+            </div>
+
+            <p class="text-[10px] tracking-[1em] text-white/40 uppercase mb-12">
+                Luxury Fragrance House
+            </p>
+
+            <a href="#collections" class="btn-luxury">
+                Discover
+            </a>
+
+        </section>
+
+        <!-- COLLECTION -->
+        <section
+            id="collections"
+            class="py-32 px-6 centered-content"
+        >
+
+            <h2 class="text-gold-gradient text-3xl tracking-[0.5em] mb-20 uppercase tracking-mobile">
+                The Collection
+            </h2>
+
+            <div
+                id="product-grid"
+                class="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-6xl"
+            ></div>
+
+        </section>
+
+        <!-- CONTACT -->
+        <section
+            id="contact"
+            class="py-32 px-6 centered-content bg-black/20"
+        >
+
+            <div class="max-w-xl w-full">
+
+                <h2 class="text-gold-gradient text-2xl tracking-[0.5em] mb-16 uppercase">
+                    Concierge Service
+                </h2>
+
+                <form id="orderForm" class="space-y-12 text-left">
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[8px] tracking-widest text-yellow-200/60 uppercase">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[8px] tracking-widest text-yellow-200/60 uppercase">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[8px] tracking-widest text-yellow-200/60 uppercase">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            required
+                        >
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[8px] tracking-widest text-yellow-200/60 uppercase">
+                            Selection
+                        </label>
+
+                        <select
+                            id="form-product-select"
+                            name="product"
+                            required
+                        ></select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[8px] tracking-widest text-yellow-200/60 uppercase">
+                            Message
+                        </label>
+
+                        <textarea
+                            name="message"
+                            rows="2"
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn-luxury w-full mt-8"
+                    >
+                        Submit Inquiry
+                    </button>
+
+                    <p
+                        id="responseMsg"
+                        class="hidden text-center text-[9px] tracking-[0.3em] uppercase mt-6"
+                    ></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- DETAIL PAGE -->
+    <main id="detail-page" class="page-hidden py-32 px-6 fade-in">
+
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-20">
+
+            <div class="flex-1 space-y-6">
+
+                <div
+                    class="mirror-effect glass-card border border-yellow-200/10 p-10 flex justify-center"
+                >
+                    <img
+                        id="detail-main-img"
+                        src=""
+                        class="max-h-[500px] object-contain"
+                    >
+                </div>
+
+                <div
+                    id="image-thumbnails"
+                    class="flex gap-4 justify-center"
+                ></div>
+
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center text-left">
+
+                <p
+                    id="detail-category"
+                    class="text-[10px] tracking-[0.5em] text-yellow-200/60 uppercase mb-4"
+                ></p>
+
+                <h2
+                    id="detail-title"
+                    class="text-4xl md:text-5xl tracking-[0.3em] text-gold-gradient mb-8 uppercase"
+                ></h2>
+
+                <div class="w-12 h-[1px] bg-yellow-200/40 mb-8"></div>
+
+                <p
+                    id="detail-description"
+                    class="text-xs leading-loose text-white/60 mb-12 tracking-widest"
+                ></p>
+
+                <div class="space-y-6 mb-12">
+
+                    <div class="flex justify-between border-b border-white/5 py-3">
+                        <span class="text-[9px] uppercase tracking-widest text-white/30">
+                            Nồng độ
+                        </span>
+
+                        <span class="text-[9px] uppercase tracking-widest">
+                            Eau de Parfum
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between border-b border-white/5 py-3">
+                        <span class="text-[9px] uppercase tracking-widest text-white/30">
+                            Dung tích
+                        </span>
+
+                        <span class="text-[9px] uppercase tracking-widest">
+                            100 ML
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="flex gap-6">
+
+                    <button
+                        onclick="orderThisProduct()"
+                        class="btn-luxury flex-1"
+                    >
+                        Order This Scent
+                    </button>
+
+                    <button
+                        onclick="showPage('home-page')"
+                        class="text-[9px] uppercase tracking-[0.4em] border-b border-white/20 hover:border-yellow-200 py-2 transition-all"
+                    >
+                        Back to List
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-20 border-t border-white/5 centered-content">
+
+        <p class="text-[8px] tracking-[0.5em] text-white/20 uppercase">
+            © 2026 HMM PARFUMS. ALL RIGHTS RESERVED.
+        </p>
+
+    </footer>
+
+<!-- ========================= -->
+<!-- CHỈ THAY PHẦN JAVASCRIPT -->
+<!-- GIỮ NGUYÊN TOÀN BỘ HTML/CSS -->
+<!-- ========================= -->
+
+<script>
+
+    // =========================
+    // PRODUCTS DYNAMIC
+    // =========================
+
+    let PRODUCTS = [];
+
+    // =========================
+    // APPS SCRIPT URL
+    // =========================
+
+    const FORM_URL =
+        'https://script.google.com/macros/s/AKfycbxcEhYS7CkMwpbvAo9BHAzDecWLMiJqgYfqDGWxniCv0EeWDl73MmdAdgBMSIMjlfX02A/exec';
+
+    // =========================
+    // INIT
+    // =========================
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        lucide.createIcons();
+
+        // LOAD PRODUCTS TỪ GOOGLE SHEET
+        loadProducts();
+
+    });
+
+    // =========================
+    // LOAD PRODUCTS
+    // =========================
+
+    async function loadProducts() {
+
+        try {
+
+            const response = await fetch(
+                FORM_URL + '?action=getProducts'
+            );
+
+            const result = await response.json();
+
+            if (!result.success) {
+
+                throw new Error(
+                    result.message || 'Load failed'
+                );
+            }
+
+            PRODUCTS = result.products.map(product => ({
+
+                id: product.id,
+
+                name: product.name,
+
+                category: product.category,
+
+                description: product.description,
+
+                images:
+                    product.images &&
+                    product.images.length
+                        ? product.images
+                        : [product.image],
+
+                price: product.price,
+
+                comparePrice:
+                    product.comparePrice,
+
+                stock: product.stock,
+
+                tags: product.tags
+            }));
+
+            // GIỮ NGUYÊN CHỨC NĂNG CŨ
+
+            renderProductGrid();
+
+            renderFormSelect();
+
+        } catch (error) {
+
+            console.error(error);
+
+            document.getElementById(
+                'product-grid'
+            ).innerHTML = `
+
+                <div class="col-span-full text-center py-20">
+
+                    <p class="text-white/40 tracking-[0.3em] uppercase text-xs">
+
+                        Failed To Load Products
+
+                    </p>
+
+                </div>
+            `;
+        }
+    }
+
+    // =========================
+    // RENDER PRODUCT GRID
+    // =========================
+
+    function renderProductGrid() {
+
+        const grid =
+            document.getElementById(
+                'product-grid'
+            );
+
+        grid.innerHTML =
+            PRODUCTS.map(p => `
+
+                <div
+                    class="centered-content group cursor-pointer"
+                    onclick="showProductDetail('${p.id}')"
+                >
+
+                    <div class="mirror-effect glass-card p-10 transition-all duration-700 group-hover:scale-[1.04]">
+
+                        <img
+                            src="${p.images[0]}"
+                            class="w-48 h-64 object-cover transition-transform duration-700 group-hover:scale-110 rounded"
+                        >
+
+                    </div>
+
+                    <h3 class="mt-10 text-xs tracking-[0.4em] uppercase font-light group-hover:text-gold transition-colors">
+
+                        ${p.name}
+
+                    </h3>
+
+                    <p class="text-[8px] text-white/30 tracking-widest mt-2 uppercase">
+
+                        ${p.category}
+
+                    </p>
+
+                </div>
+
+            `).join('');
+    }
+
+    // =========================
+    // RENDER FORM SELECT
+    // =========================
+
+    function renderFormSelect() {
+
+        const select =
+            document.getElementById(
+                'form-product-select'
+            );
+
+        select.innerHTML =
+            '<option value="">Chọn mùi hương...</option>' +
+
+            PRODUCTS.map(p => `
+
+                <option value="${p.name}">
+
+                    ${p.name}
+
+                </option>
+
+            `).join('');
+    }
+
+    // =========================
+    // SHOW PAGE
+    // =========================
+
+    function showPage(pageId) {
+
+        document
+            .getElementById('home-page')
+            .classList.add('page-hidden');
+
+        document
+            .getElementById('detail-page')
+            .classList.add('page-hidden');
+
+        document
+            .getElementById(pageId)
+            .classList.remove('page-hidden');
+
+        window.scrollTo(0, 0);
+    }
+
+    // =========================
+    // SHOW PRODUCT DETAIL
+    // =========================
+
+    function showProductDetail(productId) {
+
+        const p =
+            PRODUCTS.find(
+                prod => prod.id === productId
+            );
+
+        if (!p) return;
+
+        document.getElementById(
+            'detail-title'
+        ).innerText = p.name;
+
+        document.getElementById(
+            'detail-category'
+        ).innerText = p.category;
+
+        document.getElementById(
+            'detail-description'
+        ).innerText = p.description;
+
+        document.getElementById(
+            'detail-main-img'
+        ).src = p.images[0];
+
+        const thumbContainer =
+            document.getElementById(
+                'image-thumbnails'
+            );
+
+        thumbContainer.innerHTML =
+            p.images.map(img => `
+
+                <img
+                    src="${img}"
+                    onclick="document.getElementById('detail-main-img').src='${img}'"
+                    class="w-16 h-16 object-cover cursor-pointer border border-gold/20 hover:border-gold p-1 rounded"
+                >
+
+            `).join('');
+
+        showPage('detail-page');
+    }
+
+    // =========================
+    // ORDER THIS PRODUCT
+    // =========================
+
+    function orderThisProduct() {
+
+        const productName =
+            document.getElementById(
+                'detail-title'
+            ).innerText;
+
+        document.getElementById(
+            'form-product-select'
+        ).value = productName;
+
+        showPage('home-page');
+
+        setTimeout(() => {
+
+            document
+                .getElementById('contact')
+                .scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+        }, 300);
+    }
+
+    // =========================
+    // FORM SUBMIT
+    // =========================
+
+    document
+        .getElementById('orderForm')
+        .addEventListener(
+            'submit',
+            async (e) => {
+
+                e.preventDefault();
+
+                const btn =
+                    document.getElementById(
+                        'submitBtn'
+                    );
+
+                const msg =
+                    document.getElementById(
+                        'responseMsg'
+                    );
+
+                btn.disabled = true;
+
+                btn.innerText =
+                    'Transmitting...';
+
+                try {
+
+                    const formData =
+                        new FormData(e.target);
+
+                    const response =
+                        await fetch(
+                            FORM_URL,
+                            {
+                                method: 'POST',
+                                body: formData
+                            }
+                        );
+
+                    const result =
+                        await response.json();
+
+                    msg.classList.remove(
+                        'hidden'
+                    );
+
+                    if (result.success) {
+
+                        msg.style.color =
+                            '#f3cf7a';
+
+                        msg.innerText =
+                            'Inquiry Sent Successfully.';
+
+                        e.target.reset();
+
+                    } else {
+
+                        throw new Error(
+                            result.message
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    msg.classList.remove(
+                        'hidden'
+                    );
+
+                    msg.style.color =
+                        '#ff6b6b';
+
+                    msg.innerText =
+                        'Connection Error.';
+                }
+
+                btn.disabled = false;
+
+                btn.innerText =
+                    'Submit Inquiry';
+            }
+        );
+
+</script>
+</body>
+</html>
