@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Zone Vietnam - Hệ thống phân phối kỹ thuật số</title>
-    
     <link rel="icon" href="https://cdn.abphotos.link/photos/resized/40x40/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,7 +68,6 @@
         }
         html { scroll-behavior: smooth; }
         
-        /* Hiệu ứng Glassmorphism */
         .glass-panel {
             background: rgba(24, 24, 27, 0.35);
             backdrop-filter: blur(20px);
@@ -109,7 +107,6 @@
             background: rgba(0, 0, 0, 0.6);
         }
 
-        /* Tối ưu render phần tử: Chỉ render khi nằm trong viewport */
         .optimize-render {
             content-visibility: auto;
             contain-intrinsic-size: auto 380px;
@@ -544,7 +541,8 @@
 
         let MOCK_ORDERS = [];
 
-        let webAppUrl = localStorage.getItem('acctbaza_api_url') || "";
+        // Gán trực tiếp URL theo yêu cầu
+        let webAppUrl = "https://script.google.com/macros/s/AKfycbz09DYoJGX2NdYFZgkeVMlXtd0xYk7ueqV8xdC4k7FPPx8hLyPl9MFjGddlkxqjZ-9l5g/exec";
         let rawProducts = [];
         let filteredProducts = [];
         let selectedCategory = "all";
@@ -561,6 +559,7 @@
             const apiInput = document.getElementById('settings-api-url');
             apiInput.value = webAppUrl;
 
+            // Nếu đã gán cứng, banner mặc định ẩn
             if (webAppUrl) {
                 banner.classList.add('hidden');
                 fetchProductsFromAPI();
@@ -712,7 +711,6 @@
             filterProducts();
         }
 
-        /* Đã tối ưu khối thẻ sản phẩm: Toàn bộ div kích hoạt popup */
         function renderProductGrid() {
             const grid = document.getElementById('product-grid');
             const emptyState = document.getElementById('empty-state');
@@ -847,30 +845,7 @@
 
             const totalPay = currentProduct.price * quantitySelected;
 
-            if (!webAppUrl) {
-                setTimeout(() => {
-                    const mockOrderId = "AZ-" + Math.floor(Math.random() * 900000 + 100000);
-                    const mockSyntax = `AZ ${mockOrderId}`;
-                    
-                    MOCK_ORDERS.unshift({
-                        orderId: mockOrderId,
-                        email: email,
-                        productId: currentProduct.id,
-                        productName: currentProduct.name,
-                        qty: quantitySelected,
-                        price: currentProduct.price,
-                        status: "Pending",
-                        data: "",
-                        timestamp: new Date().toLocaleString('vi-VN')
-                    });
-
-                    closeBuyModal();
-                    openPaymentModal(mockOrderId, totalPay, mockSyntax, true);
-                    resetBtn(btn, originalBtnHtml);
-                }, 1000);
-                return;
-            }
-
+            // Dùng trực tiếp webAppUrl
             try {
                 const response = await fetch(webAppUrl, {
                     method: 'POST',
@@ -938,26 +913,6 @@
             pollingInterval = setInterval(async () => {
                 attempt++;
 
-                if (isMock) {
-                    if (attempt === 3) { 
-                        clearInterval(pollingInterval);
-                        let order = MOCK_ORDERS.find(o => o.orderId === orderId);
-                        if(order) {
-                            order.status = "Paid";
-                            const listAccs = currentProduct.accounts.split(',').map(acc => acc.trim());
-                            const purchased = listAccs.splice(0, order.qty);
-                            currentProduct.stock = listAccs.length;
-                            currentProduct.accounts = listAccs.join(', ');
-                            order.data = purchased.join('\n');
-                            
-                            document.getElementById('payment-modal').classList.add('hidden');
-                            openSuccessModal(order.data);
-                            renderApp();
-                        }
-                    }
-                    return;
-                }
-
                 try {
                     const response = await fetch(`${webAppUrl}?action=checkOrderStatus&orderId=${orderId}`);
                     const data = await response.json();
@@ -1020,16 +975,6 @@
             const resultBox = document.getElementById('history-result');
             btn.disabled = true;
             btn.innerHTML = `<span class="text-black font-normal text-[10px] tracking-widest uppercase">Đang quét...</span>`;
-
-            if (!webAppUrl) {
-                setTimeout(() => {
-                    const matched = MOCK_ORDERS.filter(o => o.email.toLowerCase() === email.toLowerCase() && o.status === "Paid");
-                    renderHistoryResult(matched);
-                    btn.disabled = false;
-                    btn.innerHTML = `Yêu cầu dữ liệu`;
-                }, 800);
-                return;
-            }
 
             try {
                 const response = await fetch(`${webAppUrl}?action=getOrders&email=${encodeURIComponent(email)}`);
