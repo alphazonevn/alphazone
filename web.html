@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
         tailwind.config = {
@@ -114,7 +113,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4 cursor-pointer group" onclick="resetFilters()">
                 <div class="w-10 h-10 glass-panel rounded-xl flex items-center justify-center transition-all duration-500 transform group-hover:scale-105 group-hover:rotate-3">
-                    <i class="fa-solid fa-layer-group text-lg text-zinc-300"></i>
+                    <span class="text-zinc-300 font-light text-sm tracking-widest">AZ</span>
                 </div>
                 <div>
                     <span class="text-xl font-normal tracking-[0.2em] text-zinc-100 drop-shadow-sm uppercase">Alpha Zone</span>
@@ -124,18 +123,16 @@
 
             <div class="hidden md:flex items-center flex-1 max-w-lg mx-8 relative group">
                 <div class="relative w-full">
-                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Tra cứu thông tin cơ sở dữ liệu..." class="w-full glass-input rounded-xl py-2.5 pl-12 pr-4 text-sm font-light text-zinc-200 placeholder-zinc-500 outline-none transition-all shadow-inner">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-zinc-500 text-sm group-focus-within:text-zinc-300 transition-colors"></i>
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Tra cứu thông tin cơ sở dữ liệu..." class="w-full glass-input rounded-xl py-2.5 px-4 text-sm font-light text-zinc-200 placeholder-zinc-500 outline-none transition-all shadow-inner">
                 </div>
             </div>
 
             <div class="flex items-center gap-3">
                 <button onclick="openHistoryModal()" class="flex items-center gap-2 glass-button text-sm font-light tracking-wide px-4 py-2 rounded-xl text-zinc-300 hover:text-white shadow-sm active:scale-95">
-                    <i class="fa-solid fa-clock-rotate-left text-zinc-400 text-xs font-light"></i>
                     <span class="hidden sm:inline">Dữ liệu phân phối</span>
                 </button>
-                <button onclick="checkPasswordAndOpenSettings()" class="p-2.5 glass-button rounded-xl text-zinc-400 hover:text-white shadow-sm active:scale-95 group" title="Cấu trúc liên kết API">
-                    <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-700 font-light"></i>
+                <button onclick="checkPasswordAndOpenSettings()" class="px-4 py-2 glass-button rounded-xl text-zinc-400 hover:text-white shadow-sm active:scale-95 group" title="Cấu trúc liên kết API">
+                    <span class="text-[10px] tracking-widest uppercase">Cấu hình</span>
                 </button>
             </div>
         </div>
@@ -143,8 +140,7 @@
 
     <div class="block md:hidden glass-header p-4">
         <div class="relative w-full">
-            <input type="text" id="search-input-mobile" oninput="syncAndFilterMobile()" placeholder="Tra cứu thông tin..." class="w-full glass-input rounded-xl py-3 pl-10 pr-4 text-sm font-light text-zinc-300 placeholder-zinc-500 outline-none transition-all">
-            <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-zinc-500 text-sm"></i>
+            <input type="text" id="search-input-mobile" oninput="syncAndFilterMobile()" placeholder="Tra cứu thông tin..." class="w-full glass-input rounded-xl py-3 px-4 text-sm font-light text-zinc-300 placeholder-zinc-500 outline-none transition-all">
         </div>
     </div>
 
@@ -166,41 +162,21 @@
         </div>
 
         <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 hover:-translate-y-1 transition-transform duration-500 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-zinc-400 group-hover:text-zinc-200 transition-colors border border-zinc-700/50 bg-black/30">
-                    <i class="fa-solid fa-microchip text-lg font-light"></i>
-                </div>
-                <div>
-                    <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Kiến trúc</span>
-                    <span class="text-lg font-normal text-zinc-200">Webhook IPN</span>
-                </div>
+            <div class="glass-panel p-5 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-500 group">
+                <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Kiến trúc</span>
+                <span class="text-lg font-normal text-zinc-200">Webhook IPN</span>
             </div>
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 hover:-translate-y-1 transition-transform duration-500 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-zinc-400 group-hover:text-zinc-200 transition-colors border border-zinc-700/50 bg-black/30">
-                    <i class="fa-solid fa-server text-lg font-light"></i>
-                </div>
-                <div>
-                    <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Cơ sở dữ liệu</span>
-                    <span id="stat-products" class="text-lg font-normal text-zinc-200">0 loại</span>
-                </div>
+            <div class="glass-panel p-5 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-500 group">
+                <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Cơ sở dữ liệu</span>
+                <span id="stat-products" class="text-lg font-normal text-zinc-200">0 loại</span>
             </div>
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 hover:-translate-y-1 transition-transform duration-500 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-zinc-400 group-hover:text-zinc-200 transition-colors border border-zinc-700/50 bg-black/30">
-                    <i class="fa-solid fa-database text-lg font-light"></i>
-                </div>
-                <div>
-                    <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Không gian lưu trữ</span>
-                    <span id="stat-stock" class="text-lg font-normal text-zinc-200">0 đơn vị</span>
-                </div>
+            <div class="glass-panel p-5 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-500 group">
+                <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Không gian lưu trữ</span>
+                <span id="stat-stock" class="text-lg font-normal text-zinc-200">0 đơn vị</span>
             </div>
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 hover:-translate-y-1 transition-transform duration-500 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-zinc-400 group-hover:text-zinc-200 transition-colors border border-zinc-700/50 bg-black/30">
-                    <i class="fa-solid fa-shield-blank text-lg font-light"></i>
-                </div>
-                <div>
-                    <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Giao thức</span>
-                    <span class="text-lg font-normal text-zinc-200">Bảo mật đa lớp</span>
-                </div>
+            <div class="glass-panel p-5 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-500 group">
+                <span class="text-[9px] text-zinc-500 block uppercase font-light tracking-widest mb-1">Giao thức</span>
+                <span class="text-lg font-normal text-zinc-200">Bảo mật đa lớp</span>
             </div>
         </section>
 
@@ -215,8 +191,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <aside class="space-y-6 lg:col-span-1">
                 <div class="glass-panel p-6 rounded-2xl">
-                    <h3 class="text-sm font-normal uppercase tracking-widest text-zinc-300 mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
-                        <i class="fa-solid fa-sliders text-zinc-500 text-xs font-light"></i>
+                    <h3 class="text-sm font-normal uppercase tracking-widest text-zinc-300 mb-6 border-b border-zinc-800 pb-4">
                         Tham số lọc
                     </h3>
 
@@ -224,27 +199,25 @@
                         <div>
                             <label class="text-[9px] font-light uppercase tracking-widest text-zinc-500 block mb-2">Trình tự phân loại</label>
                             <div class="relative">
-                                <select id="sort-order" onchange="filterProducts()" class="w-full glass-input rounded-xl p-3 text-xs font-light tracking-wide text-zinc-300 outline-none appearance-none cursor-pointer">
+                                <select id="sort-order" onchange="filterProducts()" class="w-full glass-input rounded-xl p-3 text-xs font-light tracking-wide text-zinc-300 outline-none cursor-pointer">
                                     <option value="default">Cấu hình gốc</option>
                                     <option value="price_asc">Định mức: Tăng dần</option>
                                     <option value="price_desc">Định mức: Giảm dần</option>
                                     <option value="name_asc">Ký tự định danh: A - Z</option>
                                 </select>
-                                <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-zinc-600 text-[10px] pointer-events-none"></i>
                             </div>
                         </div>
 
                         <div>
                             <label class="text-[9px] font-light uppercase tracking-widest text-zinc-500 block mb-2">Ngưỡng tài chính</label>
                             <div class="relative">
-                                <select id="filter-price" onchange="filterProducts()" class="w-full glass-input rounded-xl p-3 text-xs font-light tracking-wide text-zinc-300 outline-none appearance-none cursor-pointer">
+                                <select id="filter-price" onchange="filterProducts()" class="w-full glass-input rounded-xl p-3 text-xs font-light tracking-wide text-zinc-300 outline-none cursor-pointer">
                                     <option value="all">Mọi phân khúc</option>
                                     <option value="under50">Biên độ < 50.000đ</option>
                                     <option value="50to100">Biên độ 50k - 100k</option>
                                     <option value="100to500">Biên độ 100k - 500k</option>
                                     <option value="over500">Biên độ > 500.000đ</option>
                                 </select>
-                                <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-zinc-600 text-[10px] pointer-events-none"></i>
                             </div>
                         </div>
 
@@ -253,7 +226,7 @@
                                 <div class="relative flex items-center justify-center">
                                     <input type="checkbox" id="filter-instock" onchange="filterProducts()" class="peer sr-only">
                                     <div class="w-4 h-4 rounded-sm border border-zinc-600 peer-checked:bg-zinc-300 peer-checked:border-zinc-300 transition-all flex items-center justify-center">
-                                        <i class="fa-solid fa-check text-black text-[10px] opacity-0 peer-checked:opacity-100 transition-opacity"></i>
+                                        <span class="text-black text-[10px] opacity-0 peer-checked:opacity-100 transition-opacity">✓</span>
                                     </div>
                                 </div>
                                 <span class="text-xs font-light tracking-wide text-zinc-400 group-hover:text-zinc-200 transition-colors">Ẩn phân vùng trống</span>
@@ -267,13 +240,10 @@
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                    <div class="absolute -right-4 -bottom-4 opacity-5 text-8xl text-zinc-300 group-hover:scale-110 transition-transform duration-1000">
-                        <i class="fa-solid fa-satellite-dish font-light"></i>
-                    </div>
                     <div class="relative z-10">
                         <h4 class="text-sm font-normal uppercase tracking-widest text-zinc-300 mb-3 border-b border-zinc-800 pb-3">Kênh giao tiếp</h4>
                         <p class="text-xs font-light text-zinc-400 leading-relaxed mb-5 tracking-wide">Giải quyết các vấn đề liên quan đến gián đoạn API, lỗi Webhook hoặc xác thực khối dữ liệu lớn.</p>
-                        <a href="https://t.me/marcvnn" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-xs glass-button text-zinc-200 hover:text-white py-3 rounded-xl transition-all active:scale-95 tracking-widest uppercase">
+                        <a href="https://t.me/your_telegram" target="_blank" class="inline-flex items-center justify-center w-full text-xs glass-button text-zinc-200 hover:text-white py-3 rounded-xl transition-all active:scale-95 tracking-widest uppercase">
                             Khởi tạo kết nối
                         </a>
                     </div>
@@ -301,7 +271,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-3 opacity-30 hover:opacity-80 transition-opacity">
-                    <i class="fa-solid fa-layer-group text-zinc-300 text-sm font-light"></i>
                     <span class="font-light text-zinc-300 tracking-[0.3em] text-xs uppercase">Alpha Zone Vietnam</span>
                 </div>
                 <div class="text-center md:text-right text-zinc-600 font-light">
@@ -315,8 +284,8 @@
         <div class="flex items-center justify-center min-h-screen p-4 text-center bg-black/80 backdrop-blur-xl">
             <div class="relative glass-panel rounded-3xl max-w-lg w-full p-8 text-left shadow-2xl transition-all transform scale-100 border border-zinc-700/50">
                 
-                <button onclick="closeBuyModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500 hover:rotate-90">
-                    <i class="fa-solid fa-xmark font-light"></i>
+                <button onclick="closeBuyModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500">
+                    <span class="font-light text-sm">X</span>
                 </button>
 
                 <span id="modal-category" class="inline-block mb-3 text-[9px] text-zinc-400 border border-zinc-700/50 bg-white/5 px-3 py-1 rounded-full font-light uppercase tracking-[0.2em]">Phân vùng</span>
@@ -347,11 +316,11 @@
                             </label>
                             <div class="flex items-center glass-input rounded-xl overflow-hidden h-[44px]">
                                 <button onclick="changeQuantity(-1)" class="w-12 h-full hover:bg-white/10 flex items-center justify-center transition-colors text-zinc-400">
-                                    <i class="fa-solid fa-minus text-[10px] font-light"></i>
+                                    <span class="text-sm font-light">-</span>
                                 </button>
                                 <input type="number" id="purchase-qty" value="1" min="1" onchange="validateQuantity()" class="w-full text-center bg-transparent border-none text-sm font-normal focus:ring-0 text-zinc-200 p-0 outline-none">
                                 <button onclick="changeQuantity(1)" class="w-12 h-full hover:bg-white/10 flex items-center justify-center transition-colors text-zinc-400">
-                                    <i class="fa-solid fa-plus text-[10px] font-light"></i>
+                                    <span class="text-sm font-light">+</span>
                                 </button>
                             </div>
                         </div>
@@ -382,7 +351,7 @@
                 <div class="bg-white p-4 rounded-2xl mx-auto inline-block border-4 border-zinc-800 mb-5 relative group shadow-2xl shadow-zinc-800/50">
                     <img id="payment-qr-img" src="" alt="Mã QR Thanh toán" class="w-48 h-48 object-cover rounded-xl transition-opacity duration-300 opacity-0">
                     <div id="qr-loading" class="absolute inset-0 flex items-center justify-center bg-white rounded-xl">
-                        <i class="fa-solid fa-circle-notch fa-spin text-zinc-300 text-2xl"></i>
+                        <span class="text-zinc-500 text-[10px] font-normal uppercase tracking-widest">Đang tải...</span>
                     </div>
                 </div>
 
@@ -395,8 +364,8 @@
                         <span class="text-[9px] font-light text-zinc-500 uppercase tracking-widest">Cú pháp nội dung</span>
                         <div class="flex items-center gap-2">
                             <span id="payment-syntax" class="text-sm font-normal text-zinc-200 bg-white/10 px-2 py-0.5 rounded tracking-wide">AZ ...</span>
-                            <button onclick="copyToClipboard('payment-syntax-hidden')" class="text-zinc-400 hover:text-white transition-colors" title="Sao chép nội dung">
-                                <i class="fa-regular fa-copy text-xs"></i>
+                            <button onclick="copyToClipboard('payment-syntax-hidden')" class="text-[9px] text-zinc-400 hover:text-white transition-colors glass-button px-2 py-1 rounded uppercase tracking-widest" title="Sao chép nội dung">
+                                Sao chép
                             </button>
                             <input type="text" id="payment-syntax-hidden" class="sr-only">
                         </div>
@@ -444,8 +413,8 @@
     <div id="history-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center bg-black/80 backdrop-blur-xl">
             <div class="relative glass-panel rounded-3xl max-w-2xl w-full p-8 text-left border border-zinc-700/50">
-                <button onclick="closeHistoryModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500 hover:rotate-90">
-                    <i class="fa-solid fa-xmark font-light"></i>
+                <button onclick="closeHistoryModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500">
+                    <span class="font-light text-sm">X</span>
                 </button>
 
                 <h3 class="text-sm font-normal uppercase tracking-[0.2em] text-zinc-300 mb-6 border-b border-zinc-800 pb-4">
@@ -475,8 +444,8 @@
     <div id="settings-modal" class="fixed inset-0 z-[60] overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center bg-black/80 backdrop-blur-xl">
             <div class="relative glass-panel rounded-3xl max-w-lg w-full p-8 text-left border border-zinc-700/50">
-                <button onclick="closeSettingsModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500 hover:rotate-90">
-                    <i class="fa-solid fa-xmark font-light"></i>
+                <button onclick="closeSettingsModal()" class="absolute right-6 top-6 text-zinc-500 hover:text-white w-8 h-8 flex items-center justify-center transition-all duration-500">
+                    <span class="font-light text-sm">X</span>
                 </button>
 
                 <h3 class="text-sm font-normal uppercase tracking-[0.2em] text-zinc-300 mb-4 border-b border-zinc-800 pb-4">
