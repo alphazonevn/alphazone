@@ -759,7 +759,7 @@
             temp.select();
             document.execCommand("copy");
             document.body.removeChild(temp);
-            showToast("DATA LINK COPIED TO CLIPBOARD");
+            showToast("Đã sao chép đường dẫn sản phẩm");
         }
 
         function checkUrlForProduct() {
@@ -805,8 +805,8 @@
             const email = document.getElementById('customer-email').value.trim();
             const phone = document.getElementById('customer-phone').value.trim();
 
-            if (!name || !email || !phone) return showToast("ERROR: Thiếu Data định danh đầu vào.");
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast("ERROR: Email format invalid.");
+            if (!name || !email || !phone) return showToast("ERROR: Vui lòng nhập đủ thông tin.");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast("Lỗi: Vui lòng nhập đúng định dạng mail.");
 
             customerData = { name, email, phone };
             const btn = document.getElementById('btn-submit-order');
@@ -856,7 +856,7 @@
             const temp = document.createElement("textarea"); temp.value = message; document.body.appendChild(temp);
             temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
 
-            showToast("DATA ĐÃ LƯU. KẾT NỐI SUPPORT...");
+            showToast("Đã lưu dữ liệu. Kết nối hỗ trợ...");
             setTimeout(() => { window.open("https://zalo.me/0879342346", "_blank"); cancelPayment(); }, 1200);
         }
 
@@ -915,7 +915,7 @@
             if (el.type === 'hidden' || el.classList.contains('sr-only')) {
                 el.type = 'text'; el.classList.remove('sr-only'); el.select(); document.execCommand('copy'); el.type = 'hidden'; el.classList.add('sr-only');
             } else { el.select(); document.execCommand('copy'); }
-            showToast("DATA_COPIED_TO_CLIPBOARD");
+            showToast("Dữ liệu đã được sao chép");
         }
     </script>
 </body>
