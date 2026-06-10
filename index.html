@@ -839,7 +839,7 @@
             document.getElementById('payment-syntax').innerText = syntax;
             document.getElementById('payment-syntax-hidden').value = syntax;
 
-            const qrUrl = `https://img.vietqr.io/image/MB_BANK-4499123123-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(syntax)}&accountName=NGUYEN_LE_TRI`;
+            const qrUrl = `https://img.vietqr.io/image/MB-4499123123-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(syntax)}&accountName=ALPHA_ZONE`;
             const qrImg = document.getElementById('payment-qr-img');
             qrImg.classList.remove('opacity-100');
             qrImg.src = qrUrl;
