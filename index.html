@@ -214,15 +214,12 @@
 </head>
 <body class="selection:bg-[var(--color-main)] selection:text-white font-light">
 
-    <!-- Global Cyber Background -->
     <div class="cyber-grid"></div>
     <div class="aurora-blob top-0 left-[-10%] w-[60vw] h-[60vw] bg-[var(--color-glow)]"></div>
     <div class="aurora-blob bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[var(--color-main)]" style="animation-delay: -5s; animation-duration: 25s;"></div>
 
-    <!-- Toast Notifications -->
     <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 w-[90%] max-w-sm pointer-events-none"></div>
 
-    <!-- Minimal Top Info -->
     <div class="fixed top-0 left-0 w-full p-4 sm:p-6 flex justify-between items-start z-40 pointer-events-none">
         <div class="flex items-center gap-4 pointer-events-auto group cursor-pointer">
             <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" alt="Logo" class="w-12 h-12 rounded-2xl object-cover transition-all duration-500">
@@ -241,11 +238,9 @@
         </div>
     </div>
 
-    <!-- HERO SECTION (Spatial Concept) -->
     <div class="min-h-screen flex items-center justify-center pt-20 pb-32 px-4 sm:px-6 relative">
         <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center animate-fade">
             
-            <!-- Left: Massive Typography -->
             <div class="relative z-10 flex flex-col items-start">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-glow)]/20 bg-black/40 backdrop-blur-sm mb-8 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
                     <span class="w-2 h-2 rounded-full bg-[var(--color-glow)] shadow-[0_0_10px_var(--color-glow)]"></span>
@@ -262,14 +257,12 @@
                 </p>
                 
                 <button onclick="document.getElementById('search-input').focus(); window.scrollTo({top: 0, behavior: 'smooth'});" class="btn-holo px-10 py-5 text-[12px] uppercase tracking-[0.2em] flex items-center gap-3">
-                    Xem thêm dịch vụ
+                    Xem thêm dịch vụ
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
             </div>
 
-            <!-- Right: Floating Glass Slider -->
             <div class="relative h-[400px] sm:h-[500px] w-full flex justify-center lg:justify-end items-center [perspective:1000px]">
-                <!-- Glowing back shadow -->
                 <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-glow)] to-[var(--color-main)] blur-[100px] opacity-20 rounded-full"></div>
                 
                 <div class="w-full max-w-md h-full neo-glass rounded-[40px] p-2 relative z-10 overflow-hidden transform hover:scale-[1.02] hover:-rotate-1 transition-transform duration-700 shadow-[0_20px_50px_rgba(220,38,38,0.15)]">
@@ -278,16 +271,13 @@
                         <img src="https://i.pinimg.com/736x/5d/62/c2/5d62c2f8711489ee69c799678e902786.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" id="slide-1">
                         <img src="https://i.pinimg.com/1200x/98/11/08/9811086406157a288ba352874a7be984.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" id="slide-2">
                         
-                        <!-- Overlay gradient for depth -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30"></div>
                         
-                        <!-- Tech Data Overlay -->
                         <div class="absolute top-6 left-6 flex gap-2">
                             <div class="w-1.5 h-1.5 bg-[var(--color-glow)] rounded-full animate-ping"></div>
                             <span class="text-[9px] font-mono text-white/80 uppercase tracking-widest font-bold">Live Stream</span>
                         </div>
                         
-                        <!-- Dots -->
                         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 backdrop-blur-md bg-black/50 px-4 py-2 rounded-full border border-white/10">
                             <button onclick="goToSlide(0)" id="dot-0" class="w-6 h-1 rounded-full bg-[var(--color-glow)] shadow-[0_0_8px_var(--color-glow)] transition-all duration-300"></button>
                             <button onclick="goToSlide(1)" id="dot-1" class="w-1.5 h-1.5 rounded-full bg-white/30 hover:bg-white transition-all duration-300"></button>
@@ -300,18 +290,15 @@
         </div>
     </div>
 
-    <!-- MAIN APP WRAPPER -->
-    <div class="pb-40 px-4 sm:px-6 relative z-10 max-w-7xl mx-auto -mt-10">
+    <div class="px-4 sm:px-6 relative z-10 max-w-7xl mx-auto -mt-10">
         
-        <!-- Panel: Products -->
         <div id="panel-products" class="animate-fade">
-            <!-- Search & Filters Bar -->
             <div class="neo-glass p-2 sm:p-3 rounded-[24px] mb-8 flex flex-col md:flex-row gap-3">
                 <div class="flex-1 relative group">
                     <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-neutral-500 group-focus-within:text-[var(--color-glow)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
-                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Nhập tên sản phẩm cần tìm..." class="w-full cyber-input pl-12 pr-4 py-4 text-[14px] bg-transparent border-none">
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Nhập tên sản phẩm cần tìm..." class="w-full cyber-input pl-12 pr-4 py-4 text-[14px] bg-transparent border-none">
                 </div>
                 <div class="h-[1px] md:h-auto md:w-[1px] bg-white/10 mx-2 hidden md:block"></div>
                 <div class="grid grid-cols-2 gap-2 w-full md:flex md:w-auto">
@@ -330,29 +317,23 @@
                 </div>
             </div>
 
-            <!-- Categories -->
             <div class="mb-8 relative group">
                 <div class="neo-glass rounded-full p-1.5 flex items-center gap-2 border border-[var(--color-main)]/20 shadow-lg relative overflow-hidden">
-                    <!-- Nút Mũi tên Trái -->
                     <button onclick="scrollCategories(-1)" class="w-9 h-9 rounded-full bg-black/40 hover:bg-[var(--color-glow)]/20 flex items-center justify-center text-neutral-400 hover:text-white transition-all shrink-0 z-10 border border-white/5 hidden sm:flex shadow-md">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
                     
-                    <!-- Khung vuốt Category -->
                     <div class="flex-1 overflow-hidden relative rounded-full mask-edges">
                         <div id="category-container" class="flex gap-2 overflow-x-auto scrollbar-hide px-2 relative z-0 scroll-smooth items-center">
-                            <!-- Chèn bằng JS -->
-                        </div>
+                            </div>
                     </div>
 
-                    <!-- Nút Mũi tên Phải -->
                     <button onclick="scrollCategories(1)" class="w-9 h-9 rounded-full bg-black/40 hover:bg-[var(--color-glow)]/20 flex items-center justify-center text-neutral-400 hover:text-white transition-all shrink-0 z-10 border border-white/5 hidden sm:flex shadow-md">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
             </div>
 
-            <!-- States -->
             <div id="loading-state" class="hidden py-32 text-center">
                 <div class="relative w-16 h-16 mx-auto mb-6">
                     <div class="absolute inset-0 border-2 border-[var(--color-glow)] border-t-transparent rounded-full animate-spin"></div>
@@ -369,18 +350,71 @@
                 <button onclick="resetFilters()" class="btn-holo px-8 py-3 text-[11px] uppercase tracking-[0.2em]">Reset Mạng Lưới</button>
             </div>
 
-            <!-- Product Grid -->
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20"></div>
         </div>
 
     </div>
 
-    <!-- SPATIAL FLOATING DOCK -->
+    <footer class="w-full relative z-10 border-t border-white/10 bg-[#050505]/90 backdrop-blur-xl pt-16 pb-32 sm:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3">
+                        <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" alt="Alpha Zone" class="w-12 h-12 rounded-xl object-cover shadow-[0_0_15px_rgba(255,69,69,0.3)]">
+                        <div>
+                            <h4 class="text-[15px] font-black tracking-[0.2em] uppercase text-white drop-shadow-md">ALPHA ZONE</h4>
+                            <p class="text-[9px] text-[var(--color-glow)] tracking-[0.3em] uppercase font-bold">Vietnam Space</p>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-neutral-400 leading-relaxed max-w-sm">
+                        Cửa ngõ phân phối tài nguyên số, dịch vụ nền tảng AI và quy trình tự động hóa thế hệ mới. Tối ưu, bảo mật và vượt thời gian.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-mono text-white uppercase tracking-widest font-bold mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-glow)]"></span> Phân Hệ Dữ Liệu
+                    </h4>
+                    <ul class="space-y-3 text-[13px] text-neutral-400">
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Giao thức dịch vụ (TOS)</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Chính sách bảo mật dữ liệu</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Cơ chế hoàn tiền & Đổi trả</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-mono text-white uppercase tracking-widest font-bold mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-glow)]"></span> Liên Hệ Core Node
+                    </h4>
+                    <ul class="space-y-4 text-[13px] text-neutral-400">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-[var(--color-glow)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Ho Chi Minh City, Vietnam
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[var(--color-glow)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            Zalo Support: <a href="https://zalo.me/0879342346" class="text-white hover:text-[var(--color-glow)] font-bold tracking-wider transition-colors ml-1">0879.342.346</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-[11px] text-neutral-500 font-mono tracking-widest uppercase">
+                    &copy; 2026 ALPHA ZONE VIETNAM. Bản quyền thuộc về nhà phát triển.
+                </p>
+                <p class="text-[10px] text-neutral-600 font-mono tracking-widest uppercase flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
+                    System architect: <span class="text-white font-bold tracking-widest">ALPHA ZONE VIETNAM</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[90%] sm:w-auto flex justify-center">
         <div class="floating-dock flex gap-1 sm:gap-2 w-full sm:w-auto">
             <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="dock-btn dock-active flex-1 sm:flex-none px-4 sm:px-8 py-3.5 text-[11px] uppercase tracking-[0.15em] flex justify-center items-center gap-2">
                 <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                <span>SẢN PHẨM</span>
+                <span>SẢN PHẨM</span>
             </button> 
             <div class="w-[1px] bg-white/10 mx-1"></div>
             <a href="https://zalo.me/0879342346" target="_blank" class="dock-btn flex-1 sm:flex-none px-4 sm:px-8 py-3.5 text-[11px] uppercase tracking-[0.15em] flex justify-center items-center gap-2 hover:text-white" title="Hỗ Trợ Zalo">
@@ -390,24 +424,20 @@
         </div>
     </div>
     
-    <!-- Mobile Support Floating button -->
     <a href="https://zalo.me/0879342346" target="_blank" class="fixed sm:hidden bottom-24 right-4 z-30 w-14 h-14 bg-white/5 backdrop-blur-md border border-[var(--color-glow)]/40 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:scale-105 transition-transform p-3">
         <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" alt="Zalo" class="w-full h-full object-contain">
     </a>
 
-    <!-- Modal: Buy Product -->
     <div id="buy-modal" class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm hidden modal-container">
         <div class="absolute inset-0" onclick="closeBuyModal()"></div>
         
         <div class="modal-content neo-glass w-full h-auto max-h-[90vh] sm:max-w-[480px] rounded-t-[40px] sm:rounded-[40px] flex flex-col relative overflow-hidden mt-auto sm:mt-0">
-            <!-- Glow effect top right -->
             <div class="absolute top-0 right-0 w-64 h-64 bg-[var(--color-glow)]/15 blur-[80px] rounded-full pointer-events-none"></div>
 
             <div class="w-full flex justify-center pt-4 pb-2 sm:hidden relative z-10 shrink-0">
                 <div class="w-12 h-1.5 bg-white/20 rounded-full"></div>
             </div>
 
-            <!-- Header -->
             <div class="px-6 sm:px-8 pt-2 sm:pt-8 pb-5 border-b border-white/10 shrink-0 relative z-10">
                 <div class="absolute right-4 top-4 sm:right-6 sm:top-6 flex items-center gap-2 z-50">
                     <button onclick="shareProduct()" class="text-neutral-400 hover:text-[var(--color-glow)] p-2.5 bg-black/50 rounded-full transition-colors border border-white/5" title="Copy Link">
@@ -421,14 +451,13 @@
                 <h3 id="modal-title" class="text-2xl font-bold text-white pr-24 leading-tight break-words">Product Name</h3>
             </div>
 
-            <!-- Content -->
             <div class="px-6 sm:px-8 py-6 overflow-y-auto flex-1 custom-scrollbar relative z-10">
                 <div class="bg-[#050505]/60 border border-[var(--color-glow)]/10 p-5 rounded-2xl mb-6 shadow-inner">
                     <p id="modal-description" class="text-[14px] text-neutral-300 whitespace-pre-line leading-relaxed break-words"></p>
                 </div>
 
                 <div class="space-y-4 mb-6">
-                    <label class="block text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1 font-bold">Vui lòng nhập chính xác thông tin liên hệ</label>
+                    <label class="block text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1 font-bold">Vui lòng nhập chính xác thông tin liên hệ</label>
                     <input type="text" id="customer-name" placeholder="Họ và tên..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
                     <input type="email" id="customer-email" placeholder="Email nhận giải mã..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
                     <input type="tel" id="customer-phone" placeholder="Zalo Support..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
@@ -452,20 +481,18 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="px-6 sm:px-8 py-6 border-t border-white/10 bg-black/60 backdrop-blur-2xl shrink-0 sm:rounded-b-[40px] relative z-10">
                 <div class="flex items-center justify-between mb-5">
                     <span class="text-[12px] text-neutral-400 font-mono uppercase tracking-widest font-bold">TOTAL_ESTIMATE</span>
                     <span id="modal-total" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-glow)] to-[var(--color-main)] tracking-tight">0 đ</span>
                 </div>
                 <button onclick="createOrderCheckout()" id="btn-submit-order" class="w-full btn-holo py-4.5 text-[14px] tracking-[0.2em] h-14">
-                    TIẾN HÀNH THANH TOÁN
+                    TIẾN HÀNH THANH TOÁN
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Payment QR -->
     <div id="payment-modal" class="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md hidden modal-container">
         <div class="absolute inset-0" onclick="cancelPayment()"></div>
         
@@ -492,11 +519,11 @@
 
                 <div class="w-full bg-black/40 p-5 mb-8 rounded-[24px] text-left border border-white/10">
                     <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/5">
-                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">TỔNG CỘNG</span>
+                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">TỔNG CỘNG</span>
                         <span id="payment-amount" class="text-xl text-[var(--color-glow)] font-bold">0 đ</span>
                     </div>
                     <div class="flex flex-col gap-2 overflow-hidden">
-                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">NỘI DUNG CHUYỂN KHOẢN</span>
+                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">NỘI DUNG CHUYỂN KHOẢN</span>
                         <div class="flex items-center justify-between bg-black/60 border border-[var(--color-glow)]/30 rounded-xl p-3 gap-3">
                             <span id="payment-syntax" class="text-[16px] text-[var(--color-glow)] font-mono font-bold tracking-wider break-all line-clamp-2">HD...</span>
                             <button onclick="copyToClipboard('payment-syntax-hidden')" class="bg-[var(--color-glow)]/10 hover:bg-[var(--color-glow)]/30 text-[var(--color-glow)] hover:text-white px-3 py-1.5 rounded-lg text-[10px] font-mono transition-colors uppercase tracking-widest flex items-center shrink-0 gap-1 border border-[var(--color-glow)]/20 font-bold">
@@ -504,7 +531,7 @@
                             </button>
                             <input type="text" id="payment-syntax-hidden" class="sr-only">
                         </div>
-                        <p class="text-[11px] text-neutral-400 mt-1.5">Vui lòng ghi chính xác NỘI DUNG CHUYỂN KHOẢN.</p>
+                        <p class="text-[11px] text-neutral-400 mt-1.5">Vui lòng ghi chính xác NỘI DUNG CHUYỂN KHOẢN.</p>
                     </div>
                 </div>
             </div>
@@ -512,16 +539,15 @@
             <div class="space-y-3 shrink-0 pt-4 relative z-10">
                 <button onclick="triggerManualConfirm()" id="btn-manual-confirm" class="w-full bg-white text-black hover:bg-neutral-200 rounded-xl py-4 text-[12px] uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.73 10.32c-.08-4.42-3.8-8-8.44-8-4.78 0-8.66 3.73-8.66 8.32 0 2.65 1.34 5 3.39 6.51.15.11.23.29.19.47l-.46 2.06c-.05.21.14.39.34.33l2.36-.71c.14-.04.29-.02.41.05 1.5.85 3.19 1.3 4.96 1.3 4.78 0 8.66-3.73 8.66-8.33.01-.01.01-1.34-.75-2zM12.28 14h-1.63c-.3 0-.54-.24-.54-.54v-3.8c0-.3.24-.54.54-.54h1.63c1.55 0 2.82 1.27 2.82 2.82s-1.27 2.86-2.82 2.86zm-4.32-3.32h1.4c.18 0 .32.14.32.32v.56c0 .18-.14.32-.32.32H8.28v1.59c0 .18-.14.32-.32.32h-.56c-.18 0-.32-.14-.32-.32v-3.79c0-.18.14-.32.32-.32h1.96c.18 0 .32.14.32.32v.56c0 .18-.14.32-.32.32h-1.4v.12zm7.66 3.19c0 .18-.14.32-.32.32h-2.12c-.18 0-.32-.14-.32-.32v-3.79c0-.18.14-.32.32-.32h.56c.18 0 .32.14.32.32v2.35l1.04-1.29c.12-.15.31-.22.5-.18l.12.02c.16.05.24.23.15.37l-1.07 1.33 1.22 1.48c.11.14.03.35-.15.37l-.25.03zm-3.34-1.93c0-1.01-.83-1.84-1.84-1.84h-.65v3.68h.65c1.01 0 1.84-.83 1.84-1.84z"></path></svg>
-                    Gửi thông báo đã thanh toán ngay
+                    Gửi thông báo đã thanh toán ngay
                 </button>
                 <button onclick="cancelPayment()" class="w-full py-4 text-[12px] text-neutral-500 hover:text-white hover:bg-white/5 rounded-xl uppercase tracking-[0.2em] font-medium transition-colors">
-                    Hủy
+                    Hủy
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Success Delivery -->
     <div id="success-modal" class="fixed inset-0 z-[80] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md hidden modal-container">
         <div class="absolute inset-0" onclick="closeSuccessModal()"></div>
         <div class="modal-content neo-glass w-full h-auto max-h-[90vh] sm:max-w-lg rounded-t-[40px] sm:rounded-[40px] p-6 sm:p-10 text-center relative overflow-hidden flex flex-col mt-auto sm:mt-0">
@@ -759,7 +785,7 @@
             temp.select();
             document.execCommand("copy");
             document.body.removeChild(temp);
-            showToast("Đã sao chép đường dẫn sản phẩm");
+            showToast("Đã sao chép đường dẫn sản phẩm");
         }
 
         function checkUrlForProduct() {
@@ -805,8 +831,8 @@
             const email = document.getElementById('customer-email').value.trim();
             const phone = document.getElementById('customer-phone').value.trim();
 
-            if (!name || !email || !phone) return showToast("ERROR: Vui lòng nhập đủ thông tin.");
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast("Lỗi: Vui lòng nhập đúng định dạng mail.");
+            if (!name || !email || !phone) return showToast("ERROR: Vui lòng nhập đủ thông tin.");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast("Lỗi: Vui lòng nhập đúng định dạng mail.");
 
             customerData = { name, email, phone };
             const btn = document.getElementById('btn-submit-order');
@@ -856,7 +882,7 @@
             const temp = document.createElement("textarea"); temp.value = message; document.body.appendChild(temp);
             temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
 
-            showToast("Đã lưu dữ liệu. Kết nối hỗ trợ...");
+            showToast("Đã lưu dữ liệu. Kết nối hỗ trợ...");
             setTimeout(() => { window.open("https://zalo.me/0879342346", "_blank"); cancelPayment(); }, 1200);
         }
 
@@ -915,7 +941,7 @@
             if (el.type === 'hidden' || el.classList.contains('sr-only')) {
                 el.type = 'text'; el.classList.remove('sr-only'); el.select(); document.execCommand('copy'); el.type = 'hidden'; el.classList.add('sr-only');
             } else { el.select(); document.execCommand('copy'); }
-            showToast("Dữ liệu đã được sao chép");
+            showToast("Dữ liệu đã được sao chép");
         }
     </script>
 </body>
