@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full scroll-smooth">
+<head>
+  <title>AlphaZone - Công nghệ & Giải pháp</title>
+  <meta charset="UTF-8">
+
+  <!-- Thẻ Open Graph cho preview -->
+  <meta property="og:title" content="AlphaZone - Công nghệ & Giải pháp" />
+  <meta property="og:description" content="Khám phá các giải pháp công nghệ tiên tiến cùng AlphaZone." />
+  <meta property="og:image" content="https://alphazone.io.vn/images/preview.jpg" />
+  <meta property="og:url" content="https://alphazone.io.vn" />
+  <meta property="og:type" content="website" />
+
+  <!-- Thẻ Twitter Card (tùy chọn) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AlphaZone - Công nghệ & Giải pháp" />
+  <meta name="twitter:description" content="Khám phá các giải pháp công nghệ tiên tiến cùng AlphaZone." />
+  <meta name="twitter:image" content="https://alphazone.io.vn/images/preview.jpg" />
+    <link rel="icon" href="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" alt="Logo">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ALPHA ZONE VIETNAM | Cửa Ngõ Không Gian Số</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050505; /* Nền đen tuyền */
+            --color-main: #dc2626; /* Đỏ thẫm (Red 600) */
+            --color-glow: #ff4545; /* Đỏ neon sáng */
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            box-sizing: border-box; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body { 
+            background-color: var(--bg-deep); 
+            color: #e5e5e5; 
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .font-mono { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            font-variant-numeric: tabular-nums;
+        }
+
+        ::-webkit-scrollbar { width: 0px; height: 0px; display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .custom-scrollbar::-webkit-scrollbar { display: block; width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+        /* Dynamic Mesh Background */
+        .cyber-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+        }
+        
+        .aurora-blob {
+            position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.35;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10vw, -10vh) scale(1.2); }
+        }
+
+        /* Glass Panels */
+        .neo-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.01), 0 8px 32px rgba(0,0,0,0.8);
+        }
+
+        /* Ultimate Floating Dock */
+        .floating-dock {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .dock-btn {
+            color: #737373;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .dock-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .dock-active { color: #fff !important; background: rgba(255,255,255,0.1) !important; box-shadow: inset 0 0 10px rgba(255,255,255,0.05); }
+        .dock-active::after {
+            content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 4px; border-radius: 50%; background: var(--color-glow);
+            box-shadow: 0 0 10px var(--color-glow);
+        }
+
+        /* Inputs & Form Controls */
+        .cyber-input {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+            border-radius: 16px;
+        }
+        .cyber-input:focus {
+            border-color: var(--color-glow);
+            background: rgba(239,68,68,0.03);
+            box-shadow: 0 0 15px rgba(239,68,68,0.15), inset 0 0 10px rgba(239,68,68,0.05);
+        }
+        /* Select dropdown fix */
+        select option { background: #0a0a0a; color: #fff; }
+
+        /* Buttons */
+        .btn-holo {
+            background: linear-gradient(45deg, var(--color-glow), var(--color-main));
+            color: #fff;
+            font-weight: 800;
+            border-radius: 16px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-holo::before {
+            content: ''; position: absolute; inset: 2px; border-radius: 14px;
+            background: var(--bg-deep); z-index: -1; transition: opacity 0.3s ease;
+        }
+        .btn-holo:hover::before { opacity: 0; }
+        .btn-holo:hover { box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); transform: scale(1.02); letter-spacing: 1px; }
+        .btn-holo:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+        /* Hero Typography */
+        .text-stroke {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        .text-stroke-glow::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, var(--color-glow), var(--color-main), transparent);
+            -webkit-background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transition: opacity 0.5s;
+            animation: sweep 4s linear infinite;
+        }
+        .text-stroke:hover::before { opacity: 1; }
+
+        @keyframes sweep {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Chips */
+        .chip {
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: #a3a3a3;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-radius: 100px;
+        }
+        .chip:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+        .chip-active {
+            border-color: var(--color-glow);
+            color: var(--color-glow) !important;
+            background: rgba(239, 68, 68, 0.05);
+            box-shadow: inset 0 0 15px rgba(239, 68, 68, 0.1);
+        }
+
+        /* Animations */
+        @keyframes revealUp { 
+            0% { opacity: 0; transform: translateY(30px) scale(0.98); } 
+            100% { opacity: 1; transform: translateY(0) scale(1); } 
+        }
+        .animate-fade { animation: revealUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes slideUpModal {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Modal Container */
+        .modal-container { transition: opacity 0.4s ease; }
+        .modal-content { transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        @media (max-width: 639px) {
+            .modal-content {
+                animation: slideUpModal 0.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            }
+        }
+        
+        /* Terminal Receipt */
+        .terminal-box {
+            background: #080808;
+            border: 1px solid #1f1f1f;
+            position: relative;
+        }
+        .terminal-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-glow), transparent);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--color-main)] selection:text-white font-light">
+
+    <div class="cyber-grid"></div>
+    <div class="aurora-blob top-0 left-[-10%] w-[60vw] h-[60vw] bg-[var(--color-glow)]"></div>
+    <div class="aurora-blob bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[var(--color-main)]" style="animation-delay: -5s; animation-duration: 25s;"></div>
+
+    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 w-[90%] max-w-sm pointer-events-none"></div>
+
+    <div class="fixed top-0 left-0 w-full p-4 sm:p-6 flex justify-between items-start z-40 pointer-events-none">
+        <div class="flex items-center gap-4 pointer-events-auto group cursor-pointer">
+            <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" alt="Logo" class="w-12 h-12 rounded-2xl object-cover transition-all duration-500">
+            <div>
+                <h1 class="text-[13px] sm:text-[15px] font-black tracking-[0.2em] uppercase text-white drop-shadow-md">ALPHA ZONE</h1>
+                <p class="text-[9px] sm:text-[10px] text-neutral-400 tracking-[0.3em] uppercase">Vietnam Space</p>
+            </div>
+        </div>
+        
+        <div id="connection-banner" class="hidden pointer-events-auto neo-glass px-4 py-2 rounded-full flex items-center gap-3">
+            <div class="relative w-2 h-2">
+                <div class="absolute inset-0 bg-yellow-500 rounded-full animate-ping opacity-75"></div>
+                <div class="relative w-full h-full bg-yellow-500 rounded-full"></div>
+            </div>
+            <span class="text-[10px] font-mono text-yellow-500 uppercase tracking-widest font-bold">Local Node</span>
+        </div>
+    </div>
+
+    <div class="min-h-screen flex items-center justify-center pt-20 pb-32 px-4 sm:px-6 relative">
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center animate-fade">
+            
+            <div class="relative z-10 flex flex-col items-start">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-glow)]/20 bg-black/40 backdrop-blur-sm mb-8 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
+                    <span class="w-2 h-2 rounded-full bg-[var(--color-glow)] shadow-[0_0_10px_var(--color-glow)]"></span>
+                    <span class="text-[10px] font-mono text-[var(--color-glow)] uppercase tracking-[0.2em] font-bold">Cổng Kết Nối Dữ Liệu Lượng Tử</span>
+                </div>
+                
+                <h2 class="text-6xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tighter mb-6 relative">
+                    <span class="text-stroke text-stroke-glow block" data-text="ALPHA ZONE">ALPHA ZONE</span>
+                    <span class="text-white block">VIETNAM.</span>
+                </h2>
+                
+                <p class="text-[15px] text-neutral-400 max-w-md leading-relaxed mb-10">
+                    Trải nghiệm hệ thống phân phối tài nguyên số thế hệ mới. Tốc độ ánh sáng, bảo mật tuyệt đối, giao diện vượt thời gian.
+                </p>
+                
+                <button onclick="document.getElementById('search-input').focus(); window.scrollTo({top: 0, behavior: 'smooth'});" class="btn-holo px-10 py-5 text-[12px] uppercase tracking-[0.2em] flex items-center gap-3">
+                    Xem thêm dịch vụ
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+
+            <div class="relative h-[400px] sm:h-[500px] w-full flex justify-center lg:justify-end items-center [perspective:1000px]">
+                <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-glow)] to-[var(--color-main)] blur-[100px] opacity-20 rounded-full"></div>
+                
+                <div class="w-full max-w-md h-full neo-glass rounded-[40px] p-2 relative z-10 overflow-hidden transform hover:scale-[1.02] hover:-rotate-1 transition-transform duration-700 shadow-[0_20px_50px_rgba(220,38,38,0.15)]">
+                    <div class="w-full h-full rounded-[32px] overflow-hidden relative bg-black">
+                        <img src="https://i.pinimg.com/736x/5c/3a/92/5c3a92c9e7063b0c32d3bc596d28a09d.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" id="slide-0">
+                        <img src="https://i.pinimg.com/736x/5d/62/c2/5d62c2f8711489ee69c799678e902786.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" id="slide-1">
+                        <img src="https://i.pinimg.com/1200x/98/11/08/9811086406157a288ba352874a7be984.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" id="slide-2">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30"></div>
+                        
+                        <div class="absolute top-6 left-6 flex gap-2">
+                            <div class="w-1.5 h-1.5 bg-[var(--color-glow)] rounded-full animate-ping"></div>
+                            <span class="text-[9px] font-mono text-white/80 uppercase tracking-widest font-bold">Live Stream</span>
+                        </div>
+                        
+                        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 backdrop-blur-md bg-black/50 px-4 py-2 rounded-full border border-white/10">
+                            <button onclick="goToSlide(0)" id="dot-0" class="w-6 h-1 rounded-full bg-[var(--color-glow)] shadow-[0_0_8px_var(--color-glow)] transition-all duration-300"></button>
+                            <button onclick="goToSlide(1)" id="dot-1" class="w-1.5 h-1.5 rounded-full bg-white/30 hover:bg-white transition-all duration-300"></button>
+                            <button onclick="goToSlide(2)" id="dot-2" class="w-1.5 h-1.5 rounded-full bg-white/30 hover:bg-white transition-all duration-300"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="px-4 sm:px-6 relative z-10 max-w-7xl mx-auto -mt-10">
+        
+        <div id="panel-products" class="animate-fade">
+            <div class="neo-glass p-2 sm:p-3 rounded-[24px] mb-8 flex flex-col md:flex-row gap-3">
+                <div class="flex-1 relative group">
+                    <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-neutral-500 group-focus-within:text-[var(--color-glow)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Nhập tên sản phẩm cần tìm..." class="w-full cyber-input pl-12 pr-4 py-4 text-[14px] bg-transparent border-none">
+                </div>
+                <div class="h-[1px] md:h-auto md:w-[1px] bg-white/10 mx-2 hidden md:block"></div>
+                <div class="grid grid-cols-2 gap-2 w-full md:flex md:w-auto">
+                    <select id="filter-price" onchange="filterProducts()" class="w-full md:w-48 cyber-input px-4 py-4 text-[13px] bg-transparent border-none appearance-none cursor-pointer truncate font-bold">
+                        <option value="all">Giá: Tất cả</option>
+                        <option value="under50">< 50.000 Đ</option>
+                        <option value="50to100">50K - 100K</option>
+                        <option value="100to500">100K - 500K</option>
+                        <option value="over500">> 500.000 Đ</option>
+                    </select>
+                    <select id="sort-order" onchange="filterProducts()" class="w-full md:w-48 cyber-input px-4 py-4 text-[13px] bg-transparent border-none appearance-none cursor-pointer truncate font-bold">
+                        <option value="default">Sắp xếp: Mặc định</option>
+                        <option value="price_asc">Giá trị: Tăng</option>
+                        <option value="price_desc">Giá trị: Giảm</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-8 relative group">
+                <div class="neo-glass rounded-full p-1.5 flex items-center gap-2 border border-[var(--color-main)]/20 shadow-lg relative overflow-hidden">
+                    <button onclick="scrollCategories(-1)" class="w-9 h-9 rounded-full bg-black/40 hover:bg-[var(--color-glow)]/20 flex items-center justify-center text-neutral-400 hover:text-white transition-all shrink-0 z-10 border border-white/5 hidden sm:flex shadow-md">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    
+                    <div class="flex-1 overflow-hidden relative rounded-full mask-edges">
+                        <div id="category-container" class="flex gap-2 overflow-x-auto scrollbar-hide px-2 relative z-0 scroll-smooth items-center">
+                            </div>
+                    </div>
+
+                    <button onclick="scrollCategories(1)" class="w-9 h-9 rounded-full bg-black/40 hover:bg-[var(--color-glow)]/20 flex items-center justify-center text-neutral-400 hover:text-white transition-all shrink-0 z-10 border border-white/5 hidden sm:flex shadow-md">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loading-state" class="hidden py-32 text-center">
+                <div class="relative w-16 h-16 mx-auto mb-6">
+                    <div class="absolute inset-0 border-2 border-[var(--color-glow)] border-t-transparent rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 border-2 border-[var(--color-main)] border-b-transparent rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 0.8s;"></div>
+                </div>
+                <p class="text-[11px] font-mono text-[var(--color-glow)] uppercase tracking-[0.3em] animate-pulse font-bold">Đồng bộ tín hiệu lõi...</p>
+            </div>
+
+            <div id="empty-state" class="hidden py-24 text-center neo-glass rounded-[40px] border-dashed border-[var(--color-main)]/30">
+                <div class="text-[var(--color-main)] mb-4">
+                    <svg class="w-12 h-12 mx-auto opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <p class="text-[14px] text-neutral-400 font-mono uppercase tracking-widest mb-6 font-bold">NULL_DATA_FOUND</p>
+                <button onclick="resetFilters()" class="btn-holo px-8 py-3 text-[11px] uppercase tracking-[0.2em]">Reset Mạng Lưới</button>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20"></div>
+        </div>
+
+    </div>
+
+    <footer class="w-full relative z-10 border-t border-white/10 bg-[#050505]/90 backdrop-blur-xl pt-16 pb-32 sm:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3">
+                        <img src="https://cdn.abphotos.link/photos/resized/320x/2026/03/11/1773232281_ARJvCgc348bqad67_1773238655-phpcgaoey.png" alt="Alpha Zone" class="w-12 h-12 rounded-xl object-cover shadow-[0_0_15px_rgba(255,69,69,0.3)]">
+                        <div>
+                            <h4 class="text-[15px] font-black tracking-[0.2em] uppercase text-white drop-shadow-md">ALPHA ZONE</h4>
+                            <p class="text-[9px] text-[var(--color-glow)] tracking-[0.3em] uppercase font-bold">Vietnam Space</p>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-neutral-400 leading-relaxed max-w-sm">
+                        Cửa ngõ phân phối tài nguyên số, dịch vụ nền tảng AI và quy trình tự động hóa thế hệ mới. Tối ưu, bảo mật và vượt thời gian.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-mono text-white uppercase tracking-widest font-bold mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-glow)]"></span> Phân Hệ Dữ Liệu
+                    </h4>
+                    <ul class="space-y-3 text-[13px] text-neutral-400">
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Giao thức dịch vụ (TOS)</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Chính sách bảo mật dữ liệu</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-glow)] hover:pl-1 transition-all duration-300">Cơ chế hoàn tiền & Đổi trả</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-mono text-white uppercase tracking-widest font-bold mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-glow)]"></span> Liên Hệ Core Node
+                    </h4>
+                    <ul class="space-y-4 text-[13px] text-neutral-400">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-[var(--color-glow)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Ho Chi Minh City, Vietnam
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[var(--color-glow)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            Zalo Support: <a href="https://zalo.me/0879342346" class="text-white hover:text-[var(--color-glow)] font-bold tracking-wider transition-colors ml-1">0879.342.346</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-[11px] text-neutral-500 font-mono tracking-widest uppercase">
+                    &copy; 2026 ALPHA ZONE VIETNAM. Bản quyền thuộc về nhà phát triển.
+                </p>
+                <p class="text-[10px] text-neutral-600 font-mono tracking-widest uppercase flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
+                    System architect: <span class="text-white font-bold tracking-widest">ALPHA ZONE VIETNAM</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[90%] sm:w-auto flex justify-center">
+        <div class="floating-dock flex gap-1 sm:gap-2 w-full sm:w-auto">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="dock-btn dock-active flex-1 sm:flex-none px-4 sm:px-8 py-3.5 text-[11px] uppercase tracking-[0.15em] flex justify-center items-center gap-2">
+                <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span>SẢN PHẨM</span>
+            </button> 
+            <div class="w-[1px] bg-white/10 mx-1"></div>
+            <a href="https://zalo.me/0879342346" target="_blank" class="dock-btn flex-1 sm:flex-none px-4 sm:px-8 py-3.5 text-[11px] uppercase tracking-[0.15em] flex justify-center items-center gap-2 hover:text-white" title="Hỗ Trợ Zalo">
+                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" alt="Zalo" class="w-5 h-5 object-contain">
+                <span>Hỗ Trợ Zalo</span>
+            </a>
+        </div>
+    </div>
+    
+    <a href="https://zalo.me/0879342346" target="_blank" class="fixed sm:hidden bottom-24 right-4 z-30 w-14 h-14 bg-white/5 backdrop-blur-md border border-[var(--color-glow)]/40 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:scale-105 transition-transform p-3">
+        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" alt="Zalo" class="w-full h-full object-contain">
+    </a>
+
+    <div id="buy-modal" class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm hidden modal-container">
+        <div class="absolute inset-0" onclick="closeBuyModal()"></div>
+        
+        <div class="modal-content neo-glass w-full h-auto max-h-[90vh] sm:max-w-[480px] rounded-t-[40px] sm:rounded-[40px] flex flex-col relative overflow-hidden mt-auto sm:mt-0">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-[var(--color-glow)]/15 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div class="w-full flex justify-center pt-4 pb-2 sm:hidden relative z-10 shrink-0">
+                <div class="w-12 h-1.5 bg-white/20 rounded-full"></div>
+            </div>
+
+            <div class="px-6 sm:px-8 pt-2 sm:pt-8 pb-5 border-b border-white/10 shrink-0 relative z-10">
+                <div class="absolute right-4 top-4 sm:right-6 sm:top-6 flex items-center gap-2 z-50">
+                    <button onclick="shareProduct()" class="text-neutral-400 hover:text-[var(--color-glow)] p-2.5 bg-black/50 rounded-full transition-colors border border-white/5" title="Copy Link">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                    </button>
+                    <button onclick="closeBuyModal()" class="text-neutral-400 hover:text-white p-2.5 bg-black/50 rounded-full transition-colors border border-white/5">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <span id="modal-category" class="inline-block text-[9px] font-mono text-[var(--color-glow)] uppercase tracking-[0.2em] bg-[var(--color-glow)]/10 px-3 py-1.5 rounded-md mb-3 border border-[var(--color-glow)]/20 font-bold">Category</span>
+                <h3 id="modal-title" class="text-2xl font-bold text-white pr-24 leading-tight break-words">Product Name</h3>
+            </div>
+
+            <div class="px-6 sm:px-8 py-6 overflow-y-auto flex-1 custom-scrollbar relative z-10">
+                <div class="bg-[#050505]/60 border border-[var(--color-glow)]/10 p-5 rounded-2xl mb-6 shadow-inner">
+                    <p id="modal-description" class="text-[14px] text-neutral-300 whitespace-pre-line leading-relaxed break-words"></p>
+                </div>
+
+                <div class="space-y-4 mb-6">
+                    <label class="block text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1 font-bold">Vui lòng nhập chính xác thông tin liên hệ</label>
+                    <input type="text" id="customer-name" placeholder="Họ và tên..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
+                    <input type="email" id="customer-email" placeholder="Email nhận giải mã..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
+                    <input type="tel" id="customer-phone" placeholder="Zalo Support..." class="w-full cyber-input px-5 py-4 md:text-[14px] text-[16px]">
+                </div>
+
+                <div class="flex items-center justify-between p-5 bg-[var(--color-main)]/10 rounded-2xl border border-[var(--color-main)]/30">
+                    <div>
+                        <span class="block text-[10px] text-neutral-400 font-mono uppercase tracking-widest mb-1 font-bold">UNIT_PRICE</span>
+                        <div class="text-white text-xl font-bold">
+                            <span id="modal-price">0</span><span class="text-[14px] ml-1 text-neutral-500 font-normal">đ</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-neutral-400 font-mono uppercase tracking-widest mb-1 text-right font-bold">QTY</span>
+                        <div class="flex items-center bg-black/50 border border-white/10 rounded-xl overflow-hidden h-11 w-32">
+                            <button onclick="changeQuantity(-1)" class="w-10 h-full text-neutral-400 hover:text-white hover:bg-[var(--color-glow)]/20 font-bold transition-colors">-</button>
+                            <input type="number" id="purchase-qty" value="1" min="1" onchange="validateQuantity()" class="w-full text-center bg-transparent border-none text-[15px] text-white p-0 outline-none appearance-none font-bold">
+                            <button onclick="changeQuantity(1)" class="w-10 h-full text-neutral-400 hover:text-white hover:bg-[var(--color-glow)]/20 font-bold transition-colors">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 sm:px-8 py-6 border-t border-white/10 bg-black/60 backdrop-blur-2xl shrink-0 sm:rounded-b-[40px] relative z-10">
+                <div class="flex items-center justify-between mb-5">
+                    <span class="text-[12px] text-neutral-400 font-mono uppercase tracking-widest font-bold">TOTAL_ESTIMATE</span>
+                    <span id="modal-total" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-glow)] to-[var(--color-main)] tracking-tight">0 đ</span>
+                </div>
+                <button onclick="createOrderCheckout()" id="btn-submit-order" class="w-full btn-holo py-4.5 text-[14px] tracking-[0.2em] h-14">
+                    TIẾN HÀNH THANH TOÁN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md hidden modal-container">
+        <div class="absolute inset-0" onclick="cancelPayment()"></div>
+        
+        <div class="modal-content neo-glass w-full h-auto max-h-[90vh] sm:max-w-md rounded-t-[40px] sm:rounded-[40px] p-6 sm:p-8 text-center relative flex flex-col overflow-hidden mt-auto sm:mt-0">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-glow)] to-transparent opacity-50"></div>
+
+            <div class="w-full flex justify-center pt-2 pb-5 sm:hidden shrink-0 relative z-10">
+                <div class="w-12 h-1.5 bg-white/20 rounded-full"></div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col items-center relative z-10">
+                <div class="inline-flex items-center justify-center gap-2 bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-4 py-2 rounded-full mb-6">
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full animate-ping absolute"></span>
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full relative"></span>
+                    <span class="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">AWAITING_FUNDS</span>
+                </div>
+                
+                <div class="bg-white p-4 inline-block mb-8 relative rounded-[32px] border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)] mx-auto">
+                    <img id="payment-qr-img" src="" alt="QR Code" class="w-56 h-56 object-contain opacity-0 transition-opacity duration-500 rounded-2xl mix-blend-multiply">
+                    <div id="qr-loading" class="absolute inset-0 flex items-center justify-center bg-white rounded-[28px]">
+                        <div class="w-8 h-8 border-2 border-neutral-200 border-t-black rounded-full animate-spin"></div>
+                    </div>
+                </div>
+
+                <div class="w-full bg-black/40 p-5 mb-8 rounded-[24px] text-left border border-white/10">
+                    <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/5">
+                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">TỔNG CỘNG</span>
+                        <span id="payment-amount" class="text-xl text-[var(--color-glow)] font-bold">0 đ</span>
+                    </div>
+                    <div class="flex flex-col gap-2 overflow-hidden">
+                        <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest font-bold">NỘI DUNG CHUYỂN KHOẢN</span>
+                        <div class="flex items-center justify-between bg-black/60 border border-[var(--color-glow)]/30 rounded-xl p-3 gap-3">
+                            <span id="payment-syntax" class="text-[16px] text-[var(--color-glow)] font-mono font-bold tracking-wider break-all line-clamp-2">HD...</span>
+                            <button onclick="copyToClipboard('payment-syntax-hidden')" class="bg-[var(--color-glow)]/10 hover:bg-[var(--color-glow)]/30 text-[var(--color-glow)] hover:text-white px-3 py-1.5 rounded-lg text-[10px] font-mono transition-colors uppercase tracking-widest flex items-center shrink-0 gap-1 border border-[var(--color-glow)]/20 font-bold">
+                                Copy
+                            </button>
+                            <input type="text" id="payment-syntax-hidden" class="sr-only">
+                        </div>
+                        <p class="text-[11px] text-neutral-400 mt-1.5">Vui lòng ghi chính xác NỘI DUNG CHUYỂN KHOẢN.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3 shrink-0 pt-4 relative z-10">
+                <button onclick="triggerManualConfirm()" id="btn-manual-confirm" class="w-full bg-white text-black hover:bg-neutral-200 rounded-xl py-4 text-[12px] uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.73 10.32c-.08-4.42-3.8-8-8.44-8-4.78 0-8.66 3.73-8.66 8.32 0 2.65 1.34 5 3.39 6.51.15.11.23.29.19.47l-.46 2.06c-.05.21.14.39.34.33l2.36-.71c.14-.04.29-.02.41.05 1.5.85 3.19 1.3 4.96 1.3 4.78 0 8.66-3.73 8.66-8.33.01-.01.01-1.34-.75-2zM12.28 14h-1.63c-.3 0-.54-.24-.54-.54v-3.8c0-.3.24-.54.54-.54h1.63c1.55 0 2.82 1.27 2.82 2.82s-1.27 2.86-2.82 2.86zm-4.32-3.32h1.4c.18 0 .32.14.32.32v.56c0 .18-.14.32-.32.32H8.28v1.59c0 .18-.14.32-.32.32h-.56c-.18 0-.32-.14-.32-.32v-3.79c0-.18.14-.32.32-.32h1.96c.18 0 .32.14.32.32v.56c0 .18-.14.32-.32.32h-1.4v.12zm7.66 3.19c0 .18-.14.32-.32.32h-2.12c-.18 0-.32-.14-.32-.32v-3.79c0-.18.14-.32.32-.32h.56c.18 0 .32.14.32.32v2.35l1.04-1.29c.12-.15.31-.22.5-.18l.12.02c.16.05.24.23.15.37l-1.07 1.33 1.22 1.48c.11.14.03.35-.15.37l-.25.03zm-3.34-1.93c0-1.01-.83-1.84-1.84-1.84h-.65v3.68h.65c1.01 0 1.84-.83 1.84-1.84z"></path></svg>
+                    Gửi thông báo đã thanh toán ngay
+                </button>
+                <button onclick="cancelPayment()" class="w-full py-4 text-[12px] text-neutral-500 hover:text-white hover:bg-white/5 rounded-xl uppercase tracking-[0.2em] font-medium transition-colors">
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="fixed inset-0 z-[80] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md hidden modal-container">
+        <div class="absolute inset-0" onclick="closeSuccessModal()"></div>
+        <div class="modal-content neo-glass w-full h-auto max-h-[90vh] sm:max-w-lg rounded-t-[40px] sm:rounded-[40px] p-6 sm:p-10 text-center relative overflow-hidden flex flex-col mt-auto sm:mt-0">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div class="w-full flex justify-center pt-2 pb-5 sm:hidden shrink-0 relative z-10">
+                <div class="w-12 h-1.5 bg-white/20 rounded-full"></div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar relative z-10">
+                <div class="w-20 h-20 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.15)] transform rotate-3">
+                    <svg class="w-10 h-10 transform -rotate-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Access Granted</h3>
+                <p class="text-[14px] text-neutral-400 mb-8">Khóa bản quyền của bạn đã được giải mã.</p>
+
+                <div class="terminal-box p-5 rounded-2xl mb-6 relative">
+                    <div class="absolute top-0 right-0 p-3">
+                         <button onclick="copyToClipboard('delivered-data')" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-3 py-1.5 rounded-lg text-[10px] font-mono shadow-sm transition-colors uppercase tracking-widest flex items-center gap-1 font-bold">
+                            Copy
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-[var(--color-glow)] font-mono uppercase tracking-widest mb-4 text-left font-bold">DECRYPTED_DATA</p>
+                    <textarea id="delivered-data" readonly class="w-full bg-transparent border-none p-0 text-[14px] font-mono leading-relaxed text-emerald-400 resize-none outline-none min-h-[120px] break-words" spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <div class="shrink-0 pt-4 relative z-10">
+                <button onclick="closeSuccessModal()" class="w-full cyber-input border-white/20 text-white hover:bg-white/5 py-4 text-[12px] uppercase tracking-[0.2em] font-bold h-14">
+                    CLOSE_TERMINAL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MOCK_PRODUCTS = [
+            { id: "P001", name: "Netflix Premium UltraHD 1 Tháng (Cá nhân)", category: "Trực tuyến", price: 55000, description: "Phân giải 4K cao cấp nhất.\nTương thích đa nền tảng.\nChính sách 1 đổi 1 30 ngày.\nNghiêm cấm đổi thông tin.", image: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&auto=format&fit=crop&q=80" },
+            { id: "P002", name: "Spotify Premium 12 Tháng", category: "Âm nhạc", price: 180000, description: "Nâng cấp chính chủ.\nBảo lưu danh sách phát.\nHiệu lực 12 tháng liên tục.", image: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=600&auto=format&fit=crop&q=80" },
+            { id: "P003", name: "Adobe Creative Cloud All App", category: "Phần mềm", price: 250000, description: "Cấp phép bản quyền Full Apps.\nUpdate chính hãng từ máy chủ.", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&auto=format&fit=crop&q=80" }
+        ];
+
+        let webAppUrl = "https://script.google.com/macros/s/AKfycbwSxnzL7bRFyrv2wiD6J1_1yMPghVF51CCzlPZSKofJPv-pLGUsErwH2hJRag7MkEI/exec";
+        let rawProducts = [];
+        let filteredProducts = [];
+        let selectedCategory = "all";
+        let currentProduct = null;
+        let quantitySelected = 1;
+        let activeOrderId = null;
+        let customerData = { name: "", email: "", phone: "" };
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        window.addEventListener('load', initApp);
+
+        function initApp() {
+            if (webAppUrl && webAppUrl.startsWith("http")) {
+                fetchProductsFromAPI();
+            } else {
+                document.getElementById('connection-banner').classList.remove('hidden');
+                rawProducts = JSON.parse(JSON.stringify(MOCK_PRODUCTS));
+                renderApp();
+                checkUrlForProduct();
+            }
+
+            setInterval(() => { goToSlide((currentSlide + 1) % totalSlides); }, 3500);
+        }
+
+        function showLoading(isLoading) {
+            document.getElementById('product-grid').classList.toggle('hidden', isLoading);
+            document.getElementById('loading-state').classList.toggle('hidden', !isLoading);
+        }
+
+        function renderApp() {
+            renderCategories();
+            filterProducts();
+        }
+
+        async function fetchProductsFromAPI() {
+            showLoading(true);
+            try {
+                const response = await fetch(`${webAppUrl}?action=getProducts`);
+                const data = await response.json();
+                if (data && data.status === "success") rawProducts = data.data;
+                else throw new Error();
+            } catch (error) {
+                document.getElementById('connection-banner').classList.remove('hidden');
+                rawProducts = JSON.parse(JSON.stringify(MOCK_PRODUCTS));
+            } finally {
+                renderApp();
+                showLoading(false);
+                checkUrlForProduct();
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('category-container');
+            const categories = [...new Set(rawProducts.map(p => p.category))];
+            
+            container.innerHTML = `<button onclick="selectCategory('all')" id="cat-all" class="chip px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest shrink-0">Toàn Bộ</button>`;
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.id = `cat-${encodeURIComponent(cat)}`;
+                btn.className = "chip px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest shrink-0";
+                btn.innerText = cat;
+                btn.onclick = () => selectCategory(cat);
+                container.appendChild(btn);
+            });
+            updateActiveCategoryUI();
+        }
+
+        function scrollCategories(direction) {
+            const container = document.getElementById('category-container');
+            if (container) {
+                container.scrollBy({ left: direction * 200, behavior: 'smooth' });
+            }
+        }
+
+        function selectCategory(categoryName) {
+            selectedCategory = categoryName;
+            updateActiveCategoryUI();
+            filterProducts();
+        }
+
+        function updateActiveCategoryUI() {
+            document.querySelectorAll('.chip').forEach(btn => btn.classList.remove('chip-active'));
+            const targetId = selectedCategory === 'all' ? 'cat-all' : `cat-${encodeURIComponent(selectedCategory)}`;
+            const activeBtn = document.getElementById(targetId);
+            if (activeBtn) activeBtn.classList.add('chip-active');
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const priceFilter = document.getElementById('filter-price').value;
+            const sortOrder = document.getElementById('sort-order').value;
+
+            filteredProducts = rawProducts.filter(p => {
+                if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
+                if (query && !p.name.toLowerCase().includes(query) && !p.description.toLowerCase().includes(query)) return false;
+                
+                const price = parseFloat(p.price);
+                if (priceFilter === "under50" && price >= 50000) return false;
+                if (priceFilter === "50to100" && (price < 50000 || price > 100000)) return false;
+                if (priceFilter === "100to500" && (price < 100000 || price > 500000)) return false;
+                if (priceFilter === "over500" && price <= 500000) return false;
+                return true;
+            });
+
+            if (sortOrder === 'price_asc') filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            else if (sortOrder === 'price_desc') filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+
+            renderProductGrid();
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = "";
+            document.getElementById('filter-price').value = "all";
+            document.getElementById('sort-order').value = "default";
+            selectCategory("all");
+        }
+
+        function renderProductGrid() {
+            const grid = document.getElementById('product-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filteredProducts.map((p) => `
+                <div class="relative group cursor-pointer h-full flex flex-col" onclick="openBuyModal('${p.id}')">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-glow)] to-[var(--color-main)] rounded-[32px] blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative flex-1 neo-glass rounded-[32px] p-2.5 flex flex-col transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[var(--color-glow)]/50">
+                        <div class="aspect-[4/3] w-full overflow-hidden rounded-[24px] relative bg-black/50">
+                            <img src="${p.image}" alt="Img" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md shadow-lg text-[9px] font-mono px-3 py-1.5 rounded-lg text-white/90 border border-[var(--color-glow)]/20 uppercase tracking-widest font-bold z-20">${p.category}</div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col relative z-20">
+                            <h3 class="text-[17px] font-bold text-white line-clamp-2 leading-snug mb-3">${p.name}</h3>
+                            <p class="text-[13px] text-neutral-400 line-clamp-2 leading-relaxed mb-6 flex-1">${p.description}</p>
+                            <div class="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                                <span class="text-[18px] text-[var(--color-glow)] font-black tracking-tight">${formatMoney(p.price)}đ</span>
+                                <span class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 group-hover:bg-[var(--color-glow)] group-hover:border-[var(--color-glow)] group-hover:text-black text-neutral-300 flex items-center justify-center transition-all duration-300">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openBuyModal(productId, updateUrl = true) {
+            currentProduct = rawProducts.find(p => p.id === productId);
+            if (!currentProduct) return;
+
+            if (updateUrl) {
+                const newUrl = window.location.pathname + '?productId=' + productId;
+                window.history.pushState({path: newUrl}, '', newUrl);
+            }
+
+            document.getElementById('modal-title').innerText = currentProduct.name;
+            document.getElementById('modal-category').innerText = currentProduct.category;
+            document.getElementById('modal-description').innerText = currentProduct.description;
+            
+            quantitySelected = 1;
+            document.getElementById('purchase-qty').value = quantitySelected;
+            updatePurchaseTotal();
+
+            document.getElementById('buy-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBuyModal(updateUrl = true) { 
+            document.getElementById('buy-modal').classList.add('hidden'); 
+            document.body.style.overflow = '';
+            
+            if (updateUrl) {
+                const newUrl = window.location.pathname;
+                window.history.pushState({path: newUrl}, '', newUrl);
+            }
+        }
+
+        function shareProduct() {
+            if (!currentProduct) return;
+            const url = window.location.origin + window.location.pathname + '?productId=' + currentProduct.id;
+            const temp = document.createElement("input");
+            temp.value = url;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+            showToast("Đã sao chép đường dẫn sản phẩm");
+        }
+
+        function checkUrlForProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('productId');
+            if (productId) {
+                setTimeout(() => openBuyModal(productId, false), 100); 
+            }
+        }
+
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('productId');
+            if (productId) openBuyModal(productId, false);
+            else closeBuyModal(false);
+        });
+
+        function changeQuantity(change) {
+            const newQty = quantitySelected + change;
+            if (newQty >= 1) {
+                quantitySelected = newQty;
+                document.getElementById('purchase-qty').value = quantitySelected;
+                updatePurchaseTotal();
+            }
+        }
+
+        function validateQuantity() {
+            let val = parseInt(document.getElementById('purchase-qty').value);
+            quantitySelected = (isNaN(val) || val < 1) ? 1 : val;
+            document.getElementById('purchase-qty').value = quantitySelected;
+            updatePurchaseTotal();
+        }
+
+        function updatePurchaseTotal() {
+            if (currentProduct) {
+                document.getElementById('modal-price').innerText = formatMoney(currentProduct.price);
+                document.getElementById('modal-total').innerText = `${formatMoney(currentProduct.price * quantitySelected)} đ`;
+            }
+        }
+
+        async function createOrderCheckout() {
+            const name = document.getElementById('customer-name').value.trim();
+            const email = document.getElementById('customer-email').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+
+            if (!name || !email || !phone) return showToast("ERROR: Vui lòng nhập đủ thông tin.");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast("Lỗi: Vui lòng nhập đúng định dạng mail.");
+
+            customerData = { name, email, phone };
+            const btn = document.getElementById('btn-submit-order');
+            btn.disabled = true; btn.innerHTML = '<div class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>';
+
+            try {
+                const response = await fetch(webAppUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams({ action: 'createOrder', productId: currentProduct.id, price: currentProduct.price, email, name, phone, qty: quantitySelected })
+                });
+                const resData = await response.json();
+                if (resData.status === "success") {
+                    closeBuyModal();
+                    openPaymentModal(resData.orderId, resData.amount, resData.paymentSyntax);
+                } else throw new Error();
+            } catch (err) {
+                showToast("NODE FAILED. Kích hoạt Local Mode Backup.");
+                setTimeout(() => {
+                    closeBuyModal();
+                    openPaymentModal("AZV-" + Math.floor(Math.random()*10000), currentProduct.price * quantitySelected, "AZV" + Math.floor(Math.random()*9999));
+                }, 800);
+            } finally {
+                btn.disabled = false; btn.innerText = "INITIATE_TRANSFER";
+            }
+        }
+
+        function openPaymentModal(orderId, amount, syntax) {
+            activeOrderId = orderId;
+            document.getElementById('payment-amount').innerText = formatMoney(amount) + ' đ';
+            document.getElementById('payment-syntax').innerText = syntax;
+            document.getElementById('payment-syntax-hidden').value = syntax;
+
+            const qrUrl = `https://img.vietqr.io/image/MB-4499123123-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(syntax)}&accountName=ALPHA_ZONE`;
+            const qrImg = document.getElementById('payment-qr-img');
+            qrImg.classList.remove('opacity-100');
+            qrImg.src = qrUrl;
+            qrImg.onload = () => { document.getElementById('qr-loading').classList.add('hidden'); qrImg.classList.add('opacity-100'); };
+
+            document.getElementById('payment-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function triggerManualConfirm() {
+            if (!activeOrderId) return;
+            const message = `[LỆNH CẤP PHÁT TÀI NGUYÊN]\n- Mã HĐ: ${activeOrderId}\n- Lõi SP: ${currentProduct.name}\n- Multiplier: ${quantitySelected}\n- Credit: ${formatMoney(currentProduct.price * quantitySelected)}đ\n- Định danh: ${customerData.email}\n=> Tôi đã hoàn tất Transfer.`;
+            
+            const temp = document.createElement("textarea"); temp.value = message; document.body.appendChild(temp);
+            temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+
+            showToast("Đã lưu dữ liệu. Kết nối hỗ trợ...");
+            setTimeout(() => { window.open("https://zalo.me/0879342346", "_blank"); cancelPayment(); }, 1200);
+        }
+
+        function cancelPayment() {
+            activeOrderId = null;
+            document.getElementById('payment-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function closeSuccessModal() { 
+            document.getElementById('success-modal').classList.add('hidden'); 
+            document.body.style.overflow = '';
+        }
+
+        function goToSlide(index) {
+            const currentImg = document.getElementById(`slide-${currentSlide}`);
+            const currentDot = document.getElementById(`dot-${currentSlide}`);
+            if(currentImg) currentImg.classList.replace('opacity-100', 'opacity-0');
+            if(currentDot) {
+                currentDot.classList.replace('bg-[var(--color-glow)]', 'bg-white/30');
+                currentDot.classList.remove('w-6', 'shadow-[0_0_8px_var(--color-glow)]');
+                currentDot.classList.add('w-1.5', 'hover:bg-white');
+            }
+
+            currentSlide = index;
+
+            const newImg = document.getElementById(`slide-${currentSlide}`);
+            const newDot = document.getElementById(`dot-${currentSlide}`);
+            if(newImg) newImg.classList.replace('opacity-0', 'opacity-100');
+            if(newDot) {
+                newDot.classList.replace('bg-white/30', 'bg-[var(--color-glow)]');
+                newDot.classList.remove('w-1.5', 'hover:bg-white');
+                newDot.classList.add('w-6', 'shadow-[0_0_8px_var(--color-glow)]');
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `neo-glass text-white px-5 py-4 rounded-2xl text-[12px] font-mono uppercase tracking-widest shadow-2xl transition-all duration-400 transform -translate-y-6 opacity-0 flex items-center justify-between border-l-4 border-[var(--color-glow)]`;
+            toast.innerHTML = `<div class="flex items-center gap-3"><span class="w-2 h-2 bg-[var(--color-glow)] rounded-full animate-ping"></span><span class="font-bold">${message}</span></div>`;
+            container.appendChild(toast);
+            
+            void toast.offsetWidth;
+            toast.classList.remove('-translate-y-6', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-6');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        function formatMoney(num) { return Number(num).toLocaleString('vi-VN'); }
+        
+        function copyToClipboard(id) {
+            const el = document.getElementById(id);
+            if (el.type === 'hidden' || el.classList.contains('sr-only')) {
+                el.type = 'text'; el.classList.remove('sr-only'); el.select(); document.execCommand('copy'); el.type = 'hidden'; el.classList.add('sr-only');
+            } else { el.select(); document.execCommand('copy'); }
+            showToast("Dữ liệu đã được sao chép");
+        }
+    </script>
+</body>
+</html>
